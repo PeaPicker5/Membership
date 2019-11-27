@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Membership.UI_Controls.Offices.OfficesHeld"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="100" d:DesignWidth="310">
+
+
+    <DockPanel Background="White"  LastChildFill="True">
+
+        <!-- Membership Information -->
+
+        <GroupBox BorderBrush="Black" BorderThickness="2" Background="AntiqueWhite" >
+            <GroupBox.Header>
+                <TextBlock Text="OFFICES HELD" Style="{StaticResource HeaderTextBlockStyle}" Padding="0" />
+            </GroupBox.Header>
+
+            <DockPanel LastChildFill="True" >
+                <DataGrid x:Name="OfficesHeldGrid" 
+                            ItemsSource="{Binding Path=OfficerRecs}"
+                            AlternatingRowBackground="LightGray"
+                            AutoGenerateColumns="False"
+                            IsReadOnly="True"
+                            CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Year" Binding="{Binding Path=Year}" Width="50"/>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Path=OfficeRec.Title}" MinWidth="150"/>
+                        <DataGridTextColumn Header="From" Binding="{Binding Path=FromDate}"/>
+                        <DataGridTextColumn Header="To" Binding="{Binding Path=ToDate}"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </DockPanel>
+        </GroupBox>
+
+    </DockPanel>
+
+</UserControl>
+

@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="Membership.UI_Controls.Members.MemberSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
+             xmlns:dues="clr-namespace:Membership.UI_Controls.Dues"
+             xmlns:members="clr-namespace:Membership.UI_Controls.Members"
+             xmlns:common="clr-namespace:Membership.Common"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="400" d:DesignWidth="1200">
+
+
+        <!-- Membership Information -->
+        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+            <GroupBox.Header>
+                <DockPanel  x:Name="SelectionBar" LastChildFill="True">
+                    <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
+
+
+
+
+
+
+
+
+
+                    <Label Content="MEMBERSHIP SELECTION:   " FontWeight="Bold" FontSize="16"/>
+                    
+                        <CheckBox  x:Name="FilterCurrent" Style="{StaticResource CheckBoxStyle}"  
+                                   VerticalAlignment="Center" 
+                                   Click="FilterCheckBoxOnClick" />
+                        <Label Content="Current Only"     FontSize="16"/>
+                    
+                        <Label Content="     Last Name:"  FontSize="16"/>
+                        <TextBox x:Name="FilterLastName"  Margin="0,3" 
+                                 Style="{StaticResource InputTextBox}" Width="150" 
+                                 TextChanged="FilterTextBoxOnTextChanged" />
+                    
+                        <Label Content="    First Name:"  FontSize="16"/>
+                        <TextBox x:Name="FilterFirstName" Margin="0,3" 
+                                 Style="{StaticResource InputTextBox}" Width="150" 
+                                 TextChanged="FilterTextBoxOnTextChanged" />
+                    
+                        <Label Content="    Status:"      FontSize="16"/>
+                        <ComboBox x:Name="FilterStatus"   Margin="0,3" MinWidth="200" IsEditable="True"
+                                  ItemsSource="{Binding Path=MemberTypes, Mode=OneWay}"
+                                  DisplayMemberPath="Description"
+                                  SelectedValuePath="TypeId"
+                                  SelectionChanged="FilterComboBoxSelectionChanged" />
+                    </StackPanel>
+
+                </DockPanel>
+        </GroupBox.Header>
+
+            <Grid  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" MaxWidth="310"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="14"
+                    ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
+                    AutoGenerateColumns="false"
+                    CanUserAddRows="False" IsReadOnly="True" 
+                    SelectionChanged="MemberGrid_SelectionChanged">
+                    <DataGrid.Columns  >
+                        <!--<DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsDeceased}"/>-->
+                        <DataGridCheckBoxColumn Width="85"  Header="Current" Binding="{Binding Path=IsCurrent}"/>
+                        <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=LastName}"/>
+                        <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=FirstName}"/>
+                        <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MI}"/>
+                        <DataGridTextColumn MinWidth="120" Header="Status" Binding="{Binding Path=Status}"/>
+                        <DataGridTextColumn Header="Obligated" Binding="{Binding Path=DateObligated, StringFormat=MM-dd-yyyy}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn MinWidth="200" Header="Address" Binding="{Binding Path=Address1}"/>
+                        <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=CityStateZip}"/>
+                        <DataGridTextColumn MinWidth="250" Header="EMail Address" Binding="{Binding Path=EmailAddress}"/>
+                        <DataGridTextColumn MinWidth="300" Header="Comment"  Binding="{Binding Path=Comment}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <members:MemberInfo x:Name="MemberInfoControl"  Grid.Row="1" Grid.Column="0"  />
+                <offices:OfficesHeld x:Name="OfficesHeldControl" Grid.Row="1" Grid.Column="1" />
+                <dues:DuesPaid x:Name="DuesPaidControl"  Grid.Row="1" Grid.Column="2"/>
+    
+            </Grid>
+
+    </GroupBox>
+
+</UserControl>
+

@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Membership.UI_Controls.Dues.DuesCollection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="200" d:DesignWidth="1200">
+
+
+        <!-- Membership Information -->
+        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+            <GroupBox.Header>
+                <DockPanel  x:Name="SelectionBar"  LastChildFill="False">
+                    <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
+                        <Label Content="DUES COLLECTION :   " FontWeight="Bold" FontSize="20"/>
+                        <Label Content="    Year:"      FontSize="16"/>
+                        <Label Content="{Binding Source={x:Static sys:DateTime.Today}}"
+                               ContentStringFormat="{}{0:yyyy    }" FontSize="16"/>
+                        <CheckBox Content="Show Unpaid Members Only" 
+                               Style="{StaticResource MetroCheckBox}" FontSize="16" Click="DisplayUnpaidMembersOnly" />
+                    </StackPanel>
+                    <Button ToolTip="Record the dues receipts."  DockPanel.Dock="Right" Width="100"
+                            Click="RecordDuesButtonOnClick"
+                            Margin="10,0">
+                        <Image Source="/Membership;component/Common/Resources/Add.png" Width="24" Margin="-3"/>
+                    </Button>
+                </DockPanel>
+            </GroupBox.Header>
+
+            <Grid  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="6*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Label Content="DUES RECEIVED:" Style="{StaticResource LabelStyle}" Margin="0,30,0,0"
+                           HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Path=RunningCount, StringFormat=Records: {0:d}}"
+                               Style="{StaticResource HeaderTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Path=RunningAmount, StringFormat=Amount: {0:c}}" 
+                               Style="{StaticResource HeaderTextBlockStyle}"/>
+                </StackPanel>
+
+                <DataGrid x:Name="CollectionGrid" Grid.Row="0" Grid.Column="1" FontSize="14" 
+                          CanUserAddRows="False" AutoGenerateColumns="false"
+                          ItemsSource="{Binding Path=DuesRecs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionUnit="FullRow" SelectedValuePath="IsPaid"
+                          MouseDoubleClick="CollectionGrid_MouseDoubleClick" >
+                    <DataGrid.Columns  >
+                        <DataGridTemplateColumn Header="PAID">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox Click="IsPaidBox_OnChecked" Tag="{Binding Path=MemberRec}"
+                                        HorizontalAlignment="Center" IsChecked="{Binding Path=IsPaid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Width="90"  Header="Amount"   Binding="{Binding Path=Amount, Mode=TwoWay,StringFormat={}{0:c}}" >
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn MinWidth="90"  Header="Date Paid" Binding="{Binding Path=PaidOnDate}" IsReadOnly="True"  >
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=MemberRec.LastName}" IsReadOnly="True" />
+                        <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=MemberRec.FirstName}" IsReadOnly="True"  />
+                        <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MemberRec.MI}" IsReadOnly="True"/>
+                        <DataGridTextColumn MinWidth="120" Header="Status" Binding="{Binding Path=MemberRec.Status}" IsReadOnly="True"/>
+                        <DataGridTextColumn MinWidth="200" Header="Address" Binding="{Binding Path=MemberRec.Address1}" IsReadOnly="True"/>
+                        <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=MemberRec.CityStateZip}" IsReadOnly="True" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+
+    </GroupBox>
+
+</UserControl>
+

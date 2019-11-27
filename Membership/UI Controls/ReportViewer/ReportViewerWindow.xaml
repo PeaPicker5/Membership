@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Membership.UI_Controls.ReportViewer.ReportViewerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+        mc:Ignorable="d" 
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        d:DesignHeight="400" d:DesignWidth="750">
+
+    
+    
+    <DockPanel LastChildFill="True">
+
+        <!-- Membership Information -->
+        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+            <GroupBox.Header>
+                <DockPanel  x:Name="SelectionBar" LastChildFill="True">
+                    <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
+                        <Label Content="DUES HISTORY:   " FontWeight="Bold" FontSize="16"/>
+
+                        <Label Content="    Year:"      FontSize="16"/>
+                        <ComboBox x:Name="YearSelectionCombo"   Margin="0,3" MinWidth="100" IsEditable="True"
+                                  ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
+                                   />
+                    </StackPanel>
+
+                </DockPanel>
+            </GroupBox.Header>
+
+            <Grid  >
+                <WindowsFormsHost DockPanel.Dock="Top" Margin="20">
+
+                    <rv:ReportViewer x:Name="ReportViewer" Visible="True"  Enabled="True" Dock="None" />
+
+                </WindowsFormsHost>
+
+            </Grid>
+
+        </GroupBox>
+
+
+
+    </DockPanel>
+</UserControl>

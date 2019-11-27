@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Membership.UI_Controls.Dues.DuesHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="200" d:DesignWidth="1200">
+
+
+        <!-- Membership Information -->
+        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+            <GroupBox.Header>
+                <DockPanel  x:Name="SelectionBar" LastChildFill="True">
+                    <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
+                        <Label Content="DUES HISTORY:   " FontWeight="Bold" FontSize="16"/>
+                    
+                        <Label Content="    Year:"      FontSize="16"/>
+                        <ComboBox x:Name="YearSelectionCombo"   Margin="0,3" MinWidth="100" IsEditable="True"
+                                  ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
+                                  SelectionChanged="YearSelectionChanged" />
+                    </StackPanel>
+
+                </DockPanel>
+        </GroupBox.Header>
+
+            <Grid  >
+
+            <DataGrid FontSize="14"
+                    ItemsSource="{Binding Path=DuesRecs, Mode=OneWay}"
+                    AlternatingRowBackground="LightGray"
+                    AutoGenerateColumns="false"
+                    CanUserAddRows="False" IsReadOnly="True" >
+                <DataGrid.Columns  >
+                    <DataGridTextColumn Width="90"     Header="Date Paid" Binding="{Binding Path=PaidOnDate}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="90"     Header="Amount" Binding="{Binding Path=Amount,StringFormat={}{0:c}}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=MemberRec.LastName}"/>
+                    <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=MemberRec.FirstName}"/>
+                    <DataGridTextColumn Width="40"     Header="MI" Binding="{Binding Path=MemberRec.MI}"/>
+                    <DataGridTextColumn MinWidth="200" Header="Address  (Current)" Binding="{Binding Path=MemberRec.Address1}"/>
+                    <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=MemberRec.CityStateZip}"/>
+                    <DataGridTextColumn MinWidth="250" Width="*" Header="EMail Address" Binding="{Binding Path=MemberRec.EmailAddress}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            </Grid>
+
+    </GroupBox>
+
+</UserControl>
+

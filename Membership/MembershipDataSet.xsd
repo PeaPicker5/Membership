@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MembershipDataSet" targetNamespace="http://tempuri.org/MembershipDataSet.xsd" xmlns:mstns="http://tempuri.org/MembershipDataSet.xsd" xmlns="http://tempuri.org/MembershipDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="MembershipConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MembershipConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Membership.Properties.Settings.GlobalReference.Default.MembershipConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VIEW_CurrentDuesTableAdapter" GeneratorDataComponentClassName="VIEW_CurrentDuesTableAdapter" Name="VIEW_CurrentDues" UserDataComponentName="VIEW_CurrentDuesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="MembershipConnectionString (Settings)" DbObjectName="Membership.dbo.VIEW_CurrentDues" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT IsPaid, Year, Month, Amount, TypeId, Description, DuesAmount, MemberID, MemberTypeID, Lastname, Firstname, MI, Comment, EMailAddress, SponsorID1, SponsorID2, SponsorID3, Address1, Address2, City, State, ZIP, Phone, DateObligated, DateActive, DateRemoved, DateDeceased, DateOfBirth, Photo, PageImage FROM dbo.VIEW_CurrentDues</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="IsPaid" DataSetColumn="IsPaid" />
+              <Mapping SourceColumn="Year" DataSetColumn="Year" />
+              <Mapping SourceColumn="Month" DataSetColumn="Month" />
+              <Mapping SourceColumn="Amount" DataSetColumn="Amount" />
+              <Mapping SourceColumn="TypeId" DataSetColumn="TypeId" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="DuesAmount" DataSetColumn="DuesAmount" />
+              <Mapping SourceColumn="MemberID" DataSetColumn="MemberID" />
+              <Mapping SourceColumn="MemberTypeID" DataSetColumn="MemberTypeID" />
+              <Mapping SourceColumn="Lastname" DataSetColumn="Lastname" />
+              <Mapping SourceColumn="Firstname" DataSetColumn="Firstname" />
+              <Mapping SourceColumn="MI" DataSetColumn="MI" />
+              <Mapping SourceColumn="Comment" DataSetColumn="Comment" />
+              <Mapping SourceColumn="EMailAddress" DataSetColumn="EMailAddress" />
+              <Mapping SourceColumn="SponsorID1" DataSetColumn="SponsorID1" />
+              <Mapping SourceColumn="SponsorID2" DataSetColumn="SponsorID2" />
+              <Mapping SourceColumn="SponsorID3" DataSetColumn="SponsorID3" />
+              <Mapping SourceColumn="Address1" DataSetColumn="Address1" />
+              <Mapping SourceColumn="Address2" DataSetColumn="Address2" />
+              <Mapping SourceColumn="City" DataSetColumn="City" />
+              <Mapping SourceColumn="State" DataSetColumn="State" />
+              <Mapping SourceColumn="ZIP" DataSetColumn="ZIP" />
+              <Mapping SourceColumn="Phone" DataSetColumn="Phone" />
+              <Mapping SourceColumn="DateObligated" DataSetColumn="DateObligated" />
+              <Mapping SourceColumn="DateActive" DataSetColumn="DateActive" />
+              <Mapping SourceColumn="DateRemoved" DataSetColumn="DateRemoved" />
+              <Mapping SourceColumn="DateDeceased" DataSetColumn="DateDeceased" />
+              <Mapping SourceColumn="DateOfBirth" DataSetColumn="DateOfBirth" />
+              <Mapping SourceColumn="Photo" DataSetColumn="Photo" />
+              <Mapping SourceColumn="PageImage" DataSetColumn="PageImage" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MembershipDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="MembershipDataSet" msprop:Generator_UserDSName="MembershipDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VIEW_CurrentDues" msprop:Generator_TableClassName="VIEW_CurrentDuesDataTable" msprop:Generator_TableVarName="tableVIEW_CurrentDues" msprop:Generator_TablePropName="VIEW_CurrentDues" msprop:Generator_RowDeletingName="VIEW_CurrentDuesRowDeleting" msprop:Generator_RowChangingName="VIEW_CurrentDuesRowChanging" msprop:Generator_RowEvHandlerName="VIEW_CurrentDuesRowChangeEventHandler" msprop:Generator_RowDeletedName="VIEW_CurrentDuesRowDeleted" msprop:Generator_UserTableName="VIEW_CurrentDues" msprop:Generator_RowChangedName="VIEW_CurrentDuesRowChanged" msprop:Generator_RowEvArgName="VIEW_CurrentDuesRowChangeEvent" msprop:Generator_RowClassName="VIEW_CurrentDuesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IsPaid" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnIsPaid" msprop:Generator_ColumnPropNameInRow="IsPaid" msprop:Generator_ColumnPropNameInTable="IsPaidColumn" msprop:Generator_UserColumnName="IsPaid" type="xs:int" minOccurs="0" />
+              <xs:element name="Year" msprop:Generator_ColumnVarNameInTable="columnYear" msprop:Generator_ColumnPropNameInRow="Year" msprop:Generator_ColumnPropNameInTable="YearColumn" msprop:Generator_UserColumnName="Year" type="xs:int" minOccurs="0" />
+              <xs:element name="Month" msprop:Generator_ColumnVarNameInTable="columnMonth" msprop:Generator_ColumnPropNameInRow="Month" msprop:Generator_ColumnPropNameInTable="MonthColumn" msprop:Generator_UserColumnName="Month" type="xs:int" minOccurs="0" />
+              <xs:element name="Amount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:double" minOccurs="0" />
+              <xs:element name="TypeId" msprop:Generator_ColumnVarNameInTable="columnTypeId" msprop:Generator_ColumnPropNameInRow="TypeId" msprop:Generator_ColumnPropNameInTable="TypeIdColumn" msprop:Generator_UserColumnName="TypeId" type="xs:int" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DuesAmount" msprop:Generator_ColumnVarNameInTable="columnDuesAmount" msprop:Generator_ColumnPropNameInRow="DuesAmount" msprop:Generator_ColumnPropNameInTable="DuesAmountColumn" msprop:Generator_UserColumnName="DuesAmount" type="xs:double" minOccurs="0" />
+              <xs:element name="MemberID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnMemberID" msprop:Generator_ColumnPropNameInRow="MemberID" msprop:Generator_ColumnPropNameInTable="MemberIDColumn" msprop:Generator_UserColumnName="MemberID" type="xs:string" />
+              <xs:element name="MemberTypeID" msprop:Generator_ColumnVarNameInTable="columnMemberTypeID" msprop:Generator_ColumnPropNameInRow="MemberTypeID" msprop:Generator_ColumnPropNameInTable="MemberTypeIDColumn" msprop:Generator_UserColumnName="MemberTypeID" type="xs:int" minOccurs="0" />
+              <xs:element name="Lastname" msprop:Generator_ColumnVarNameInTable="columnLastname" msprop:Generator_ColumnPropNameInRow="Lastname" msprop:Generator_ColumnPropNameInTable="LastnameColumn" msprop:Generator_UserColumnName="Lastname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Firstname" msprop:Generator_ColumnVarNameInTable="columnFirstname" msprop:Generator_ColumnPropNameInRow="Firstname" msprop:Generator_ColumnPropNameInTable="FirstnameColumn" msprop:Generator_UserColumnName="Firstname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MI" msprop:Generator_ColumnVarNameInTable="columnMI" msprop:Generator_ColumnPropNameInRow="MI" msprop:Generator_ColumnPropNameInTable="MIColumn" msprop:Generator_UserColumnName="MI" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Comment" msprop:Generator_ColumnVarNameInTable="columnComment" msprop:Generator_ColumnPropNameInRow="Comment" msprop:Generator_ColumnPropNameInTable="CommentColumn" msprop:Generator_UserColumnName="Comment" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EMailAddress" msprop:Generator_ColumnVarNameInTable="columnEMailAddress" msprop:Generator_ColumnPropNameInRow="EMailAddress" msprop:Generator_ColumnPropNameInTable="EMailAddressColumn" msprop:Generator_UserColumnName="EMailAddress" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SponsorID1" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnSponsorID1" msprop:Generator_ColumnPropNameInRow="SponsorID1" msprop:Generator_ColumnPropNameInTable="SponsorID1Column" msprop:Generator_UserColumnName="SponsorID1" type="xs:string" minOccurs="0" />
+              <xs:element name="SponsorID2" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnSponsorID2" msprop:Generator_ColumnPropNameInRow="SponsorID2" msprop:Generator_ColumnPropNameInTable="SponsorID2Column" msprop:Generator_UserColumnName="SponsorID2" type="xs:string" minOccurs="0" />
+              <xs:element name="SponsorID3" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnSponsorID3" msprop:Generator_ColumnPropNameInRow="SponsorID3" msprop:Generator_ColumnPropNameInTable="SponsorID3Column" msprop:Generator_UserColumnName="SponsorID3" type="xs:string" minOccurs="0" />
+              <xs:element name="Address1" msprop:Generator_ColumnVarNameInTable="columnAddress1" msprop:Generator_ColumnPropNameInRow="Address1" msprop:Generator_ColumnPropNameInTable="Address1Column" msprop:Generator_UserColumnName="Address1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address2" msprop:Generator_ColumnVarNameInTable="columnAddress2" msprop:Generator_ColumnPropNameInRow="Address2" msprop:Generator_ColumnPropNameInTable="Address2Column" msprop:Generator_UserColumnName="Address2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="City" msprop:Generator_ColumnVarNameInTable="columnCity" msprop:Generator_ColumnPropNameInRow="City" msprop:Generator_ColumnPropNameInTable="CityColumn" msprop:Generator_UserColumnName="City" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="State" msprop:Generator_ColumnVarNameInTable="columnState" msprop:Generator_ColumnPropNameInRow="State" msprop:Generator_ColumnPropNameInTable="StateColumn" msprop:Generator_UserColumnName="State" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ZIP" msprop:Generator_ColumnVarNameInTable="columnZIP" msprop:Generator_ColumnPropNameInRow="ZIP" msprop:Generator_ColumnPropNameInTable="ZIPColumn" msprop:Generator_UserColumnName="ZIP" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_UserColumnName="Phone" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DateObligated" msprop:Generator_ColumnVarNameInTable="columnDateObligated" msprop:Generator_ColumnPropNameInRow="DateObligated" msprop:Generator_ColumnPropNameInTable="DateObligatedColumn" msprop:Generator_UserColumnName="DateObligated" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateActive" msprop:Generator_ColumnVarNameInTable="columnDateActive" msprop:Generator_ColumnPropNameInRow="DateActive" msprop:Generator_ColumnPropNameInTable="DateActiveColumn" msprop:Generator_UserColumnName="DateActive" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateRemoved" msprop:Generator_ColumnVarNameInTable="columnDateRemoved" msprop:Generator_ColumnPropNameInRow="DateRemoved" msprop:Generator_ColumnPropNameInTable="DateRemovedColumn" msprop:Generator_UserColumnName="DateRemoved" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateDeceased" msprop:Generator_ColumnVarNameInTable="columnDateDeceased" msprop:Generator_ColumnPropNameInRow="DateDeceased" msprop:Generator_ColumnPropNameInTable="DateDeceasedColumn" msprop:Generator_UserColumnName="DateDeceased" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateOfBirth" msprop:Generator_ColumnVarNameInTable="columnDateOfBirth" msprop:Generator_ColumnPropNameInRow="DateOfBirth" msprop:Generator_ColumnPropNameInTable="DateOfBirthColumn" msprop:Generator_UserColumnName="DateOfBirth" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Photo" msprop:Generator_ColumnVarNameInTable="columnPhoto" msprop:Generator_ColumnPropNameInRow="Photo" msprop:Generator_ColumnPropNameInTable="PhotoColumn" msprop:Generator_UserColumnName="Photo" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="PageImage" msprop:Generator_ColumnVarNameInTable="columnPageImage" msprop:Generator_ColumnPropNameInRow="PageImage" msprop:Generator_ColumnPropNameInTable="PageImageColumn" msprop:Generator_UserColumnName="PageImage" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:VIEW_CurrentDues" />
+      <xs:field xpath="mstns:TypeId" />
+      <xs:field xpath="mstns:MemberID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

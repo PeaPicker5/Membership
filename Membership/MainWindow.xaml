@@ -1,0 +1,140 @@
+﻿<Window x:Class="Membership.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fluent="urn:fluent-ribbon"
+        xmlns:converters="clr-namespace:Membership.Common.Converters"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="MainWindow" Height="800" Width="1500" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BoolToVisibilityConverter TrueValue="Collapsed" FalseValue="Visible"
+                                                  x:Key="InvertedBoolToVisibilityConverter" />
+            <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
+                                                  x:Key="BoolToVisibilityConverter" />
+            <converters:BooleanInverterConverter x:Key="BoolInverterConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid FocusManager.FocusedElement="{Binding ElementName=MainRibbon}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <fluent:Ribbon x:Name="MainRibbon" x:FieldModifier="private" DockPanel.Dock="Top" Height="120"  >
+                <fluent:Ribbon.Menu>
+                    <fluent:ApplicationMenu Header="File" RightPaneWidth="0">
+                        <fluent:MenuItem Header="Help"
+                                         Command="Help"
+                                         KeyTip="H">
+                            <fluent:MenuItem.Icon>
+                                <Image Source="/Common/Resources/Help.png" 
+                                        Width="24" Height="24"/>
+                            </fluent:MenuItem.Icon>
+                        </fluent:MenuItem>
+                        <fluent:MenuItem Header="System Status"
+                                         KeyTip="S">
+                            <fluent:MenuItem.Icon>
+                                <Image
+                                    Source="/Common/Resources/SystemStatus.png"
+                                    Width="24" Height="24" />
+                            </fluent:MenuItem.Icon>
+                        </fluent:MenuItem>
+                        <fluent:MenuItem Header="About"
+                                         KeyTip="A">
+                            <fluent:MenuItem.Icon>
+                                <Image
+                                    Source="/Common/Resources/Info.png"
+                                    Width="24" Height="24" />
+                            </fluent:MenuItem.Icon>
+                        </fluent:MenuItem>
+                        <fluent:SeparatorTabItem />
+                        <fluent:MenuItem Header="Exit"
+                                         KeyTip="X"
+                                         InputGestureText="Alt-F4">
+                            <fluent:MenuItem.Icon>
+                                <Image
+                                    Source="/Common/Resources/Exit.png"
+                                    Width="24" Height="24" />
+                            </fluent:MenuItem.Icon>
+                        </fluent:MenuItem>
+                    </fluent:ApplicationMenu>
+                </fluent:Ribbon.Menu>
+
+                <fluent:RibbonTabItem Header="Home" KeyTip="H">
+
+                    <fluent:RibbonGroupBox  Header="Membership">
+                        <fluent:Button ToolTip="Membership"
+                                       Header="Membership List"
+                                       LargeIcon="{StaticResource CalendarIcon}"
+                                       Click="MembershipButton_Click" />
+                    </fluent:RibbonGroupBox>
+
+                    <fluent:RibbonGroupBox Header="Dues">
+                        <fluent:Button Header="Dues History"
+                                       ToolTip="Dues History"
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesHistoryButtonOnClick" />
+                        <fluent:Button Header="Dues Collection"
+                                       ToolTip="Dues Collection" 
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesCollectionButtonOnClick" />
+                        <fluent:Button Header="Dues Card Report"
+                                       ToolTip="Dues Cards" 
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesCardsButtonOnClick" />
+                        <fluent:Button Header="Dues Warning Report"
+                                       ToolTip="Dues Warning Report" 
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesWarningButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+
+                    <fluent:RibbonGroupBox Header="Offices">
+                        <fluent:Button Header="Officer Assignment"
+                                       ToolTip="Assign the officers of the Association."
+                                       LargeIcon="{StaticResource TagIcon}"
+                                       Click="OfficerAssignButtonOnClick" />
+                        <fluent:Button Header="Officer History"
+                                       ToolTip="Officers for a given year." 
+                                       LargeIcon="{StaticResource TagIcon}"
+                                       Click="OfficerHistoryButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+
+                    <fluent:RibbonGroupBox Header="Reports" >
+                        <fluent:Button Header="Reports"
+                                       ToolTip="Add a new member to the roll." 
+                                       LargeIcon="{StaticResource ReportIcon}"
+                                       Click="ReportsButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+                    
+                    <fluent:RibbonGroupBox Header="Organization" >
+                        <fluent:Button Header="System Configuration"
+                                       ToolTip="General settings for the organization." 
+                                       LargeIcon="{StaticResource SystemStatusIcon}"
+                                       Click="SysConfigButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+
+                </fluent:RibbonTabItem>
+            </fluent:Ribbon>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1" LastChildFill="True" x:Name="MainStack" Background="BlanchedAlmond" >
+
+        </DockPanel>
+
+    </Grid>
+
+
+
+</Window>
+

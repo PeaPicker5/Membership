@@ -1,0 +1,132 @@
+﻿<holidays:EditHolidayBase x:Class="Structure.Controls.Holidays.EditHolidayControl"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:controls="clr-namespace:Mavin.UI.Windows.Common.Controls;assembly=Mavin.UI.Windows.Common"
+                          xmlns:converters="clr-namespace:Mavin.UI.Windows.Common.Converters;assembly=Mavin.UI.Windows.Common"
+                          xmlns:validationRules="clr-namespace:Mavin.UI.Windows.Common.ValidationRules;assembly=Mavin.UI.Windows.Common"
+                          xmlns:holidays="clr-namespace:Structure.Controls.Holidays"
+                          xmlns:customControls="clr-namespace:Mavin.UI.Windows.Common.Controls.CustomControls;assembly=Mavin.UI.Windows.Common"
+                          xmlns:listDetails="clr-namespace:Mavin.UI.Windows.Common.Controls.ListDetails;assembly=Mavin.UI.Windows.Common"
+                          DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                          mc:Ignorable="d"
+                          d:DesignWidth="600">
+    <controls:MavinBaseControl.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Mavin.UI.Windows.Common;component/MavinResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:NullToFalseConverter x:Key="NullToFalseConverter" />
+            <converters:NullToVisibilityConverter NullValue="Hidden" NotNullValue="Visible"
+                                                  x:Key="NullToVisibilityConverter" />
+        </ResourceDictionary>
+    </controls:MavinBaseControl.Resources>
+
+    <Control.Triggers>
+        <EventTrigger RoutedEvent="holidays:EditHolidayControl.ItemChanged">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.5" BeginTime="0:0:0"
+                                     From="0.0" To="1.0" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Control.Triggers>
+
+    <Border
+        Style="{StaticResource FooterBorderStyle}"
+        Margin="0, 0, 0, 150">
+        <DockPanel>
+
+            <listDetails:DetailsHeaderControl
+                DockPanel.Dock="Top" Margin="10"
+                IsEditing="{Binding Path=IsEditing, Mode=OneWay, RelativeSource={RelativeSource AncestorType=holidays:EditHolidayControl}}"
+                TitleText="{Binding Path=TitleText, Mode=OneWay}"
+                HasAnyItems="{Binding Path=ItemData, Mode=OneWay, Converter={StaticResource NullToFalseConverter}, RelativeSource={RelativeSource AncestorType=holidays:EditHolidayControl}}"
+                AddItem="DetailsHeaderControlOnAddItem"
+                CancelItem="DetailsHeaderControlOnCancelItem"
+                EditItem="DetailsHeaderControlOnEditItem"
+                HideDetails="DetailsHeaderControlOnHideDetails"
+                RemoveItem="DetailsHeaderControlOnRemoveItem"
+                SaveItem="DetailsHeaderControlOnSaveItem" />
+
+            <Grid
+                Visibility="{Binding Path=ItemData, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=holidays:EditHolidayControl}}"
+                Width="500"
+                Margin="0,0,0,10"
+                IsEnabled="{Binding Path=IsEditing, Mode=OneWay, RelativeSource={RelativeSource AncestorType=holidays:EditHolidayControl}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Content="Description:"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource LabelStyle}" />
+                    <customControls:MavinWatermarkTextBox Grid.Row="0" Grid.Column="1"
+                                                     x:Name="DescriptionTextBox" x:FieldModifier="private"
+                                                     Style="{StaticResource WatermarkTextBoxStyle}"
+                                                     WatermarkText="Enter a description for the holiday"
+                                                     HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Center"
+                                                     MaxLength="100">
+                        <Binding Path="HolidayName" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <validationRules:EmptyStringValidationRule
+                                    ErrorMessage="A holiday description is required." />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </customControls:MavinWatermarkTextBox>
+
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Margin="0,10,0,0"
+                           Content="Date:"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource LabelStyle}" />
+                    <DockPanel Grid.Row="1" Grid.Column="1"
+                               Margin="0,10,0,0">
+                        <DatePicker DockPanel.Dock="Left"
+                                    x:Name="DatePicker" x:FieldModifier="private"
+                                    Width="150"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    SelectedDateFormat="Short"
+                                    PreviewTextInput="DatePickerOnPreviewTextInput"
+                                    CalendarStyle="{StaticResource CalendarStyle}">
+                            <DatePicker.SelectedDate>
+                                <Binding Path="ItemData.Date" Mode="OneWay"
+                                         RelativeSource="{RelativeSource AncestorType=holidays:EditHolidayControl}">
+                                    <Binding.ValidationRules>
+                                        <validationRules:EmptyStringValidationRule
+                                            ErrorMessage="A date is required." />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </DatePicker.SelectedDate>
+                        </DatePicker>
+                        <customControls:MavinShortUpDown DockPanel.Dock="Right"
+                                          x:Name="NumberOfDaysUpDown" x:FieldModifier="private"
+                                          Width="60"
+                                          Minimum="1"
+                                          Maximum="255" />
+                        <Label DockPanel.Dock="Right"
+                               Content="Number of Days:"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Style="{StaticResource LabelStyle}" />
+
+                    </DockPanel>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Border>
+</holidays:EditHolidayBase>
