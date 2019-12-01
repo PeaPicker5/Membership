@@ -8,13 +8,13 @@ namespace Membership.UI_Controls.Offices
 {
     public partial class OfficesHeld : IOfficeHeldView
     {
-        public IEnumerable<OfficeHeld> OfficerRecs
+        public IEnumerable<Officer> OfficerRecs
         {
-            get { return (IEnumerable<OfficeHeld>)GetValue(OfficerRecsProperty); }
+            get { return (IEnumerable<Officer>)GetValue(OfficerRecsProperty); }
             set { SetValue(OfficerRecsProperty, value); }
         }
         public static readonly DependencyProperty OfficerRecsProperty =
-            DependencyProperty.Register("OfficerRecs", typeof(IEnumerable<OfficeHeld>), 
+            DependencyProperty.Register("OfficerRecs", typeof(IEnumerable<Officer>), 
                 typeof(OfficesHeld));
 
 

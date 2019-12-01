@@ -76,7 +76,7 @@
                     <fluent:RibbonGroupBox  Header="Membership">
                         <fluent:Button ToolTip="Membership"
                                        Header="Membership List"
-                                       LargeIcon="{StaticResource CalendarIcon}"
+                                       LargeIcon="{StaticResource ColorsIcon}"
                                        Click="MembershipButton_Click" />
                     </fluent:RibbonGroupBox>
 
@@ -108,6 +108,12 @@
                                        ToolTip="Officers for a given year." 
                                        LargeIcon="{StaticResource TagIcon}"
                                        Click="OfficerHistoryButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+                    <fluent:RibbonGroupBox Header="Meetings">
+                        <fluent:Button Header="Meeting Attendance"
+                                       ToolTip="Assign the officers of the Association."
+                                       LargeIcon="{StaticResource CalendarIcon}"
+                                       Click="OfficerAssignButtonOnClick" />
                     </fluent:RibbonGroupBox>
 
                     <fluent:RibbonGroupBox Header="Reports" >

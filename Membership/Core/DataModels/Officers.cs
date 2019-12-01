@@ -3,19 +3,19 @@ using System.Globalization;
 
 namespace Membership.Core.DataModels
 {
-    public class OfficeHeld
+    public class Officer
     {
-        public OfficeHeld() {}
-        public OfficeHeld(Guid memberId, Office officeRec, int year, int fromMonth, int toMonth)
+        public Officer() {}
+        public Officer(Member memberRec, Office officeRec, int year, int fromMonth, int toMonth)
         {
-            MemberId = memberId;
+            MemberRec = memberRec;
             OfficeRec = officeRec;
             Year = year;
             FromMonth = fromMonth;
             ToMonth = toMonth;
         }
 
-        public Guid MemberId { get; set; }
+        public Member MemberRec { get; set; }
         public Office OfficeRec { get; set; }
         public int Year { get; set; }
         public int FromMonth { get; set; }

@@ -15,7 +15,7 @@ namespace Membership.UI_Controls.Offices
             InitializeComponent();
         }
 
-        public IEnumerable<OfficeHeld> Officers { get; set; }
+        public IEnumerable<Officer> Officers { get; set; }
 
         private void OfficeHeldGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -27,6 +27,6 @@ namespace Membership.UI_Controls.Offices
 
         }
 
-        public IEnumerable<OfficeHeld> OfficerRecs { get; set; }
+        public IEnumerable<Officer> OfficerRecs { get; set; }
     }
 }

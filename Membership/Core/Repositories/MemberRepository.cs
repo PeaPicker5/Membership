@@ -25,7 +25,10 @@ namespace Membership.Core.Repositories
 
         public IEnumerable<Member> GetMembers()
         {
-            const string query = "SELECT ml.*, mt.Description as [Status] FROM MEMBER_List ml INNER JOIN MEMBER_Type mt ON ml.MemberTypeId = mt.TypeId ORDER BY Lastname";
+            const string query = "SELECT ml.*, mt.Description as [Status], mt.DuesAmount " +
+                                 "FROM MEMBER_List ml " +
+                                 "INNER JOIN MEMBER_Type mt ON ml.MemberTypeId = mt.TypeId " +
+                                 "ORDER BY Lastname";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 var retVal = connection.Query<Member>(query).ToList();

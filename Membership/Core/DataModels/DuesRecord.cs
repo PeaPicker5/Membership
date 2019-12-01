@@ -8,15 +8,15 @@ namespace Membership.Core.DataModels
 {
     public class DuesRecord : INotifyPropertyChanged
     {
-        //public DuesRecord() { }
-        //public DuesRecord(Member memberRec, int year, int month, float amount, bool isPaid)
-        //{
-        //    MemberRec = memberRec;
-        //    Year = year;
-        //    Month = month;
-        //    Amount = amount;
-        //    IsPaid = isPaid;
-        //}
+        public DuesRecord() { }
+        public DuesRecord(Member memberRec, int year, int month, float amount, bool isPaid)
+        {
+            MemberRec = memberRec;
+            Year = year;
+            Month = month;
+            Amount = amount;
+            IsPaid = isPaid;
+        }
 
         public Member MemberRec { get; set; }
         public int Year { get; set; }
@@ -40,6 +40,8 @@ namespace Membership.Core.DataModels
             }
             set {}
         }
+
+        public Guid MemberId => MemberRec.MemberId;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

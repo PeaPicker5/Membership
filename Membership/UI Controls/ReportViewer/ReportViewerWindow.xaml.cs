@@ -1,42 +1,50 @@
-﻿using System;
-using System.Windows;
+﻿using System.Linq;
+using Membership.Core.Presenters;
+using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.ReportViewer
 {
-    public partial class ReportViewerWindow 
+    public partial class ReportViewerWindow : IReportViewerView
     {
+        private readonly ReportViewerPresenter _presenter;
+
         public ReportViewerWindow()
         {
             InitializeComponent();
-            ReportViewer.Load += ReportViewer_Load;
+            _presenter = new ReportViewerPresenter(this);
         }
-        private bool _isReportViewerLoaded;
 
-        private void ReportViewer_Load(object sender, EventArgs e)
+        public void LoadReport(string reportName)
         {
-            if (!_isReportViewerLoaded)
+            LoadReportDatasets(reportName);
+
+            ReportViewer.LocalReport.ReportEmbeddedResource = ReportFileName;
+            ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            ReportViewer.RefreshReport();
+        }
+
+
+        private void LoadReportDatasets(string reportName)
+        {
+            ReportFileName = $"Membership.Reports.{reportName}.rdlc";
+
+            switch (reportName.ToUpper())
             {
-                var reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-                var dataset = new MembershipDataSet();
-
-                dataset.BeginInit();
-
-                reportDataSource1.Name = "CurrentDues"; //Name of the report dataset in our .RDLC file
-                reportDataSource1.Value = dataset.VIEW_CurrentDues;
-                ReportViewer.LocalReport.DataSources.Add(reportDataSource1);
-                ReportViewer.LocalReport.ReportEmbeddedResource = "DuesWarning.rdlc";
-
-                dataset.EndInit();
-
-                //fill data into dataSet
-                var salesOrderDetailTableAdapter = new MembershipDataSetTableAdapters.VIEW_CurrentDuesTableAdapter();
-                salesOrderDetailTableAdapter.ClearBeforeFill = true;
-                salesOrderDetailTableAdapter.Fill(dataset.VIEW_CurrentDues);
-
-                ReportViewer.RefreshReport();
-
-                _isReportViewerLoaded = true;
+                case "DUESCARDS":
+                case "DUESWARNING":
+                    var membersThatOwe = _presenter.CurrentlyOweDues()
+                                         .Where(rec => !rec.IsPaid)
+                                         .Select(ml => ml.MemberId).ToList();
+                    // MemberRecord Dataset
+                    DatasetRecords = _presenter.GetMembersFromList(membersThatOwe);
+                    var dataset = new ReportDataSource { Name = "MemberRecord", Value = DatasetRecords };
+                    ReportViewer.LocalReport.DataSources.Add(dataset);
+                    break;
             }
         }
+
+        public string ReportFileName { get; set; }
+        public string DatasetName { get; set; }
+        public object DatasetRecords { get; set; }
     }
 }

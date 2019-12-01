@@ -5,13 +5,13 @@ using Membership.Core.Repositories;
 
 namespace Membership.Core.Presenters
 {
-    public class OfficesHeldPresenter :IOfficeHeldView
+    public class OfficerRecordsPresenter :IOfficerRecordsView
     {
         public IEnumerable<Officer> OfficerRecs { get; set; }
         private readonly IOfficeHeldRepository _officeRepository;
-        private readonly IOfficeHeldView _view;
+        private readonly IOfficerRecordsView _view;
 
-        public OfficesHeldPresenter(IOfficeHeldView view)
+        public OfficerRecordsPresenter(IOfficerRecordsView view)
         {
             _officeRepository = new OfficeHeldRepository();
             _view = view;
@@ -22,5 +22,14 @@ namespace Membership.Core.Presenters
             _view.OfficerRecs = _officeRepository.GetOfficesByMember(memberId);
         }
 
+        public IEnumerable<int> LoadYearsOnFile()
+        {
+            return _officeRepository.GetYearsOnFile();
+        }
+
+        public IEnumerable<Office> LoadOfficesOnFile()
+        {
+            return _officeRepository.GetOfficesOnFile();
+        }
     }
 }

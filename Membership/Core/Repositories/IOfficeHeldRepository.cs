@@ -11,14 +11,17 @@ namespace Membership.Core.Repositories
         /// </summary>
         /// <param name="memberId">The event identifier.</param>
         /// <returns></returns>
-        IEnumerable<OfficeHeld> GetOfficesByMember(Guid memberId);
+        IEnumerable<Officer> GetOfficesByMember(Guid memberId);
 
         /// <summary>
         /// Gets all Officers for a given year.
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        IEnumerable<OfficeHeld> GetOfficesByYear(int year);
+        IEnumerable<Officer> GetOfficesByYear(int year);
+
+        IEnumerable<int> GetYearsOnFile();
+        IEnumerable<Office> GetOfficesOnFile();
 
     }
 }

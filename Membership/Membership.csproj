@@ -149,12 +149,16 @@
     <Compile Include="Common\UsStates.cs" />
     <Compile Include="Core\DataModels\DuesHistory.cs" />
     <Compile Include="Core\DataModels\DuesRecord.cs" />
-    <Compile Include="Core\DataModels\OfficeHeld.cs" />
+    <Compile Include="Core\DataModels\Officers.cs" />
     <Compile Include="Core\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />
+    <Compile Include="Core\Presenters\IOfficerRecordsView.cs" />
+    <Compile Include="Core\Presenters\IReportViewerView.cs" />
     <Compile Include="Core\Presenters\IMemberSelectionView.cs" />
     <Compile Include="Core\Presenters\IOfficeHeldView.cs" />
     <Compile Include="Core\Presenters\IMemberView.cs" />
+    <Compile Include="Core\Presenters\OfficerRecordsPresenter.cs" />
+    <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficesHeldPresenter.cs" />
     <Compile Include="Core\Presenters\MemberSelectionPresenter.cs" />
     <Compile Include="Core\Repositories\IDuesRepository.cs" />
@@ -172,6 +176,9 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="UI Controls\Offices\OfficerRecords.xaml.cs">
+      <DependentUpon>OfficerRecords.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI Controls\ReportViewer\ReportViewerWindow.xaml.cs">
       <DependentUpon>ReportViewerWindow.xaml</DependentUpon>
     </Compile>
@@ -195,9 +202,6 @@
     </Compile>
     <Compile Include="UI Controls\Offices\OfficesHeld.xaml.cs">
       <DependentUpon>OfficesHeld.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Page Include="Common\AddEditButtons.xaml">
       <SubType>Designer</SubType>
@@ -228,6 +232,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI Controls\Offices\OfficerRecords.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI Controls\ReportViewer\ReportViewerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -260,10 +268,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -279,9 +283,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Reports\DuesWarning.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DuesWarning.rdlc" />
     <EmbeddedResource Include="Reports\DuesCards.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -300,6 +302,12 @@
     </None>
     <None Include="Membership_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Membership.Core.DataModels.DuesHistory.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.DataModels.DuesRecord.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.DataModels.Member.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.DataModels.MemberType.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.DataModels.Office.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.DataModels.OfficeHeld.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

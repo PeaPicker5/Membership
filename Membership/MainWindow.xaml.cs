@@ -3,18 +3,12 @@ using Membership.UI_Controls.Dues;
 using Membership.UI_Controls.Members;
 using Membership.UI_Controls.Offices;
 using Membership.UI_Controls.ReportViewer;
+using DuesHistory = Membership.UI_Controls.Dues.DuesHistory;
 
 namespace Membership
 {
-
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow
     {
-
-
-
         public bool CanAddMember
         {
             get { return (bool)GetValue(CanAddMemberProperty); }
@@ -23,12 +17,11 @@ namespace Membership
         public static readonly DependencyProperty CanAddMemberProperty =
             DependencyProperty.Register("CanAddMember", typeof(bool), typeof(MainWindow));
 
-
-
         public MainWindow()
         {
             InitializeComponent();
         }
+        
         private void MembershipButton_Click(object sender, RoutedEventArgs e)
         {
             var ucMemberSelection = new MemberSelection();
@@ -49,7 +42,6 @@ namespace Membership
             ucOfficers.LoadOfficers();
             MainStack.Children.Add(ucOfficers);
         }
-
 
         private void AddMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
@@ -76,13 +68,17 @@ namespace Membership
         private void DuesCardsButtonOnClick(object sender, RoutedEventArgs e)
         {
             var ucDuesCardReport = new ReportViewerWindow();
+            ucDuesCardReport.LoadReport("DuesCards");
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesCardReport);
         }
 
         private void DuesWarningButtonOnClick(object sender, RoutedEventArgs e)
         {
-
+            var ucDuesCardReport = new ReportViewerWindow();
+            ucDuesCardReport.LoadReport("DuesWarning");
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucDuesCardReport);
         }
 
 
@@ -93,7 +89,10 @@ namespace Membership
 
         private void OfficerAssignButtonOnClick(object sender, RoutedEventArgs e)
         {
-
+            var ucOfficerRecords = new OfficerRecords();
+            ucOfficerRecords.Load();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucOfficerRecords);
         }
 
         private void ReportsButtonOnClick(object sender, RoutedEventArgs e)

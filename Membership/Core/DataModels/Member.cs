@@ -40,6 +40,7 @@ namespace Membership.Core.DataModels
         }
 
         public string Status { get; set; }
+        public float DuesAmount { get; set; }
     
         public bool IsCurrent
         {
