@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -19,10 +20,7 @@ namespace Membership.UI_Controls.Offices
 
         public IEnumerable<Officer> OfficerRecs { get; set; }
 
-
         #region Dependency Properties
-
-
 
         public bool ShowingByYear
         {
@@ -32,8 +30,6 @@ namespace Membership.UI_Controls.Offices
         public static readonly DependencyProperty ShowingByYearProperty =
             DependencyProperty.Register("ShowingByYear", typeof(bool),
                 typeof(OfficerRecords));
-
-
 
         public int SelectedOfficeId
         {
@@ -79,18 +75,18 @@ namespace Membership.UI_Controls.Offices
 
         public void Load()
         {
+            ShowingByYear = true;
             YearsOnFile = _presenter.LoadYearsOnFile();
             if (YearSelectionCombo.Items.Count > 0)
                 YearSelectionCombo.SelectedIndex = 0;
             OfficesOnFile = _presenter.LoadOfficesOnFile();
             if (OfficeSelectionCombo.Items.Count > 0)
                 OfficeSelectionCombo.SelectedIndex = 0;
-            ShowingByYear = true;
         }
         private void YearSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!ShowingByYear) return;
- //           _presenter.LoadOfficersByYear();
+            OfficersByYearControl.Load(Convert.ToInt32(YearSelectionCombo.SelectedValue));
         }
 
         private void OfficeSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -117,5 +113,6 @@ namespace Membership.UI_Controls.Offices
         {
             ShowingByYear = false;
         }
+
     }
 }

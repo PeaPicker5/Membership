@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:Membership.Common.Converters"
+             xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="400" d:DesignWidth="1200">
@@ -16,7 +17,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            <DataTemplate x:Key="officeListTemplate" >
+                <DockPanel LastChildFill="True"  >
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=OfficeRec.Title}" Width="130"/>
+                    <TextBlock DockPanel.Dock="Right"  FontSize="14" Text="{Binding Path=MemberRec.FullName}" />
+                </DockPanel>
+            </DataTemplate>
             <converters:BoolToVisibilityConverter TrueValue="Collapsed" FalseValue="Visible"
                                                   x:Key="InvertedBoolToVisibilityConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
@@ -26,7 +32,7 @@
     </UserControl.Resources>
 
 <!-- Membership Information -->
-        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite" Padding="0">
             <GroupBox.Header>
                 <DockPanel  x:Name="SelectionBar"  LastChildFill="False">
                     <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
@@ -36,7 +42,8 @@
                         <ComboBox x:Name="YearSelectionCombo"   Margin="0,3" MinWidth="100" IsEditable="True"
                                   Visibility="{Binding Path=ShowingByYear, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                                   ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
-                                  SelectionChanged="YearSelectionChanged" />
+                                  SelectionChanged="YearSelectionChanged"
+                                  />
                         <Label Content="    Office:"      FontSize="16"
                                   Visibility="{Binding Path=ShowingByYear, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibilityConverter}}" />
                         <ComboBox x:Name="OfficeSelectionCombo"
@@ -51,56 +58,32 @@
                 </DockPanel>
             </GroupBox.Header>
 
-            <Grid  >
+            <Grid Background="AntiqueWhite" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="6*" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="0">
-                    <Button Width="120" Click="RecordsByYearOnClick" Margin="10,30,10,10">
+                <StackPanel Grid.Column="0">
+                    <Button Width="120" Click="RecordsByYearOnClick" Margin="10,30,10,10" BorderThickness="4">
                         <TextBlock Text="RECORDS  BY YEAR"   
                                    FontSize="18" Style="{StaticResource MessageTextBlockStyle}" />
                     </Button>
-                    <Button Width="120" Click="RecordsByOfficeOnClick" Margin="10">
+                    <Button Width="120" Click="RecordsByOfficeOnClick" Margin="10" BorderThickness="4">
                         <TextBlock Text="RECORDS  BY OFFICE" 
                                    FontSize="18" Style="{StaticResource MessageTextBlockStyle}" />
                     </Button>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Background="White">
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center"
-                               FontWeight="Bold" FontSize="20" Text="FIRE DISTRICT OFFICERS" />
-
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" Margin="0,10,0,0"
-                               FontWeight="Bold" FontSize="18" Text="COMMISSIONERS" />
-                    <!-- list control of names.   -->
-
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" Margin="0,10,0,0"
-                               FontWeight="Bold" FontSize="18" Text="LINE OFFICERS" />
-                    <!-- User Control -> send in office group type and year, display grid of officer names   -->                
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" Margin="0,10,0,0"
-                               FontWeight="Bold" FontSize="18" Text="OTHER OFFICES" />
-                    <!-- User Control -> send in office group type and year, display grid of officer names   -->
-                </StackPanel>
-
-                <StackPanel Grid.Column="2" Background="White">
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center"
-                               FontWeight="Bold" FontSize="20" Text="ASSOCIATION OFFICERS" />
-
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" Margin="0,10,0,0"
-                               FontWeight="Bold" FontSize="18" Text="BOARD OF DIRECTORS" />
-                    <!-- list control of names.   -->
-
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" Margin="0,10,0,0"
-                               FontWeight="Bold" FontSize="18" Text="TABLE OFFICERS" />
-                    <!-- User Control -> send in office group type and year, display grid of officer names   -->
-                    <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" Margin="0,10,0,0"
-                               FontWeight="Bold" FontSize="18" Text="OTHER OFFICES" />
-                    <!-- User Control -> send in office group type and year, display grid of officer names   -->
-                </StackPanel>
-            </Grid>
+                <DockPanel LastChildFill="True" Grid.Column="1" 
+                           Visibility="{Binding Path=ShowingByYear, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <offices:OfficerRecordsByYear x:Name="OfficersByYearControl" />
+                </DockPanel>
+                <DockPanel LastChildFill="True" Grid.Column="1" 
+                           Visibility="{Binding Path=ShowingByYear, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+                    <offices:OfficerRecordsByOffice x:Name="OfficersByOfficeControl" />
+                </DockPanel>
+        </Grid>
 
     </GroupBox>
 

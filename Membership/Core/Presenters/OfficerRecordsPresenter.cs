@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Membership.Core.DataModels;
 using Membership.Core.Repositories;
 
@@ -30,6 +31,12 @@ namespace Membership.Core.Presenters
         public IEnumerable<Office> LoadOfficesOnFile()
         {
             return _officeRepository.GetOfficesOnFile();
+        }
+
+        public void LoadOfficersForaYear(int year)
+        {
+            var allRecs = _officeRepository.GetOfficersByYear(year).ToList();
+
         }
     }
 }

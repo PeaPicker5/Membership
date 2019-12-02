@@ -152,11 +152,13 @@
     <Compile Include="Core\DataModels\Officers.cs" />
     <Compile Include="Core\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />
+    <Compile Include="Core\Presenters\IOfficerRecordsByYear.cs" />
     <Compile Include="Core\Presenters\IOfficerRecordsView.cs" />
     <Compile Include="Core\Presenters\IReportViewerView.cs" />
     <Compile Include="Core\Presenters\IMemberSelectionView.cs" />
     <Compile Include="Core\Presenters\IOfficeHeldView.cs" />
     <Compile Include="Core\Presenters\IMemberView.cs" />
+    <Compile Include="Core\Presenters\OfficerRecordsByYearPresenter.cs" />
     <Compile Include="Core\Presenters\OfficerRecordsPresenter.cs" />
     <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficesHeldPresenter.cs" />
@@ -176,6 +178,9 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="UI Controls\Offices\OfficerRecordsByYear.xaml.cs">
+      <DependentUpon>OfficerRecordsByYear.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI Controls\Offices\OfficerRecords.xaml.cs">
       <DependentUpon>OfficerRecords.xaml</DependentUpon>
     </Compile>
@@ -232,6 +237,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI Controls\Offices\OfficerRecordsByYear.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI Controls\Offices\OfficerRecords.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -18,7 +18,7 @@ namespace Membership.Core.Repositories
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        IEnumerable<Officer> GetOfficesByYear(int year);
+        IEnumerable<Officer> GetOfficersByYear(int year);
 
         IEnumerable<int> GetYearsOnFile();
         IEnumerable<Office> GetOfficesOnFile();

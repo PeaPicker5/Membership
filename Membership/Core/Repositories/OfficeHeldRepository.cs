@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Dapper;
 using Membership.Core.DataModels;
 
@@ -29,16 +30,6 @@ namespace Membership.Core.Repositories
                 return officers;
             }
         }
-
-        public IEnumerable<Officer> GetOfficesByYear(int year)
-        {
-            const string query = "SELECT * FROM OfficeAssignments WHERE Year = @year";
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
-            {
-                var retVal = connection.Query<Officer>(query,new { Year = year }).ToList();
-                return retVal;
-            }
-        }
         public IEnumerable<int> GetYearsOnFile()
         {
             var yearList = new List<int>();
@@ -52,11 +43,45 @@ namespace Membership.Core.Repositories
             }
         }
 
+        public IEnumerable<Officer> GetOfficesByYear(int year)
+        {
+            const string query = "SELECT * FROM OfficeAssignments WHERE Year = @year";
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var retVal = connection.Query<Officer>(query, new { Year = year }).ToList();
+                return retVal;
+            }
+        }
+
+        public IEnumerable<Officer> GetOfficersByYear(int year)
+        {
+            const string query = "SELECT  oa.*, ml.*, ol.* " +
+                                 "FROM Office_Assignments oa " +
+                                 "INNER JOIN MEMBER_List ml ON oa.MemberID = ml.MemberID " +
+                                 "INNER JOIN OFFICE_List ol on oa.OfficeID = ol.OfficeID " +
+                                 "WHERE oa.Year = @year";
+
+            List<Officer> officerRecs = null;
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                officerRecs = connection.Query<Officer, Member, Office, Officer>(query,
+                    (officer, member, office) =>
+                    {
+                        officer.MemberRec = member;
+                        officer.OfficeRec = office;
+                        return officer;
+                    },
+                    new { Year = year }, splitOn: "MemberId,OfficeId", commandType: CommandType.Text).ToList();
+            }
+
+            return officerRecs;
+        }
+
         public IEnumerable<Office> GetOfficesOnFile()
         {
             const string query = "SELECT DISTINCT ol.* FROM OFFICE_Assignments oa " +
                                  "INNER JOIN OFFICE_List ol ON oa.OfficeID = ol.OfficeID " +
-                                 "Order by ol.OfficeId "  ;
+                                 "Order by ol.OfficeId ";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 var retVal = connection.Query<Office>(query).ToList();
@@ -64,5 +89,6 @@ namespace Membership.Core.Repositories
             }
 
         }
+
     }
 }
