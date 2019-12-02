@@ -20,12 +20,12 @@ namespace Membership.Core.Presenters
 
         public void GetByMemberId(Guid memberId)
         {
-            _view.OfficerRecs = _officeRepository.GetOfficesByMember(memberId);
+            _view.OfficerRecs = _officeRepository.GetOfficersByMember(memberId);
         }
 
         public IEnumerable<int> LoadYearsOnFile()
         {
-            return _officeRepository.GetYearsOnFile();
+            return _officeRepository.GetOfficerYearsOnFile();
         }
 
         public IEnumerable<Office> LoadOfficesOnFile()
@@ -33,9 +33,9 @@ namespace Membership.Core.Presenters
             return _officeRepository.GetOfficesOnFile();
         }
 
-        public void LoadOfficersForaYear(int year)
+        public void LoadOfficersForaTitle(int officeId)
         {
-            var allRecs = _officeRepository.GetOfficersByYear(year).ToList();
+            var allRecs = _officeRepository.GetOfficersByTitle(officeId).ToList();
 
         }
     }

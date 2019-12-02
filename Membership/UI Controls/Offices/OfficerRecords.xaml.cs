@@ -18,7 +18,15 @@ namespace Membership.UI_Controls.Offices
 
         private readonly OfficerRecordsPresenter _presenter;
 
-        public IEnumerable<Officer> OfficerRecs { get; set; }
+        public IEnumerable<Officer> OfficerRecs
+        {
+            get { return (IEnumerable<Officer>)GetValue(OfficerRecsProperty); }
+            set { SetValue(OfficerRecsProperty, value); OnPropertyChanged();}
+        }
+        public static readonly DependencyProperty OfficerRecsProperty =
+            DependencyProperty.Register("OfficerRecs",
+                typeof(IEnumerable<Officer>),typeof(OfficerRecords));
+
 
         #region Dependency Properties
 
@@ -30,16 +38,6 @@ namespace Membership.UI_Controls.Offices
         public static readonly DependencyProperty ShowingByYearProperty =
             DependencyProperty.Register("ShowingByYear", typeof(bool),
                 typeof(OfficerRecords));
-
-        public int SelectedOfficeId
-        {
-            get { return (int)GetValue(SelectedOfficeIdProperty); }
-            set { SetValue(SelectedOfficeIdProperty, value); }
-        }
-        public static readonly DependencyProperty SelectedOfficeIdProperty =
-            DependencyProperty.Register("SelectedOfficeId", typeof(int),
-                typeof(OfficerRecords));
-
 
         public IEnumerable<int> YearsOnFile
         {
@@ -92,7 +90,7 @@ namespace Membership.UI_Controls.Offices
         private void OfficeSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ShowingByYear) return;
- //           _presenter.LoadOfficersByOffice(SelectedOfficeId);
+ //           OfficersByTitleControl.Load(SelectedOfficeId);
         }
 
 
@@ -112,6 +110,7 @@ namespace Membership.UI_Controls.Offices
         private void RecordsByOfficeOnClick(object sender, RoutedEventArgs e)
         {
             ShowingByYear = false;
+            _presenter.LoadOfficersForaTitle(1);
         }
 
     }

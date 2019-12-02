@@ -19,7 +19,7 @@ namespace Membership.Core.Presenters
 
         public void GetByMemberId(Guid memberId)
         {
-            _view.OfficerRecs = _officeRepository.GetOfficesByMember(memberId);
+            _view.OfficerRecs = _officeRepository.GetOfficersByMember(memberId);
         }
 
     }
