@@ -80,6 +80,13 @@
                                        Click="MembershipButton_Click" />
                     </fluent:RibbonGroupBox>
 
+                    <fluent:RibbonGroupBox Header="Meetings">
+                        <fluent:Button Header="Meeting Attendance"
+                                       ToolTip="Assign the officers of the Association."
+                                       LargeIcon="{StaticResource CalendarIcon}"
+                                       Click="OfficerAssignButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+
                     <fluent:RibbonGroupBox Header="Dues">
                         <fluent:Button Header="Dues History"
                                        ToolTip="Dues History"
@@ -89,31 +96,25 @@
                                        ToolTip="Dues Collection" 
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesCollectionButtonOnClick" />
-                        <fluent:Button Header="Dues Card Report"
+                        <fluent:Button Header="Print  Dues Cards"
                                        ToolTip="Dues Cards" 
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesCardsButtonOnClick" />
-                        <fluent:Button Header="Dues Warning Report"
+                        <fluent:Button Header="Dues Warning Notice"
                                        ToolTip="Dues Warning Report" 
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesWarningButtonOnClick" />
                     </fluent:RibbonGroupBox>
 
                     <fluent:RibbonGroupBox Header="Offices">
-                        <fluent:Button Header="Officer Assignment"
+                        <fluent:Button Header="Officer Assignments"
                                        ToolTip="Assign the officers of the Association."
                                        LargeIcon="{StaticResource TagIcon}"
                                        Click="OfficerAssignButtonOnClick" />
-                        <fluent:Button Header="Officer History"
+                        <fluent:Button Header="Office History"
                                        ToolTip="Officers for a given year." 
                                        LargeIcon="{StaticResource TagIcon}"
                                        Click="OfficerHistoryButtonOnClick" />
-                    </fluent:RibbonGroupBox>
-                    <fluent:RibbonGroupBox Header="Meetings">
-                        <fluent:Button Header="Meeting Attendance"
-                                       ToolTip="Assign the officers of the Association."
-                                       LargeIcon="{StaticResource CalendarIcon}"
-                                       Click="OfficerAssignButtonOnClick" />
                     </fluent:RibbonGroupBox>
 
                     <fluent:RibbonGroupBox Header="Reports" >

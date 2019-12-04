@@ -1,0 +1,80 @@
+﻿Things to do:
+
+
+Membership Info:
+	UI - Format, add dates, add image(s) of scans/photos, Sponsorship members
+	Add/Edit/Delete functionality.
+		- Upon delete, add warning to change status instead.  DELETE IS BAD.  Should only be for fixing entry issues.
+	Add a clear filter buttom to the right side of the header section.
+	Fix grid columns with MinWidth amounts.
+	Report printout of member needed
+	Report printout of membership grid.
+
+
+Offices Held:
+	Extend the width of the To column to fill the control.
+
+
+Dues Collection:
+	Change the Apply button to have a $ rather than a + sign.
+
+
+Dues Card Report:
+	Format the report to line up with the dues cards.
+	Include a side-2 to the report for the address and return address.
+	Use/Configure the Officer parameter in the header section 
+		1) Combo box of table officers, auto select the Financial Secretary.
+		2) Need a parameter for 1st or 2nd notice.
+		3) Auto fill the Officer Text box with the current name of that position.
+		4) Allow for the Text box to be overwritten with a random name.
+		5) Add instructions on how to load the cards into the printer and how to print on both sides.
+
+
+Dues Warning Report:
+	Format the report like the forms used in the past.
+	Allow for the same parameters and usage as the dues cards report (minus the 1st or 2nd notice).
+
+
+Officers:
+	Add bool IsPartialTerm field so as to display '*'.  Partial if FromMonth ?> 0 OR ToMonth ?< 12 (use NULL propagation)
+	Make one menu option for Officer Assignments and one for Office History.
+	Remove the buttons to swap between the two options and break them up.
+
+
+Meeting Attendance:
+	Header info for date, time, location (default to Global Variable), description, purpose
+	Make a ListView in a Wrappanel like the office history.  
+	List Item is (Chkbox) (Lastname, Firstname).
+	Click on the list item and the checkbox will toggle its value.
+	Add/Edit/Delete functionality needed in the parameter area.
+	Report printout possibility.
+
+
+Reports:
+	Need is debateable:
+
+
+Organization Information:
+	Add this to the toolbar for:
+		1) Name and address of the Association
+		2) Logo to be used in reports
+
+
+System Configuration:
+	UI for a Global Variables section (if any)
+	UI for lookup tables (add/edit/delete)
+		1) Office List
+		2) Membership status and dues.
+		3) Membership Types and the dues amounts.
+		4) Member Removal Codes when status changes to (4)Removed
+
+
+Common:
+	Setup ENUMs for "magic numbers"
+	Look into setting up common styles for UI controls and setting it up in a common area for use.
+	Add a linkId in the MEMBER_List table to link to a person's removel code.
+	Set up referential integraty to DB tables.
+
+
+
+LEAVE OPEN THE POSSIBILITY FOR A POINTS BASED ATTENDANCE SYSTEM.
