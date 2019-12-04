@@ -17,29 +17,21 @@
             <GroupBox.Header>
                 <DockPanel  x:Name="SelectionBar" LastChildFill="True">
                     <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
-                        <Label Content="DUES HISTORY:   " FontWeight="Bold" FontSize="16"/>
+                        <Label Content="PARAMETERS:   " FontWeight="Bold" FontSize="16"/>
 
-                        <Label Content="    Year:"      FontSize="16"/>
-                        <ComboBox x:Name="YearSelectionCombo"   Margin="0,3" MinWidth="100" IsEditable="True"
-                                  ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
-                                   />
+                        <Label Content="    Officer:"      FontSize="16"/>
+                        <TextBlock x:Name="OfficerToSignText"  Margin="0,3" MinWidth="150" Background="White"/>
                     </StackPanel>
-
                 </DockPanel>
             </GroupBox.Header>
 
             <Grid  >
                 <WindowsFormsHost DockPanel.Dock="Top" Margin="20">
-
                     <rv:ReportViewer x:Name="ReportViewer" Visible="True"  Enabled="True" Dock="None" />
-
                 </WindowsFormsHost>
-
             </Grid>
 
         </GroupBox>
-
-
 
     </DockPanel>
 </UserControl>

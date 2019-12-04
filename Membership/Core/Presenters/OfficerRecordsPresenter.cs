@@ -33,10 +33,14 @@ namespace Membership.Core.Presenters
             return _officeRepository.GetOfficesOnFile();
         }
 
-        public void LoadOfficersForaTitle(int officeId)
+        public void LoadOfficersForaTitle(int officeId, int fromYear = 9999, int backToYear = 0)
         {
-            var allRecs = _officeRepository.GetOfficersByTitle(officeId).ToList();
-
+            _view.OfficerRecs = _officeRepository.GetOfficersByTitle(officeId)
+                .Where(x => x.Year <= fromYear && x.Year >= backToYear)
+                .OrderByDescending(x => x.Year)
+                .ThenBy(x => x.MemberRec.LastName)
+                .ThenBy(x => x.MemberRec.FirstName)
+                .ToList();
         }
     }
 }

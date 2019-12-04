@@ -76,24 +76,43 @@ namespace Membership.UI_Controls.Offices
             ShowingByYear = true;
             YearsOnFile = _presenter.LoadYearsOnFile();
             if (YearSelectionCombo.Items.Count > 0)
+            {
                 YearSelectionCombo.SelectedIndex = 0;
+                OfficeFromCombo.SelectedIndex = 0;
+                OfficeBackToCombo.SelectedIndex = YearsOnFile.Count() - 1;
+            }
             OfficesOnFile = _presenter.LoadOfficesOnFile();
             if (OfficeSelectionCombo.Items.Count > 0)
                 OfficeSelectionCombo.SelectedIndex = 0;
         }
         private void YearSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!ShowingByYear) return;
             OfficersByYearControl.Load(Convert.ToInt32(YearSelectionCombo.SelectedValue));
         }
 
         private void OfficeSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ShowingByYear) return;
- //           OfficersByTitleControl.Load(SelectedOfficeId);
+            ReloadOfficersForaTitle();
         }
 
+        private void ReloadOfficersForaTitle()
+        {
+            var officeId = Convert.ToInt32(OfficeSelectionCombo.SelectedValue);
+            var fromYear = Convert.ToInt32(OfficeFromCombo.SelectedValue);
+            var backToYear = Convert.ToInt32(OfficeBackToCombo.SelectedValue);
+            _presenter.LoadOfficersForaTitle(officeId, fromYear, backToYear);
+        }
 
+        #region Button Click Events
+        private void RecordsByYearOnClick(object sender, RoutedEventArgs e)
+        {
+            ShowingByYear = true;
+        }
+        private void RecordsByOfficeOnClick(object sender, RoutedEventArgs e)
+        {
+            ShowingByYear = false;
+        }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
@@ -102,16 +121,20 @@ namespace Membership.UI_Controls.Offices
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void RecordsByYearOnClick(object sender, RoutedEventArgs e)
+        private void OfficeBackToYearChanged(object sender, SelectionChangedEventArgs e)
         {
-            ShowingByYear = true;
+            if (ShowingByYear) return;
+            if (OfficeBackToCombo.SelectedIndex < OfficeFromCombo.SelectedIndex)
+                OfficeBackToCombo.SelectedIndex = OfficeFromCombo.SelectedIndex;
+            ReloadOfficersForaTitle();
         }
 
-        private void RecordsByOfficeOnClick(object sender, RoutedEventArgs e)
+        private void OfficeFromYearChanged(object sender, SelectionChangedEventArgs e)
         {
-            ShowingByYear = false;
-            _presenter.LoadOfficersForaTitle(1);
+            if (ShowingByYear) return;
+            if (OfficeFromCombo.SelectedIndex > OfficeBackToCombo.SelectedIndex)
+                OfficeFromCombo.SelectedIndex = OfficeBackToCombo.SelectedIndex;
+            ReloadOfficersForaTitle();
         }
-
     }
 }

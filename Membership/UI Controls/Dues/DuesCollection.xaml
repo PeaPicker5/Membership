@@ -4,17 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:converters="clr-namespace:Membership.Common.Converters"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="200" d:DesignWidth="1200">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <!-- Membership Information -->
+            <converters:BoolToVisibilityConverter TrueValue="Collapsed" FalseValue="Visible"
+                                                  x:Key="InvertedBoolToVisibilityConverter" />
+            <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
+                                                  x:Key="BoolToVisibilityConverter" />
+            <converters:IntegerGreaterThanAmount  x:Key="IntegerGreaterThanAmount" Cutoff="30" />
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
         <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
             <GroupBox.Header>
                 <DockPanel  x:Name="SelectionBar"  LastChildFill="False">
                     <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
-                        <Label Content="DUES COLLECTION :   " FontWeight="Bold" FontSize="20"/>
+                        <Label Content="DUES COLLECTION :   " FontWeight="Bold" FontSize="16"/>
                         <Label Content="    Year:"      FontSize="16"/>
                         <Label Content="{Binding Source={x:Static sys:DateTime.Today}}"
                                ContentStringFormat="{}{0:yyyy    }" FontSize="16"/>
@@ -22,9 +37,13 @@
                                Style="{StaticResource MetroCheckBox}" FontSize="16" Click="DisplayUnpaidMembersOnly" />
                     </StackPanel>
                     <Button ToolTip="Record the dues receipts."  DockPanel.Dock="Right" Width="100"
-                            Click="RecordDuesButtonOnClick"
-                            Margin="10,0">
-                        <Image Source="/Membership;component/Common/Resources/Add.png" Width="24" Margin="-3"/>
+                            Click="RecordDuesButtonOnClick" IsEnabled="{Binding Path=RunningCount}"
+                            Margin="10,0" Height="32">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Membership;component/Common/Resources/Add.png" Width="24" Margin="-3"/>
+                            <TextBlock Text=" APPLY"   
+                                   FontSize="18" Style="{StaticResource MessageTextBlockStyle}" />
+                        </StackPanel>
                     </Button>
                 </DockPanel>
             </GroupBox.Header>
@@ -45,21 +64,37 @@
                 </StackPanel>
 
                 <DataGrid x:Name="CollectionGrid" Grid.Row="0" Grid.Column="1" FontSize="14" 
-                          CanUserAddRows="False" AutoGenerateColumns="false"
+                          CanUserAddRows="False" AutoGenerateColumns="false" IsReadOnly="True"
                           ItemsSource="{Binding Path=DuesRecs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectionUnit="FullRow" SelectedValuePath="IsPaid"
                           MouseDoubleClick="CollectionGrid_MouseDoubleClick" >
-                    <DataGrid.Columns  >
-                        <DataGridTemplateColumn Header="PAID">
+
+                    <!--<DataGrid.Resources>
+                        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}" >
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Year,Converter={StaticResource IntegerGreaterThanAmount}}"
+                                             Value="True">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>-->
+
+                    <DataGrid.Columns>
+
+                        <DataGridCheckBoxColumn MinWidth="40" Header="PAID" Binding="{Binding Path=IsPaid}" />
+                                            <!--ElementStyle="{StaticResource CheckBoxStyle}" />-->
+
+                        <!--<DataGridTemplateColumn Header="PAID" IsReadOnly="True" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox Click="IsPaidBox_OnChecked" Tag="{Binding Path=MemberRec}"
-                                        HorizontalAlignment="Center" IsChecked="{Binding Path=IsPaid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <CheckBox x:Name="IsPaidBox" HorizontalAlignment="Center"         Tag="{Binding Path=Year}"
+                                          IsChecked="{Binding Path=IsPaid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        </DataGridTemplateColumn>-->
 
-                        <DataGridTextColumn Width="90"  Header="Amount"   Binding="{Binding Path=Amount, Mode=TwoWay,StringFormat={}{0:c}}" >
+                        <DataGridTextColumn Width="90" Header="Amount" Binding="{Binding Path=Amount, Mode=TwoWay,StringFormat={}{0:c}}" >
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
                                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
