@@ -69,16 +69,6 @@
                           SelectionUnit="FullRow" SelectedValuePath="IsPaid"
                           MouseDoubleClick="CollectionGrid_MouseDoubleClick" >
 
-                    <!--<DataGrid.Resources>
-                        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}" >
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Year,Converter={StaticResource IntegerGreaterThanAmount}}"
-                                             Value="True">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.Resources>-->
 
                     <DataGrid.Columns>
 
