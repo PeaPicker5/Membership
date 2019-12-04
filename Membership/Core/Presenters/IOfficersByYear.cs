@@ -3,7 +3,7 @@ using Membership.Core.DataModels;
 
 namespace Membership.Core.Presenters
 {
-    public interface IOfficerRecordsByYearView
+    public interface IOfficersByYearView
     {
         IEnumerable<Officer> Commissioners { get; set; }
         IEnumerable<Officer> LineOfficers { get; set; }

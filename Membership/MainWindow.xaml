@@ -114,7 +114,7 @@
                         <fluent:Button Header="Office History"
                                        ToolTip="Officers for a given year." 
                                        LargeIcon="{StaticResource TagIcon}"
-                                       Click="OfficerHistoryButtonOnClick" />
+                                       Click="OfficeHistoryButtonOnClick" />
                     </fluent:RibbonGroupBox>
 
                     <fluent:RibbonGroupBox Header="Reports" >

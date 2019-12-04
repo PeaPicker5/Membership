@@ -6,7 +6,7 @@ using Membership.Core.Presenters;
 
 namespace Membership.UI_Controls.Offices
 {
-    public partial class OfficesHeld : IOfficeHeldView
+    public partial class OfficesHeld : IOfficeHistoryView
     {
         public IEnumerable<Officer> OfficerRecs
         {

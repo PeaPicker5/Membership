@@ -6,7 +6,7 @@ using Membership.Core.Repositories;
 
 namespace Membership.Core.Presenters
 {
-    public class OfficerRecordsByYearPresenter :IOfficerRecordsByYearView
+    public class OfficersByYearPresenter : IOfficersByYearView
     {
         public IEnumerable<Officer> Commissioners { get; set; }
         public IEnumerable<Officer> LineOfficers { get; set; }
@@ -16,9 +16,9 @@ namespace Membership.Core.Presenters
         public IEnumerable<Officer> OtherAssocOfficers { get; set; }
 
         private readonly IOfficeHeldRepository _officeRepository;
-        private readonly IOfficerRecordsByYearView _view;
+        private readonly IOfficersByYearView _view;
 
-        public OfficerRecordsByYearPresenter(IOfficerRecordsByYearView view)
+        public OfficersByYearPresenter(IOfficersByYearView view)
         {
             _officeRepository = new OfficeHeldRepository();
             _view = view;
@@ -35,5 +35,12 @@ namespace Membership.Core.Presenters
             _view.TableOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 5);
             _view.OtherAssocOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 6);
         }
+
+        public IEnumerable<int> LoadYearsOnFile()
+        {
+            return _officeRepository.GetOfficerYearsOnFile();
+        }
+
+
     }
 }

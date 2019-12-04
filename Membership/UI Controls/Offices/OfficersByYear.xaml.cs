@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
@@ -9,9 +11,10 @@ using Membership.Properties;
 namespace Membership.UI_Controls.Offices
 {
 
-    public sealed partial class OfficerRecordsByYear : IOfficerRecordsByYearView, INotifyPropertyChanged
+    public sealed partial class OfficersByYear : IOfficersByYearView, INotifyPropertyChanged
     {
-        private readonly OfficerRecordsByYearPresenter _presenter;
+        private readonly OfficersByYearPresenter _presenter;
+        public int SelectedYear { get; set; }
 
         #region Dependency Properties for officer types
         public IEnumerable<Officer> Commissioners
@@ -21,7 +24,7 @@ namespace Membership.UI_Controls.Offices
         }
         public static readonly DependencyProperty CommissionersProperty =
             DependencyProperty.Register("Commissioners", 
-                typeof(IEnumerable<Officer>), typeof(OfficerRecordsByYear));
+                typeof(IEnumerable<Officer>), typeof(OfficersByYear));
 
         public IEnumerable<Officer> LineOfficers
         {
@@ -30,7 +33,7 @@ namespace Membership.UI_Controls.Offices
         }
         public static readonly DependencyProperty LineOfficersProperty =
             DependencyProperty.Register("LineOfficers",
-                typeof(IEnumerable<Officer>), typeof(OfficerRecordsByYear));
+                typeof(IEnumerable<Officer>), typeof(OfficersByYear));
 
         public IEnumerable<Officer> OtherDistrictOfficers
         {
@@ -39,7 +42,7 @@ namespace Membership.UI_Controls.Offices
         }
         public static readonly DependencyProperty OtherDistrictOfficersProperty =
             DependencyProperty.Register("OtherDistrictOfficers",
-                typeof(IEnumerable<Officer>), typeof(OfficerRecordsByYear));
+                typeof(IEnumerable<Officer>), typeof(OfficersByYear));
 
         public IEnumerable<Officer> BoardOfDirectors
         {
@@ -48,7 +51,7 @@ namespace Membership.UI_Controls.Offices
         }
         public static readonly DependencyProperty BoardOfDirectorsProperty =
             DependencyProperty.Register("BoardOfDirectors",
-                typeof(IEnumerable<Officer>), typeof(OfficerRecordsByYear));
+                typeof(IEnumerable<Officer>), typeof(OfficersByYear));
 
         public IEnumerable<Officer> TableOfficers
         {
@@ -57,7 +60,7 @@ namespace Membership.UI_Controls.Offices
         }
         public static readonly DependencyProperty TableOfficersProperty =
             DependencyProperty.Register("TableOfficers",
-                typeof(IEnumerable<Officer>), typeof(OfficerRecordsByYear));
+                typeof(IEnumerable<Officer>), typeof(OfficersByYear));
 
         public IEnumerable<Officer> OtherAssocOfficers
         {
@@ -66,19 +69,45 @@ namespace Membership.UI_Controls.Offices
         }
         public static readonly DependencyProperty OtherAssocOfficersProperty =
             DependencyProperty.Register("OtherAssocOfficers",
-                typeof(IEnumerable<Officer>), typeof(OfficerRecordsByYear));
+                typeof(IEnumerable<Officer>), typeof(OfficersByYear));
         #endregion
+        public IEnumerable<int> YearsOnFile
+        {
+            get => (IEnumerable<int>)GetValue(YearsOnFileProperty);
+            private set
+            {
+                SetValue(YearsOnFileProperty, value); OnPropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty YearsOnFileProperty =
+            DependencyProperty.Register("YearsOnFile", typeof(IEnumerable<int>),
+                typeof(OfficersByYear));
 
-        public OfficerRecordsByYear()
+        public OfficersByYear()
         {
             InitializeComponent();
-            _presenter = new OfficerRecordsByYearPresenter(this);
+            _presenter = new OfficersByYearPresenter(this);
         }
 
-        public void Load(int year)
+        public void LoadYearsOnFile()
         {
-            if (year == 0) return;
-            _presenter.LoadOfficersForaYear(year);
+            YearsOnFile = _presenter.LoadYearsOnFile();
+            if (YearSelectionCombo.Items.Count > 0)
+            {
+                YearSelectionCombo.SelectedIndex = 0;
+            }
+            LoadOfficerRecords();
+        }
+
+        private void YearSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedYear = Convert.ToInt32(YearSelectionCombo.SelectedValue);
+            if (SelectedYear == 0) return;
+            LoadOfficerRecords();
+        }
+        private void LoadOfficerRecords()
+        {
+            _presenter.LoadOfficersForaYear(SelectedYear);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

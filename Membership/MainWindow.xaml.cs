@@ -3,20 +3,11 @@ using Membership.UI_Controls.Dues;
 using Membership.UI_Controls.Members;
 using Membership.UI_Controls.Offices;
 using Membership.UI_Controls.ReportViewer;
-using DuesHistory = Membership.UI_Controls.Dues.DuesHistory;
 
 namespace Membership
 {
     public partial class MainWindow
     {
-        public bool CanAddMember
-        {
-            get { return (bool)GetValue(CanAddMemberProperty); }
-            set { SetValue(CanAddMemberProperty, value); }
-        }
-        public static readonly DependencyProperty CanAddMemberProperty =
-            DependencyProperty.Register("CanAddMember", typeof(bool), typeof(MainWindow));
-
         public MainWindow()
         {
             InitializeComponent();
@@ -33,14 +24,6 @@ namespace Membership
         private void OrganizationButton_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void OfficerButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainStack.Children.Clear();
-            var ucOfficers = new CurrentOfficers();
-            ucOfficers.LoadOfficers();
-            MainStack.Children.Add(ucOfficers);
         }
 
         private void AddMemberButtonOnClick(object sender, RoutedEventArgs e)
@@ -82,15 +65,18 @@ namespace Membership
         }
 
 
-        private void OfficerHistoryButtonOnClick(object sender, RoutedEventArgs e)
+        private void OfficeHistoryButtonOnClick(object sender, RoutedEventArgs e)
         {
-
+            var ucOfficeHistory = new OfficeHistory();
+            ucOfficeHistory.LoadRecords();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucOfficeHistory);
         }
 
         private void OfficerAssignButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucOfficerRecords = new OfficerRecords();
-            ucOfficerRecords.Load();
+            var ucOfficerRecords = new OfficersByYear();
+            ucOfficerRecords.LoadYearsOnFile();
             MainStack.Children.Clear();
             MainStack.Children.Add(ucOfficerRecords);
         }

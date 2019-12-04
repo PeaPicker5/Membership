@@ -16,7 +16,7 @@
                         <Label Content="DUES HISTORY:   " FontWeight="Bold" FontSize="16"/>
                     
                         <Label Content="    Year:"      FontSize="16"/>
-                        <ComboBox x:Name="YearSelectionCombo"   Margin="0,3" MinWidth="100" IsEditable="True"
+                        <ComboBox x:Name="YearSelectionCombo"   Margin="0,3" MinWidth="100" IsEditable="False"
                                   ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
                                   SelectionChanged="YearSelectionChanged" />
                     </StackPanel>

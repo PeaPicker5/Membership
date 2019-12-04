@@ -44,7 +44,7 @@
                                  TextChanged="FilterTextBoxOnTextChanged" />
                     
                         <Label Content="    Status:"      FontSize="16"/>
-                        <ComboBox x:Name="FilterStatus"   Margin="0,3" MinWidth="200" IsEditable="True"
+                        <ComboBox x:Name="FilterStatus"   Margin="0,3" MinWidth="200" IsEditable="False"
                                   ItemsSource="{Binding Path=MemberTypes, Mode=OneWay}"
                                   DisplayMemberPath="Description"
                                   SelectedValuePath="TypeId"
