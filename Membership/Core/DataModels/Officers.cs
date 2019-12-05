@@ -31,6 +31,6 @@ namespace Membership.Core.DataModels
             ? DateTime.ParseExact($"{ToMonth:D2}/{Year:D4}", "MM'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy")
             : DateTime.ParseExact($"12/{Year}", "MM'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy");
 
-
+        public bool PartialYear => FromMonth > 1 || (ToMonth > 0 && ToMonth < 12);
     }
 }

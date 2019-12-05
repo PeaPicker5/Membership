@@ -12,11 +12,9 @@ Membership Info:
 
 
 Offices Held:
-	Extend the width of the To column to fill the control.
 
 
 Dues Collection:
-	Change the Apply button to have a $ rather than a + sign.
 
 
 Dues Card Report:
@@ -36,9 +34,6 @@ Dues Warning Report:
 
 
 Officers:
-	Add bool IsPartialTerm field so as to display '*'.  Partial if FromMonth ?> 0 OR ToMonth ?< 12 (use NULL propagation)
-	Make one menu option for Officer Assignments and one for Office History.
-	Remove the buttons to swap between the two options and break them up.
 
 
 Meeting Attendance:

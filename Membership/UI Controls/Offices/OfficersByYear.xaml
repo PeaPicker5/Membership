@@ -15,18 +15,19 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:BoolToVisibilityConverter TrueValue="Hidden" FalseValue="Visible"
+                                                  x:Key="InvertedBoolToVisibilityConverter" />
+            <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Hidden"
+                                                  x:Key="BoolToVisibilityConverter" />
+
             <DataTemplate x:Key="officerListTemplate" >
                 <DockPanel LastChildFill="True"  >
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="* " 
+                               Visibility="{Binding Path=PartialYear, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=OfficeRec.Title}" Width="130"/>
                     <TextBlock DockPanel.Dock="Right"  FontSize="14" Text="{Binding Path=MemberRec.FullName}" />
                 </DockPanel>
             </DataTemplate>
-
-            <converters:BoolToVisibilityConverter TrueValue="Collapsed" FalseValue="Visible"
-                                                  x:Key="InvertedBoolToVisibilityConverter" />
-            <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
-                                                  x:Key="BoolToVisibilityConverter" />
-            <converters:BooleanInverterConverter x:Key="BoolInverterConverter"/>
 
         </ResourceDictionary>
     </UserControl.Resources>
@@ -41,6 +42,7 @@
                                   ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
                                   SelectionChanged="YearSelectionChanged"/>
                 </StackPanel>
+                <Label DockPanel.Dock="Right" Content="* Denotes a partial year term." FontSize="14" />
             </DockPanel>
         </GroupBox.Header>
 
