@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Media;
 using Membership.Core.Presenters;
 using Microsoft.Reporting.WinForms;
 
@@ -19,14 +21,22 @@ namespace Membership.UI_Controls.ReportViewer
             LoadReportDatasets(reportName);
 
             ReportViewer.LocalReport.ReportEmbeddedResource = ReportFileName;
+            ReportViewer.LocalReport.SetParameters(GetParameters());
             ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+
             ReportViewer.RefreshReport();
         }
 
+        private IEnumerable<ReportParameter> GetParameters()
+        {
+            var retVal = new List<ReportParameter>();
+            retVal.Add(new ReportParameter("Signature", "Kevin Doran"));
 
+            return retVal;
+        }
         private void LoadReportDatasets(string reportName)
         {
-            ReportFileName = $"Membership.Reports.{reportName}.rdlc";
+            ReportFileName = $"Membership.ReportDefinitions.{reportName}.rdlc";
 
             switch (reportName.ToUpper())
             {
