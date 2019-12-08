@@ -1,60 +1,75 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Windows.Media;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using Membership.Annotations;
 using Membership.Core.Presenters;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.ReportViewer
 {
-    public partial class ReportViewerWindow : IReportViewerView
+    public partial class ReportViewerWindow 
     {
         private readonly ReportViewerPresenter _presenter;
+
+        #region Dependency Properties
+        public string ReportName
+        {
+            get { return (string)GetValue(ReportNameProperty); }
+            set { SetValue(ReportNameProperty, value); }
+        }
+        public static readonly DependencyProperty ReportNameProperty =
+            DependencyProperty.Register("ReportName",
+                typeof(string), typeof(ReportViewerWindow));
+        public IEnumerable<ReportParameter> ReportParams
+        {
+            get { return (IEnumerable<ReportParameter>)GetValue(ReportParamsProperty); }
+            set { SetValue(ReportParamsProperty, value); }
+        }
+        public static readonly DependencyProperty ReportParamsProperty =
+            DependencyProperty.Register("ReportParams",
+                typeof(IEnumerable<ReportParameter>), typeof(ReportViewerWindow));
+
+        #endregion
 
         public ReportViewerWindow()
         {
             InitializeComponent();
-            _presenter = new ReportViewerPresenter(this);
+            _presenter = new ReportViewerPresenter();
         }
 
-        public void LoadReport(string reportName)
+        public void LoadReport()
         {
-            LoadReportDatasets(reportName);
+            var reportFileName = $"Membership.ReportDefinitions.{ReportName}.rdlc";
+            ReportViewer.LocalReport.ReportEmbeddedResource = reportFileName;
 
-            ReportViewer.LocalReport.ReportEmbeddedResource = ReportFileName;
-            ReportViewer.LocalReport.SetParameters(GetParameters());
+            LoadReportDatasets();
+            if (ReportParams.Any())
+                ReportViewer.LocalReport.SetParameters(ReportParams);
             ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
 
             ReportViewer.RefreshReport();
         }
 
-        private IEnumerable<ReportParameter> GetParameters()
+        private void LoadReportDatasets()
         {
-            var retVal = new List<ReportParameter>();
-            retVal.Add(new ReportParameter("Signature", "Kevin Doran"));
-
-            return retVal;
-        }
-        private void LoadReportDatasets(string reportName)
-        {
-            ReportFileName = $"Membership.ReportDefinitions.{reportName}.rdlc";
-
-            switch (reportName.ToUpper())
+            switch (ReportName.ToUpper())
             {
                 case "DUESCARDS":
                 case "DUESWARNING":
                     var membersThatOwe = _presenter.CurrentlyOweDues()
                                          .Where(rec => !rec.IsPaid)
                                          .Select(ml => ml.MemberId).ToList();
-                    // MemberRecord Dataset
-                    DatasetRecords = _presenter.GetMembersFromList(membersThatOwe);
-                    var dataset = new ReportDataSource { Name = "MemberRecord", Value = DatasetRecords };
+                    var dataset = new ReportDataSource
+                    {
+                        Name = "MemberRecord", 
+                        Value = _presenter.GetMembersFromList(membersThatOwe)
+                    };
                     ReportViewer.LocalReport.DataSources.Add(dataset);
                     break;
             }
         }
 
-        public string ReportFileName { get; set; }
-        public string DatasetName { get; set; }
-        public object DatasetRecords { get; set; }
     }
 }

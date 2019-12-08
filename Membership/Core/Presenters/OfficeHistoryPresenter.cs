@@ -18,11 +18,6 @@ namespace Membership.Core.Presenters
             _view = view;
         }
 
-        public void GetByMemberId(Guid memberId)
-        {
-            _view.OfficerRecs = _officeRepository.GetOfficersByMember(memberId);
-        }
-
         public IEnumerable<int> LoadYearsOnFile()
         {
             return _officeRepository.GetOfficerYearsOnFile();

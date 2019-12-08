@@ -155,13 +155,14 @@
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />
     <Compile Include="Core\Presenters\IOfficersByYear.cs" />
     <Compile Include="Core\Presenters\IOfficerRecordsView.cs" />
+    <Compile Include="Core\Presenters\IReportParametersView.cs" />
     <Compile Include="Core\Presenters\IReportViewerView.cs" />
     <Compile Include="Core\Presenters\IMemberSelectionView.cs" />
     <Compile Include="Core\Presenters\IOfficeHistoryView.cs" />
     <Compile Include="Core\Presenters\IMemberView.cs" />
     <Compile Include="Core\Presenters\OfficersByYearPresenter.cs" />
     <Compile Include="Core\Presenters\OfficeHistoryPresenter.cs" />
-    <Compile Include="Core\Presenters\OfficerRecordsPresenter.cs" />
+    <Compile Include="Core\Presenters\ReportParametersPresenter.cs" />
     <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficesHeldPresenter.cs" />
     <Compile Include="Core\Presenters\MemberSelectionPresenter.cs" />
@@ -180,6 +181,12 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="ReportDefinitions\DuesWarningReport.xaml.cs">
+      <DependentUpon>DuesWarningReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDefinitions\DuesCardsReport.xaml.cs">
+      <DependentUpon>DuesCardsReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UI Controls\Offices\OfficeHistory.xaml.cs">
       <DependentUpon>OfficeHistory.xaml</DependentUpon>
@@ -236,6 +243,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ReportDefinitions\DuesWarningReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReportDefinitions\DuesCardsReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI Controls\Offices\OfficeHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

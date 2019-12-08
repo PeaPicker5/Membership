@@ -6,17 +6,15 @@ using Membership.Core.Repositories;
 
 namespace Membership.Core.Presenters
 {
-    public class ReportViewerPresenter : IReportViewerView
+    public class ReportViewerPresenter
     {
         private readonly IDuesRepository _duesRepository;
         private readonly IMemberRepository _memberRepository;
-        private readonly IReportViewerView _view;
 
-        public ReportViewerPresenter(IReportViewerView view)
+        public ReportViewerPresenter()
         {
             _duesRepository = new DuesRepository();
             _memberRepository = new MemberRepository();
-            _view = view;
         }
 
         public IEnumerable<Member> GetMembersFromList(IEnumerable<Guid> memberIdList)
@@ -26,7 +24,6 @@ namespace Membership.Core.Presenters
             {
                 retValue.AddRange(_memberRepository.GetMembers().Where(mem => itm == mem.MemberId));
             }
-
             return retValue;
         }
         public IEnumerable<DuesRecord> CurrentlyOweDues()
@@ -34,9 +31,5 @@ namespace Membership.Core.Presenters
             return _duesRepository.CurrentlyOweDues();
         }
 
-
-        public string ReportFileName { get; set; }
-        public string DatasetName { get; set; }
-        public object DatasetRecords { get; set; }
     }
 }

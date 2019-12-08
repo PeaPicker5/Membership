@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Membership.ReportDefinitions;
 using Membership.UI_Controls.Dues;
 using Membership.UI_Controls.Members;
 using Membership.UI_Controls.Offices;
@@ -50,18 +51,16 @@ namespace Membership
 
         private void DuesCardsButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCardReport = new ReportViewerWindow();
-            ucDuesCardReport.LoadReport("DuesCards");
+            var ucDuesCardReport = new DuesCardsReport();
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesCardReport);
         }
 
         private void DuesWarningButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCardReport = new ReportViewerWindow();
-            ucDuesCardReport.LoadReport("DuesWarning");
+            var ucDuesWarningReport = new DuesWarningReport();
             MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesCardReport);
+            MainStack.Children.Add(ucDuesWarningReport);
         }
 
 

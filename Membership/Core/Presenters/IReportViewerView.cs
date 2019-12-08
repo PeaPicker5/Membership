@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Membership.Core.DataModels;
+using Microsoft.Reporting.WinForms;
 
 namespace Membership.Core.Presenters
 {
     public interface IReportViewerView
     {
-        string ReportFileName { get; set; }
-        string DatasetName { get; set; }
-        object DatasetRecords { get; set; }
+        string ReportName { get; set; }
+        IEnumerable<ReportParameter> ReportParams { get; set; }
     }
 }

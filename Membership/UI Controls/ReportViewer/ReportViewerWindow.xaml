@@ -9,29 +9,9 @@
         d:DesignHeight="400" d:DesignWidth="750">
 
     
-    
     <DockPanel LastChildFill="True">
-
-        <!-- Membership Information -->
-        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
-            <GroupBox.Header>
-                <DockPanel  x:Name="SelectionBar" LastChildFill="True">
-                    <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
-                        <Label Content="PARAMETERS:   " FontWeight="Bold" FontSize="16"/>
-
-                        <Label Content="    Officer:"      FontSize="16"/>
-                        <TextBlock x:Name="OfficerToSignText"  Margin="0,3" MinWidth="150" Background="White"/>
-                    </StackPanel>
-                </DockPanel>
-            </GroupBox.Header>
-
-            <Grid  >
-                <WindowsFormsHost DockPanel.Dock="Top" Margin="20">
-                    <rv:ReportViewer x:Name="ReportViewer" Visible="True"  Enabled="True" Dock="None" />
-                </WindowsFormsHost>
-            </Grid>
-
-        </GroupBox>
-
+        <WindowsFormsHost DockPanel.Dock="Top" Margin="20">
+            <rv:ReportViewer x:Name="ReportViewer" Visible="True"  Enabled="True" Dock="None" />
+        </WindowsFormsHost>
     </DockPanel>
 </UserControl>
