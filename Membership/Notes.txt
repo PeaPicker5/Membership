@@ -20,17 +20,13 @@ Dues Collection:
 Dues Card Report:
 	Format the report to line up with the dues cards.
 	Include a side-2 to the report for the address and return address.
-	Use/Configure the Officer parameter in the header section 
-		1) Combo box of table officers, auto select the Financial Secretary.
+
 		2) Need a parameter for 1st or 2nd notice.
-		3) Auto fill the Officer Text box with the current name of that position.
-		4) Allow for the Text box to be overwritten with a random name.
 		5) Add instructions on how to load the cards into the printer and how to print on both sides.
 
 
 Dues Warning Report:
 	Format the report like the forms used in the past.
-	Allow for the same parameters and usage as the dues cards report (minus the 1st or 2nd notice).
 
 
 Officers:

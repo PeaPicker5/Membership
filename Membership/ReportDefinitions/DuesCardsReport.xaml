@@ -21,6 +21,11 @@
                                Style="{StaticResource InputTextBox}"
                                Margin="0,3" MinWidth="175" Background="White"/>
                 </StackPanel>
+
+                <RadioButton GroupName="notice" Content="First Notice" x:Name="NoticeRadio"
+                             Margin="30,0" IsChecked="True"/>
+                <RadioButton GroupName="notice" Content="Second Notice"  />
+
                 <Button ToolTip="Update the report with the given parameter values."  
                         DockPanel.Dock="Right" Width="120"
                         Click="UpdateReportOnClick" 

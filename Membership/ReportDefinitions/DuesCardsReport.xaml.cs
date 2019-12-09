@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -32,7 +33,12 @@ namespace Membership.ReportDefinitions
         
         private IEnumerable<ReportParameter> UpdateParameterValues()
         {
-            return new List<ReportParameter> {new ReportParameter("Signature", OfficerToSignText.Text)};
+            return new List<ReportParameter>
+            {   
+                new ReportParameter("Signature", OfficerToSignText.Text),
+                new ReportParameter("FirstNotice", NoticeRadio.IsChecked==true
+                                                            ? bool.TrueString : bool.FalseString )
+            };
         }
 
         private void UpdateReportOnClick(object sender, RoutedEventArgs e)
