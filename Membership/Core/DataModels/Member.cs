@@ -50,6 +50,10 @@ namespace Membership.Core.DataModels
 
         public bool IsDeceased => DateDeceased > DateObligated;
         public string FullName => $"{FirstName} {LastName}";
+        public string CityStateZip => $"{City}, {State}  {ZIP}";
+
+
+
 
         public Guid MemberId { get; set; }
         public int MemberTypeId { get; set; }
@@ -76,6 +80,5 @@ namespace Membership.Core.DataModels
         public DateTime DateDeceased { get; set; }
 
 
-        public string CityStateZip => $"{City}, {State}  {ZIP}";
     }
 }

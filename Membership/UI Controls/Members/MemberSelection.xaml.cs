@@ -42,8 +42,6 @@ namespace Membership.UI_Controls.Members
         public static readonly DependencyProperty MemberTypesProperty =
             DependencyProperty.Register("MemberTypes", typeof(IEnumerable<MemberType>), typeof(MemberSelection));
 
-
-
         public IEnumerable<Member> FilteredMembers
         {
             get { return (IEnumerable<Member>)GetValue(FilteredMembersProperty); }
@@ -72,13 +70,6 @@ namespace Membership.UI_Controls.Members
             FilteredMembers = Members;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private void MemberGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var dg = (DataGrid) sender;
@@ -88,7 +79,6 @@ namespace Membership.UI_Controls.Members
             OfficesHeldControl.LoadOfficeRecords(selectedMemberRec.MemberId);
             MemberInfoControl.MemberRec = selectedMemberRec;
         }
-
 
         private void ApplyFilterSettings()
         {
@@ -105,31 +95,23 @@ namespace Membership.UI_Controls.Members
         {
             ApplyFilterSettings();
         }
-
         private void FilterComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFilterSettings();
         }
-
-
         private void FilterCheckBoxOnClick(object sender, RoutedEventArgs e)
         {
             ApplyFilterSettings();
         }
 
-        private void EditMemberButtonOnClick(object sender, RoutedEventArgs e)
-        {
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void DeleteMemberButtonOnClick(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void AddMemberButtonOnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

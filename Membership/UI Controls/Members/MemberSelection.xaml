@@ -7,24 +7,25 @@
              xmlns:dues="clr-namespace:Membership.UI_Controls.Dues"
              xmlns:members="clr-namespace:Membership.UI_Controls.Members"
              xmlns:common="clr-namespace:Membership.Common"
+             xmlns:converters="clr-namespace:Membership.Common.Converters"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="400" d:DesignWidth="1200">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:MinimumDateConverter x:Key="MinimumDateConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
 
         <!-- Membership Information -->
         <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
             <GroupBox.Header>
                 <DockPanel  x:Name="SelectionBar" LastChildFill="True">
                     <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
-
-
-
-
-
-
-
-
 
                     <Label Content="MEMBERSHIP SELECTION:   " FontWeight="Bold" FontSize="16"/>
                     
@@ -50,9 +51,8 @@
                                   SelectedValuePath="TypeId"
                                   SelectionChanged="FilterComboBoxSelectionChanged" />
                     </StackPanel>
-
                 </DockPanel>
-        </GroupBox.Header>
+            </GroupBox.Header>
 
             <Grid  >
                 <Grid.ColumnDefinitions>
@@ -67,27 +67,28 @@
                 
                 <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="14"
                     ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
-                    AutoGenerateColumns="false"
+                    AutoGenerateColumns="false" GridLinesVisibility="All"
                     CanUserAddRows="False" IsReadOnly="True" 
                     SelectionChanged="MemberGrid_SelectionChanged">
                     <DataGrid.Columns  >
                         <!--<DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsDeceased}"/>-->
                         <DataGridCheckBoxColumn Width="85"  Header="Current" Binding="{Binding Path=IsCurrent}"/>
-                        <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=LastName}"/>
-                        <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=FirstName}"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
                         <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MI}"/>
-                        <DataGridTextColumn MinWidth="120" Header="Status" Binding="{Binding Path=Status}"/>
-                        <DataGridTextColumn Header="Obligated" Binding="{Binding Path=DateObligated, StringFormat=MM-dd-yyyy}" >
+                        <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
+                        <DataGridTextColumn Header="Obligated" Binding="{Binding Path=DateObligated, 
+                                            Converter={StaticResource MinimumDateConverter},StringFormat=MM-dd-yyyy}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn MinWidth="200" Header="Address" Binding="{Binding Path=Address1}"/>
-                        <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=CityStateZip}"/>
-                        <DataGridTextColumn MinWidth="250" Header="EMail Address" Binding="{Binding Path=EmailAddress}"/>
-                        <DataGridTextColumn MinWidth="300" Header="Comment"  Binding="{Binding Path=Comment}" Width="*" />
+                        <DataGridTextColumn Header="Address" Binding="{Binding Path=Address1}"/>
+                        <DataGridTextColumn Header="City State Zip" Binding="{Binding Path=CityStateZip}"/>
+                        <DataGridTextColumn MinWidth="200" Header="EMail Address" Binding="{Binding Path=EmailAddress}"/>
+                        <DataGridTextColumn Header="Comment"  Binding="{Binding Path=Comment}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
 

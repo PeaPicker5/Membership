@@ -2,11 +2,11 @@
 
 
 Membership Info:
-	UI - Format, add dates, add image(s) of scans/photos, Sponsorship members
+	Build in Reason for Removal Combo.  Values in DB.  Hide unless status = removed
+	UI - add image(s) of scans/photos
 	Add/Edit/Delete functionality.
 		- Upon delete, add warning to change status instead.  DELETE IS BAD.  Should only be for fixing entry issues.
 	Add a clear filter buttom to the right side of the header section.
-	Fix grid columns with MinWidth amounts.
 	Report printout of member needed
 	Report printout of membership grid.
 
@@ -20,8 +20,6 @@ Dues Collection:
 Dues Card Report:
 	Format the report to line up with the dues cards.
 	Include a side-2 to the report for the address and return address.
-
-		2) Need a parameter for 1st or 2nd notice.
 		5) Add instructions on how to load the cards into the printer and how to print on both sides.
 
 

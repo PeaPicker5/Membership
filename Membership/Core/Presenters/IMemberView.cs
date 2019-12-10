@@ -1,8 +1,11 @@
-﻿using Membership.Core.DataModels;
+﻿using System;
+using System.Collections.Generic;
+
 namespace Membership.Core.Presenters
 {
     public interface IMemberView
     {
-        Member MemberRec { get; set; }
+        ICollection<Tuple<int, string>> MemberTypeLookups { get; set; }
+        ICollection<Tuple<Guid, string>> MemberLookups { get; set; }
     }
 }

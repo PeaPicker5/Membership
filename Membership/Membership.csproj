@@ -128,6 +128,7 @@
       <DependentUpon>AddEditButtons.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Converters\BooleanInverterConverter.cs" />
+    <Compile Include="Common\Converters\MinimumDateConverter.cs" />
     <Compile Include="Common\Converters\IntegerGreaterThanAmount.cs" />
     <Compile Include="Common\Converters\BoolToDoubleConverter.cs" />
     <Compile Include="Common\Converters\BoolToStringConverter.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Core\Presenters\IMemberSelectionView.cs" />
     <Compile Include="Core\Presenters\IOfficeHistoryView.cs" />
     <Compile Include="Core\Presenters\IMemberView.cs" />
+    <Compile Include="Core\Presenters\MemberInfoPresenter.cs" />
     <Compile Include="Core\Presenters\OfficersByYearPresenter.cs" />
     <Compile Include="Core\Presenters\OfficeHistoryPresenter.cs" />
     <Compile Include="Core\Presenters\ReportParametersPresenter.cs" />
