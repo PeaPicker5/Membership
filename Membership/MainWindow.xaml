@@ -105,10 +105,18 @@
                                        ToolTip="Dues Cards" 
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesCardsButtonOnClick" />
-                        <fluent:Button Header="Dues Warning Notice"
-                                       ToolTip="Dues Warning Report" 
+                        <fluent:Button Header="Warning Notice"
+                                       ToolTip="Warning report of members that still owe.  Post on the board in late March." 
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesWarningButtonOnClick" />
+                        <fluent:Button Header="Removal Notice"
+                                       ToolTip="Notice to be read off at the April meeting." 
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesRemovalNoticeButtonOnClick" />
+                        <fluent:Button Header="Removal Letters"
+                                       ToolTip="Letters that get mailed out to the members that were kicked out." 
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesRemovalLettersButtonOnClick" />
                     </fluent:RibbonGroupBox>
                 <!--</fluent:RibbonTabItem>
 

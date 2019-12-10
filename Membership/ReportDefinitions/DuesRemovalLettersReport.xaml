@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Membership.ReportDefinitions.DuesRemovalLettersReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rv="clr-namespace:Membership.UI_Controls.ReportViewer"
+        mc:Ignorable="d" 
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        d:DesignHeight="400" d:DesignWidth="1200">
+
+
+    <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite" Padding="0">
+        <GroupBox.Header>
+            <DockPanel  x:Name="SelectionBar" LastChildFill="False" Background="AntiqueWhite">
+
+                <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
+                    <Label Content=" PARAMETERS :   " FontWeight="Bold" FontSize="16"/>
+
+                    <Label Content="    Signature Name:"  FontSize="16"/>
+                    <TextBox x:Name="OfficerToSignText" FontSize="18" FontStyle="Italic" 
+                               Style="{StaticResource InputTextBox}"
+                               Margin="0,3" MinWidth="175" Background="White"/>
+
+                    <Label Content="    Office Title:"  FontSize="16"/>
+                    <ComboBox x:Name="OfficeTitleCombo"  FontSize="16"  Margin="0,3" MinWidth="175" IsEditable="False"
+                              ItemsSource="{Binding Path=TableOfficers, Mode=OneWay}"
+                              DisplayMemberPath="OfficeRec.Title"
+                              SelectedValuePath="OfficeRec.Title"
+                              SelectedValue="{Binding Path=SelectedOffice.OfficeRec.Title}"
+                              Style="{StaticResource ComboBoxFadeInOutStyle}" />
+
+
+                </StackPanel>
+                
+                <Button ToolTip="Update the report with the given parameter values."  
+                        DockPanel.Dock="Right" Width="120"
+                        Click="UpdateReportOnClick" 
+                        Margin="10,0" Height="32">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Membership;component/Common/Resources/report-update.png" Width="24" Margin="-3"/>
+                        <TextBlock Text=" UPDATE" FontSize="18" Style="{StaticResource MessageTextBlockStyle}" />
+                    </StackPanel>
+                </Button>
+            </DockPanel>
+        </GroupBox.Header>
+
+        <DockPanel LastChildFill="True">
+            <rv:ReportViewerWindow x:Name="ReportControl"/>
+        </DockPanel>
+    </GroupBox>
+
+</UserControl>

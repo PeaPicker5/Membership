@@ -32,7 +32,7 @@ namespace Membership
 
         }
 
-
+        // DUES FUNCTIONS //
         private void DuesHistoryButtonOnClick(object sender, RoutedEventArgs e)
         {
             var ucDuesHistory = new DuesHistory();
@@ -62,6 +62,19 @@ namespace Membership
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesWarningReport);
         }
+        private void DuesRemovalNoticeButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var ucDuesRemovalNoticeReport = new DuesRemovalNoticeReport();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucDuesRemovalNoticeReport);
+        }
+
+        private void DuesRemovalLettersButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var ucDuesRemovalLettersReport = new DuesRemovalLettersReport();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucDuesRemovalLettersReport);
+        }
 
 
         private void OfficeHistoryButtonOnClick(object sender, RoutedEventArgs e)
@@ -89,5 +102,6 @@ namespace Membership
         {
 
         }
+
     }
 }

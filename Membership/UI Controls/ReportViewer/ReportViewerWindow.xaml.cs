@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using Membership.Annotations;
 using Membership.Core.Presenters;
 using Microsoft.Reporting.WinForms;
 
@@ -58,6 +55,8 @@ namespace Membership.UI_Controls.ReportViewer
             {
                 case "DUESCARDS":
                 case "DUESWARNING":
+                case "DUESREMOVALNOTICE":
+                case "DUESREMOVALLETTERS":
                     var membersThatOwe = _presenter.CurrentlyOweDues()
                                          .Where(rec => !rec.IsPaid)
                                          .Select(ml => ml.MemberId).ToList();
