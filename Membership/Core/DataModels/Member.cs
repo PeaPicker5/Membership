@@ -7,6 +7,7 @@ namespace Membership.Core.DataModels
     {
         public Member() { }
 
+        private int RemovedStatus = 4;
         public Member(Guid memberId, int memberTypeId, string lastName, string firstName,
             string mi, string comment, string emailAddress, Guid sponsorID1, Guid sponsorID2, Guid sponsorID3,
             string address1, string address2, string city, string state, string zip, string phone, 
@@ -41,7 +42,8 @@ namespace Membership.Core.DataModels
 
         public string Status { get; set; }
         public float DuesAmount { get; set; }
-    
+
+        public bool WasRemoved => MemberTypeId == RemovedStatus;
         public bool IsCurrent
         {
             get { return (MemberTypeId == 1 || MemberTypeId == 2) && !IsDeceased; }

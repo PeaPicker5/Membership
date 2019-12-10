@@ -22,6 +22,29 @@ namespace Membership.UI_Controls.Members
         private readonly MemberInfoPresenter _presenter;
 
         #region Dependency Properties
+
+
+
+        public bool IsEditing
+        {
+            get { return (bool)GetValue(IsEditingProperty); }
+            set { SetValue(IsEditingProperty, value); OnPropertyChanged();}
+        }
+        public static readonly DependencyProperty IsEditingProperty =
+            DependencyProperty.Register("IsEditing", typeof(bool), typeof(MemberInfo));
+
+
+
+        public bool IsAdding
+        {
+            get { return (bool)GetValue(IsAddingProperty); }
+            set { SetValue(IsAddingProperty, value); OnPropertyChanged();}
+        }
+        public static readonly DependencyProperty IsAddingProperty =
+            DependencyProperty.Register("IsAdding", typeof(bool), typeof(MemberInfo));
+
+
+
         public Member MemberRec
         {
             get { return (Member)GetValue(MemberRecProperty); }
@@ -49,6 +72,14 @@ namespace Membership.UI_Controls.Members
             DependencyProperty.Register("MemberLookups", typeof(ICollection<Tuple<Guid,string>>),
                 typeof(MemberInfo));
 
+        public ICollection<MemberRemoval> RemovalCodes   
+        {
+            get { return (ICollection<MemberRemoval>)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); OnPropertyChanged();}
+        }
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("RemovalCodes", typeof(ICollection<MemberRemoval>),
+                typeof(MemberInfo));
 
 
         #endregion
@@ -60,6 +91,7 @@ namespace Membership.UI_Controls.Members
             InitializeComponent();
             _presenter = new MemberInfoPresenter(this);
             _presenter.LoadLookups();
+            IsEditing = true; //for testing
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -69,20 +101,35 @@ namespace Membership.UI_Controls.Members
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); 
         }
 
+        #region Button Events
         private void AddMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
-
+            IsAdding = true;
+            IsEditing = true;
         }
 
         private void EditMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
-
+            IsEditing = true;
         }
 
         private void DeleteMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
-
+            IsAdding = false;
+            IsEditing = false;
         }
+        private void SaveMemberButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            IsAdding = false;
+            IsEditing = false;
+        }
+        private void CancelButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            IsAdding = false;
+            IsEditing = false;
+        }
+        #endregion
+        
         private void DatePickerOnPreviewTextInput(object sender, TextCompositionEventArgs eventArgs)
         {
             eventArgs.Handled = eventArgs.Text.Any(
@@ -93,5 +140,7 @@ namespace Membership.UI_Controls.Members
         {
 
         }
+
+
     }
 }

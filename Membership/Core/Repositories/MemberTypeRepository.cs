@@ -32,5 +32,15 @@ namespace Membership.Core.Repositories
                 return retVal.OrderBy(r => r.TypeId);
             }
         }
+
+        public IEnumerable<MemberRemoval> GetRemovalCodes()
+        {
+            const string query = "SELECT * FROM MEMBER_RemovalCodes";
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var retVal = connection.Query<MemberRemoval>(query).ToList();
+                return retVal.OrderBy(r => r.RemovalId);
+            }
+        }
     }
 }

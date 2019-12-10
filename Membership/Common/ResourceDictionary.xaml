@@ -484,7 +484,7 @@
 
 
     <Style x:Key="InputLabel" TargetType="{x:Type Label}">
-        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Padding" Value="0" />
     </Style>

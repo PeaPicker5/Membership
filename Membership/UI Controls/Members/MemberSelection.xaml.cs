@@ -68,6 +68,7 @@ namespace Membership.UI_Controls.Members
         {
             _presenter.Load();
             FilteredMembers = Members;
+            MemberSelectionGrid.SelectedIndex = 0;
         }
 
         private void MemberGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

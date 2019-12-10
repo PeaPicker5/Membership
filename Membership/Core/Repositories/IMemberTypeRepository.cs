@@ -9,5 +9,6 @@ namespace Membership.Core.Repositories
 
         IEnumerable<MemberType> GetAllTypes();
 
+        IEnumerable<MemberRemoval> GetRemovalCodes();
     }
 }

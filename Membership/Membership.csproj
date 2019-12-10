@@ -151,6 +151,7 @@
     <Compile Include="Common\UsStates.cs" />
     <Compile Include="Core\DataModels\DuesHistory.cs" />
     <Compile Include="Core\DataModels\DuesRecord.cs" />
+    <Compile Include="Core\DataModels\MemberRemoval.cs" />
     <Compile Include="Core\DataModels\Officers.cs" />
     <Compile Include="Core\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />

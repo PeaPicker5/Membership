@@ -61,8 +61,8 @@
                     <ColumnDefinition Width="*" MaxWidth="310"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2.5*" />
                 </Grid.RowDefinitions>
                 
                 <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="14"
@@ -92,7 +92,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <members:MemberInfo x:Name="MemberInfoControl"  Grid.Row="1" Grid.Column="0"  />
+                <members:MemberInfo x:Name="MemberInfoControl"  Grid.Row="1" Grid.Column="0" />
                 <offices:OfficesHeld x:Name="OfficesHeldControl" Grid.Row="1" Grid.Column="1" />
                 <dues:DuesPaid x:Name="DuesPaidControl"  Grid.Row="1" Grid.Column="2"/>
     

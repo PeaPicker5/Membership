@@ -29,11 +29,12 @@ namespace Membership.Core.Presenters
             }
 
             _view.MemberLookups = _memberRepository.GetMembers().Select(mem => new Tuple<Guid, string>(mem.MemberId, mem.FullName)).ToList();
-
+            
+            _view.RemovalCodes = _memberTypeRepository.GetRemovalCodes().ToList();
         }
-
 
         public ICollection<Tuple<int, string>> MemberTypeLookups { get; set; }
         public ICollection<Tuple<Guid, string>> MemberLookups { get; set; }
+        public ICollection<MemberRemoval> RemovalCodes { get; set; }
     }
 }
