@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Microsoft.Reporting.WinForms;
 
@@ -51,24 +53,46 @@ namespace Membership.UI_Controls.ReportViewer
 
         private void LoadReportDatasets()
         {
+            ReportViewer.LocalReport.DataSources.Clear();
+
             switch (ReportName.ToUpper())
             {
                 case "DUESCARDS":
                 case "DUESWARNING":
                 case "DUESREMOVALNOTICE":
                 case "DUESREMOVALLETTERS":
-                    var membersThatOwe = _presenter.CurrentlyOweDues()
-                                         .Where(rec => !rec.IsPaid)
-                                         .Select(ml => ml.MemberId).ToList();
+                case "DUESADDRESSLABELS":
+                    var datasetValue = new List<Member>();
+
+                    if (ReportName.ToUpper() == "DUESADDRESSLABELS")
+                        datasetValue.AddRange(GetBlankMembersForLabels());
+                    
+                    var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
+                    datasetValue.AddRange(_presenter.GetMembersFromList(membersThatOwe));
+
                     var dataset = new ReportDataSource
                     {
-                        Name = "MemberRecord", 
-                        Value = _presenter.GetMembersFromList(membersThatOwe)
+                        Name = "MemberRecord",
+                        Value = datasetValue
                     };
                     ReportViewer.LocalReport.DataSources.Add(dataset);
                     break;
             }
         }
 
+        private IEnumerable<Member> GetBlankMembersForLabels()
+        {
+            var blankLabels = (from p in ReportParams where p.Name == "StartingLabel" select p.Values).FirstOrDefault();
+
+            if (blankLabels == null) return null;
+            var numOfLabels = Convert.ToInt32(blankLabels[0]);
+
+            var returnVal = new List<Member>();
+            for (var i = 1; i < numOfLabels; i++)
+            {
+                returnVal.Add(new Member());
+            }
+            return returnVal;
+        }
     }
 }

@@ -55,6 +55,12 @@ namespace Membership
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesCardReport);
         }
+        private void DuesAddressLabelsButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var ucDuesCardReport = new DuesAddressLabels();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucDuesCardReport);
+        }
 
         private void DuesWarningButtonOnClick(object sender, RoutedEventArgs e)
         {

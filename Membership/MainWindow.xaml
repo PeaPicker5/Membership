@@ -105,6 +105,10 @@
                                        ToolTip="Dues Cards" 
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesCardsButtonOnClick" />
+                        <fluent:Button Header="Print Dues Address Labels"
+                                       ToolTip="Address labels for those members that still owe dues for the current year." 
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesAddressLabelsButtonOnClick" />
                         <fluent:Button Header="Warning Notice"
                                        ToolTip="Warning report of members that still owe.  Post on the board in late March." 
                                        LargeIcon="{StaticResource BadgeIcon}"

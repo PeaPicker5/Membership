@@ -26,6 +26,9 @@ Dues Card Report:
 Dues Warning Report:
 	Format the report like the forms used in the past.
 
+Dues Notification Report format
+
+Lineup the address labels
 
 Officers:
 
