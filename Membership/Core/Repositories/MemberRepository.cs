@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 
 namespace Membership.Core.Repositories
@@ -15,7 +17,7 @@ namespace Membership.Core.Repositories
 
         public Member Get(Guid memberId)
         {
-            const string query = "SELECT * FROM Members WHERE MemberId = @MemberId";
+            const string query = "SELECT * FROM MEMBER_List WHERE MemberId = @MemberId";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 var retVal = connection.Query<Member>(query,new {MemberId = memberId}).ToList();
@@ -35,6 +37,42 @@ namespace Membership.Core.Repositories
                 return retVal;
             }
         }
+
+
+        public bool InsertMemberRecord(Member memberRec)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var isSuccess = connection.Insert(memberRec);
+                return isSuccess > 0;
+            }
+        }
+        public bool UpdateMemberRecord(Member memberRec)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var isSuccess = connection.Update(memberRec);
+                return isSuccess;
+            }
+        }
+        public bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesRecord> duesRecs, 
+                                        IEnumerable<Officer> officerRecs)
+        {
+
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                bool isSuccess = true;
+                if (officerRecs.Any())
+                    isSuccess = connection.Delete(officerRecs);
+                if (isSuccess && duesRecs.Any())
+                    isSuccess = connection.Delete(duesRecs);
+                if (isSuccess)
+                    isSuccess = connection.Delete(memberRec);
+                return isSuccess;
+            }
+
+        }
+
 
     }
 }

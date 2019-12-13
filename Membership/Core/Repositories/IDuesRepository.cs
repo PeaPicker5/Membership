@@ -33,7 +33,7 @@ namespace Membership.Core.Repositories
 
         IEnumerable<DuesRecord> CurrentlyOweDues();
 
-        void UpdateDuesPayments(ICollection<DuesHistory> duesPayments);
+        void InsertDuesPayments(IEnumerable<DuesRecord> duesPayments);
 
     }
 }

@@ -10,14 +10,15 @@
              xmlns:converters="clr-namespace:Membership.Common.Converters"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             d:DesignHeight="400" d:DesignWidth="1200">
+             d:DesignHeight="400" d:DesignWidth="1500">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <converters:MinimumDateConverter x:Key="MinimumDateConverter" />
+            <converters:BooleanInverterConverter x:Key="BooleanInverterConverter" /> 
+            <converters:MinimumDateConverter x:Key="MinimumDateConverter" /> 
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -27,7 +28,7 @@
                 <DockPanel  x:Name="SelectionBar" LastChildFill="True">
                     <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
 
-                    <Label Content="MEMBERSHIP SELECTION:   " FontWeight="Bold" FontSize="16"/>
+                        <Label Content="MEMBERSHIP SELECTION:   " FontWeight="Bold" FontSize="16"/>
                     
                         <CheckBox  x:Name="FilterCurrent" Style="{StaticResource CheckBoxStyle}"  
                                    VerticalAlignment="Center" 
@@ -36,22 +37,31 @@
                     
                         <Label Content="     Last Name:"  FontSize="16"/>
                         <TextBox x:Name="FilterLastName"  Margin="0,3" 
-                                 Style="{StaticResource InputTextBox}" Width="150" 
+                                 Style="{StaticResource InputTextBox}" MinWidth="100" 
                                  TextChanged="FilterTextBoxOnTextChanged" />
                     
                         <Label Content="    First Name:"  FontSize="16"/>
                         <TextBox x:Name="FilterFirstName" Margin="0,3" 
-                                 Style="{StaticResource InputTextBox}" Width="150" 
+                                 Style="{StaticResource InputTextBox}" MinWidth="100" 
                                  TextChanged="FilterTextBoxOnTextChanged" />
                     
                         <Label Content="    Status:"      FontSize="16"/>
-                        <ComboBox x:Name="FilterStatus"   Margin="0,3" MinWidth="200" IsEditable="False"
+                        <ComboBox x:Name="FilterStatus"   Margin="0,3" MinWidth="100" IsEditable="False"
                                   ItemsSource="{Binding Path=MemberTypes, Mode=OneWay}"
                                   DisplayMemberPath="Description"
                                   SelectedValuePath="TypeId"
                                   SelectionChanged="FilterComboBoxSelectionChanged" />
                     </StackPanel>
-                </DockPanel>
+                    <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button ToolTip="Clear the selection filters."  Width="100"
+                            Click="ClearSelectionOnClick" Margin="10,0" Height="32">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text=" CLEAR FILTER"   
+                                       FontSize="12" Style="{StaticResource MessageTextBlockStyle}" />
+                        </StackPanel>
+                    </Button>
+                    </StackPanel>
+            </DockPanel>
             </GroupBox.Header>
 
             <Grid  >
@@ -61,15 +71,16 @@
                     <ColumnDefinition Width="*" MaxWidth="310"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="2.5*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 
                 <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="14"
-                    ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
-                    AutoGenerateColumns="false" GridLinesVisibility="All"
-                    CanUserAddRows="False" IsReadOnly="True" 
-                    SelectionChanged="MemberGrid_SelectionChanged">
+                          IsEnabled="{Binding ElementName=MemberInfoControl, Path=IsEditing, Converter={StaticResource BooleanInverterConverter} }"
+                          ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
+                          AutoGenerateColumns="false" GridLinesVisibility="All"
+                          CanUserAddRows="False" IsReadOnly="True" 
+                          SelectionChanged="MemberGrid_SelectionChanged">
                     <DataGrid.Columns  >
                         <!--<DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsDeceased}"/>-->
                         <DataGridCheckBoxColumn Width="85"  Header="Current" Binding="{Binding Path=IsCurrent}"/>
@@ -92,7 +103,10 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <members:MemberInfo x:Name="MemberInfoControl"  Grid.Row="1" Grid.Column="0" />
+                <members:MemberInfo x:Name="MemberInfoControl" Grid.Row="1" Grid.Column="0"  
+                                    Unloaded="MemberInfoControl_OnUnloaded"  
+                                    OnMemberUpdated="MemberInfoControl_OnOnMemberUpdated"
+                                    OnMemberDeleted="MemberInfoControl_OnOnMemberDeleted" />
                 <offices:OfficesHeld x:Name="OfficesHeldControl" Grid.Row="1" Grid.Column="1" />
                 <dues:DuesPaid x:Name="DuesPaidControl"  Grid.Row="1" Grid.Column="2"/>
     

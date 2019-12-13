@@ -91,15 +91,24 @@ namespace Membership.Core.Repositories
             }
         }
 
-        public void UpdateDuesPayments(ICollection<DuesHistory> duesPayments)
+        public void InsertDuesPayments(IEnumerable<DuesRecord> duesPayments)
         {
-
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-
-                var isSuccess = connection.Insert(duesPayments);
+                var isSuccess = connection.Insert(MapFromData(duesPayments));
             }
-
         }
+
+        private List<DuesHistory> MapFromData(IEnumerable<DuesRecord> duesRecords)
+        {
+            return duesRecords.Select(rec => new DuesHistory()
+            {
+                MemberId = rec.MemberRec.MemberId,
+                Amount = rec.Amount,
+                Month = DateTime.Now.Month,
+                Year = DateTime.Now.Year
+            }).ToList();
+        }
+
     }
 }

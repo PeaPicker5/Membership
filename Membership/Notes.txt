@@ -2,24 +2,21 @@
 
 
 Membership Info:
-	Build in Reason for Removal Combo.  Values in DB.  Hide unless status = removed
 	UI - add image(s) of scans/photos
-	Add/Edit/Delete functionality.
+	Delete functionality (waiting for Office and Dues).
 		- Upon delete, add warning to change status instead.  DELETE IS BAD.  Should only be for fixing entry issues.
-	Add a clear filter buttom to the right side of the header section.
 	Report printout of member needed
 	Report printout of membership grid.
 
 
 Offices Held:
-
+	Add/Edit/Delete functionality
 
 Dues Collection:
 
 
 Dues Card Report:
 	Format the report to line up with the dues cards.
-	Include a side-2 to the report for the address and return address.
 		5) Add instructions on how to load the cards into the printer and how to print on both sides.
 
 
@@ -43,7 +40,20 @@ Meeting Attendance:
 
 
 Reports:
-	Need is debateable:
+	Member 
+		1) Member details.  Dates, offices, dues, sponsors, meetings, etc...
+		2) Current members without an email address.
+		3) Members by status.
+	Officers
+		1) Current officers, or officers by year.
+		2) Office history (by year)
+	Dues
+		1) Collection amount for a given year
+	Meetings
+		1) Blank attendance sheet with every name that has been at any meeting in the past 2 years.  Plus some write-in spots.
+		2) Monthly attendance for the year by member. (used for voting)
+		3) Sheet for who was at a given meeting.  (selection of meeting to print?)
+
 
 
 Organization Information:
@@ -77,3 +87,9 @@ LEAVE OPEN THE POSSIBILITY FOR A POINTS BASED ATTENDANCE SYSTEM.
 Just in case:
 Web site to explain the ReportViewer version issue with regards to adding parameters to the rdlc files.
 https://stackoverflow.com/questions/45090487/rdlc-report-stop-working-after-change-visual-studio-2015-to-visual-studio-2017
+
+Dapper Documentation:
+https://github.com/StackExchange/Dapper/blob/master/Readme.md
+
+Dapper Contrib Documentation;
+https://dapper-tutorial.net/insert

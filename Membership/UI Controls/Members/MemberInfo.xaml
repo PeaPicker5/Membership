@@ -11,7 +11,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -20,17 +19,14 @@
                                                   x:Key="InvertedBoolToVisibilityConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
                                                   x:Key="BoolToVisibilityConverter" />
-
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <GroupBox BorderBrush="Black" BorderThickness="2" Background="AntiqueWhite">
+    <GroupBox BorderBrush="Black" BorderThickness="2" Background="AntiqueWhite" >
         <GroupBox.Header>
             <Grid Height="21">
-
                 <TextBlock Text="MEMBER INFORMATION" 
                            Style="{StaticResource HeaderTextBlockStyle}"  Padding="10,0" />
-
 
                 <StackPanel Orientation="Horizontal">
                     <Button ToolTip="Add a new member to the roll."  
@@ -39,15 +35,13 @@
                             Margin="2,-2">
                         <Image Source="/Membership;component/Common/Resources/Add.png" Width="24" Margin="-3"/>
                     </Button>
-
                     <Button ToolTip="Edit an existing member record." 
                             Visibility="{Binding Path=IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
                             Click="EditMemberButtonOnClick" 
                             Margin="2,-2">
                         <Image Source="/Membership;component/Common/Resources/Edit.png" Width="24" Margin="-3"/>
                     </Button>
-
-                    <Button ToolTip="Delete the current member record." 
+                    <Button ToolTip="Delete the current member record." IsEnabled="False"
                             Visibility="{Binding Path=IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
                             Click="DeleteMemberButtonOnClick"
                             Margin="2,-2">
@@ -66,7 +60,7 @@
                         <Image Source="/Membership;component/Common/Resources/Cancel.png" Width="24" Margin="-3"/>
                     </Button>
                 </StackPanel>
-                </Grid>
+            </Grid>
         </GroupBox.Header>
 
         <Grid Background="White" IsEnabled="{Binding Path=IsEditing, Mode=OneWay}" >
@@ -86,9 +80,9 @@
                         <ColumnDefinition Width="1.5*" />
                         <ColumnDefinition Width="10*" />
                     </Grid.ColumnDefinitions>
-                    <common:InputControl Grid.Column="0" Label="First Name" TextBox="{Binding Path=MemberRec.FirstName}" Margin="5"/>
-                    <common:InputControl Grid.Column="1" Label="MI" TextBox="{Binding Path=MemberRec.MI}" Margin="5"/>
-                    <common:InputControl Grid.Column="2" Label="Last Name" TextBox="{Binding Path=MemberRec.LastName}" Margin="5"/>
+                    <common:InputControl Grid.Column="0" Label="First Name" TextBox="{Binding Path=MemberRec.FirstName, Mode=TwoWay}" Margin="5"/>
+                    <common:InputControl Grid.Column="1" Label="MI" TextBox="{Binding Path=MemberRec.MI, Mode=TwoWay}" Margin="5"/>
+                    <common:InputControl Grid.Column="2" Label="Last Name" TextBox="{Binding Path=MemberRec.LastName, Mode=TwoWay}" Margin="5"/>
                 </Grid>
                 
                 <!--ADDRESS CONTROL-->
@@ -96,31 +90,31 @@
                     <Label  Content="Address:" Style="{StaticResource InputLabel}" />
                     <Border BorderBrush="#FFABADB3"  BorderThickness="1">
                         <StackPanel >
-                            <TextBox Text="{Binding MemberRec.Address1}" Style="{StaticResource InputTextBox}" BorderBrush="{x:Null}" />
-                            <TextBox Text="{Binding MemberRec.Address2}" Style="{StaticResource InputTextBox}" BorderBrush="{x:Null}"/>
+                            <TextBox Text="{Binding MemberRec.Address1, Mode=TwoWay}" Style="{StaticResource InputTextBox}" BorderBrush="{x:Null}" />
+                            <TextBox Text="{Binding MemberRec.Address2, Mode=TwoWay}" Style="{StaticResource InputTextBox}" BorderBrush="{x:Null}"/>
                         </StackPanel>
                     </Border>
                     <!--City State ZIP-->
                     <DockPanel LastChildFill="True" >
-                        <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.ZIP}" Style="{StaticResource InputTextBox}" Width="60" />
+                        <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.ZIP, Mode=TwoWay}" Style="{StaticResource InputTextBox}" Width="60" />
                         <ComboBox DockPanel.Dock="Right" Width="60" Margin="10,0"
                                   FontSize="16" Height="24" 
                                   VerticalAlignment="Top" VerticalContentAlignment="Top"
-                                  SelectedValue="{Binding Path=MemberRec.State}"
+                                  SelectedValue="{Binding Path=MemberRec.State, Mode=TwoWay}"
                                   ItemsSource="{Binding Path=StateInits}"
                                   Style="{StaticResource ComboBoxFadeInOutStyle}" >
                         </ComboBox>
-                        <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.City}" Style="{StaticResource InputTextBox}" />
+                        <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.City, Mode=TwoWay}" Style="{StaticResource InputTextBox}" />
                     </DockPanel>
                 </StackPanel>
 
                 <common:InputControl Label="Email Address:" DockPanel.Dock="Top"
-                                     TextBox="{Binding Path=MemberRec.EmailAddress}" Margin="5,0,5,5"/>
+                                     TextBox="{Binding Path=MemberRec.EmailAddress, Mode=TwoWay}" Margin="5,0,5,5"/>
             </DockPanel>
 
             <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label Content="Comments:" DockPanel.Dock="Top" Style="{StaticResource InputLabel}" Margin="5,0"  />
-                <TextBox Text="{Binding MemberRec.Comment}" Style="{StaticResource InputTextBox}" Margin="5,0,5,5"
+                <TextBox Text="{Binding MemberRec.Comment, Mode=TwoWay}" Style="{StaticResource InputTextBox}" Margin="5,0,5,5"
                          TextWrapping="WrapWithOverflow" VerticalScrollBarVisibility="Auto" />
             </DockPanel>
 
@@ -145,19 +139,19 @@
                         <ComboBox x:Name="RemovalReasonCombo"  Margin="0,0,0,5" MinWidth="100" FontSize="16"
                             ItemsSource="{Binding Path=RemovalCodes, Mode=OneWay}"
                             SelectedValuePath="RemovalId" DisplayMemberPath="Description"
-                            SelectedValue="{Binding Path=MemberRec.RemovalReasonCode}"/>
+                            SelectedValue="{Binding Path=MemberRec.RemovalReasonId}"/>
                 </StackPanel>
                 <Label Content="Sponsors:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <ComboBox x:Name="Sponsor1"   Margin="0" MinWidth="100" FontSize="16"
-                          ItemsSource="{Binding Path=MemberLookups, Mode=OneWay}"
+                          ItemsSource="{Binding Path=SponsorLookups, Mode=OneWay}"
                           SelectedValuePath="Item1" DisplayMemberPath="Item2"
                           SelectedValue="{Binding Path=MemberRec.SponsorID1}"/>
                 <ComboBox x:Name="Sponsor2"  Margin="0" MinWidth="100" FontSize="16"
-                          ItemsSource="{Binding Path=MemberLookups, Mode=OneWay}"
+                          ItemsSource="{Binding Path=SponsorLookups, Mode=OneWay}"
                           SelectedValuePath="Item1" DisplayMemberPath="Item2"
                           SelectedValue="{Binding Path=MemberRec.SponsorID2}"/>
                 <ComboBox x:Name="Sponsor3"  Margin="0,0,0,5" MinWidth="100" FontSize="16"
-                          ItemsSource="{Binding Path=MemberLookups, Mode=OneWay}"
+                          ItemsSource="{Binding Path=SponsorLookups, Mode=OneWay}"
                           SelectedValuePath="Item1" DisplayMemberPath="Item2"
                           SelectedValue="{Binding Path=MemberRec.SponsorID3}"/>
             </StackPanel>
@@ -169,32 +163,37 @@
 
                 <Label Content="Obligated To Assoc:" Style="{StaticResource InputLabel}" />
                 <DatePicker Text="{Binding Path=MemberRec.DateObligated, Converter={StaticResource MinimumDateConverter}}"
+                            PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
 
                 <Label Content="Removed From Assoc:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <DatePicker Text="{Binding Path=MemberRec.DateRemoved, Converter={StaticResource MinimumDateConverter}}"
-                            Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
+                            PreviewTextInput="DatePickerOnPreviewTextInput"
+                            Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27" />
                 
                 <Label Content="Initial Active:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <DatePicker Text="{Binding Path=MemberRec.DateActive, Converter={StaticResource MinimumDateConverter}}"
+                            PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
                 
                 <Label Content="Off Active:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <DatePicker Text="{Binding Path=MemberRec.DateOffActive, Converter={StaticResource MinimumDateConverter}}"
+                            PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
                 
                 <Label Content="Date Of Birth:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <DatePicker Text="{Binding Path=MemberRec.DateOfBirth, Converter={StaticResource MinimumDateConverter}}"
+                            PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
                 
                 <Label Content="Date Deceased:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <DatePicker Text="{Binding Path=MemberRec.DateDeceased, Converter={StaticResource MinimumDateConverter}}"
+                            PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
             </StackPanel>
 
             </ScrollViewer>
 
-            
             <!--IMAGE OF MEMBERSHIP RECORD-->
 
         </Grid>

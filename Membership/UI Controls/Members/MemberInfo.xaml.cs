@@ -21,9 +21,17 @@ namespace Membership.UI_Controls.Members
         };
         private readonly MemberInfoPresenter _presenter;
 
+        private Guid _selectedMemberId;
+
         #region Dependency Properties
 
-
+        public Member MemberRec
+        {
+            get { return (Member)GetValue(MemberRecProperty); }
+            set { SetValue(MemberRecProperty, value); OnPropertyChanged();}
+        }
+        public static readonly DependencyProperty MemberRecProperty =
+            DependencyProperty.Register("MemberRec", typeof(Member),typeof(MemberInfo));
 
         public bool IsEditing
         {
@@ -33,8 +41,6 @@ namespace Membership.UI_Controls.Members
         public static readonly DependencyProperty IsEditingProperty =
             DependencyProperty.Register("IsEditing", typeof(bool), typeof(MemberInfo));
 
-
-
         public bool IsAdding
         {
             get { return (bool)GetValue(IsAddingProperty); }
@@ -42,17 +48,6 @@ namespace Membership.UI_Controls.Members
         }
         public static readonly DependencyProperty IsAddingProperty =
             DependencyProperty.Register("IsAdding", typeof(bool), typeof(MemberInfo));
-
-
-
-        public Member MemberRec
-        {
-            get { return (Member)GetValue(MemberRecProperty); }
-            set { SetValue(MemberRecProperty, value); OnPropertyChanged(); }
-        }
-        public static readonly DependencyProperty MemberRecProperty =
-            DependencyProperty.Register("MemberRec", typeof(Member),
-                typeof(MemberInfo));
 
         public ICollection<Tuple<int,string>> MemberTypeLookups 
         {
@@ -63,7 +58,7 @@ namespace Membership.UI_Controls.Members
             DependencyProperty.Register("MemberTypeLookups", typeof(ICollection<Tuple<int, string>>),
                 typeof(MemberInfo));
 
-        public ICollection<Tuple<Guid,string>> MemberLookups
+        public ICollection<Tuple<Guid,string>> SponsorLookups
         {
             get { return (ICollection<Tuple<Guid,string>>)GetValue(MemberLookupsProperty); }
             set { SetValue(MemberLookupsProperty, value); }
@@ -81,29 +76,21 @@ namespace Membership.UI_Controls.Members
             DependencyProperty.Register("RemovalCodes", typeof(ICollection<MemberRemoval>),
                 typeof(MemberInfo));
 
-
         #endregion
 
         public MemberInfo()
         {
-            MemberLookups = new ObservableCollection<Tuple<Guid, string>>();
+            SponsorLookups = new ObservableCollection<Tuple<Guid, string>>();
             MemberTypeLookups = new ObservableCollection<Tuple<int, string>>();
             InitializeComponent();
             _presenter = new MemberInfoPresenter(this);
             _presenter.LoadLookups();
-            IsEditing = true; //for testing
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); 
         }
 
         #region Button Events
         private void AddMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
+            MemberRec = new Member {MemberId = Guid.NewGuid(),MemberTypeId = 3};
             IsAdding = true;
             IsEditing = true;
         }
@@ -115,32 +102,78 @@ namespace Membership.UI_Controls.Members
 
         private void DeleteMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
+
+            if (!_presenter.DeleteMemberRecord(MemberRec)) return;
             IsAdding = false;
             IsEditing = false;
+            MemberRec = null;
+            RaiseEvent(new RoutedEventArgs(OnMemberDeletedEvent));
         }
         private void SaveMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
-            IsAdding = false;
-            IsEditing = false;
+            if (MemberRec.FirstName == "" || MemberRec.LastName == "") return;
+            SaveMemberRecord();
         }
         private void CancelButtonOnClick(object sender, RoutedEventArgs e)
         {
-            IsAdding = false;
-            IsEditing = false;
+            CancelMemberRecord();
         }
         #endregion
-        
+
+        public void ResetControl(Guid memberId)
+        {
+            _selectedMemberId = memberId;
+            MemberRec = _presenter.GetMember(memberId);
+        }
+
+        public void SaveMemberRecord()
+        {
+            if (IsAdding)
+                if (!_presenter.InsertMemberRecord(MemberRec)) return;
+            else
+                if (!_presenter.UpdateMemberRecord(MemberRec)) return;
+            IsAdding = false;
+            IsEditing = false;
+            RaiseEvent(new RoutedEventArgs(OnMemberUpdatedEvent));
+        }
+
+        public void CancelMemberRecord()
+        {
+            IsAdding = false;
+            IsEditing = false;
+            ResetControl(_selectedMemberId);
+        }
         private void DatePickerOnPreviewTextInput(object sender, TextCompositionEventArgs eventArgs)
         {
             eventArgs.Handled = eventArgs.Text.Any(
                 character => !char.IsDigit(character) && character != '/' && character != '-');
         }
 
-        private void StartDatePicker_OnSelectedDateChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 
+        public static readonly RoutedEvent OnMemberUpdatedEvent =
+            EventManager.RegisterRoutedEvent("OnMemberUpdatedEvent",
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MemberInfo));
+        public event RoutedEventHandler OnMemberUpdated
+        {
+            add => AddHandler(OnMemberUpdatedEvent, value);
+            remove => RemoveHandler(OnMemberUpdatedEvent, value);
+        }
+        
+        public static readonly RoutedEvent OnMemberDeletedEvent =
+            EventManager.RegisterRoutedEvent("OnMemberDeletedEvent",
+                RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MemberInfo));
+        public event RoutedEventHandler OnMemberDeleted
+        {
+            add => AddHandler(OnMemberDeletedEvent, value);
+            remove => RemoveHandler(OnMemberDeletedEvent, value);
+        }
     }
 }

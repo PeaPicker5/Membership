@@ -18,9 +18,12 @@ namespace Membership.Core.Presenters
             _view = view;
         }
 
-        public void Load()
+        public void LoadMembers()
         {
             _view.Members = _memberRepository.GetMembers();
+        }
+        public void LoadMemberTypes()
+        {
             _view.MemberTypes = _memberTypeRepository.GetAllTypes();
         }
 

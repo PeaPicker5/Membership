@@ -12,11 +12,12 @@ using Membership.Properties;
 
 namespace Membership.UI_Controls.Members
 {
-    /// <summary>
-    /// Interaction logic for MemberSelection.xaml
-    /// </summary>
+
     public partial class MemberSelection : IMemberSelectionView, INotifyPropertyChanged
     {
+        private readonly MemberSelectionPresenter _presenter;
+
+        #region Dependency Properties
         public Member SelectedMember
         {
             get { return (Member)GetValue(SelectedMemberProperty); }
@@ -55,20 +56,22 @@ namespace Membership.UI_Controls.Members
             DependencyProperty.Register("FilteredMembers", typeof(IEnumerable<Member>), typeof(MemberSelection));
 
 
-        private readonly MemberSelectionPresenter _presenter;
+        #endregion
 
         public MemberSelection()
         {
             FilteredMembers = new ObservableCollection<Member>();
             InitializeComponent();
             _presenter = new MemberSelectionPresenter(this);
+            _presenter.LoadMemberTypes();
         }
 
         public void LoadMembers()
         {
-            _presenter.Load();
+            _presenter.LoadMembers();
             FilteredMembers = Members;
-            MemberSelectionGrid.SelectedIndex = 0;
+            if (SelectedMember == null)
+                MemberSelectionGrid.SelectedIndex = 0;
         }
 
         private void MemberGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -78,8 +81,9 @@ namespace Membership.UI_Controls.Members
             SelectedMember = (Member)dg.SelectedItem;
             DuesPaidControl.LoadDuesPaidRecords(selectedMemberRec.MemberId);
             OfficesHeldControl.LoadOfficeRecords(selectedMemberRec.MemberId);
-            MemberInfoControl.MemberRec = selectedMemberRec;
+            MemberInfoControl.ResetControl(selectedMemberRec.MemberId);
         }
+
 
         private void ApplyFilterSettings()
         {
@@ -114,5 +118,34 @@ namespace Membership.UI_Controls.Members
         }
 
 
+        private void MemberInfoControl_OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            if (!MemberInfoControl.IsEditing) return;
+            if (MessageBox.Show("Do you want to save your changes before leaving?", "Save or Cancel", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                MemberInfoControl.SaveMemberRecord();
+            else
+                MemberInfoControl.CancelMemberRecord();
+        }
+
+        private void MemberInfoControl_OnOnMemberUpdated(object sender, RoutedEventArgs e)
+        {
+            LoadMembers();
+            ApplyFilterSettings();
+        }
+        private void MemberInfoControl_OnOnMemberDeleted(object sender, RoutedEventArgs e)
+        {
+            SelectedMember = null;
+            LoadMembers();
+            ApplyFilterSettings();
+        }
+
+        private void ClearSelectionOnClick(object sender, RoutedEventArgs e)
+        {
+            FilterCurrent.IsChecked = false;
+            FilterLastName.Text = "";
+            FilterFirstName.Text = "";
+            FilterStatus.SelectedIndex = 0;
+            ApplyFilterSettings();
+        }
     }
 }

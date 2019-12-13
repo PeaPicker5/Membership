@@ -53,7 +53,7 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel x:Name="DistrictOfficersStack"  Grid.Column="0" Margin="0,10,5,10"  Background="White"  >
+            <StackPanel x:Name="DistrictOfficersStack"  Grid.Column="0" Margin="10,10,5,10"  Background="White"  >
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center"
                             FontWeight="Heavy" FontSize="24" Text="FIRE DISTRICT OFFICERS" />
                 <!--COMMISSIONERS-->

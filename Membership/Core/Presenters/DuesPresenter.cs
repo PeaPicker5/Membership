@@ -33,38 +33,18 @@ namespace Membership.Core.Presenters
             return _duesRepository.GetDuesByYear(year);
         }
 
-        public void UpdateDuesRecords()
+        public void InsertDuesRecords()
         {
-            var recs = _view.DuesRecs.Where(rec => rec.IsPaid && rec.Year == 0).ToList();
-            var x = MapFromData(recs);
-            _duesRepository.UpdateDuesPayments(x);
+            _duesRepository.InsertDuesPayments(_view.DuesRecs.Where(rec => rec.IsPaid && rec.Year == 0).ToList());
         }
+
+
         public void MembersCurrentlyOweDues()
         {
             _view.DuesRecs = _duesRepository.CurrentlyOweDues().ToList();
         }
 
 
-        public List<DuesHistory> MapFromData(IEnumerable<DuesRecord> duesRecords)
-        {
-            //foreach (var rec in duesRecords)
-            //    retValue.Add(new DuesRecord()
-            //    {
-            //        MemberRec = rec.MemberRec,
-            //        Amount = rec.Amount,
-            //        Month = rec.Month,
-            //        Year = rec.Year
-            //    });
-
-            var x = duesRecords.Select(rec => new DuesHistory()
-            {
-                MemberId = rec.MemberRec.MemberId, 
-                Amount = rec.Amount, 
-                Month = DateTime.Now.Month, 
-                Year = DateTime.Now.Year
-            }).ToList();
-            return x;
-        }
 
     }
 }

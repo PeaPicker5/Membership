@@ -7,9 +7,8 @@ namespace Membership.Core.DataModels
     public class DuesHistory
     {
 
-        [ExplicitKey]
-        public Guid MemberId { get; set; }
-        public int Year { get; set; }
+        [ExplicitKey] public Guid MemberId { get; set; }
+        [ExplicitKey] public int Year { get; set; }
         public int Month { get; set; }
         public float Amount { get; set; }
     }

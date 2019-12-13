@@ -95,7 +95,7 @@ namespace Membership.UI_Controls.Dues
 
         private void RecordDuesButtonOnClick(object sender, RoutedEventArgs e)
         {
-            _presenter.UpdateDuesRecords();
+            _presenter.InsertDuesRecords();
             LoadMembers();
             UpdateDuesRecsGrid();
         }
@@ -109,42 +109,13 @@ namespace Membership.UI_Controls.Dues
 
         private void CollectionGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var gridRow = (DataGrid) sender; 
-            if (gridRow == null) return;
-            var selectedRow = gridRow.SelectedItem; 
+            var gridRow = (DataGrid) sender;
+            var selectedRow = gridRow?.SelectedItem; 
             if (selectedRow == null) return;
             if (((DuesRecord) selectedRow).Year > 0) return;
 
             var selectedMemberId = ((DuesRecord)selectedRow).MemberRec.MemberId;
             TogglePaymentRecord(selectedMemberId);
-        }
-
-        private void IsPaidBox_OnUnChecked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                e.Handled = true;
-                var cBox = (CheckBox) sender;
-                cBox.Checked -= IsPaidBox_OnChecked;
-
-                var yearPaid = Convert.ToInt32(cBox.Tag);
-                if (yearPaid > 0)
-                {
-                    cBox.Checked -= IsPaidBox_OnChecked;
-                    cBox.IsChecked = true;
-                    cBox.Checked += IsPaidBox_OnChecked;
-                    return;
-                }
-                UpdateDuesRecsGrid();
-//                cBox.Checked += IsPaidBox_OnChecked;
-            }
-            catch (Exception ex) { }
-        }
-
-        private void IsPaidBox_OnChecked(object sender, RoutedEventArgs e)
-        {
-            e.Handled = true;
-         //   UpdateDuesRecsGrid();
         }
 
         private void TogglePaymentRecord(Guid selectedMemberId)
@@ -156,7 +127,6 @@ namespace Membership.UI_Controls.Dues
         }
         private void UpdateDuesRecsGrid()
         {
-            
             RunningCount = DuesRecs.Count(c => c.IsPaid && c.Year == 0);
             RunningAmount = DuesRecs.Where(c => c.IsPaid && c.Year == 0).Sum(rec => rec.Amount);
             DuesRecs = _showUnpaidOnly
