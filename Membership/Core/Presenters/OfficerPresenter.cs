@@ -5,15 +5,15 @@ using Membership.Core.Repositories;
 
 namespace Membership.Core.Presenters
 {
-    public class OfficesHeldPresenter :IOfficeHistoryView
+    public class OfficerPresenter :IOfficeHistoryView
     {
         public IEnumerable<Officer> OfficerRecs { get; set; }
-        private readonly IOfficeHeldRepository _officeRepository;
+        private readonly IOfficerRepository _officeRepository;
         private readonly IOfficeHistoryView _view;
 
-        public OfficesHeldPresenter(IOfficeHistoryView view)
+        public OfficerPresenter(IOfficeHistoryView view)
         {
-            _officeRepository = new OfficeHeldRepository();
+            _officeRepository = new OfficerRepository();
             _view = view;
         }
 

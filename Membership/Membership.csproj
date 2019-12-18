@@ -152,7 +152,7 @@
     <Compile Include="Core\DataModels\DuesHistory.cs" />
     <Compile Include="Core\DataModels\DuesRecord.cs" />
     <Compile Include="Core\DataModels\MemberRemoval.cs" />
-    <Compile Include="Core\DataModels\Officers.cs" />
+    <Compile Include="Core\DataModels\Officer.cs" />
     <Compile Include="Core\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />
     <Compile Include="Core\Presenters\IOfficersByYear.cs" />
@@ -167,15 +167,15 @@
     <Compile Include="Core\Presenters\OfficeHistoryPresenter.cs" />
     <Compile Include="Core\Presenters\ReportParametersPresenter.cs" />
     <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
-    <Compile Include="Core\Presenters\OfficesHeldPresenter.cs" />
+    <Compile Include="Core\Presenters\OfficerPresenter.cs" />
     <Compile Include="Core\Presenters\MemberSelectionPresenter.cs" />
     <Compile Include="Core\Repositories\IDuesRepository.cs" />
     <Compile Include="Core\Repositories\IMemberTypeRepository.cs" />
-    <Compile Include="Core\Repositories\IOfficeHeldRepository.cs" />
+    <Compile Include="Core\Repositories\IOfficerRepository.cs" />
     <Compile Include="Core\Repositories\IMemberRepository.cs" />
     <Compile Include="Core\Repositories\DuesRepository.cs" />
     <Compile Include="Core\Repositories\MemberTypeRepository.cs" />
-    <Compile Include="Core\Repositories\OfficeHeldRepository.cs" />
+    <Compile Include="Core\Repositories\OfficerRepository.cs" />
     <Compile Include="Core\Repositories\MemberRepository.cs" />
     <Compile Include="MembershipDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

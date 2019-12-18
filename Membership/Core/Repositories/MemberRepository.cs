@@ -55,19 +55,25 @@ namespace Membership.Core.Repositories
                 return isSuccess;
             }
         }
-        public bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesRecord> duesRecs, 
+
+        public bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesRecord> duesRecs, IEnumerable<Officer> officerRecs)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesHistory> duesHistoryRecs, 
                                         IEnumerable<Officer> officerRecs)
         {
 
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 bool isSuccess = true;
-                if (officerRecs.Any())
-                    isSuccess = connection.Delete(officerRecs);
-                if (isSuccess && duesRecs.Any())
-                    isSuccess = connection.Delete(duesRecs);
-                if (isSuccess)
-                    isSuccess = connection.Delete(memberRec);
+                //if (officerRecs.Any())
+                //    isSuccess = connection.Delete(officerRecs);
+                //if (isSuccess && duesHistoryRecs.Any())
+                //    isSuccess = connection.Delete(duesRecs);
+                //if (isSuccess)
+                //    isSuccess = connection.Delete(memberRec);
                 return isSuccess;
             }
 

@@ -56,7 +56,7 @@ namespace Membership.Core.Repositories
         {
             return GetOne(memberId, year, "WHERE dues.MemberId = @Param1 AND dues.Year = @Param2");
         }
-        public ICollection<DuesRecord> GetDuesByMember(Guid memberId)
+        public ICollection<DuesRecord> GetDuesRecordByMemberId(Guid memberId)
         {
             return GetMany(memberId, "WHERE dues.MemberId = @Param1").ToList();
         }
@@ -96,6 +96,13 @@ namespace Membership.Core.Repositories
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 var isSuccess = connection.Insert(MapFromData(duesPayments));
+            }
+        }
+        public void DeleteDuesPayments(IEnumerable<DuesRecord> duesPayments)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var isSuccess = connection.Delete(MapFromData(duesPayments));
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using Membership.Core.DataModels;
 using Membership.Core.Repositories;
@@ -20,7 +22,7 @@ namespace Membership.Core.Presenters
 
         public void GetByMemberId(Guid memberId)
         {
-            _view.DuesRecs = _duesRepository.GetDuesByMember(memberId);
+            _view.DuesRecs = _duesRepository.GetDuesRecordByMemberId(memberId);
         }
 
         public IEnumerable<int> LoadYearsOnFile()
@@ -43,6 +45,7 @@ namespace Membership.Core.Presenters
         {
             _view.DuesRecs = _duesRepository.CurrentlyOweDues().ToList();
         }
+
 
 
 

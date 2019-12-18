@@ -4,11 +4,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 
 namespace Membership.Core.Repositories
 {
-    public class OfficeHeldRepository : IOfficeHeldRepository
+    public class OfficerRepository : IOfficerRepository
     {
         private const string DbConnectionName = "MembershipDB";
 
@@ -77,10 +78,21 @@ namespace Membership.Core.Repositories
         }
         public IEnumerable<Officer> GetOfficersByMember(Guid memberId)
         {
-            var whereClause = "WHERE oa.MemberId = @memberId";
+            var whereClause = "WHERE oa.MemberId = @memberId ORDER BY oa.Year DESC";
             var parameter = new DynamicParameters();
             parameter.Add("MemberId", memberId);
             return GetSelectedOfficerRecords(whereClause, parameter);
         }
+
+
+        public void DeleteOfficerRecords(IEnumerable<Officer> officerRecs)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var isSuccess = connection.Delete(officerRecs);
+            }
+        }
+
+
     }
 }

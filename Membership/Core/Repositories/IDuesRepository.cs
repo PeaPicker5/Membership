@@ -19,7 +19,7 @@ namespace Membership.Core.Repositories
         /// </summary>
         /// <param name="memberId">The event identifier.</param>
         /// <returns></returns>
-        ICollection<DuesRecord> GetDuesByMember(Guid memberId);
+        ICollection<DuesRecord> GetDuesRecordByMemberId(Guid memberId);
 
         /// <summary>
         /// Gets all dues records for a given year.
@@ -34,6 +34,7 @@ namespace Membership.Core.Repositories
         IEnumerable<DuesRecord> CurrentlyOweDues();
 
         void InsertDuesPayments(IEnumerable<DuesRecord> duesPayments);
+        void DeleteDuesPayments(IEnumerable<DuesRecord> duesPayments);
 
     }
 }

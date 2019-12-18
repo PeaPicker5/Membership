@@ -58,7 +58,7 @@ namespace Membership.ReportDefinitions
                 SelectedOffice = finSecRecord;
             }
         }
-        
+
         private IEnumerable<ReportParameter> UpdateParameterValues()
         {
             return new List<ReportParameter>

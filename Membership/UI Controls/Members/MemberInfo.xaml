@@ -41,7 +41,9 @@
                             Margin="2,-2">
                         <Image Source="/Membership;component/Common/Resources/Edit.png" Width="24" Margin="-3"/>
                     </Button>
-                    <Button ToolTip="Delete the current member record." IsEnabled="False"
+                    <Button ToolTip="Delete the current member record." 
+                            
+                            
                             Visibility="{Binding Path=IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
                             Click="DeleteMemberButtonOnClick"
                             Margin="2,-2">
@@ -162,32 +164,44 @@
             <StackPanel  Margin="10,5,10,5">
 
                 <Label Content="Obligated To Assoc:" Style="{StaticResource InputLabel}" />
-                <DatePicker Text="{Binding Path=MemberRec.DateObligated, Converter={StaticResource MinimumDateConverter}}"
+                <DatePicker Text="{Binding Path=MemberRec.DateObligated, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
 
-                <Label Content="Removed From Assoc:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
-                <DatePicker Text="{Binding Path=MemberRec.DateRemoved, Converter={StaticResource MinimumDateConverter}}"
+                <StackPanel >
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=StatusCombo, Path=SelectedValue}" Value="4">
+                                    <Setter Property="Visibility"  Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Label Content="Removed From Assoc:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
+                    <DatePicker Text="{Binding Path=MemberRec.DateRemoved, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27" />
-                
+                </StackPanel>     
+
                 <Label Content="Initial Active:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
-                <DatePicker Text="{Binding Path=MemberRec.DateActive, Converter={StaticResource MinimumDateConverter}}"
+                    <DatePicker Text="{Binding Path=MemberRec.DateActive, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
                 
                 <Label Content="Off Active:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
-                <DatePicker Text="{Binding Path=MemberRec.DateOffActive, Converter={StaticResource MinimumDateConverter}}"
+                    <DatePicker Text="{Binding Path=MemberRec.DateOffActive, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
                 
                 <Label Content="Date Of Birth:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
-                <DatePicker Text="{Binding Path=MemberRec.DateOfBirth, Converter={StaticResource MinimumDateConverter}}"
+                    <DatePicker Text="{Binding Path=MemberRec.DateOfBirth, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
                 
                 <Label Content="Date Deceased:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
-                <DatePicker Text="{Binding Path=MemberRec.DateDeceased, Converter={StaticResource MinimumDateConverter}}"
+                    <DatePicker Text="{Binding Path=MemberRec.DateDeceased, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
             </StackPanel>

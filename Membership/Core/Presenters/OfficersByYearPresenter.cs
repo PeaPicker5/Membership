@@ -15,12 +15,12 @@ namespace Membership.Core.Presenters
         public IEnumerable<Officer> TableOfficers { get; set; }
         public IEnumerable<Officer> OtherAssocOfficers { get; set; }
 
-        private readonly IOfficeHeldRepository _officeRepository;
+        private readonly IOfficerRepository _officeRepository;
         private readonly IOfficersByYearView _view;
 
         public OfficersByYearPresenter(IOfficersByYearView view)
         {
-            _officeRepository = new OfficeHeldRepository();
+            _officeRepository = new OfficerRepository();
             _view = view;
         }
 
@@ -29,11 +29,11 @@ namespace Membership.Core.Presenters
             var allRecs = _officeRepository.GetOfficersByYear(year).ToList();
 
             _view.Commissioners = allRecs.Where(off => off.OfficeRec.GroupId == 1);
-            _view.LineOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 2);
-            _view.OtherDistrictOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 3);
+            _view.LineOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 2).OrderBy(off => off.OfficeId);
+            _view.OtherDistrictOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 3).OrderBy(off => off.OfficeId);
             _view.BoardOfDirectors = allRecs.Where(off => off.OfficeRec.GroupId == 4);
-            _view.TableOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 5);
-            _view.OtherAssocOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 6);
+            _view.TableOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 5).OrderBy(off => off.OfficeId);
+            _view.OtherAssocOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 6).OrderBy(off => off.OfficeId);
         }
 
         public IEnumerable<int> LoadYearsOnFile()

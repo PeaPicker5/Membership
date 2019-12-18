@@ -18,12 +18,12 @@ namespace Membership.UI_Controls.Offices
                 typeof(OfficesHeld));
 
 
-        private readonly OfficesHeldPresenter _presenter;
+        private readonly OfficerPresenter _presenter;
 
         public OfficesHeld()
         {
             InitializeComponent();
-            _presenter = new OfficesHeldPresenter(this);
+            _presenter = new OfficerPresenter(this);
         }
 
         public void LoadOfficeRecords(Guid memberId)

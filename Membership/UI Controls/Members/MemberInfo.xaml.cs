@@ -60,11 +60,11 @@ namespace Membership.UI_Controls.Members
 
         public ICollection<Tuple<Guid,string>> SponsorLookups
         {
-            get { return (ICollection<Tuple<Guid,string>>)GetValue(MemberLookupsProperty); }
-            set { SetValue(MemberLookupsProperty, value); }
+            get { return (ICollection<Tuple<Guid,string>>)GetValue(SponsorLookupsProperty); }
+            set { SetValue(SponsorLookupsProperty, value); OnPropertyChanged();}
         }
-        public static readonly DependencyProperty MemberLookupsProperty =
-            DependencyProperty.Register("MemberLookups", typeof(ICollection<Tuple<Guid,string>>),
+        public static readonly DependencyProperty SponsorLookupsProperty =
+            DependencyProperty.Register("SponsorLookups", typeof(ICollection<Tuple<Guid,string>>),
                 typeof(MemberInfo));
 
         public ICollection<MemberRemoval> RemovalCodes   
@@ -102,8 +102,16 @@ namespace Membership.UI_Controls.Members
 
         private void DeleteMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
+            if (MessageBox.Show(
+                    $"{MemberRec.FullName} will be deleted from the database, as well as all Dues History, Meeting History, and Officer History records! Do you wish to continue?",
+                    "Deleting a Member Record", MessageBoxButton.OKCancel, MessageBoxImage.Hand) !=
+                MessageBoxResult.OK) return;
+ 
+            // Need to get the officer and dues CRUD working before this part.
 
+            
             if (!_presenter.DeleteMemberRecord(MemberRec)) return;
+
             IsAdding = false;
             IsEditing = false;
             MemberRec = null;
@@ -111,7 +119,7 @@ namespace Membership.UI_Controls.Members
         }
         private void SaveMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
-            if (MemberRec.FirstName == "" || MemberRec.LastName == "") return;
+            if (!VerifyControls()) return;
             SaveMemberRecord();
         }
         private void CancelButtonOnClick(object sender, RoutedEventArgs e)
@@ -129,9 +137,14 @@ namespace Membership.UI_Controls.Members
         public void SaveMemberRecord()
         {
             if (IsAdding)
+            {
                 if (!_presenter.InsertMemberRecord(MemberRec)) return;
+            }
             else
+            {
                 if (!_presenter.UpdateMemberRecord(MemberRec)) return;
+            }
+
             IsAdding = false;
             IsEditing = false;
             RaiseEvent(new RoutedEventArgs(OnMemberUpdatedEvent));
@@ -149,6 +162,15 @@ namespace Membership.UI_Controls.Members
                 character => !char.IsDigit(character) && character != '/' && character != '-');
         }
 
+
+        private bool VerifyControls()
+        {
+            // same name not on file (Warn)
+            // Blank dates are converted to null.
+            if (MemberRec.FirstName == "" || MemberRec.LastName == "") return false;
+
+            return true;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]

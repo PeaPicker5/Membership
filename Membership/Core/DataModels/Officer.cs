@@ -17,13 +17,17 @@ namespace Membership.Core.DataModels
             ToMonth = toMonth;
         }
 
-        [ExplicitKey] public Member MemberRec { get; set; }
+        [Computed] public Member MemberRec { get; set; }
         [Computed] public Office OfficeRec { get; set; }
         public int Year { get; set; }
         public int FromMonth { get; set; }
         public int ToMonth { get; set; }
 
+        public Guid MemberId => MemberRec.MemberId;
         public int OfficeId => OfficeRec.OfficeId;
+
+
+
         [Computed] public string FromDate => FromMonth > 0
             ? DateTime.ParseExact($"{FromMonth:D2}/{Year:D4}", "MM'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy")
             : DateTime.ParseExact($"01/{Year}", "M'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy");

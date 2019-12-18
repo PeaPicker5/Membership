@@ -9,28 +9,28 @@ namespace Membership.Core.Presenters
     public class OfficeHistoryPresenter :IOfficeHistoryView
     {
         public IEnumerable<Officer> OfficerRecs { get; set; }
-        private readonly IOfficeHeldRepository _officeRepository;
+        private readonly IOfficerRepository _officerRepository;
         private readonly IOfficeHistoryView _view;
 
         public OfficeHistoryPresenter(IOfficeHistoryView view)
         {
-            _officeRepository = new OfficeHeldRepository();
+            _officerRepository = new OfficerRepository();
             _view = view;
         }
 
         public IEnumerable<int> LoadYearsOnFile()
         {
-            return _officeRepository.GetOfficerYearsOnFile();
+            return _officerRepository.GetOfficerYearsOnFile();
         }
 
         public IEnumerable<Office> LoadOfficesOnFile()
         {
-            return _officeRepository.GetOfficesOnFile();
+            return _officerRepository.GetOfficesOnFile();
         }
 
         public void LoadOfficersForaTitle(int officeId, int fromYear = 9999, int backToYear = 0)
         {
-            _view.OfficerRecs = _officeRepository.GetOfficersByTitle(officeId)
+            _view.OfficerRecs = _officerRepository.GetOfficersByTitle(officeId)
                 .Where(x => x.Year <= fromYear && x.Year >= backToYear)
                 .OrderByDescending(x => x.Year)
                 .ThenBy(x => x.MemberRec.LastName)

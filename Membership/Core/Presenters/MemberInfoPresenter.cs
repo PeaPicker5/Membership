@@ -10,7 +10,7 @@ namespace Membership.Core.Presenters
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IMemberTypeRepository _memberTypeRepository;
-        private readonly IOfficeHeldRepository _officeHeldRepository;
+        private readonly IOfficerRepository _officerRepository;
         private readonly IDuesRepository _duesRepository;
 
         private readonly IMemberView _view;
@@ -22,7 +22,7 @@ namespace Membership.Core.Presenters
         {
             _memberRepository = new MemberRepository();
             _memberTypeRepository = new MemberTypeRepository();
-            _officeHeldRepository = new OfficeHeldRepository();
+            _officerRepository = new OfficerRepository();
             _duesRepository = new DuesRepository();
             _view = view;
         }
@@ -56,13 +56,16 @@ namespace Membership.Core.Presenters
         }
         public bool DeleteMemberRecord(Member memberRec)
         {
+            var duesRecords = _duesRepository.GetDuesRecordByMemberId(memberRec.MemberId);
+            _duesRepository.DeleteDuesPayments(duesRecords);
+
+            //var officerRecords = _officerRepository.GetOfficersByMember(memberRec.MemberId);
+            //_officerRepository.dele
             //Need to delete records from DUES_History, MEETING_Attendance, and OFFICE_Assignments.
-            var duesRecords = _duesRepository.GetDuesByMember(memberRec.MemberId);
-            var officeRecords  = _officeHeldRepository.GetOfficersByMember(memberRec.MemberId);
-//            var meetingRecords = _
+            //var meetingRecords = _
 
-
-            return (_memberRepository.DeleteMemberRecord(memberRec, duesRecords, officeRecords));
+            return false;
+            //return (_memberRepository.DeleteMemberRecord(memberRec, duesRecords, officerRecords));
         }
 
     }

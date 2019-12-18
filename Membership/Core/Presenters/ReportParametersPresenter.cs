@@ -11,11 +11,11 @@ namespace Membership.Core.Presenters
     {
         public IEnumerable<ReportParameter> Parameters { get; set; }
 
-        private readonly IOfficeHeldRepository _officeRepository;
+        private readonly IOfficerRepository _officeRepository;
 
         public ReportParametersPresenter()
         {
-            _officeRepository = new OfficeHeldRepository();
+            _officeRepository = new OfficerRepository();
         }
 
         public IEnumerable<Officer> LoadTableOfficersForThisYear()

@@ -79,20 +79,33 @@
                                        LargeIcon="{StaticResource ColorsIcon}"
                                        Click="MembershipButton_Click" />
                     </fluent:RibbonGroupBox>
-                <!--</fluent:RibbonTabItem>
-
-                <fluent:RibbonTabItem Header="Meetings" KeyTip="E">-->
                     <fluent:RibbonGroupBox Header="Meetings">
                         <fluent:Button Header="Meeting Attendance"
                                        ToolTip="Assign the officers of the Association."
                                        LargeIcon="{StaticResource CalendarIcon}"
                                        Click="OfficerAssignButtonOnClick" />
                     </fluent:RibbonGroupBox>
-                <!--</fluent:RibbonTabItem>
+                    <fluent:RibbonGroupBox Header="Offices">
+                        <fluent:Button Header="Officer Assignments"
+                                       ToolTip="Assign the officers of the Association."
+                                       LargeIcon="{StaticResource TagIcon}"
+                                       Click="OfficerAssignButtonOnClick" />
+                        <fluent:Button Header="Office History"
+                                       ToolTip="Officers for a given year." 
+                                       LargeIcon="{StaticResource TagIcon}"
+                                       Click="OfficeHistoryButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+                    <fluent:RibbonGroupBox Header="Organization" >
+                        <fluent:Button Header="System Configuration"
+                                       ToolTip="General settings for the organization." 
+                                       LargeIcon="{StaticResource SystemStatusIcon}"
+                                       Click="SysConfigButtonOnClick" />
+                    </fluent:RibbonGroupBox>
+                </fluent:RibbonTabItem>
 
-                <fluent:RibbonTabItem Header="Dues" KeyTip="D">-->
+                <fluent:RibbonTabItem Header="Dues" KeyTip="D">
 
-                    <fluent:RibbonGroupBox Header="Dues">
+                <fluent:RibbonGroupBox Header="Dues">
                         <fluent:Button Header="Dues History"
                                        ToolTip="Dues History"
                                        LargeIcon="{StaticResource BadgeIcon}"
@@ -101,6 +114,10 @@
                                        ToolTip="Dues Collection" 
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesCollectionButtonOnClick" />
+                        <fluent:Button Header="Current Dues Email List."
+                                       ToolTip="Create a comma delimited list of emails to be copied into the BCC of an email for notification" 
+                                       LargeIcon="{StaticResource BadgeIcon}"
+                                       Click="DuesCardsButtonOnClick" />
                         <fluent:Button Header="Print  Dues Cards"
                                        ToolTip="Dues Cards" 
                                        LargeIcon="{StaticResource BadgeIcon}"
@@ -122,39 +139,19 @@
                                        LargeIcon="{StaticResource BadgeIcon}"
                                        Click="DuesRemovalLettersButtonOnClick" />
                     </fluent:RibbonGroupBox>
-                <!--</fluent:RibbonTabItem>
+                </fluent:RibbonTabItem>
 
-                <fluent:RibbonTabItem Header="Offices" KeyTip="O">-->
+                <fluent:RibbonTabItem Header="Reports" KeyTip="R">
 
-                    <fluent:RibbonGroupBox Header="Offices">
-                        <fluent:Button Header="Officer Assignments"
-                                       ToolTip="Assign the officers of the Association."
-                                       LargeIcon="{StaticResource TagIcon}"
-                                       Click="OfficerAssignButtonOnClick" />
-                        <fluent:Button Header="Office History"
-                                       ToolTip="Officers for a given year." 
-                                       LargeIcon="{StaticResource TagIcon}"
-                                       Click="OfficeHistoryButtonOnClick" />
-                    </fluent:RibbonGroupBox>
-                <!--</fluent:RibbonTabItem>
-
-                <fluent:RibbonTabItem Header="Reports" KeyTip="R">-->
-
-                    <fluent:RibbonGroupBox Header="Reports" >
-                        <fluent:Button Header="Reports"
-                                       ToolTip="Add a new member to the roll." 
+                    <fluent:RibbonGroupBox Header="Member Reports" >
+                        <fluent:Button Header="Member Details"
+                                       ToolTip="Report of member details with offices, dues and meeting records." 
                                        LargeIcon="{StaticResource ReportIcon}"
                                        Click="ReportsButtonOnClick" />
-                    </fluent:RibbonGroupBox>
-                <!--</fluent:RibbonTabItem>
-
-                <fluent:RibbonTabItem Header="Miscellaneous" KeyTip="C">-->
-
-                    <fluent:RibbonGroupBox Header="Organization" >
-                        <fluent:Button Header="System Configuration"
-                                       ToolTip="General settings for the organization." 
-                                       LargeIcon="{StaticResource SystemStatusIcon}"
-                                       Click="SysConfigButtonOnClick" />
+                        <fluent:Button Header="Current Members Without E-mail"
+                                       ToolTip="List of current members that don't have an email address on file." 
+                                       LargeIcon="{StaticResource ReportIcon}"
+                                       Click="ReportsButtonOnClick" />
                     </fluent:RibbonGroupBox>
 
                 </fluent:RibbonTabItem>

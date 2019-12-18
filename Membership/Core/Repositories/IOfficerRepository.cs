@@ -4,7 +4,7 @@ using Membership.Core.DataModels;
 
 namespace Membership.Core.Repositories
 {
-    public interface IOfficeHeldRepository
+    public interface IOfficerRepository
     {
         /// <summary>
         /// Gets the Office records assigned to a given member.
