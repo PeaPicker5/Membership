@@ -87,14 +87,22 @@ namespace Membership.UI_Controls.Members
 
         private void ApplyFilterSettings()
         {
-            FilteredMembers = Members.Where(x =>
-                x.FirstName.IndexOf(FilterFirstName.Text, StringComparison.OrdinalIgnoreCase) >= 0 &&
-                x.LastName.IndexOf(FilterLastName.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            FilteredMembers = Members;
+            if (FilterFirstName.Text != "" || FilterLastName.Text != "")
+                FilteredMembers = Members.Where(x =>
+                    x.FirstName.IndexOf(FilterFirstName.Text, StringComparison.OrdinalIgnoreCase) >= 0 &&
+                    x.LastName.IndexOf(FilterLastName.Text, StringComparison.OrdinalIgnoreCase) >= 0);
             if (FilterCurrent.IsChecked == true)
                 FilteredMembers = FilteredMembers.Where(y => y.IsCurrent);
             if (FilterStatus.SelectedIndex > 0)
                 FilteredMembers = FilteredMembers.Where(y => y.MemberTypeId == (int) FilterStatus.SelectedValue);
-
+            if (FilterObligated.Text.Length == 4)
+            {
+                var obligationYear = Convert.ToInt32(FilterObligated.Text);
+                if (obligationYear >= 1915 && obligationYear < 2100)
+                    FilteredMembers = FilteredMembers.Where(y =>
+                        y.DateObligated != null && y.DateObligated.Value.Year == obligationYear);
+            }
         }
         private void FilterTextBoxOnTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -109,6 +117,10 @@ namespace Membership.UI_Controls.Members
             ApplyFilterSettings();
         }
 
+        private void FilterObligatedTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ApplyFilterSettings();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
@@ -141,11 +153,13 @@ namespace Membership.UI_Controls.Members
 
         private void ClearSelectionOnClick(object sender, RoutedEventArgs e)
         {
-            FilterCurrent.IsChecked = false;
+            FilterCurrent.IsChecked = true;
             FilterLastName.Text = "";
             FilterFirstName.Text = "";
             FilterStatus.SelectedIndex = 0;
+            FilterObligated.Text = "";
             ApplyFilterSettings();
         }
+
     }
 }

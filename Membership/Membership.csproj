@@ -431,6 +431,13 @@
     <Resource Include="Common\Resources\Warning.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Common\Resources\report-delete.png" />
+    <Resource Include="Common\Resources\report-error.png" />
+    <Resource Include="Common\Resources\report-info.png" />
+    <Resource Include="Common\Resources\report-ok.png" />
+    <Resource Include="Common\Resources\report-remove.png" />
+    <Resource Include="Common\Resources\report-user.png" />
+    <Resource Include="Common\Resources\report-warn.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

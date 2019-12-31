@@ -47,6 +47,13 @@
     <Image x:Key="CalendarIcon" Source="/Membership;component/Common/Resources/calendar.png" x:Shared="False"/>
     <Image x:Key="TagIcon" Source="/Membership;component/Common/Resources/Tag.png" x:Shared="False"/>
 
+    <Image x:Key="ReportWarnIcon" Source="/Membership;component/Common/Resources/report-warn.png" x:Shared="False"/>
+    <Image x:Key="ReportErrorIcon" Source="/Membership;component/Common/Resources/report-error.png" x:Shared="False"/>
+    <Image x:Key="ReportDeleteIcon" Source="/Membership;component/Common/Resources/report-delete.png" x:Shared="False"/>
+    <Image x:Key="ReportOkIcon" Source="/Membership;component/Common/Resources/report-ok.png" x:Shared="False"/>
+    <Image x:Key="ReportInfoIcon" Source="/Membership;component/Common/Resources/report-info.png" x:Shared="False"/>
+    <Image x:Key="ReportUserIcon" Source="/Membership;component/Common/Resources/report-user.png" x:Shared="False"/>
+    <Image x:Key="ReportRemoveIcon" Source="/Membership;component/Common/Resources/report-remove.png" x:Shared="False"/>
 
     <SolidColorBrush x:Key="PeaPickerGreen" Color="LimeGreen" />
     <SolidColorBrush x:Key="MavinBlue" Color="#FF00ADD9" />

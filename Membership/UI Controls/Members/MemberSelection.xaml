@@ -51,6 +51,11 @@
                                   DisplayMemberPath="Description"
                                   SelectedValuePath="TypeId"
                                   SelectionChanged="FilterComboBoxSelectionChanged" />
+                        
+                        <Label Content="    Year Obligated:"  FontSize="16"/>
+                        <TextBox x:Name="FilterObligated" Margin="0,3" 
+                                 Style="{StaticResource InputTextBox}" Width="50" 
+                                 TextChanged="FilterObligatedTextChanged" />
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
                     <Button ToolTip="Clear the selection filters."  Width="100"

@@ -1,7 +1,15 @@
 ﻿Things to do:
 
+Structural:
+    Removed, deceased (Y/N) - date optional
+	Removed reason-Add "Unknown"
+
+
+Membership Selection:
+    Add parameters: -Obligated window, deceased (Y/N) 
 
 Membership Info:
+    
 	UI - add image(s) of scans/photos
 	Delete functionality (waiting for Office and Dues).
 		- Upon delete, add warning to change status instead.  DELETE IS BAD.  Should only be for fixing entry issues.
