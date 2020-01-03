@@ -78,13 +78,15 @@
             <DockPanel x:Name="FirstColumnOfInformation" Grid.Column="0">
                 <Grid DockPanel.Dock="Top" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="7*" />
                         <ColumnDefinition Width="1.5*" />
                         <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <common:InputControl Grid.Column="0" Label="First Name" TextBox="{Binding Path=MemberRec.FirstName, Mode=TwoWay}" Margin="5"/>
                     <common:InputControl Grid.Column="1" Label="MI" TextBox="{Binding Path=MemberRec.MI, Mode=TwoWay}" Margin="5"/>
                     <common:InputControl Grid.Column="2" Label="Last Name" TextBox="{Binding Path=MemberRec.LastName, Mode=TwoWay}" Margin="5"/>
+                    <common:InputControl Grid.Column="3" Label="Suffix" TextBox="{Binding Path=MemberRec.Suffix, Mode=TwoWay}" Margin="5"/>
                 </Grid>
                 
                 <!--ADDRESS CONTROL-->
@@ -99,13 +101,12 @@
                     <!--City State ZIP-->
                     <DockPanel LastChildFill="True" >
                         <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.ZIP, Mode=TwoWay}" Style="{StaticResource InputTextBox}" Width="60" />
-                        <ComboBox DockPanel.Dock="Right" Width="60" Margin="10,0"
-                                  FontSize="16" Height="24" 
+                        <ComboBox DockPanel.Dock="Right" Width="60" Margin="10,0" FontSize="16" Height="24"
                                   VerticalAlignment="Top" VerticalContentAlignment="Top"
                                   SelectedValue="{Binding Path=MemberRec.State, Mode=TwoWay}"
                                   ItemsSource="{Binding Path=StateInits}"
-                                  Style="{StaticResource ComboBoxFadeInOutStyle}" >
-                        </ComboBox>
+                                  Style="{StaticResource ComboBoxFadeInOutStyle}" />
+
                         <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.City, Mode=TwoWay}" Style="{StaticResource InputTextBox}" />
                     </DockPanel>
                 </StackPanel>
@@ -137,11 +138,12 @@
                                 </Style.Triggers>
                             </Style>
                         </StackPanel.Style>
-                        <Label Content="Reason for Removal:" Style="{StaticResource InputLabel}"   />
-                        <ComboBox x:Name="RemovalReasonCombo"  Margin="0,0,0,5" MinWidth="100" FontSize="16"
+                        <Label Content="         Reason for Removal:" Style="{StaticResource InputLabel}"   />
+                        <ComboBox x:Name="RemovalReasonCombo"  Margin="30,0,0,5" MinWidth="100" FontSize="16"
                             ItemsSource="{Binding Path=RemovalCodes, Mode=OneWay}"
-                            SelectedValuePath="RemovalId" DisplayMemberPath="Description"
-                            SelectedValue="{Binding Path=MemberRec.RemovalReasonId}"/>
+                            SelectedValuePath="ReasonID" DisplayMemberPath="Description"
+                            SelectedValue="{Binding Path=MemberRec.RemovalReasonId, Mode=TwoWay}"
+                            Style="{StaticResource ComboBoxFadeInOutStyle}" />
                 </StackPanel>
                 <Label Content="Sponsors:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <ComboBox x:Name="Sponsor1"   Margin="0" MinWidth="100" FontSize="16"
@@ -168,7 +170,7 @@
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
 
-                <StackPanel >
+                <!--<StackPanel >
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
                             <Setter Property="Visibility" Value="Collapsed" />
@@ -179,13 +181,14 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Style>
-                    <Label Content="Removed From Assoc:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
-                    <DatePicker Text="{Binding Path=MemberRec.DateRemoved, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
+                </StackPanel>-->
+
+                <Label Content="Removed From Assoc:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
+                <DatePicker Text="{Binding Path=MemberRec.DateRemoved, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27" />
-                </StackPanel>     
 
-                <Label Content="Initial Active:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
+                <!--<Label Content="Initial Active:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                     <DatePicker Text="{Binding Path=MemberRec.DateActive, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
                             Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
@@ -193,7 +196,7 @@
                 <Label Content="Off Active:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                     <DatePicker Text="{Binding Path=MemberRec.DateOffActive, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"
                             PreviewTextInput="DatePickerOnPreviewTextInput"
-                            Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>
+                            Style="{StaticResource DatePickerStyle1}" FontSize="16" Height="27"/>-->
                 
                 <Label Content="Date Of Birth:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                     <DatePicker Text="{Binding Path=MemberRec.DateOfBirth, Mode=TwoWay, Converter={StaticResource MinimumDateConverter}}"

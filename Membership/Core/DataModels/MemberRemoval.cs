@@ -3,13 +3,13 @@
     public class MemberRemoval
     {
         public MemberRemoval() { }
-        public MemberRemoval(int removalId, string description)
+        public MemberRemoval(int reasonId, string description)
         {
-            RemovalId = removalId;
+            ReasonID = reasonId;
             Description = description;
         }
 
-        public int RemovalId { get; set; }
+        public int ReasonID { get; set; }
         public string Description { get; set; }
 
     }

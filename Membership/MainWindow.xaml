@@ -74,7 +74,7 @@
                     </fluent:ApplicationMenu>
                 </fluent:Ribbon.Menu>
 
-                <!--<fluent:RibbonTabItem Header="Home" KeyTip="M">
+                <fluent:RibbonTabItem Header="Home" KeyTip="M">
 
                     <fluent:RibbonGroupBox  Header="Membership">
                         <fluent:Button ToolTip="Membership"
@@ -104,7 +104,7 @@
                                        LargeIcon="{StaticResource SystemStatusIcon}"
                                        Click="SysConfigButtonOnClick" />
                     </fluent:RibbonGroupBox>
-                </fluent:RibbonTabItem>-->
+                </fluent:RibbonTabItem>
 
                 <fluent:RibbonTabItem Header="Dues" KeyTip="D">
 

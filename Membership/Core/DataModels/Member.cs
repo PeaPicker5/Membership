@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 using Dapper.Contrib.Extensions;
 
 namespace Membership.Core.DataModels
@@ -10,7 +11,7 @@ namespace Membership.Core.DataModels
 
         private int RemovedStatus = 4;
         public Member(Guid memberId, int memberTypeId, string lastName, string firstName,
-            string mi, string comment, string emailAddress, Guid sponsorID1, Guid sponsorID2, Guid sponsorID3,
+            string mi, string suffix, string comment, string emailAddress, Guid sponsorID1, Guid sponsorID2, Guid sponsorID3,
             string address1, string address2, string city, string state, string zip, string phone, 
             DateTime? dateOfBirth, DateTime? dateObligated, DateTime? dateActive, DateTime? dateOffActive,
             DateTime? dateRemoved, int removalReasonId, DateTime? dateDeceased)
@@ -20,6 +21,7 @@ namespace Membership.Core.DataModels
             LastName = lastName;
             FirstName = firstName;
             MI = mi;
+            Suffix = suffix;
             Comment = comment;
             EmailAddress = emailAddress;
             SponsorID1 = sponsorID1;
@@ -63,6 +65,7 @@ namespace Membership.Core.DataModels
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MI { get; set; }
+        public string Suffix { get; set; }
         public string Comment { get; set; }
         public string EmailAddress { get; set; }
         public Guid SponsorID1 { get; set; }

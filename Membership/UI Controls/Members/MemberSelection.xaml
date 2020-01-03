@@ -91,7 +91,10 @@
                         <DataGridCheckBoxColumn Width="85"  Header="Current" Binding="{Binding Path=IsCurrent}"/>
                         <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
                         <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
-                        <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MI}"/>
+                        <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MI}" 
+                                            ElementStyle="{StaticResource DataGridCellCenter}"/>
+                        <DataGridTextColumn Width="45"  Header="Sfx" Binding="{Binding Path=Suffix}"
+                                            ElementStyle="{StaticResource DataGridCellCenter}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
                         <DataGridTextColumn Header="Obligated" Binding="{Binding Path=DateObligated, 
                                             Converter={StaticResource MinimumDateConverter},StringFormat=MM-dd-yyyy}" >

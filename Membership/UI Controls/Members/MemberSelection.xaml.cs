@@ -64,6 +64,7 @@ namespace Membership.UI_Controls.Members
             InitializeComponent();
             _presenter = new MemberSelectionPresenter(this);
             _presenter.LoadMemberTypes();
+            FilterCurrent.IsChecked = true;
         }
 
         public void LoadMembers()
@@ -72,6 +73,7 @@ namespace Membership.UI_Controls.Members
             FilteredMembers = Members;
             if (SelectedMember == null)
                 MemberSelectionGrid.SelectedIndex = 0;
+            ApplyFilterSettings();
         }
 
         private void MemberGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,7 +83,7 @@ namespace Membership.UI_Controls.Members
             SelectedMember = (Member)dg.SelectedItem;
             DuesPaidControl.LoadDuesPaidRecords(selectedMemberRec.MemberId);
             OfficesHeldControl.LoadOfficeRecords(selectedMemberRec.MemberId);
-            MemberInfoControl.ResetControl(selectedMemberRec.MemberId);
+            MemberInfoControl.MemberRec = selectedMemberRec;
         }
 
 
@@ -132,11 +134,11 @@ namespace Membership.UI_Controls.Members
 
         private void MemberInfoControl_OnUnloaded(object sender, RoutedEventArgs e)
         {
-            if (!MemberInfoControl.IsEditing) return;
-            if (MessageBox.Show("Do you want to save your changes before leaving?", "Save or Cancel", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                MemberInfoControl.SaveMemberRecord();
-            else
-                MemberInfoControl.CancelMemberRecord();
+            //if (!MemberInfoControl.IsEditing) return;
+            //if (MessageBox.Show("Do you want to save your changes before leaving?", "Save or Cancel", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            //    MemberInfoControl.SaveMemberRecord();
+            //else
+            //    MemberInfoControl.CancelMemberRecord();
         }
 
         private void MemberInfoControl_OnOnMemberUpdated(object sender, RoutedEventArgs e)

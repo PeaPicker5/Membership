@@ -28,7 +28,8 @@ namespace Membership.UI_Controls.Members
         public Member MemberRec
         {
             get { return (Member)GetValue(MemberRecProperty); }
-            set { SetValue(MemberRecProperty, value); OnPropertyChanged();}
+            set { SetValue(MemberRecProperty, value); 
+                OnPropertyChanged();}
         }
         public static readonly DependencyProperty MemberRecProperty =
             DependencyProperty.Register("MemberRec", typeof(Member),typeof(MemberInfo));
@@ -93,11 +94,13 @@ namespace Membership.UI_Controls.Members
             MemberRec = new Member {MemberId = Guid.NewGuid(),MemberTypeId = 3};
             IsAdding = true;
             IsEditing = true;
+            _selectedMemberId = MemberRec.MemberId;
         }
 
         private void EditMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
             IsEditing = true;
+            _selectedMemberId = MemberRec.MemberId;
         }
 
         private void DeleteMemberButtonOnClick(object sender, RoutedEventArgs e)
@@ -128,12 +131,6 @@ namespace Membership.UI_Controls.Members
         }
         #endregion
 
-        public void ResetControl(Guid memberId)
-        {
-            _selectedMemberId = memberId;
-            MemberRec = _presenter.GetMember(memberId);
-        }
-
         public void SaveMemberRecord()
         {
             if (IsAdding)
@@ -154,7 +151,7 @@ namespace Membership.UI_Controls.Members
         {
             IsAdding = false;
             IsEditing = false;
-            ResetControl(_selectedMemberId);
+            MemberRec = _presenter.GetMember(_selectedMemberId);
         }
         private void DatePickerOnPreviewTextInput(object sender, TextCompositionEventArgs eventArgs)
         {
@@ -197,5 +194,6 @@ namespace Membership.UI_Controls.Members
             add => AddHandler(OnMemberDeletedEvent, value);
             remove => RemoveHandler(OnMemberDeletedEvent, value);
         }
+
     }
 }
