@@ -286,7 +286,6 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                       <Value>=Parameters!Signature.Value</Value>
                                       <Style>
                                         <FontStyle>Italic</FontStyle>
-                                        <FontFamily>Arial Black</FontFamily>
                                         <FontSize>16pt</FontSize>
                                       </Style>
                                     </TextRun>
@@ -346,269 +345,84 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                               </Style>
                             </Textbox>
-                            <Rectangle Name="Rectangle3">
-                              <ReportItems>
-                                <Textbox Name="DateActive2">
-                                  <CanGrow>true</CanGrow>
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value>=Globals!ExecutionTime</Value>
-                                          <Style>
-                                            <FontSize>14pt</FontSize>
-                                            <Format>MM/dd/yyyy</Format>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style>
-                                        <TextAlign>Left</TextAlign>
-                                      </Style>
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>DateActive</rd:DefaultName>
-                                  <Top>0.64974in</Top>
-                                  <Left>0.58481in</Left>
-                                  <Height>0.28082in</Height>
-                                  <Width>1.15409in</Width>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                                <Textbox Name="FullName2">
-                                  <CanGrow>true</CanGrow>
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value>=Fields!FullName.Value</Value>
-                                          <Style>
-                                            <FontSize>14pt</FontSize>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style />
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>FullName</rd:DefaultName>
-                                  <Top>1.07791in</Top>
-                                  <Left>0.58481in</Left>
-                                  <Height>0.29315in</Height>
-                                  <Width>4.18664in</Width>
-                                  <ZIndex>1</ZIndex>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                                <Textbox Name="DateRemoved2">
-                                  <CanGrow>true</CanGrow>
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value>="Jan 1, " +
-FORMAT( Globals!ExecutionTime,"yyyy") +
-" to Dec 31, " +
-FORMAT( Globals!ExecutionTime,"yyyy")</Value>
-                                          <Style>
-                                            <FontSize>14pt</FontSize>
-                                            <Format>yyyy</Format>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style />
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>DateRemoved</rd:DefaultName>
-                                  <Top>1.4497in</Top>
-                                  <Left>1.94083in</Left>
-                                  <Height>0.29561in</Height>
-                                  <Width>2.65187in</Width>
-                                  <ZIndex>2</ZIndex>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                                <Textbox Name="MI2">
-                                  <CanGrow>true</CanGrow>
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value>X</Value>
-                                          <Style>
-                                            <FontFamily>Arial Black</FontFamily>
-                                            <FontWeight>Bold</FontWeight>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style />
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>MI</rd:DefaultName>
-                                  <Top>3.09344in</Top>
-                                  <Left>0.49852in</Left>
-                                  <Height>0.25616in</Height>
-                                  <Width>0.18023in</Width>
-                                  <ZIndex>3</ZIndex>
-                                  <Visibility>
-                                    <Hidden>=Not(Parameters!FirstNotice.Value="True")</Hidden>
-                                  </Visibility>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                                <Textbox Name="FullName3">
-                                  <CanGrow>true</CanGrow>
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value>=Parameters!Signature.Value</Value>
-                                          <Style>
-                                            <FontStyle>Italic</FontStyle>
-                                            <FontFamily>Arial Black</FontFamily>
-                                            <FontSize>16pt</FontSize>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style>
-                                        <TextAlign>Center</TextAlign>
-                                      </Style>
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>FullName1</rd:DefaultName>
-                                  <Top>2.964in</Top>
-                                  <Left>2.30449in</Left>
-                                  <Height>0.3856in</Height>
-                                  <Width>2.69551in</Width>
-                                  <ZIndex>4</ZIndex>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                                <Textbox Name="DuesAmount2">
-                                  <CanGrow>true</CanGrow>
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value>=Fields!DuesAmount.Value</Value>
-                                          <Style>
-                                            <FontSize>14pt</FontSize>
-                                            <Format>'$'0.00;('$'0.00)</Format>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style />
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>DuesAmount</rd:DefaultName>
-                                  <Top>2.32914in</Top>
-                                  <Left>0.99778in</Left>
-                                  <Height>0.30547in</Height>
-                                  <Width>0.88905in</Width>
-                                  <ZIndex>5</ZIndex>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                    <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
-                                  </Style>
-                                </Textbox>
-                                <Textbox Name="MI3">
-                                  <CanGrow>true</CanGrow>
-                                  <KeepTogether>true</KeepTogether>
-                                  <Paragraphs>
-                                    <Paragraph>
-                                      <TextRuns>
-                                        <TextRun>
-                                          <Value>X</Value>
-                                          <Style>
-                                            <FontFamily>Arial Black</FontFamily>
-                                            <FontWeight>Bold</FontWeight>
-                                          </Style>
-                                        </TextRun>
-                                      </TextRuns>
-                                      <Style />
-                                    </Paragraph>
-                                  </Paragraphs>
-                                  <rd:DefaultName>MI</rd:DefaultName>
-                                  <Top>3.27833in</Top>
-                                  <Left>0.49852in</Left>
-                                  <Height>0.25616in</Height>
-                                  <Width>0.18023in</Width>
-                                  <ZIndex>6</ZIndex>
-                                  <Visibility>
-                                    <Hidden>=Parameters!FirstNotice.Value="True"</Hidden>
-                                  </Visibility>
-                                  <Style>
-                                    <Border>
-                                      <Style>None</Style>
-                                    </Border>
-                                    <PaddingLeft>2pt</PaddingLeft>
-                                    <PaddingRight>2pt</PaddingRight>
-                                    <PaddingTop>2pt</PaddingTop>
-                                    <PaddingBottom>2pt</PaddingBottom>
-                                  </Style>
-                                </Textbox>
-                              </ReportItems>
+                            <Textbox Name="MI4">
+                              <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
-                              <Height>3.75in</Height>
-                              <Width>5in</Width>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>X</Value>
+                                      <Style>
+                                        <FontFamily>Arial Black</FontFamily>
+                                        <FontSize>12pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>MI</rd:DefaultName>
+                              <Top>3.09344in</Top>
+                              <Left>0.49852in</Left>
+                              <Height>0.25616in</Height>
+                              <Width>0.18023in</Width>
                               <ZIndex>5</ZIndex>
+                              <Visibility>
+                                <Hidden>=Not (Parameters!FirstNotice.Value = "True")</Hidden>
+                              </Visibility>
                               <Style>
                                 <Border>
-                                  <Style>Solid</Style>
+                                  <Style>None</Style>
                                 </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
                               </Style>
-                            </Rectangle>
+                            </Textbox>
+                            <Textbox Name="MI5">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>X</Value>
+                                      <Style>
+                                        <FontFamily>Arial Black</FontFamily>
+                                        <FontSize>12pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>MI</rd:DefaultName>
+                              <Top>3.27833in</Top>
+                              <Left>0.49852in</Left>
+                              <Height>0.25616in</Height>
+                              <Width>0.18023in</Width>
+                              <ZIndex>6</ZIndex>
+                              <Visibility>
+                                <Hidden>=Parameters!FirstNotice.Value = "True"</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
                           </ReportItems>
                           <KeepTogether>true</KeepTogether>
                           <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
+                            <Border />
                           </Style>
                         </Rectangle>
                       </CellContents>

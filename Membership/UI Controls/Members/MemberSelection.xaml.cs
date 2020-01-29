@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -9,6 +10,8 @@ using System.Windows.Controls;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
+using Image = System.Drawing.Image;
+using static Membership.Common.ImageHelper;
 
 namespace Membership.UI_Controls.Members
 {
@@ -24,7 +27,7 @@ namespace Membership.UI_Controls.Members
             set { SetValue(SelectedMemberProperty, value); }
         }
         public static readonly DependencyProperty SelectedMemberProperty =
-            DependencyProperty.Register("SelectedMember", typeof(Member), 
+            DependencyProperty.Register("SelectedMember", typeof(Member),
                 typeof(MemberSelection));
 
         public IEnumerable<Member> Members
@@ -48,13 +51,21 @@ namespace Membership.UI_Controls.Members
             get { return (IEnumerable<Member>)GetValue(FilteredMembersProperty); }
             set
             {
-                SetValue(FilteredMembersProperty, value); 
+                SetValue(FilteredMembersProperty, value);
+                FilteredMembersCount = value.Count();
                 OnPropertyChanged();
             }
         }
         public static readonly DependencyProperty FilteredMembersProperty =
             DependencyProperty.Register("FilteredMembers", typeof(IEnumerable<Member>), typeof(MemberSelection));
 
+        public int FilteredMembersCount
+        {
+            get { return (int)GetValue(FilteredMembersCountProperty); }
+            set { SetValue(FilteredMembersCountProperty, value); }
+        }
+        public static readonly DependencyProperty FilteredMembersCountProperty =
+            DependencyProperty.Register("FilteredMembersCount", typeof(int), typeof(MemberSelection));
 
         #endregion
 
@@ -92,8 +103,8 @@ namespace Membership.UI_Controls.Members
             FilteredMembers = Members;
             if (FilterFirstName.Text != "" || FilterLastName.Text != "")
                 FilteredMembers = Members.Where(x =>
-                    x.FirstName.IndexOf(FilterFirstName.Text, StringComparison.OrdinalIgnoreCase) >= 0 &&
-                    x.LastName.IndexOf(FilterLastName.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                    x.FirstName.StartsWith(FilterFirstName.Text, StringComparison.OrdinalIgnoreCase) &&
+                    x.LastName.StartsWith(FilterLastName.Text, StringComparison.OrdinalIgnoreCase) );
             if (FilterCurrent.IsChecked == true)
                 FilteredMembers = FilteredMembers.Where(y => y.IsCurrent);
             if (FilterStatus.SelectedIndex > 0)
@@ -101,9 +112,16 @@ namespace Membership.UI_Controls.Members
             if (FilterObligated.Text.Length == 4)
             {
                 var obligationYear = Convert.ToInt32(FilterObligated.Text);
-                if (obligationYear >= 1915 && obligationYear < 2100)
+                if (obligationYear >= 1900 && obligationYear < 2100)
                     FilteredMembers = FilteredMembers.Where(y =>
                         y.DateObligated != null && y.DateObligated.Value.Year == obligationYear);
+            }
+            if (FilterRemoved.Text.Length == 4)
+            {
+                var removalYear = Convert.ToInt32(FilterRemoved.Text);
+                if (removalYear >= 1900 && removalYear < 2100)
+                    FilteredMembers = FilteredMembers.Where(y =>
+                        y.DateRemoved != null && y.DateRemoved.Value.Year == removalYear);
             }
         }
         private void FilterTextBoxOnTextChanged(object sender, TextChangedEventArgs e)
@@ -118,9 +136,20 @@ namespace Membership.UI_Controls.Members
         {
             ApplyFilterSettings();
         }
+        private void FilterRemovedTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (FilterRemoved.Text.Length < 4) return;
 
+            var removedYear = Convert.ToInt32(FilterRemoved.Text);
+            if (removedYear < 1900 || removedYear > 2100) return;
+            ApplyFilterSettings();
+        }
         private void FilterObligatedTextChanged(object sender, TextChangedEventArgs e)
         {
+            if (FilterObligated.Text.Length < 4) return;
+
+            var obligationYear = Convert.ToInt32(FilterObligated.Text);
+            if (obligationYear < 1900 || obligationYear > 2100) return;
             ApplyFilterSettings();
         }
 
@@ -160,8 +189,35 @@ namespace Membership.UI_Controls.Members
             FilterFirstName.Text = "";
             FilterStatus.SelectedIndex = 0;
             FilterObligated.Text = "";
+            FilterRemoved.Text = "";
             ApplyFilterSettings();
         }
+
+
+
+        private void bulkLoadMemberCardImages()
+        {
+            var cnt = 0;
+            foreach (var mem in Members)
+            {
+                var filename = "C:\\Membership Cards\\" + mem.LastName + ", " + mem.FirstName + ".jpg";
+                try
+                {
+                    var img = Image.FromFile(filename);
+                    mem.PageThumb = ImageToByteArray(ScaleImage(img, 300));
+                    MemberInfoControl.memberSave(mem);
+                    cnt += 1;
+                }
+                catch
+                {
+                    Debug.Print(filename);
+                }
+            }
+
+            Debug.Print($"Total processed - {cnt}");
+        }
+
+
 
     }
 }

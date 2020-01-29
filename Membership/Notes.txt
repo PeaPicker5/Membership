@@ -1,16 +1,27 @@
-﻿Things to do:
+﻿Mention that removal from Active list is a removal from Association: Chief's Report from 03/04/1976.
+
+Common comments for members with limited information:
+   Last reference in minutes - 
+   Obligated prior to 1950 - 
+   Obligated prior to 1950 - Only reference is to the death notice.
+   All information on membership is prior to 1950.
+   Only reference in the minutes was the death announcement.
+   Minutes reference member obligation, then no further mentions.
+   Removed for failure to complete active training.
+
+
+
+THINGS TO DO:
 
 Structural:
     Removed, deceased (Y/N) - date optional
-	Removed reason-Add "Unknown"
 
 
 Membership Selection:
     Add parameters: -Obligated window, deceased (Y/N) 
 
 Membership Info:
-    
-	UI - add image(s) of scans/photos
+    Expand Image of Card
 	Delete functionality (waiting for Office and Dues).
 		- Upon delete, add warning to change status instead.  DELETE IS BAD.  Should only be for fixing entry issues.
 	Report printout of member needed

@@ -51,75 +51,115 @@
                                   DisplayMemberPath="Description"
                                   SelectedValuePath="TypeId"
                                   SelectionChanged="FilterComboBoxSelectionChanged" />
-                        
+
                         <Label Content="    Year Obligated:"  FontSize="16"/>
                         <TextBox x:Name="FilterObligated" Margin="0,3" 
                                  Style="{StaticResource InputTextBox}" Width="50" 
                                  TextChanged="FilterObligatedTextChanged" />
+                        <Label Content=" Removed:"  FontSize="16"/>
+                        <TextBox x:Name="FilterRemoved" Margin="0,3" 
+                                    Style="{StaticResource InputTextBox}" Width="50" 
+                                    TextChanged="FilterRemovedTextChanged" />
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
-                    <Button ToolTip="Clear the selection filters."  Width="100"
-                            Click="ClearSelectionOnClick" Margin="10,0" Height="32">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text=" CLEAR FILTER"   
-                                       FontSize="12" Style="{StaticResource MessageTextBlockStyle}" />
-                        </StackPanel>
-                    </Button>
+                        <Button ToolTip="Clear the selection filters."  Width="100"
+                                Click="ClearSelectionOnClick" Margin="10,0" Height="32">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text=" CLEAR FILTER"   
+                                           FontSize="12" Style="{StaticResource MessageTextBlockStyle}" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-            </DockPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label Content="Records:" Style="{StaticResource LabelStyle}"/>
+                        <Label Content="{Binding FilteredMembersCount}" Style="{StaticResource LabelStyle}"/>
+                    </StackPanel>
+                </DockPanel>
             </GroupBox.Header>
 
-            <Grid  >
+            <Grid Background="AntiqueWhite" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="1.5*" />
-                    <ColumnDefinition Width="*" MaxWidth="310"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" MaxWidth="625"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
-                <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="14"
+                <GridSplitter Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Width="5"
+                              HorizontalAlignment="Right" VerticalAlignment="Stretch" 
+                              Background="Gray"/>
+
+
+                <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14"
                           IsEnabled="{Binding ElementName=MemberInfoControl, Path=IsEditing, Converter={StaticResource BooleanInverterConverter} }"
                           ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
-                          AutoGenerateColumns="false" GridLinesVisibility="All"
-                          CanUserAddRows="False" IsReadOnly="True" 
+                          AutoGenerateColumns="false" GridLinesVisibility="All" Margin="5,0,5,7"
+                          CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single"
                           SelectionChanged="MemberGrid_SelectionChanged">
                     <DataGrid.Columns  >
-                        <!--<DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsDeceased}"/>-->
-                        <DataGridCheckBoxColumn Width="85"  Header="Current" Binding="{Binding Path=IsCurrent}"/>
+                    <DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsCurrent}" Width="85"  />
                         <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
                         <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
-                        <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MI}" 
+                        <DataGridTextColumn Header="MI" Binding="{Binding Path=MI}" Width="40" 
                                             ElementStyle="{StaticResource DataGridCellCenter}"/>
-                        <DataGridTextColumn Width="45"  Header="Sfx" Binding="{Binding Path=Suffix}"
+                        <DataGridTextColumn Header="Sfx" Binding="{Binding Path=Suffix}"  Width="45" 
                                             ElementStyle="{StaticResource DataGridCellCenter}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
                         <DataGridTextColumn Header="Obligated" Binding="{Binding Path=DateObligated, 
                                             Converter={StaticResource MinimumDateConverter},StringFormat=MM-dd-yyyy}" >
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
+                        <DataGridTextColumn Header="Removed" Binding="{Binding Path=DateRemoved, 
+                                            Converter={StaticResource MinimumDateConverter},StringFormat=MM-dd-yyyy}" >
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    <!--<DataGridTextColumn Header="Deceased" Binding="{Binding Path=DateDeceased, 
+                                            Converter={StaticResource MinimumDateConverter},StringFormat=MM-dd-yyyy}" >
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>-->
                         <DataGridTextColumn Header="Address" Binding="{Binding Path=Address1}"/>
                         <DataGridTextColumn Header="City State Zip" Binding="{Binding Path=CityStateZip}"/>
-                        <DataGridTextColumn MinWidth="200" Header="EMail Address" Binding="{Binding Path=EmailAddress}"/>
+                        <DataGridTextColumn Header="EMail Address" Binding="{Binding Path=EmailAddress}"  MinWidth="200" />
                         <DataGridTextColumn Header="Comment"  Binding="{Binding Path=Comment}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <members:MemberInfo x:Name="MemberInfoControl" Grid.Row="1" Grid.Column="0"  
+                <GridSplitter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
+                              Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  
+                              Background="Gray"/>
+
+                <members:MemberInfo x:Name="MemberInfoControl" Grid.Row="1" Grid.Column="0"  Margin="5,0"
                                     Unloaded="MemberInfoControl_OnUnloaded"  
                                     OnMemberUpdated="MemberInfoControl_OnOnMemberUpdated"
                                     OnMemberDeleted="MemberInfoControl_OnOnMemberDeleted" />
-                <offices:OfficesHeld x:Name="OfficesHeldControl" Grid.Row="1" Grid.Column="1" />
-                <dues:DuesPaid x:Name="DuesPaidControl"  Grid.Row="1" Grid.Column="2"/>
-    
-            </Grid>
 
+                <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" LastChildFill="True" >
+                    <Grid   >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="*"   />
+                        </Grid.ColumnDefinitions>
+
+
+                    <offices:OfficesHeld x:Name="OfficesHeldControl" Grid.Column="0"  />
+                    <dues:DuesPaid x:Name="DuesPaidControl" Grid.Column="1" />
+                </Grid>
+                </DockPanel>
+
+            </Grid>
     </GroupBox>
 
 </UserControl>

@@ -145,6 +145,7 @@
     <Compile Include="Common\Converters\StringToPhysicalAddressConverter.cs" />
     <Compile Include="Common\Converters\StringToStringConverter.cs" />
     <Compile Include="Common\Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Common\ImageHelper.cs" />
     <Compile Include="Common\InputControl.xaml.cs">
       <DependentUpon>InputControl.xaml</DependentUpon>
     </Compile>

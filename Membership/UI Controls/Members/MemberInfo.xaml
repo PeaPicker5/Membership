@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:Membership.Common.Converters"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             d:DesignHeight="350" d:DesignWidth="1000">
+             d:DesignHeight="400" d:DesignWidth="1000">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -115,10 +115,26 @@
                                      TextBox="{Binding Path=MemberRec.EmailAddress, Mode=TwoWay}" Margin="5,0,5,5"/>
             </DockPanel>
 
-            <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <DockPanel Grid.Row="1" Grid.Column="0" >
                 <Label Content="Comments:" DockPanel.Dock="Top" Style="{StaticResource InputLabel}" Margin="5,0"  />
                 <TextBox Text="{Binding MemberRec.Comment, Mode=TwoWay}" Style="{StaticResource InputTextBox}" Margin="5,0,5,5"
                          TextWrapping="WrapWithOverflow" VerticalScrollBarVisibility="Auto" />
+            </DockPanel>
+            
+            <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="True" >
+                <Label Content="Membership Card Image:" DockPanel.Dock="Top" Style="{StaticResource InputLabel}" Margin="5,0,5,5"  />
+                <StackPanel DockPanel.Dock="Left" Orientation="Vertical" >
+                    <Button Margin="10,10,10,5"  Content="Load Image" Click="LoadImageButton_Click"></Button>
+                    <Button Margin="10,5"  Content="Expand Image" Click="ExpandImageButton_Click"></Button>
+                    <Button Margin="10,5"  Content="Clear Image" Click="ClearImageButton_Click"></Button>
+                </StackPanel>
+                <Border BorderBrush="#FFCCCCCC" BorderThickness="2" Margin="0,0,5,5">
+                    <Image Source="{Binding Path=LocalPageThumb}" />
+                </Border>
+
+
+
+
             </DockPanel>
 
             <StackPanel x:Name="SecondColumnOfInformation" Grid.Column="1" Grid.Row="0"  Margin="10,5,5,5">

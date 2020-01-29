@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.NetworkInformation;
 using Dapper.Contrib.Extensions;
 
 namespace Membership.Core.DataModels
@@ -11,10 +10,11 @@ namespace Membership.Core.DataModels
 
         private int RemovedStatus = 4;
         public Member(Guid memberId, int memberTypeId, string lastName, string firstName,
-            string mi, string suffix, string comment, string emailAddress, Guid sponsorID1, Guid sponsorID2, Guid sponsorID3,
+            string mi, string suffix, string comment, string emailAddress, 
+            Guid sponsorID1, Guid sponsorID2, Guid sponsorID3,
             string address1, string address2, string city, string state, string zip, string phone, 
-            DateTime? dateOfBirth, DateTime? dateObligated, DateTime? dateActive, DateTime? dateOffActive,
-            DateTime? dateRemoved, int removalReasonId, DateTime? dateDeceased)
+            DateTime? dateOfBirth, DateTime? dateObligated, DateTime? dateRemoved, int removalReasonId,
+            DateTime? dateDeceased, Guid pageId, byte[] pageThumb)
         {
             MemberId = memberId;
             MemberTypeId = memberTypeId;
@@ -35,21 +35,21 @@ namespace Membership.Core.DataModels
             Phone = phone;
             DateOfBirth = dateOfBirth;
             DateObligated = dateObligated;
-            DateActive = dateActive;
-            DateOffActive = dateOffActive;
             DateRemoved = dateRemoved;
             RemovalReasonId = removalReasonId;
             DateDeceased = dateDeceased;
-
+            PageId = pageId;
+            PageThumb = pageThumb;
         }
 
         [Computed] public string Status { get; set; }
         [Computed] public float DuesAmount { get; set; }
 
+
         [Computed] public bool WasRemoved => MemberTypeId == RemovedStatus;
         [Computed] public bool IsCurrent
         {
-            get { return (MemberTypeId == 1 || MemberTypeId == 3) && !IsDeceased; }
+            get { return (MemberTypeId >= 1 && MemberTypeId <= 3) && !IsDeceased; }
             set { }
         }
 
@@ -79,12 +79,10 @@ namespace Membership.Core.DataModels
         public string Phone { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public DateTime? DateObligated { get; set; }
-        public DateTime? DateActive { get; set; }
-        public DateTime? DateOffActive { get; set; }
         public DateTime? DateRemoved { get; set; }
         public int RemovalReasonId { get; set; }
         public DateTime? DateDeceased { get; set; }
-
-
+        public Guid PageId { get; set; }
+        public byte[] PageThumb { get; set; }
     }
 }

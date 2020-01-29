@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -9,11 +10,17 @@ using System.Windows.Input;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
+using Microsoft.Win32;
+using static Membership.Common.ImageHelper;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Membership.UI_Controls.Members
 {
     public partial class MemberInfo : IMemberView, INotifyPropertyChanged
     {
+
+        private byte[] _fullResPage; //Set with Load or Clear Image, Add/Update/Delete on Member Save, Load on Expand Button
+
         public static IEnumerable<string> StateInits => new List<string>()
         {
             "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
@@ -28,8 +35,11 @@ namespace Membership.UI_Controls.Members
         public Member MemberRec
         {
             get { return (Member)GetValue(MemberRecProperty); }
-            set { SetValue(MemberRecProperty, value); 
-                OnPropertyChanged();}
+            set { 
+                    SetValue(MemberRecProperty, value);
+                    LocalPageThumb = value.PageThumb;
+                    OnPropertyChanged();
+                }
         }
         public static readonly DependencyProperty MemberRecProperty =
             DependencyProperty.Register("MemberRec", typeof(Member),typeof(MemberInfo));
@@ -75,6 +85,15 @@ namespace Membership.UI_Controls.Members
         }
         public static readonly DependencyProperty MyPropertyProperty =
             DependencyProperty.Register("RemovalCodes", typeof(ICollection<MemberRemoval>),
+                typeof(MemberInfo));
+
+        public byte[] LocalPageThumb    
+        {
+            get { return (byte[])GetValue(LocalPageThumbProperty); }
+            set { SetValue(LocalPageThumbProperty, value); OnPropertyChanged(); }
+        }
+        public static readonly DependencyProperty LocalPageThumbProperty =
+            DependencyProperty.Register("LocalPageThumb", typeof(byte[]),
                 typeof(MemberInfo));
 
         #endregion
@@ -131,8 +150,9 @@ namespace Membership.UI_Controls.Members
         }
         #endregion
 
-        public void SaveMemberRecord()
+        private void SaveMemberRecord()
         {
+            MemberRec.PageThumb = LocalPageThumb;
             if (IsAdding)
             {
                 if (!_presenter.InsertMemberRecord(MemberRec)) return;
@@ -147,7 +167,7 @@ namespace Membership.UI_Controls.Members
             RaiseEvent(new RoutedEventArgs(OnMemberUpdatedEvent));
         }
 
-        public void CancelMemberRecord()
+        private void CancelMemberRecord()
         {
             IsAdding = false;
             IsEditing = false;
@@ -194,6 +214,41 @@ namespace Membership.UI_Controls.Members
             add => AddHandler(OnMemberDeletedEvent, value);
             remove => RemoveHandler(OnMemberDeletedEvent, value);
         }
+
+
+        private void LoadImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.FileName = MemberRec.LastName;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var img = Image.FromFile(openFileDialog.FileName);
+
+                _fullResPage = ImageToByteArray(img);
+                LocalPageThumb = ImageToByteArray(ScaleImage(img, 300));
+            }
+
+        }
+
+
+        private void ClearImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            _fullResPage = null;
+            LocalPageThumb = null;
+        }
+
+        private void ExpandImageButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        public void memberSave(Member memrec)
+        {
+            _presenter.UpdateMemberRecord(memrec);
+        }
+
+
 
     }
 }
