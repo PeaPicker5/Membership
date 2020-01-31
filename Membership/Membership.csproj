@@ -153,6 +153,7 @@
     <Compile Include="Core\DataModels\DuesHistory.cs" />
     <Compile Include="Core\DataModels\DuesRecord.cs" />
     <Compile Include="Core\DataModels\MemberRemoval.cs" />
+    <Compile Include="Core\DataModels\ImageRec.cs" />
     <Compile Include="Core\DataModels\Officer.cs" />
     <Compile Include="Core\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />
@@ -170,7 +171,9 @@
     <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficerPresenter.cs" />
     <Compile Include="Core\Presenters\MemberSelectionPresenter.cs" />
+    <Compile Include="Core\Repositories\FileStoreRepository.cs" />
     <Compile Include="Core\Repositories\IDuesRepository.cs" />
+    <Compile Include="Core\Repositories\IFileStoreRepository.cs" />
     <Compile Include="Core\Repositories\IMemberTypeRepository.cs" />
     <Compile Include="Core\Repositories\IOfficerRepository.cs" />
     <Compile Include="Core\Repositories\IMemberRepository.cs" />
@@ -201,6 +204,9 @@
       <DependentUpon>DuesCardsReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UI Controls\Members\ImagePopupWindow.xaml.cs">
+      <DependentUpon>ImagePopupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI Controls\Offices\OfficeHistory.xaml.cs">
       <DependentUpon>OfficeHistory.xaml</DependentUpon>
     </Compile>
@@ -275,6 +281,10 @@
     <Page Include="ReportDefinitions\DuesCardsReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI Controls\Members\ImagePopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI Controls\Offices\OfficeHistory.xaml">
       <Generator>MSBuild:Compile</Generator>

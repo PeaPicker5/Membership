@@ -154,13 +154,9 @@ namespace Membership.UI_Controls.Members
         {
             MemberRec.PageThumb = LocalPageThumb;
             if (IsAdding)
-            {
-                if (!_presenter.InsertMemberRecord(MemberRec)) return;
-            }
+                _presenter.InsertMemberRecord(MemberRec, _fullResPage);
             else
-            {
-                if (!_presenter.UpdateMemberRecord(MemberRec)) return;
-            }
+                _presenter.UpdateMemberRecord(MemberRec, _fullResPage);
 
             IsAdding = false;
             IsEditing = false;
@@ -239,13 +235,14 @@ namespace Membership.UI_Controls.Members
 
         private void ExpandImageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var popup = new ImagePopupWindow {ImageSource = _presenter.GetImageData(MemberRec.PageId)};
+            popup.ShowDialog();
         }
 
 
-        public void memberSave(Member memrec)
+        public void MemberSave(Member memrec, byte[]imageData)
         {
-            _presenter.UpdateMemberRecord(memrec);
+            _presenter.UpdateMemberRecord(memrec, imageData);
         }
 
 

@@ -19,8 +19,8 @@ namespace Membership.Core.Repositories
         /// <returns></returns>
         IEnumerable<Member> GetMembers();
 
-        bool InsertMemberRecord(Member memberRec);
-        bool UpdateMemberRecord(Member memberRec);
+        void InsertMemberRecord(Member memberRec);
+        void UpdateMemberRecord(Member memberRec);
         bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesRecord> duesRecs,
             IEnumerable<Officer> officerRecs);
     }

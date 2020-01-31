@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Membership.Core.DataModels;
 using Membership.Core.Repositories;
@@ -12,6 +13,8 @@ namespace Membership.Core.Presenters
         private readonly IMemberTypeRepository _memberTypeRepository;
         private readonly IOfficerRepository _officerRepository;
         private readonly IDuesRepository _duesRepository;
+        private readonly IFileStoreRepository _fileStoreRepository;
+
 
         private readonly IMemberView _view;
         public ICollection<Tuple<int, string>> MemberTypeLookups { get; set; }
@@ -24,6 +27,7 @@ namespace Membership.Core.Presenters
             _memberTypeRepository = new MemberTypeRepository();
             _officerRepository = new OfficerRepository();
             _duesRepository = new DuesRepository();
+            _fileStoreRepository = new FileStoreRepository();
             _view = view;
         }
 
@@ -46,16 +50,21 @@ namespace Membership.Core.Presenters
             _view.RemovalCodes = _memberTypeRepository.GetRemovalCodes().ToList();
         }
 
-        public bool InsertMemberRecord(Member memberRec)
+        public void InsertMemberRecord(Member memberRec, byte[] fullResPicture)
         {
-            return _memberRepository.InsertMemberRecord(memberRec);
+            if (fullResPicture != null)
+                memberRec.PageId = InsertNewPicture("Membership Card", fullResPicture);
+            _memberRepository.InsertMemberRecord(memberRec);
         }
-        public bool UpdateMemberRecord(Member memberRec)
+        public void UpdateMemberRecord(Member memberRec, byte[] fullResPicture)
         {
-            return _memberRepository.UpdateMemberRecord(memberRec);
+            memberRec.PageId = UpdateMembershipCardImage(memberRec.PageId, fullResPicture);
+            _memberRepository.UpdateMemberRecord(memberRec);
         }
         public bool DeleteMemberRecord(Member memberRec)
         {
+            _fileStoreRepository.DeleteImageRecord(memberRec.PageId);
+
             var duesRecords = _duesRepository.GetDuesRecordByMemberId(memberRec.MemberId);
             _duesRepository.DeleteDuesPayments(duesRecords);
 
@@ -66,6 +75,41 @@ namespace Membership.Core.Presenters
 
             return false;
             //return (_memberRepository.DeleteMemberRecord(memberRec, duesRecords, officerRecords));
+        }
+
+        public byte[] GetImageData(Guid fileStoreId)
+        {
+            return _fileStoreRepository.Get(fileStoreId).ImageData;
+        }
+
+
+        private Guid UpdateMembershipCardImage(Guid imageId, byte[] image)
+        {
+            // new picture added
+            if (imageId == Guid.Empty && image != null) return InsertNewPicture("Membership Card", image);
+
+            // picture was either updated or ignored.
+            if (imageId != Guid.Empty && image != null) return UpdateExistingPicture(imageId, image);
+
+            // picture was cleared out
+            if (imageId != Guid.Empty && image == null) return DeleteExistingPicture(imageId);
+
+            return Guid.Empty;
+        }
+
+        private Guid InsertNewPicture(string description, byte[] image)
+        {
+            var img = new ImageRec(Guid.NewGuid(), description, image);
+            _fileStoreRepository.InsertImageRecord(img);
+            return img.ImageId;
+        }
+        private Guid UpdateExistingPicture(Guid imageId, byte[] image)
+        {
+            return _fileStoreRepository.UpdateImageRecord(imageId, image) ? imageId : Guid.Empty;
+        }
+        private Guid DeleteExistingPicture(Guid imageId)
+        {
+            return _fileStoreRepository.DeleteImageRecord(imageId) ? Guid.Empty : imageId;
         }
 
     }

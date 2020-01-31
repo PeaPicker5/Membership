@@ -94,7 +94,7 @@
                 <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14"
                           IsEnabled="{Binding ElementName=MemberInfoControl, Path=IsEditing, Converter={StaticResource BooleanInverterConverter} }"
                           ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
-                          AutoGenerateColumns="false" GridLinesVisibility="All" Margin="5,0,5,7"
+                          AutoGenerateColumns="false" GridLinesVisibility="All" Margin="5,0,5,5"
                           CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single"
                           SelectionChanged="MemberGrid_SelectionChanged">
                     <DataGrid.Columns  >

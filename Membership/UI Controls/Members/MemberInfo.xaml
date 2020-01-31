@@ -19,6 +19,8 @@
                                                   x:Key="InvertedBoolToVisibilityConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
                                                   x:Key="BoolToVisibilityConverter" />
+            <converters:NullToVisibilityConverter NotNullValue="Visible" NullValue="Collapsed"
+                                                  x:Key="NullToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -124,9 +126,11 @@
             <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="True" >
                 <Label Content="Membership Card Image:" DockPanel.Dock="Top" Style="{StaticResource InputLabel}" Margin="5,0,5,5"  />
                 <StackPanel DockPanel.Dock="Left" Orientation="Vertical" >
-                    <Button Margin="10,10,10,5"  Content="Load Image" Click="LoadImageButton_Click"></Button>
-                    <Button Margin="10,5"  Content="Expand Image" Click="ExpandImageButton_Click"></Button>
-                    <Button Margin="10,5"  Content="Clear Image" Click="ClearImageButton_Click"></Button>
+                    <Button Margin="10,10,10,5"  Content="Load Image" Click="LoadImageButton_Click"/>
+                    <Button Margin="10,5"  Content="Clear Image" Click="ClearImageButton_Click"/>
+                    <Button Margin="10,5"  Content="Expand Image"
+                            Visibility="{Binding Path=MemberRec.PageThumb, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}"
+                            Click="ExpandImageButton_Click"/>
                 </StackPanel>
                 <Border BorderBrush="#FFCCCCCC" BorderThickness="2" Margin="0,0,5,5">
                     <Image Source="{Binding Path=LocalPageThumb}" />

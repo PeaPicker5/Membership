@@ -39,20 +39,18 @@ namespace Membership.Core.Repositories
         }
 
 
-        public bool InsertMemberRecord(Member memberRec)
+        public void InsertMemberRecord(Member memberRec)
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var isSuccess = connection.Insert(memberRec);
-                return isSuccess > 0;
+                connection.Insert(memberRec);
             }
         }
-        public bool UpdateMemberRecord(Member memberRec)
+        public void UpdateMemberRecord(Member memberRec)
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var isSuccess = connection.Update(memberRec);
-                return isSuccess;
+                connection.Update(memberRec);
             }
         }
 

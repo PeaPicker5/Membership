@@ -198,20 +198,26 @@ namespace Membership.UI_Controls.Members
         private void bulkLoadMemberCardImages()
         {
             var cnt = 0;
+            Image img;
             foreach (var mem in Members)
             {
                 var filename = "C:\\Membership Cards\\" + mem.LastName + ", " + mem.FirstName + ".jpg";
                 try
-                {
-                    var img = Image.FromFile(filename);
-                    mem.PageThumb = ImageToByteArray(ScaleImage(img, 300));
-                    MemberInfoControl.memberSave(mem);
-                    cnt += 1;
+                { 
+                    img = Image.FromFile(filename);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Debug.Print(filename);
+                    var x = ex;
+                    Debug.Print($"Filename not found - {filename}");
+                    continue;
                 }
+                var imgByte = ImageToByteArray(img);
+                mem.PageThumb = ImageToByteArray(ScaleImage(img, 300));
+                MemberInfoControl.MemberSave(mem, imgByte);
+                Debug.Print(filename);
+                cnt += 1;
+
             }
 
             Debug.Print($"Total processed - {cnt}");
