@@ -36,5 +36,7 @@ namespace Membership.Core.Repositories
         void InsertDuesPayments(IEnumerable<DuesRecord> duesPayments);
         void DeleteDuesPayments(IEnumerable<DuesRecord> duesPayments);
 
+        List<DuesHistory> MapFromData(IEnumerable<DuesRecord> duesRecords);
+
     }
 }

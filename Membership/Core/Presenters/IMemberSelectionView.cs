@@ -5,7 +5,7 @@ namespace Membership.Core.Presenters
 {
     public interface IMemberSelectionView
     {
-        IEnumerable<Member> Members { get; set; }
+        ICollection<Member> Members { get; set; }
 
         IEnumerable<MemberType> MemberTypes { get; set; }
     }

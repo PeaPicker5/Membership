@@ -11,7 +11,7 @@ using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
 using Image = System.Drawing.Image;
-using static Membership.Common.ImageHelper;
+using static Membership.Common.CommonBaseClass;
 
 namespace Membership.UI_Controls.Members
 {
@@ -30,13 +30,13 @@ namespace Membership.UI_Controls.Members
             DependencyProperty.Register("SelectedMember", typeof(Member),
                 typeof(MemberSelection));
 
-        public IEnumerable<Member> Members
+        public ICollection<Member> Members
         {
-            get { return (IEnumerable<Member>)GetValue(MembersProperty); }
+            get { return (ICollection<Member>)GetValue(MembersProperty); }
             set { SetValue(MembersProperty, value); OnPropertyChanged();}
         }
         public static readonly DependencyProperty MembersProperty =
-            DependencyProperty.Register("MembersProperty", typeof(IEnumerable<Member>), typeof(MemberSelection));
+            DependencyProperty.Register("MembersProperty", typeof(ICollection<Member>), typeof(MemberSelection));
 
         public IEnumerable<MemberType> MemberTypes
         {
@@ -153,13 +153,6 @@ namespace Membership.UI_Controls.Members
             ApplyFilterSettings();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
 
         private void MemberInfoControl_OnUnloaded(object sender, RoutedEventArgs e)
         {
@@ -169,7 +162,6 @@ namespace Membership.UI_Controls.Members
             //else
             //    MemberInfoControl.CancelMemberRecord();
         }
-
         private void MemberInfoControl_OnOnMemberUpdated(object sender, RoutedEventArgs e)
         {
             LoadMembers();
@@ -177,8 +169,12 @@ namespace Membership.UI_Controls.Members
         }
         private void MemberInfoControl_OnOnMemberDeleted(object sender, RoutedEventArgs e)
         {
-            SelectedMember = null;
-            LoadMembers();
+            var x = MemberSelectionGrid.SelectedIndex;
+            Members.Remove(SelectedMember);
+            if (MemberSelectionGrid.Items.Count > 1)
+                MemberSelectionGrid.SelectedIndex = x - 1;
+            SelectedMember = (Member)MemberSelectionGrid.SelectedItem;
+            
             ApplyFilterSettings();
         }
 
@@ -193,9 +189,15 @@ namespace Membership.UI_Controls.Members
             ApplyFilterSettings();
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
 
-        private void bulkLoadMemberCardImages()
+        private void BulkLoadMemberCardImages()
         {
             var cnt = 0;
             Image img;

@@ -32,7 +32,7 @@ namespace Membership.Core.Presenters
             var x = _memberRepository.Get(memberId);
         }
 
-        public IEnumerable<Member> Members { get; set; }
+        public ICollection<Member> Members { get; set; }
         public IEnumerable<MemberType> MemberTypes { get; set; }
         public IEnumerable<Office> Offices { get; set; }
         public IEnumerable<DuesRecord> DuesRecords { get; set; }

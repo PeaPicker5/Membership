@@ -106,14 +106,14 @@ namespace Membership.Core.Repositories
             }
         }
 
-        private List<DuesHistory> MapFromData(IEnumerable<DuesRecord> duesRecords)
+        public List<DuesHistory> MapFromData(IEnumerable<DuesRecord> duesRecords)
         {
             return duesRecords.Select(rec => new DuesHistory()
             {
                 MemberId = rec.MemberRec.MemberId,
+                Year = rec.Year,
                 Amount = rec.Amount,
-                Month = DateTime.Now.Month,
-                Year = DateTime.Now.Year
+                Month = rec.Month
             }).ToList();
         }
 

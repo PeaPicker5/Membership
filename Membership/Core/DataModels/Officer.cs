@@ -23,7 +23,7 @@ namespace Membership.Core.DataModels
         public int FromMonth { get; set; }
         public int ToMonth { get; set; }
 
-        public Guid MemberId => MemberRec.MemberId;
+        [ExplicitKey] public Guid MemberId => MemberRec.MemberId;
         public int OfficeId => OfficeRec.OfficeId;
 
 

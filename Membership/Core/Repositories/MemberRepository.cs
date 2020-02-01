@@ -25,7 +25,7 @@ namespace Membership.Core.Repositories
             }
         }
 
-        public IEnumerable<Member> GetMembers()
+        public ICollection<Member> GetMembers()
         {
             const string query = "SELECT ml.*, mt.Description as [Status], mt.DuesAmount " +
                                  "FROM MEMBER_List ml " +
@@ -54,27 +54,24 @@ namespace Membership.Core.Repositories
             }
         }
 
-        public bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesRecord> duesRecs, IEnumerable<Officer> officerRecs)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesHistory> duesHistoryRecs, 
-                                        IEnumerable<Officer> officerRecs)
+        public bool DeleteMemberRecord(Member memberRec, 
+                                       IEnumerable<DuesHistory> duesHistoryRecs, 
+                                       IEnumerable<Officer> officerRecs)
         {
 
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                bool isSuccess = true;
-                //if (officerRecs.Any())
-                //    isSuccess = connection.Delete(officerRecs);
-                //if (isSuccess && duesHistoryRecs.Any())
-                //    isSuccess = connection.Delete(duesRecs);
-                //if (isSuccess)
-                //    isSuccess = connection.Delete(memberRec);
-                return isSuccess;
+                foreach (var officeRec in officerRecs)
+                    connection.Delete(officeRec); 
+                foreach (var duesRec in duesHistoryRecs)
+                    connection.Delete(duesRec);
+                if (memberRec.PageId != Guid.Empty)
+                    connection.Delete(new ImageRec(memberRec.PageId, string.Empty, null));
+                connection.Delete(memberRec);
+                return true;
             }
 
+            return false;
         }
 
 

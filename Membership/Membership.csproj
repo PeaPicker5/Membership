@@ -145,11 +145,10 @@
     <Compile Include="Common\Converters\StringToPhysicalAddressConverter.cs" />
     <Compile Include="Common\Converters\StringToStringConverter.cs" />
     <Compile Include="Common\Converters\StringToVisibilityConverter.cs" />
-    <Compile Include="Common\ImageHelper.cs" />
+    <Compile Include="Common\CommonBaseClass.cs" />
     <Compile Include="Common\InputControl.xaml.cs">
       <DependentUpon>InputControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\UsStates.cs" />
     <Compile Include="Core\DataModels\DuesHistory.cs" />
     <Compile Include="Core\DataModels\DuesRecord.cs" />
     <Compile Include="Core\DataModels\MemberRemoval.cs" />

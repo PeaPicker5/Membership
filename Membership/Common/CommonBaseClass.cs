@@ -1,12 +1,19 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 
 namespace Membership.Common
 {
-    public class ImageHelper
+    public class CommonBaseClass
     {
+        public static List<string> StateInits => new List<string>()
+        {
+            "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
+            "NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"
+        };
 
         public static byte[] ImageToByteArray(Image image)
         {
@@ -37,5 +44,27 @@ namespace Membership.Common
             image.Dispose();
             return newImage;
         }
+
+        //public static IEnumerable<T>  RemoveCollectionItem<T>(List<T>lst)
+        //{
+        //    var ret = new List<T>();
+        //    var remaining = new List<T>();
+        //    foreach (var itm in lst)
+        //    {
+        //        if (Match(itm))
+        //        {
+        //            ret.Add(itm);
+        //        }
+        //        else
+        //        {
+        //            remaining.Add(itm);
+        //        }
+        //    }
+
+        //    lst.Clear();
+        //    lst.AddRange(remaining);
+        //    return ret;
+        //}
+
     }
 }

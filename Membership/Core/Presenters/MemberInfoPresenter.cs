@@ -66,15 +66,16 @@ namespace Membership.Core.Presenters
             _fileStoreRepository.DeleteImageRecord(memberRec.PageId);
 
             var duesRecords = _duesRepository.GetDuesRecordByMemberId(memberRec.MemberId);
-            _duesRepository.DeleteDuesPayments(duesRecords);
+            var duesHistory = _duesRepository.MapFromData(duesRecords);
+//            _duesRepository.DeleteDuesPayments(duesRecords);
 
-            //var officerRecords = _officerRepository.GetOfficersByMember(memberRec.MemberId);
+            var officerRecords = _officerRepository.GetOfficersByMember(memberRec.MemberId);
             //_officerRepository.dele
             //Need to delete records from DUES_History, MEETING_Attendance, and OFFICE_Assignments.
             //var meetingRecords = _
 
-            return false;
-            //return (_memberRepository.DeleteMemberRecord(memberRec, duesRecords, officerRecords));
+            //return false;
+            return _memberRepository.DeleteMemberRecord(memberRec, duesHistory, officerRecords);
         }
 
         public byte[] GetImageData(Guid fileStoreId)

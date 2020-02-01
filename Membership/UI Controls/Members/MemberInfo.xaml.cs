@@ -11,7 +11,7 @@ using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
 using Microsoft.Win32;
-using static Membership.Common.ImageHelper;
+using static Membership.Common.CommonBaseClass;
 using MessageBox = System.Windows.MessageBox;
 
 namespace Membership.UI_Controls.Members
@@ -21,11 +21,11 @@ namespace Membership.UI_Controls.Members
 
         private byte[] _fullResPage; //Set with Load or Clear Image, Add/Update/Delete on Member Save, Load on Expand Button
 
-        public static IEnumerable<string> StateInits => new List<string>()
-        {
-            "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
-            "NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"
-        };
+        //public static IEnumerable<string> StateInits => new List<string>()
+        //{
+        //    "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
+        //    "NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"
+        //};
         private readonly MemberInfoPresenter _presenter;
 
         private Guid _selectedMemberId;
@@ -136,7 +136,6 @@ namespace Membership.UI_Controls.Members
 
             IsAdding = false;
             IsEditing = false;
-            MemberRec = null;
             RaiseEvent(new RoutedEventArgs(OnMemberDeletedEvent));
         }
         private void SaveMemberButtonOnClick(object sender, RoutedEventArgs e)

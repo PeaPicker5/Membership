@@ -17,11 +17,13 @@ namespace Membership.Core.Repositories
         /// Gets all access events.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Member> GetMembers();
+        ICollection<Member> GetMembers();
 
         void InsertMemberRecord(Member memberRec);
         void UpdateMemberRecord(Member memberRec);
-        bool DeleteMemberRecord(Member memberRec, IEnumerable<DuesRecord> duesRecs,
+        bool DeleteMemberRecord(Member memberRec, 
+            IEnumerable<DuesHistory> duesRecs,
             IEnumerable<Officer> officerRecs);
+
     }
 }
