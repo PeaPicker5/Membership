@@ -9,7 +9,7 @@ namespace Membership.Core.DataModels
         public Member() { }
 
         private int RemovedStatus = 4;
-        public Member(Guid memberId, int memberTypeId, string lastName, string firstName,
+        public Member(Guid memberId, int memberTypeId, bool isActive, string lastName, string firstName,
             string mi, string suffix, string comment, string emailAddress, 
             Guid sponsorID1, Guid sponsorID2, Guid sponsorID3,
             string address1, string address2, string city, string state, string zip, string phone, 
@@ -18,6 +18,7 @@ namespace Membership.Core.DataModels
         {
             MemberId = memberId;
             MemberTypeId = memberTypeId;
+            IsActive = isActive;
             LastName = lastName;
             FirstName = firstName;
             MI = mi;
@@ -55,6 +56,7 @@ namespace Membership.Core.DataModels
 
         [Computed] public bool IsDeceased => DateDeceased > DateObligated;
         [Computed] public string FullName => $"{FirstName} {LastName}";
+        [Computed] public string LFName => $"{LastName}, {FirstName} {MI}";
         [Computed] public string CityStateZip => $"{City}, {State}  {ZIP}";
 
 
@@ -62,6 +64,7 @@ namespace Membership.Core.DataModels
 
         [ExplicitKey] public Guid MemberId { get; set; }
         public int MemberTypeId { get; set; }
+        public bool IsActive { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MI { get; set; }

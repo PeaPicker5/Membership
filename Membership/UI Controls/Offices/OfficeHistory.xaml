@@ -21,8 +21,9 @@
                 <DockPanel LastChildFill="True"  >
                     <TextBlock DockPanel.Dock="Left" FontSize="14" Text="* " 
                                 Visibility="{Binding Path=PartialYear, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=FromDate}" />
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=ToDate, StringFormat='-{0}'}" Width="70"/>
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=FromDate, StringFormat='MMM yyyy'}" Width="58"/>
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text=" - "/>
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=ToDate, StringFormat='MMM yyyy'}" Width="70"/>
                     <TextBlock DockPanel.Dock="Right"  FontSize="14" Text="{Binding Path=MemberRec.FullName}" MinWidth="100" />
                 </DockPanel>
             </DataTemplate>
@@ -63,13 +64,15 @@
             </Grid.ColumnDefinitions>
 
             <DockPanel LastChildFill="True" Grid.Column="0" Margin="10"  Background="White" >
-                <TextBlock Text="{Binding ElementName=OfficeSelectionCombo, Path=Text, StringFormat='OFFICE OF - {0}'}" 
+                <TextBlock Text="{Binding ElementName=OfficeSelectionCombo, Path=Text, 
+                                          StringFormat='History for the office of {0}'}" 
                            DockPanel.Dock="Top" TextAlignment="Center" TextDecorations="Underline" 
                            FontWeight="Heavy" FontSize="24"  />
                 <ListView ItemsSource="{Binding OfficerRecs}" ItemTemplate="{StaticResource officerListTemplate}" BorderThickness="0">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Vertical" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualHeight}"/>
+                            <WrapPanel Orientation="Vertical" 
+                                       Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualHeight}"/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
 

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Membership.Common.Converters"
+             xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="400" d:DesignWidth="1200">
@@ -15,17 +16,23 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:MinimumDateConverter x:Key="MinimumDateConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Hidden" FalseValue="Visible"
                                                   x:Key="InvertedBoolToVisibilityConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Hidden"
                                                   x:Key="BoolToVisibilityConverter" />
+            
+            <converters:BoolToVisibilityConverter TrueValue="Collapsed" FalseValue="Visible"
+                                                  x:Key="InvertedBoolToCollapsedConverter" />
+            <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
+                                                  x:Key="BoolToCollapsedConverter" />
 
-            <DataTemplate x:Key="officerListTemplate" >
+            <DataTemplate x:Key="OfficerListTemplate" >
                 <DockPanel LastChildFill="True"  >
                     <TextBlock DockPanel.Dock="Left" FontSize="14" Text="* " 
                                Visibility="{Binding Path=PartialYear, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=OfficeRec.Title}" Width="130"/>
-                    <TextBlock DockPanel.Dock="Right"  FontSize="14" Text="{Binding Path=MemberRec.FullName}" />
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=OfficeRec.Title}" MinWidth="130"/>
+                    <TextBlock DockPanel.Dock="Right"  FontSize="14" Text="{Binding Path=MemberRec.FullName}" HorizontalAlignment="Right" />
                 </DockPanel>
             </DataTemplate>
 
@@ -42,26 +49,37 @@
                                   ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
                                   SelectionChanged="YearSelectionChanged"/>
                 </StackPanel>
+            
                 <Label DockPanel.Dock="Right" Content="* Denotes a partial year term." FontSize="14" />
             </DockPanel>
         </GroupBox.Header>
 
 
         <Grid Background="AntiqueWhite" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel x:Name="DistrictOfficersStack"  Grid.Column="0" Margin="10,10,5,10"  Background="White"  >
+
+            <offices:EditOfficerControl 
+                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                ItemData="{Binding Path=SelectedOfficer, Mode=OneTime}" />
+
+            <StackPanel x:Name="DistrictOfficersStack" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10"  Background="White"  >
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center"
                             FontWeight="Heavy" FontSize="24" Text="FIRE DISTRICT OFFICERS" />
                 <!--COMMISSIONERS-->
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center" Margin="0,10,0,0"
                             FontWeight="Bold" FontSize="18" Text="COMMISSIONERS" />
-                <ListBox  ItemsSource="{Binding Path=Commissioners}" Width="250" MinHeight="30" Margin="0,0,0,40"
-                            FontSize="16" HorizontalContentAlignment="Center"
-                            DisplayMemberPath="MemberRec.FullName" /> 
+                <ListBox x:Name="CommissionerList" MouseDoubleClick="CommissionerList_MouseDoubleClick"
+                          ItemsSource="{Binding Path=Commissioners}" Width="250" MinHeight="30" Margin="0,0,0,40"
+                          FontSize="16" HorizontalContentAlignment="Center"
+                          DisplayMemberPath="MemberRec.FullName" /> 
 
                 <!--LINE AND OTHER DISTRICT OFFICERS-->
                 <Grid >
@@ -73,32 +91,34 @@
                     <StackPanel Grid.Column="0" Margin="5,0,5,0">
                         <TextBlock Text="LINE OFFICERS" FontWeight="Bold" FontSize="18" TextAlignment="Center"
                                 TextDecorations="Underline" />
-                        <ListBox ItemsSource="{Binding Path=LineOfficers}" MinHeight="20" 
-                                ItemTemplate="{StaticResource officerListTemplate}" />
+                        <ListBox x:Name="LineOfficerList" SelectionChanged="LineOfficerList_SelectionChanged" 
+                                ItemsSource="{Binding Path=LineOfficers}" MinHeight="20" Margin="30,0"
+                                ItemTemplate="{StaticResource OfficerListTemplate}"  />
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                    <StackPanel Grid.Column="1" Margin="5,0,10,0">
                         <TextBlock Text="OTHER OFFICERS" FontWeight="Bold" FontSize="18" TextAlignment="Center"
                                     TextDecorations="Underline" />
-                        <ListBox ItemsSource="{Binding Path=OtherDistrictOfficers}" MinHeight="20" 
-                                    ItemTemplate="{StaticResource officerListTemplate}" />
+                        <ListBox x:Name="OtherDistrictList" MouseDoubleClick="OtherDistrictList_MouseDoubleClick" 
+                                ItemsSource="{Binding Path=OtherDistrictOfficers}" MinHeight="20" Margin="30,0"
+                                ItemTemplate="{StaticResource OfficerListTemplate}" />
                     </StackPanel>
-            </Grid>
+                </Grid>
 
             </StackPanel>
 
-            <StackPanel x:Name="AssociationOfficersStack" Grid.Column="1" Margin="5,10,10,10" Background="White">
+            <StackPanel x:Name="AssociationOfficersStack" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" Background="White">
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center"
                             FontWeight="Heavy" FontSize="24" Text="ASSOCIATION OFFICERS" />
                 <!--BOARD OF DIRECTORS-->
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center" Margin="0,10,0,0"
                             FontWeight="Bold" FontSize="18" Text="BOARD OF DIRECTORS" />
-                <ListBox  ItemsSource="{Binding Path=BoardOfDirectors}" Width="250" MinHeight="30" Margin="0,0,0,40"
+                <ListBox x:Name="BoardList" SelectionChanged="BoardList_SelectionChanged"
+                            ItemsSource="{Binding Path=BoardOfDirectors}" Width="250" MinHeight="30" Margin="0,0,0,40"
                             FontSize="16" HorizontalContentAlignment="Center"
                             DisplayMemberPath="MemberRec.FullName" />
 
                 <!--TABLE AND OTHER ASSOC OFFICERS-->
-
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -106,20 +126,21 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Margin="5,0,5,0">
-                        <TextBlock Text="TABLE OFFICERS" FontWeight="Bold" FontSize="18" TextAlignment="Center"
-                                    TextDecorations="Underline" />
-                        <ListBox ItemsSource="{Binding Path=TableOfficers}" MinHeight="20" 
-                                    ItemTemplate="{StaticResource officerListTemplate}" />
+                        <TextBlock Text="TABLE OFFICERS" FontWeight="Bold" FontSize="18" 
+                            TextAlignment="Center" TextDecorations="Underline" />
+                        <ListBox x:Name="TableList" MouseDoubleClick="TableList_MouseDoubleClick"
+                            ItemsSource="{Binding Path=TableOfficers}" MinHeight="20" Margin="30,0"
+                            ItemTemplate="{StaticResource OfficerListTemplate}"  />
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                    <StackPanel Grid.Column="1" Margin="5,0,10,0">
                         <TextBlock Text="OTHER OFFICERS" FontWeight="Bold" FontSize="18" TextAlignment="Center"
-                                    TextDecorations="Underline" />
-                        <ListBox ItemsSource="{Binding Path=OtherAssocOfficers}" MinHeight="20" 
-                                    ItemTemplate="{StaticResource officerListTemplate}" />
+                                 TextDecorations="Underline" />
+                        <ListBox x:Name="OtherAssocList" MouseDoubleClick="OtherAssocList_MouseDoubleClick"
+                                 ItemsSource="{Binding Path=OtherAssocOfficers}" MinHeight="20" Margin="30,0"
+                                 ItemTemplate="{StaticResource OfficerListTemplate}"  />
                     </StackPanel>
                 </Grid>
-
             </StackPanel>
         </Grid>
     </GroupBox>

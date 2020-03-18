@@ -39,6 +39,7 @@ namespace Membership.Core.Repositories
         }
 
 
+
         public void InsertMemberRecord(Member memberRec)
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))

@@ -13,10 +13,7 @@ Common comments for members with limited information:
 
 THINGS TO DO:
 
-
 Membership Info:
-	Delete functionality (waiting for Office and Dues).
-		- Upon delete, add warning to change status instead.  DELETE IS BAD.  Should only be for fixing entry issues.
 	Report printout of member needed
 	Report printout of membership grid.
 

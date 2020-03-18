@@ -8,34 +8,30 @@ namespace Membership.Core.DataModels
     public class Officer
     {
         public Officer() {}
-        public Officer(Member memberRec, Office officeRec, int year, int fromMonth, int toMonth)
+        public Officer(Member memberRec, Office officeRec, int year, 
+            DateTime fromDate, DateTime toDate)
         {
             MemberRec = memberRec;
             OfficeRec = officeRec;
             Year = year;
-            FromMonth = fromMonth;
-            ToMonth = toMonth;
+            FromDate = fromDate;
+            ToDate = toDate;
         }
 
         [Computed] public Member MemberRec { get; set; }
         [Computed] public Office OfficeRec { get; set; }
         public int Year { get; set; }
-        public int FromMonth { get; set; }
-        public int ToMonth { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
 
         [ExplicitKey] public Guid MemberId => MemberRec.MemberId;
         public int OfficeId => OfficeRec.OfficeId;
 
 
 
-        [Computed] public string FromDate => FromMonth > 0
-            ? DateTime.ParseExact($"{FromMonth:D2}/{Year:D4}", "MM'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy")
-            : DateTime.ParseExact($"01/{Year}", "M'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy");
+        [Computed] public int FromMonth => FromDate.Month;
+        [Computed] public int ToMonth => ToDate.Month;
 
-
-        [Computed] public string ToDate => ToMonth > 0
-            ? DateTime.ParseExact($"{ToMonth:D2}/{Year:D4}", "MM'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy")
-            : DateTime.ParseExact($"12/{Year}", "MM'/'yyyy", CultureInfo.InvariantCulture).Date.ToString("MM/yyyy");
 
         [Computed] public bool PartialYear => FromMonth > 1 || (ToMonth > 0 && ToMonth < 12);
     }

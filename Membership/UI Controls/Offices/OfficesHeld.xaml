@@ -27,8 +27,8 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Year" Binding="{Binding Path=Year}" Width="50"/>
                         <DataGridTextColumn Header="Title" Binding="{Binding Path=OfficeRec.Title}" MinWidth="150"/>
-                        <DataGridTextColumn Header="From" Binding="{Binding Path=FromDate}"/>
-                        <DataGridTextColumn Header="To" Binding="{Binding Path=ToDate}" Width="*"/>
+                        <DataGridTextColumn Header="From" Binding="{Binding Path=FromDate,StringFormat=MM/yyyy}"/>
+                        <DataGridTextColumn Header="To" Binding="{Binding Path=ToDate,StringFormat=MM/yyyy}" Width="*"/>
                     </DataGrid.Columns>
 
                 </DataGrid>

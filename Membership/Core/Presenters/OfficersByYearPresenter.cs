@@ -28,12 +28,12 @@ namespace Membership.Core.Presenters
         {
             var allRecs = _officeRepository.GetOfficersByYear(year).ToList();
 
-            _view.Commissioners = allRecs.Where(off => off.OfficeRec.GroupId == 1);
-            _view.LineOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 2).OrderBy(off => off.OfficeId);
-            _view.OtherDistrictOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 3).OrderBy(off => off.OfficeId);
-            _view.BoardOfDirectors = allRecs.Where(off => off.OfficeRec.GroupId == 4);
-            _view.TableOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 5).OrderBy(off => off.OfficeId);
-            _view.OtherAssocOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 6).OrderBy(off => off.OfficeId);
+            _view.Commissioners = allRecs.Where(off => off.OfficeRec.GroupId == 11);
+            _view.LineOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 12).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
+            _view.OtherDistrictOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 13).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
+            _view.BoardOfDirectors = allRecs.Where(off => off.OfficeRec.GroupId == 21);
+            _view.TableOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 22).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
+            _view.OtherAssocOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 23).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
         }
 
         public IEnumerable<int> LoadYearsOnFile()

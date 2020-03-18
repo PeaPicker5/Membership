@@ -55,6 +55,15 @@
     <Image x:Key="ReportUserIcon" Source="/Membership;component/Common/Resources/report-user.png" x:Shared="False"/>
     <Image x:Key="ReportRemoveIcon" Source="/Membership;component/Common/Resources/report-remove.png" x:Shared="False"/>
 
+    <Image x:Key="DuesAddressLabels" Source="/Membership;component/Common/Resources/DuesAddressLabels.png" x:Shared="False"/>
+    <Image x:Key="DuesCollection" Source="/Membership;component/Common/Resources/DuesCollection.png" x:Shared="False"/>
+    <Image x:Key="DuesEmailList" Source="/Membership;component/Common/Resources/DuesEmailList.png" x:Shared="False"/>
+    <Image x:Key="DuesHistory" Source="/Membership;component/Common/Resources/DuesHistory.png" x:Shared="False"/>
+    <Image x:Key="DuesCards" Source="/Membership;component/Common/Resources/DuesCards.png" x:Shared="False"/>
+
+    <Image x:Key="MembershipIcon" Source="/Membership;component/Common/Resources/User_group.png" x:Shared="False"/>
+    <Image x:Key="MeetingIcon" Source="/Membership;component/Common/Resources/clipboard-user.png" x:Shared="False"/>
+
     <SolidColorBrush x:Key="PeaPickerGreen" Color="LimeGreen" />
     <SolidColorBrush x:Key="MavinBlue" Color="#FF00ADD9" />
     <SolidColorBrush x:Key="HighlightColorBrush" Color="#EAF3FC" />
@@ -519,7 +528,19 @@
         </Setter>
     </Style>
 
+    <Style x:Key="DateMmyy" TargetType="DatePickerTextBox">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBox IsEnabled="False" Text="{Binding Path=SelectedDate, StringFormat='yyyy/MM', RelativeSource={RelativeSource AncestorType=DatePicker}}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="27"/>
         <Setter Property="Foreground" Value="#FF333333"/>
         <Setter Property="IsTodayHighlighted" Value="True"/>
         <Setter Property="SelectedDateFormat" Value="Short"/>

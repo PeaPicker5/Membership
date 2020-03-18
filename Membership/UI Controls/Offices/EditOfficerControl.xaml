@@ -1,0 +1,126 @@
+﻿<offices:EditOfficerBase x:Class="Membership.UI_Controls.Offices.EditOfficerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Membership.Common.Converters"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:common="clr-namespace:Membership.Common"
+             xmlns:controls="clr-namespace:Membership.Common.Controls"
+             xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="55" d:DesignWidth="1900">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <Style TargetType="DatePickerTextBox">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <TextBox IsEnabled="False" Text="{Binding Path=FromDate, StringFormat='MM/yyyy',
+                                RelativeSource={RelativeSource AncestorType=DatePicker}}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="AntiqueWhite" >
+
+        <DockPanel  x:Name="SelectionBar"  LastChildFill="True">
+
+        <!-- Buttons -->
+        <controls:DetailsHeaderControl
+                DockPanel.Dock="Left" Margin="10"
+                IsEditing="{Binding Path=IsEditing, Mode=OneWay, 
+                   RelativeSource={RelativeSource AncestorType=offices:EditOfficerControl}}"
+                AddItem="OfficerControlOnAddItem"
+                CancelItem="OfficerControlOnCancelItem"
+                EditItem="OfficerControlOnEditItem"
+                RemoveItem="OfficerControlOnRemoveItem"
+                SaveItem="OfficerControlOnSaveItem" />
+
+        <StackPanel IsEnabled="{Binding Path=IsEditing, Mode=OneWay}"
+            DockPanel.Dock="Left" 
+            Orientation="Horizontal"
+            Margin="30,5,0,-5">
+
+            <!-- Radio Buttons -->
+            <StackPanel DockPanel.Dock="Left" Margin="10,5" >
+                <RadioButton x:Name="DistrictOfficerRadio" GroupName="officetype" Content="District Officers" Click="OfficerTypeRadio_Click" IsChecked="True"/>
+                <RadioButton x:Name="AssocOfficerRadio" GroupName="officetype" Content="Association Officers" Click="OfficerTypeRadio_Click" />
+            </StackPanel>
+
+            <!-- Office Combo -->
+            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                <Label Content="Office:"     Style="{StaticResource InputLabel}"/>
+                <ComboBox x:Name="OfficeCombo"
+                    MinWidth="150" IsEditable="False"
+                    DisplayMemberPath="Title"
+                    SelectedValuePath="OfficeId"
+                    SelectionChanged="OfficeSelectionChanged" 
+                    ItemsSource="{Binding Path=OfficeRecs, Mode=TwoWay}"
+                    SelectedValue="{Binding Path=ItemData.OfficeId, Mode=TwoWay}" />
+            </StackPanel>
+
+            <!-- Member Combo -->
+            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                <Label Content="Member:" Style="{StaticResource InputLabel}"/>
+                <ComboBox x:Name="MemberCombo"
+                    MinWidth="150" IsEditable="False"
+                    DisplayMemberPath="LFName"
+                    SelectedValuePath="MemberId"
+                    ItemsSource="{Binding Path=MemberRecs, Mode=OneWay}"
+                    SelectedItem="{Binding Path=ItemData.MemberRec, Mode=OneWay}"/>
+            </StackPanel>
+
+            <!-- Selected Year UpDown -->
+            <StackPanel DockPanel.Dock="Left" Margin="10,0">
+                <Label Content="Year:" Style="{StaticResource InputLabel}"/>
+                    <mah:NumericUpDown x:Name="SelectedYear"
+                        Minimum="1915" Maximum="2050" 
+                        ValueChanged="NewYearSelected" Width="85" />
+                </StackPanel>
+
+            <!-- From Month -->
+            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                <Label Content="From:" Style="{StaticResource InputLabel}" />
+                <ComboBox x:Name="FromMonth" 
+                    MinWidth="60" IsEditable="False"
+                    SelectionChanged="FromDateChanged" 
+                    ItemsSource="{Binding Path=Months1_12, Mode=OneWay}"/>
+            </StackPanel>
+
+            <!-- To Month -->
+            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                <Label Content="To:" Style="{StaticResource InputLabel}" />
+                <ComboBox x:Name="ToMonth" 
+                    MinWidth="60" IsEditable="False"
+                    SelectionChanged="FromDateChanged" 
+                    ItemsSource="{Binding Path=Months1_12, Mode=OneWay}"/>
+            </StackPanel>
+
+            <!-- Filter Current CheckBox -->
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Margin="15,0" >
+
+                <CheckBox  x:Name="FilterCurrent" Style="{StaticResource CheckBoxStyle}"  
+                           Click="FilterCheckBoxOnClick"
+                           VerticalAlignment="Center" IsChecked="True"/>
+                <Label Content="Current Offices Only"  VerticalAlignment="Center"   FontSize="16"/>
+            </StackPanel>
+
+
+            </StackPanel>
+
+        </DockPanel>
+
+    </Grid>
+</offices:EditOfficerBase>

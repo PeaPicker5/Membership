@@ -26,6 +26,16 @@ namespace Membership.Core.Repositories
             }
         }
 
+        public IEnumerable<Office> GetAssignableOffices()
+        {
+            const string query = "SELECT * FROM OFFICE_List";
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var retVal = connection.Query<Office>(query).ToList();
+                return retVal;
+            }
+        }
+
         public IEnumerable<Office> GetOfficesOnFile()
         {
             const string query = "SELECT DISTINCT ol.* FROM OFFICE_Assignments oa " +
@@ -84,6 +94,21 @@ namespace Membership.Core.Repositories
             return GetSelectedOfficerRecords(whereClause, parameter);
         }
 
+
+        public void InsertOfficerRecord(Officer officerRec)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                connection.Insert(officerRec);
+            }
+        }
+        public void UpdateOfficerRecord(Officer officerRec)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                connection.Update(officerRec);
+            }
+        }
 
         public void DeleteOfficerRecords(IEnumerable<Officer> officerRecs)
         {

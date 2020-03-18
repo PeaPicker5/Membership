@@ -16,6 +16,25 @@ namespace Membership.UI_Controls.Offices
         private readonly OfficersByYearPresenter _presenter;
         public int SelectedYear { get; set; }
 
+        public Officer SelectedOfficer
+        {
+            get { return (Officer)GetValue(SelectedOfficerProperty); }
+            set { SetValue(SelectedOfficerProperty, value); OnPropertyChanged(); }
+        }
+        public static readonly DependencyProperty SelectedOfficerProperty =
+            DependencyProperty.Register("SelectedOfficer", typeof(Officer), typeof(OfficersByYear));
+
+
+        public bool IsModifying
+        {
+            get { return (bool)GetValue(IsModifyingProperty); }
+            set { SetValue(IsModifyingProperty, value); OnPropertyChanged(); }
+        }
+        public static readonly DependencyProperty IsModifyingProperty =
+            DependencyProperty.Register("IsModifying", typeof(bool), typeof(OfficersByYear));
+
+
+
         #region Dependency Properties for officer types
         public IEnumerable<Officer> Commissioners
         {
@@ -87,6 +106,7 @@ namespace Membership.UI_Controls.Offices
         {
             InitializeComponent();
             _presenter = new OfficersByYearPresenter(this);
+            IsModifying = false;
         }
 
         public void LoadYearsOnFile()
@@ -115,6 +135,38 @@ namespace Membership.UI_Controls.Offices
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void EditOfficerButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            IsModifying = !IsModifying;
+        }
+
+        private void CommissionerList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SelectedOfficer = (Officer)CommissionerList.SelectedItem;
+        }
+        private void LineOfficerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedOfficer = (Officer)LineOfficerList.SelectedItem;
+        }
+        private void OtherDistrictList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SelectedOfficer = (Officer)OtherDistrictList.SelectedItem;
+        }
+
+
+        private void BoardList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedOfficer = (Officer)BoardList.SelectedItem;
+        }
+        private void TableList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SelectedOfficer = (Officer)TableList.SelectedItem;
+        }
+        private void OtherAssocList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SelectedOfficer = (Officer)OtherAssocList.SelectedItem;
         }
 
     }

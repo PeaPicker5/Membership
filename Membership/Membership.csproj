@@ -124,8 +124,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\AddEditButtons.xaml.cs">
-      <DependentUpon>AddEditButtons.xaml</DependentUpon>
+    <Compile Include="Common\Controls\DetailsBaseControl.cs" />
+    <Compile Include="Common\Controls\DetailsHeaderControl.xaml.cs">
+      <DependentUpon>DetailsHeaderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Converters\BooleanInverterConverter.cs" />
     <Compile Include="Common\Converters\MinimumDateConverter.cs" />
@@ -156,6 +157,8 @@
     <Compile Include="Core\DataModels\Officer.cs" />
     <Compile Include="Core\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />
+    <Compile Include="Core\Presenters\IOfficeAssignment.cs" />
+    <Compile Include="Core\Presenters\IEditOfficerView.cs" />
     <Compile Include="Core\Presenters\IOfficersByYear.cs" />
     <Compile Include="Core\Presenters\IOfficerRecordsView.cs" />
     <Compile Include="Core\Presenters\IReportParametersView.cs" />
@@ -164,6 +167,8 @@
     <Compile Include="Core\Presenters\IOfficeHistoryView.cs" />
     <Compile Include="Core\Presenters\IMemberView.cs" />
     <Compile Include="Core\Presenters\MemberInfoPresenter.cs" />
+    <Compile Include="Core\Presenters\OfficeAssignmentPresenter.cs" />
+    <Compile Include="Core\Presenters\EditOfficerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficersByYearPresenter.cs" />
     <Compile Include="Core\Presenters\OfficeHistoryPresenter.cs" />
     <Compile Include="Core\Presenters\ReportParametersPresenter.cs" />
@@ -206,8 +211,12 @@
     <Compile Include="UI Controls\Members\ImagePopupWindow.xaml.cs">
       <DependentUpon>ImagePopupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI Controls\Offices\EditOfficerBase.cs" />
     <Compile Include="UI Controls\Offices\OfficeHistory.xaml.cs">
       <DependentUpon>OfficeHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI Controls\Offices\EditOfficerControl.xaml.cs">
+      <DependentUpon>EditOfficerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI Controls\Offices\OfficersByYear.xaml.cs">
       <DependentUpon>OfficersByYear.xaml</DependentUpon>
@@ -233,9 +242,9 @@
     <Compile Include="UI Controls\Offices\OfficesHeld.xaml.cs">
       <DependentUpon>OfficesHeld.xaml</DependentUpon>
     </Compile>
-    <Page Include="Common\AddEditButtons.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Common\Controls\DetailsHeaderControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Common\ResourceDictionary.xaml">
       <SubType>Designer</SubType>
@@ -286,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI Controls\Offices\OfficeHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI Controls\Offices\EditOfficerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -448,6 +461,14 @@
     <Resource Include="Common\Resources\report-remove.png" />
     <Resource Include="Common\Resources\report-user.png" />
     <Resource Include="Common\Resources\report-warn.png" />
+    <Resource Include="Common\Resources\DuesCards.png" />
+    <Resource Include="Common\Resources\DuesCollection.png" />
+    <Resource Include="Common\Resources\DuesEmailList.png" />
+    <Resource Include="Common\Resources\DuesHistory.png" />
+    <Resource Include="Common\Resources\DuesAddressLabels.png" />
+    <Resource Include="Common\Resources\employee-table.png" />
+    <Resource Include="Common\Resources\user_group.png" />
+    <Resource Include="Common\Resources\clipboard-user.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -462,6 +483,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

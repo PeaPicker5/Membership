@@ -22,7 +22,7 @@ namespace Membership.Core.Presenters
 
         public void GetByMemberId(Guid memberId)
         {
-            _view.DuesRecs = _duesRepository.GetDuesRecordByMemberId(memberId);
+            _view.DuesRecs = _duesRepository.GetDuesRecordByMemberId(memberId).OrderByDescending(x => x.Year).ToList();
         }
 
         public IEnumerable<int> LoadYearsOnFile()
@@ -37,7 +37,15 @@ namespace Membership.Core.Presenters
 
         public void InsertDuesRecords()
         {
-            _duesRepository.InsertDuesPayments(_view.DuesRecs.Where(rec => rec.IsPaid && rec.Year == 0).ToList());
+            var recordsToUpdate = _view.DuesRecs.Where(rec => rec.IsPaid && rec.Year == 0).ToList();
+            
+            foreach (var r in recordsToUpdate)
+            {
+                r.Month = DateTime.Today.Month;
+                r.Year = DateTime.Today.Year;
+            }
+
+            _duesRepository.InsertDuesPayments(recordsToUpdate);
         }
 
 

@@ -33,6 +33,7 @@ namespace Membership.Core.Presenters
             _view.OfficerRecs = _officerRepository.GetOfficersByTitle(officeId)
                 .Where(x => x.Year <= fromYear && x.Year >= backToYear)
                 .OrderByDescending(x => x.Year)
+                .ThenBy(x => x.FromMonth)
                 .ThenBy(x => x.MemberRec.LastName)
                 .ThenBy(x => x.MemberRec.FirstName)
                 .ToList();

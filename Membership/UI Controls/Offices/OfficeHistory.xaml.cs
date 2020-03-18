@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -46,6 +47,19 @@ namespace Membership.UI_Controls.Offices
         public static readonly DependencyProperty OfficerRecsProperty =
             DependencyProperty.Register("OfficerRecs", typeof(IEnumerable<Officer>),
                 typeof(OfficeHistory));
+
+
+        public Color AltColor => Color.Red;
+
+        public Color AlternatingColor
+        {
+            get { return (Color)GetValue(AlternatingColorProperty); }
+            set { SetValue(AlternatingColorProperty, value); }
+        }
+        public static readonly DependencyProperty AlternatingColorProperty =
+            DependencyProperty.Register("AlternatingColor", typeof(Color),
+                typeof(OfficeHistory));
+
 
         #endregion
 

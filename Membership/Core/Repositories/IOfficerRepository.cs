@@ -6,6 +6,8 @@ namespace Membership.Core.Repositories
 {
     public interface IOfficerRepository
     {
+        IEnumerable<Office> GetAssignableOffices();
+
         /// <summary>
         /// Gets the Office records assigned to a given member.
         /// </summary>

@@ -22,7 +22,7 @@ namespace Membership.Core.Presenters
         {
             return _officeRepository.GetOfficersByYear(DateTime.Now.Year)
                 .Where(x => x.OfficeRec.GroupId == 5)
-                .OrderBy(x => x.OfficeRec.Order)
+                .OrderBy(x => x.OfficeRec.GroupOrder)
                 .ToList();
         }
 

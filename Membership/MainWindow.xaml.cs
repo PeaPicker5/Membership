@@ -27,12 +27,9 @@ namespace Membership
 
         }
 
-        private void AddMemberButtonOnClick(object sender, RoutedEventArgs e)
-        {
 
-        }
 
-        // DUES FUNCTIONS //
+        #region  DUES FUNCTIONS 
         private void DuesHistoryButtonOnClick(object sender, RoutedEventArgs e)
         {
             var ucDuesHistory = new DuesHistory();
@@ -81,8 +78,9 @@ namespace Membership
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesRemovalLettersReport);
         }
+        #endregion
 
-
+        #region OFFICER FUNCTIONS - On creation of new year, ask to close out previous year
         private void OfficeHistoryButtonOnClick(object sender, RoutedEventArgs e)
         {
             var ucOfficeHistory = new OfficeHistory();
@@ -90,8 +88,7 @@ namespace Membership
             MainStack.Children.Clear();
             MainStack.Children.Add(ucOfficeHistory);
         }
-
-        private void OfficerAssignButtonOnClick(object sender, RoutedEventArgs e)
+        private void OfficerAssignmentButtonOnClick(object sender, RoutedEventArgs e)
         {
             var ucOfficerRecords = new OfficersByYear();
             ucOfficerRecords.LoadYearsOnFile();
@@ -99,6 +96,14 @@ namespace Membership
             MainStack.Children.Add(ucOfficerRecords);
         }
 
+        //private void AssignOfficerRecordsButtonOnClick(object sender, RoutedEventArgs e)
+        //{
+        //    var ucOfficeAssignment = new OfficeAssignment();
+        //    ucOfficeAssignment.LoadYearsOnFile();
+        //    MainStack.Children.Clear();
+        //    MainStack.Children.Add(ucOfficeAssignment);
+        //}
+        #endregion
         private void ReportsButtonOnClick(object sender, RoutedEventArgs e)
         {
 
