@@ -19,7 +19,8 @@ namespace Membership.UI_Controls.Offices
         public Officer SelectedOfficer
         {
             get { return (Officer)GetValue(SelectedOfficerProperty); }
-            set { SetValue(SelectedOfficerProperty, value); OnPropertyChanged(); }
+            set { SetValue(SelectedOfficerProperty, value);
+                OnPropertyChanged(); }
         }
         public static readonly DependencyProperty SelectedOfficerProperty =
             DependencyProperty.Register("SelectedOfficer", typeof(Officer), typeof(OfficersByYear));
@@ -89,7 +90,6 @@ namespace Membership.UI_Controls.Offices
         public static readonly DependencyProperty OtherAssocOfficersProperty =
             DependencyProperty.Register("OtherAssocOfficers",
                 typeof(IEnumerable<Officer>), typeof(OfficersByYear));
-        #endregion
         public IEnumerable<int> YearsOnFile
         {
             get => (IEnumerable<int>)GetValue(YearsOnFileProperty);
@@ -101,6 +101,8 @@ namespace Membership.UI_Controls.Offices
         public static readonly DependencyProperty YearsOnFileProperty =
             DependencyProperty.Register("YearsOnFile", typeof(IEnumerable<int>),
                 typeof(OfficersByYear));
+
+        #endregion
 
         public OfficersByYear()
         {

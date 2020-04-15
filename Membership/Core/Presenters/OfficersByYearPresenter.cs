@@ -28,10 +28,10 @@ namespace Membership.Core.Presenters
         {
             var allRecs = _officeRepository.GetOfficersByYear(year).ToList();
 
-            _view.Commissioners = allRecs.Where(off => off.OfficeRec.GroupId == 11);
+            _view.Commissioners = allRecs.Where(off => off.OfficeRec.GroupId == 11).OrderBy(n => n.MemberRec.LFName); ;
             _view.LineOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 12).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
             _view.OtherDistrictOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 13).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
-            _view.BoardOfDirectors = allRecs.Where(off => off.OfficeRec.GroupId == 21);
+            _view.BoardOfDirectors = allRecs.Where(off => off.OfficeRec.GroupId == 21).OrderBy(n => n.MemberRec.LFName);
             _view.TableOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 22).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
             _view.OtherAssocOfficers = allRecs.Where(off => off.OfficeRec.GroupId == 23).OrderBy(off => off.OfficeId).ThenBy(dtef => dtef.FromDate).ThenByDescending(dtet => dtet.ToDate);
         }

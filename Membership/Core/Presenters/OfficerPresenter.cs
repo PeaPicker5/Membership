@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Membership.Core.DataModels;
 using Membership.Core.Repositories;
 
@@ -19,7 +20,7 @@ namespace Membership.Core.Presenters
 
         public void GetByMemberId(Guid memberId)
         {
-            _view.OfficerRecs = _officeRepository.GetOfficersByMember(memberId);
+            _view.OfficerRecs = _officeRepository.GetOfficersByMember(memberId).OrderBy(fd => fd.FromDate);
         }
 
     }

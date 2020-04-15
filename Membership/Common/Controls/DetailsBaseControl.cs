@@ -27,8 +27,7 @@ namespace Membership.Common.Controls
                 new FrameworkPropertyMetadata(
                     (dependencyObject, eventArgs) =>
                     {
-                        var control = dependencyObject as DetailsBaseControl<T>;
-                        if (control == null)
+                        if (!(dependencyObject is DetailsBaseControl<T> control))
                         {
                             return;
                         }

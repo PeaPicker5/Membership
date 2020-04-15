@@ -22,7 +22,7 @@ namespace Membership.Core.Presenters
 
         public void GetByMemberId(Guid memberId)
         {
-            _view.DuesRecs = _duesRepository.GetDuesRecordByMemberId(memberId).OrderByDescending(x => x.Year).ToList();
+            _view.DuesRecs = _duesRepository.GetDuesRecordByMemberId(memberId).OrderBy(x => x.Year).ToList();
         }
 
         public IEnumerable<int> LoadYearsOnFile()

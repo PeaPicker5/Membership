@@ -22,9 +22,6 @@ namespace Membership.UI_Controls.Dues
         private bool _showUnpaidOnly;
 
         #region Dependency Properties
-
-
-
         private ICollection<DuesRecord> AllDuesRecs
         {
             get { return (ICollection<DuesRecord>)GetValue(AllDuesRecsProperty); }

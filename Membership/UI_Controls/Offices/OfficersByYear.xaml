@@ -13,9 +13,6 @@
     <UserControl.Resources>
         <ResourceDictionary>
 
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <converters:MinimumDateConverter x:Key="MinimumDateConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Hidden" FalseValue="Visible"
                                                   x:Key="InvertedBoolToVisibilityConverter" />
@@ -27,11 +24,19 @@
             <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
                                                   x:Key="BoolToCollapsedConverter" />
 
+            <DataTemplate x:Key="BoardListTemplate" >
+                <StackPanel Orientation="Horizontal"  >
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=MemberRec.FullName}"/>
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text=" "/>
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=PartialYear}" 
+                               Visibility="{Binding Path=PartialYear, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                </StackPanel>
+            </DataTemplate>
             <DataTemplate x:Key="OfficerListTemplate" >
                 <DockPanel LastChildFill="True"  >
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="* " 
-                               Visibility="{Binding Path=PartialYear, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=OfficeRec.Title}" MinWidth="130"/>
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=PartialYear}" 
+                               Visibility="{Binding Path=PartialYear, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     <TextBlock DockPanel.Dock="Right"  FontSize="14" Text="{Binding Path=MemberRec.FullName}" HorizontalAlignment="Right" />
                 </DockPanel>
             </DataTemplate>
@@ -66,9 +71,12 @@
             </Grid.ColumnDefinitions>
 
 
-            <offices:EditOfficerControl 
+            <!--<offices:EditOfficerControl x:Name="EditOfficerControl"
                 Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                ItemData="{Binding Path=SelectedOfficer, Mode=OneTime}" />
+
+                ItemData="{Binding ElementName=LineOfficerList, Path=SelectedItem, Mode=TwoWay}" />-->
+
+
 
             <StackPanel x:Name="DistrictOfficersStack" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10"  Background="White"  >
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center"
@@ -78,9 +86,8 @@
                             FontWeight="Bold" FontSize="18" Text="COMMISSIONERS" />
                 <ListBox x:Name="CommissionerList" MouseDoubleClick="CommissionerList_MouseDoubleClick"
                           ItemsSource="{Binding Path=Commissioners}" Width="250" MinHeight="30" Margin="0,0,0,40"
-                          FontSize="16" HorizontalContentAlignment="Center"
-                          DisplayMemberPath="MemberRec.FullName" /> 
-
+                          ItemTemplate="{StaticResource BoardListTemplate}" 
+                          FontSize="16" HorizontalContentAlignment="Center" /> 
                 <!--LINE AND OTHER DISTRICT OFFICERS-->
                 <Grid >
                     <Grid.ColumnDefinitions>
@@ -104,7 +111,6 @@
                                 ItemTemplate="{StaticResource OfficerListTemplate}" />
                     </StackPanel>
                 </Grid>
-
             </StackPanel>
 
             <StackPanel x:Name="AssociationOfficersStack" Grid.Row="1" Grid.Column="1" Margin="5,10,10,10" Background="White">
@@ -115,9 +121,8 @@
                             FontWeight="Bold" FontSize="18" Text="BOARD OF DIRECTORS" />
                 <ListBox x:Name="BoardList" SelectionChanged="BoardList_SelectionChanged"
                             ItemsSource="{Binding Path=BoardOfDirectors}" Width="250" MinHeight="30" Margin="0,0,0,40"
-                            FontSize="16" HorizontalContentAlignment="Center"
-                            DisplayMemberPath="MemberRec.FullName" />
-
+                            ItemTemplate="{StaticResource BoardListTemplate}" 
+                            FontSize="16" HorizontalContentAlignment="Center" />
                 <!--TABLE AND OTHER ASSOC OFFICERS-->
                 <Grid >
                     <Grid.ColumnDefinitions>

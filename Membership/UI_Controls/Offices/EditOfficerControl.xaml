@@ -3,22 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Membership.Common.Converters"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:common="clr-namespace:Membership.Common"
-             xmlns:controls="clr-namespace:Membership.Common.Controls"
              xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
+             xmlns:controls="clr-namespace:Membership.Common.Controls"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="55" d:DesignWidth="1900">
 
     <UserControl.Resources>
         <ResourceDictionary>
-
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
 
             <Style TargetType="DatePickerTextBox">
                 <Setter Property="Control.Template">
@@ -39,7 +32,7 @@
 
         <!-- Buttons -->
         <controls:DetailsHeaderControl
-                DockPanel.Dock="Left" Margin="10"
+                DockPanel.Dock="Left" Margin="10" 
                 IsEditing="{Binding Path=IsEditing, Mode=OneWay, 
                    RelativeSource={RelativeSource AncestorType=offices:EditOfficerControl}}"
                 AddItem="OfficerControlOnAddItem"

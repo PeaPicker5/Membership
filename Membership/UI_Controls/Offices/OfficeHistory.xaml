@@ -18,13 +18,13 @@
                                                   x:Key="BoolToVisibilityConverter" />
 
             <DataTemplate x:Key="officerListTemplate" >
-                <DockPanel LastChildFill="True"  >
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="* " 
-                                Visibility="{Binding Path=PartialYear, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=FromDate, StringFormat='MMM yyyy'}" Width="58"/>
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text=" - "/>
-                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=ToDate, StringFormat='MMM yyyy'}" Width="70"/>
-                    <TextBlock DockPanel.Dock="Right"  FontSize="14" Text="{Binding Path=MemberRec.FullName}" MinWidth="100" />
+                <DockPanel LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=FromDate, StringFormat='yyyy'}"/>
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text=") " />
+                    <TextBlock DockPanel.Dock="Left" FontSize="14" Text="{Binding Path=MemberRec.FullName}" MinWidth="100" />
+                    <TextBlock DockPanel.Dock="Right" FontSize="14" Text="        " />
+                    <TextBlock DockPanel.Dock="Right" FontSize="14" Text="{Binding Path=PartialYear}" />
+                    <TextBlock DockPanel.Dock="Right" FontSize="14" Text="  " />
                 </DockPanel>
             </DataTemplate>
 
@@ -63,7 +63,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <DockPanel LastChildFill="True" Grid.Column="0" Margin="10"  Background="White" >
+            <DockPanel LastChildFill="True" Grid.Column="0" Margin="10,10,10,30"  Background="White" >
                 <TextBlock Text="{Binding ElementName=OfficeSelectionCombo, Path=Text, 
                                           StringFormat='History for the office of {0}'}" 
                            DockPanel.Dock="Top" TextAlignment="Center" TextDecorations="Underline" 
@@ -71,7 +71,7 @@
                 <ListView ItemsSource="{Binding OfficerRecs}" ItemTemplate="{StaticResource officerListTemplate}" BorderThickness="0">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Vertical" 
+                            <WrapPanel Orientation="Vertical" HorizontalAlignment="Center"
                                        Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}},Path=ActualHeight}"/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>

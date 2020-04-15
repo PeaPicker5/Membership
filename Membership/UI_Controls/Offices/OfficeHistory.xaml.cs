@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using MahApps.Metro.Controls;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
@@ -73,9 +74,9 @@ namespace Membership.UI_Controls.Offices
 
         public void LoadRecords()
         {
-            OfficesOnFile = _presenter.LoadOfficesOnFile();
+            OfficesOnFile = _presenter.LoadOfficesOnFile().OrderBy(x => x.GroupId).ThenBy(y => y.GroupOrder);
             if (OfficeSelectionCombo.Items.Count > 0)
-                OfficeSelectionCombo.SelectedIndex = 0;
+                OfficeSelectionCombo.SelectedValue = 11;
 
             YearsOnFile = _presenter.LoadYearsOnFile();
             if (OfficeFromCombo.Items.Count > 0)

@@ -208,38 +208,38 @@
       <DependentUpon>DuesCardsReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="UI Controls\Members\ImagePopupWindow.xaml.cs">
+    <Compile Include="UI_Controls\Members\ImagePopupWindow.xaml.cs">
       <DependentUpon>ImagePopupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Offices\EditOfficerBase.cs" />
-    <Compile Include="UI Controls\Offices\OfficeHistory.xaml.cs">
+    <Compile Include="UI_Controls\Offices\EditOfficerBase.cs" />
+    <Compile Include="UI_Controls\Offices\OfficeHistory.xaml.cs">
       <DependentUpon>OfficeHistory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Offices\EditOfficerControl.xaml.cs">
+    <Compile Include="UI_Controls\Offices\EditOfficerControl.xaml.cs">
       <DependentUpon>EditOfficerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Offices\OfficersByYear.xaml.cs">
+    <Compile Include="UI_Controls\Offices\OfficersByYear.xaml.cs">
       <DependentUpon>OfficersByYear.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\ReportViewer\ReportViewerWindow.xaml.cs">
+    <Compile Include="UI_Controls\ReportViewer\ReportViewerWindow.xaml.cs">
       <DependentUpon>ReportViewerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Dues\DuesHistory.xaml.cs">
+    <Compile Include="UI_Controls\Dues\DuesHistory.xaml.cs">
       <DependentUpon>DuesHistory.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Dues\DuesPaid.xaml.cs">
+    <Compile Include="UI_Controls\Dues\DuesPaid.xaml.cs">
       <DependentUpon>DuesPaid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Dues\DuesCollection.xaml.cs">
+    <Compile Include="UI_Controls\Dues\DuesCollection.xaml.cs">
       <DependentUpon>DuesCollection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Members\MemberSelection.xaml.cs">
+    <Compile Include="UI_Controls\Members\MemberSelection.xaml.cs">
       <DependentUpon>MemberSelection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Members\MemberInfo.xaml.cs">
+    <Compile Include="UI_Controls\Members\MemberInfo.xaml.cs">
       <DependentUpon>MemberInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI Controls\Offices\OfficesHeld.xaml.cs">
+    <Compile Include="UI_Controls\Offices\OfficesHeld.xaml.cs">
       <DependentUpon>OfficesHeld.xaml</DependentUpon>
     </Compile>
     <Page Include="Common\Controls\DetailsHeaderControl.xaml">
@@ -290,47 +290,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI Controls\Members\ImagePopupWindow.xaml">
+    <Page Include="UI_Controls\Members\ImagePopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI Controls\Offices\OfficeHistory.xaml">
+    <Page Include="UI_Controls\Offices\OfficeHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI Controls\Offices\EditOfficerControl.xaml">
+    <Page Include="UI_Controls\Offices\EditOfficerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI Controls\Offices\OfficersByYear.xaml">
+    <Page Include="UI_Controls\Offices\OfficersByYear.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI Controls\ReportViewer\ReportViewerWindow.xaml">
+    <Page Include="UI_Controls\ReportViewer\ReportViewerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI Controls\Dues\DuesHistory.xaml">
+    <Page Include="UI_Controls\Dues\DuesHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI Controls\Dues\DuesPaid.xaml">
+    <Page Include="UI_Controls\Dues\DuesPaid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI Controls\Dues\DuesCollection.xaml">
+    <Page Include="UI_Controls\Dues\DuesCollection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI Controls\Members\MemberSelection.xaml">
+    <Page Include="UI_Controls\Members\MemberSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI Controls\Members\MemberInfo.xaml">
+    <Page Include="UI_Controls\Members\MemberInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI Controls\Offices\OfficesHeld.xaml">
+    <Page Include="UI_Controls\Offices\OfficesHeld.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -10,10 +10,6 @@
     <UserControl.Resources>
         <ResourceDictionary>
 
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
             <converters:BoolToVisibilityConverter TrueValue="Collapsed" FalseValue="Visible"
                                                   x:Key="InvertedBoolToVisibilityConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed"
@@ -26,7 +22,7 @@
     <Grid>
 
         <Grid>
-            <DockPanel LastChildFill="False" Width="210">
+            <DockPanel LastChildFill="False" Width="210" Height="32" >
                 <Button DockPanel.Dock="Left"
                         AutomationProperties.AutomationId="SaveButton"
                         Style="{StaticResource FadeInOutButtonStyle}"

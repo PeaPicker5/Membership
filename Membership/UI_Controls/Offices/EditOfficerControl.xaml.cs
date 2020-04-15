@@ -28,8 +28,6 @@ namespace Membership.UI_Controls.Offices
 
         #region Dependency Properties
 
-
-
         public IEnumerable<Office> OfficeRecs
         {
             get { return (IEnumerable<Office>)GetValue(OfficeRecsProperty); }

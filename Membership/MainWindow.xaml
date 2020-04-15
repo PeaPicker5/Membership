@@ -136,14 +136,14 @@
                                        Click="DuesAddressLabelsButtonOnClick" />
                     </fluent:RibbonGroupBox>
                     <fluent:RibbonGroupBox Header="Processing">
-                        <fluent:Button Header="Dues History"
-                                       ToolTip="Dues History"
-                                       LargeIcon="{StaticResource DuesHistory}"
-                                       Click="DuesHistoryButtonOnClick" />
                         <fluent:Button Header="Dues Collection"
                                        ToolTip="Dues Collection" 
                                        LargeIcon="{StaticResource DuesCollection}"
                                        Click="DuesCollectionButtonOnClick" />
+                        <fluent:Button Header="Dues History"
+                                       ToolTip="Dues History"
+                                       LargeIcon="{StaticResource DuesHistory}"
+                                       Click="DuesHistoryButtonOnClick" />
                     </fluent:RibbonGroupBox>
                     <fluent:RibbonGroupBox Header="Reporting">
 

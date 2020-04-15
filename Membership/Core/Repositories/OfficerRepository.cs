@@ -88,7 +88,7 @@ namespace Membership.Core.Repositories
         }
         public IEnumerable<Officer> GetOfficersByMember(Guid memberId)
         {
-            var whereClause = "WHERE oa.MemberId = @memberId ORDER BY oa.Year DESC";
+            var whereClause = "WHERE oa.MemberId = @memberId ORDER BY oa.Year";
             var parameter = new DynamicParameters();
             parameter.Add("MemberId", memberId);
             return GetSelectedOfficerRecords(whereClause, parameter);

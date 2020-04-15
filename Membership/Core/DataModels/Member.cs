@@ -43,7 +43,24 @@ namespace Membership.Core.DataModels
             PageThumb = pageThumb;
         }
 
-        [Computed] public string Status { get; set; }
+        [Computed]
+        public string Status
+        {
+            get
+            {
+                switch (MemberTypeId)
+                {
+                    case 1:
+                        return "Active";
+                    case 2:
+                        return "Life";
+                    case 3:
+                        return "Social";
+                    default:
+                        return "";
+                }
+            }
+         }
         [Computed] public float DuesAmount { get; set; }
 
 

@@ -103,6 +103,7 @@
                         <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=MemberRec.LastName}" IsReadOnly="True" />
                         <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=MemberRec.FirstName}" IsReadOnly="True"  />
                         <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MemberRec.MI}" IsReadOnly="True"/>
+                        <DataGridTextColumn MinWidth="60"  Header="SUFFIX" Binding="{Binding Path=MemberRec.Suffix}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="120" Header="Status" Binding="{Binding Path=MemberRec.Status}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="200" Header="Address" Binding="{Binding Path=MemberRec.Address1}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=MemberRec.CityStateZip}" IsReadOnly="True" Width="*"/>

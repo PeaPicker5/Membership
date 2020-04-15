@@ -25,14 +25,24 @@ namespace Membership.Core.DataModels
         public DateTime ToDate { get; set; }
 
         [ExplicitKey] public Guid MemberId => MemberRec.MemberId;
-        public int OfficeId => OfficeRec.OfficeId;
+        [Computed] public int OfficeId => OfficeRec.OfficeId;
 
 
 
         [Computed] public int FromMonth => FromDate.Month;
         [Computed] public int ToMonth => ToDate.Month;
 
+        [Computed] public string PartialYear
+        {
+            get
+            {
+                if (ToDate == DateTime.MinValue) return "";
+                if (FromMonth <= 1 && (ToMonth <= 0 || ToMonth >= 12)) return "";
+                var fMonth = new DateTime(2020, FromMonth, 1).ToString("MMM");
+                var tMonth = new DateTime(2020, ToMonth, 1).ToString("MMM");
+                return $"({fMonth}-{tMonth})";
+            }
+        }
 
-        [Computed] public bool PartialYear => FromMonth > 1 || (ToMonth > 0 && ToMonth < 12);
     }
 }
