@@ -3,7 +3,6 @@ using Membership.ReportDefinitions;
 using Membership.UI_Controls.Dues;
 using Membership.UI_Controls.Members;
 using Membership.UI_Controls.Offices;
-using Membership.UI_Controls.ReportViewer;
 
 namespace Membership
 {
@@ -48,9 +47,9 @@ namespace Membership
 
         private void DuesCardsButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCardReport = new DuesCardsReport();
+            var ucDuesCards = new DuesCards();
             MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesCardReport);
+            MainStack.Children.Add(ucDuesCards);
         }
         private void DuesAddressLabelsButtonOnClick(object sender, RoutedEventArgs e)
         {

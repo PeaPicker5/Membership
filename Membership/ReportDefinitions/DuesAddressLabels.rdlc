@@ -51,29 +51,21 @@
           <DataField>Comment</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DateActive">
-          <DataField>DateActive</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
         <Field Name="DateDeceased">
           <DataField>DateDeceased</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="DateObligated">
           <DataField>DateObligated</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="DateOfBirth">
           <DataField>DateOfBirth</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DateOffActive">
-          <DataField>DateOffActive</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="DateRemoved">
           <DataField>DateRemoved</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="DuesAmount">
           <DataField>DuesAmount</DataField>
@@ -91,6 +83,10 @@
           <DataField>FullName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="IsActive">
+          <DataField>IsActive</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
         <Field Name="IsCurrent">
           <DataField>IsCurrent</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
@@ -101,6 +97,10 @@
         </Field>
         <Field Name="LastName">
           <DataField>LastName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LFName">
+          <DataField>LFName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="MemberId">
@@ -115,12 +115,20 @@
           <DataField>MI</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="PageId">
+          <DataField>PageId</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+        <Field Name="PageThumb">
+          <DataField>PageThumb</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
         <Field Name="Phone">
           <DataField>Phone</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="RemovalReasonCode">
-          <DataField>RemovalReasonCode</DataField>
+        <Field Name="RemovalReasonId">
+          <DataField>RemovalReasonId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="SponsorID1">
@@ -141,6 +149,10 @@
         </Field>
         <Field Name="Status">
           <DataField>Status</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Suffix">
+          <DataField>Suffix</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="WasRemoved">

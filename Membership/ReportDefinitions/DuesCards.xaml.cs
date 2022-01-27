@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,11 +9,11 @@ using Microsoft.Reporting.WinForms;
 
 namespace Membership.ReportDefinitions
 {
-    public partial class DuesCardsReport : INotifyPropertyChanged
+    public partial class DuesCards : INotifyPropertyChanged
     {
         private readonly ReportParametersPresenter _presenter;
 
-        public DuesCardsReport()
+        public DuesCards()
         {
             InitializeComponent();
             _presenter = new ReportParametersPresenter();

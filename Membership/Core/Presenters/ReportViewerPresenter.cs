@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Membership.Core.DataModels;
 using Membership.Core.Repositories;
@@ -10,11 +11,13 @@ namespace Membership.Core.Presenters
     {
         private readonly IDuesRepository _duesRepository;
         private readonly IMemberRepository _memberRepository;
+        private readonly IReportDataRepository _reportDataRepository;
 
         public ReportViewerPresenter()
         {
             _duesRepository = new DuesRepository();
             _memberRepository = new MemberRepository();
+            _reportDataRepository = new ReportDataRepository();
         }
 
         public IEnumerable<Member> GetMembersFromList(IEnumerable<Guid> memberIdList)
@@ -29,6 +32,11 @@ namespace Membership.Core.Presenters
         public IEnumerable<DuesRecord> CurrentlyOweDues()
         {
             return _duesRepository.CurrentlyOweDues();
+        }
+
+        public DataTable GetRecords(string query)
+        {
+            return _reportDataRepository.GetRecordSet(query);
         }
 
     }

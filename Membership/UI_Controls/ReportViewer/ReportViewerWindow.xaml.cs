@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using Membership.Core.DataModels;
@@ -58,6 +59,16 @@ namespace Membership.UI_Controls.ReportViewer
             switch (ReportName.ToUpper())
             {
                 case "DUESCARDS":
+                    DataTable datasetTable = _presenter.GetRecords("exec RPT_DuesCards3330");
+
+                    var dataset1 = new ReportDataSource
+                    {
+                        Name = "Members",
+                        Value = datasetTable
+                    };
+                    ReportViewer.LocalReport.DataSources.Add(dataset1);
+
+                    break;
                 case "DUESWARNING":
                 case "DUESREMOVALNOTICE":
                 case "DUESREMOVALLETTERS":

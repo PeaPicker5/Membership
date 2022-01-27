@@ -2,35 +2,33 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="MembershipDataSet">
+    <DataSource Name="RPT_DuesCards3330">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>99b07285-c615-4982-8692-90a04c39acec</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="MembershipCoreDataModels">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>40c2e7c7-a4ce-44c5-a560-8f96ba49a42f</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="MembershipCoreDataModels1">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>e41132b8-24e1-4183-b1b8-4e97bd994186</rd:DataSourceID>
+      <rd:DataSourceID>c4dbda60-e555-4a1e-ba90-8ccd0c8cfa29</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="MemberRecord">
+    <DataSet Name="Members">
       <Query>
-        <DataSourceName>MembershipDataSet</DataSourceName>
+        <DataSourceName>RPT_DuesCards3330</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="PageNum">
+          <DataField>PageNum</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="RowNum">
+          <DataField>RowNum</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Address1">
           <DataField>Address1</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -43,115 +41,26 @@
           <DataField>City</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CityStateZip">
-          <DataField>CityStateZip</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Comment">
-          <DataField>Comment</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DateActive">
-          <DataField>DateActive</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DateDeceased">
-          <DataField>DateDeceased</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DateObligated">
-          <DataField>DateObligated</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DateOfBirth">
-          <DataField>DateOfBirth</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DateOffActive">
-          <DataField>DateOffActive</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DateRemoved">
-          <DataField>DateRemoved</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="DuesAmount">
-          <DataField>DuesAmount</DataField>
-          <rd:TypeName>System.Single</rd:TypeName>
-        </Field>
-        <Field Name="EmailAddress">
-          <DataField>EmailAddress</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FirstName">
-          <DataField>FirstName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FullName">
-          <DataField>FullName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IsCurrent">
-          <DataField>IsCurrent</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="IsDeceased">
-          <DataField>IsDeceased</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="LastName">
-          <DataField>LastName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="MemberId">
-          <DataField>MemberId</DataField>
-          <rd:TypeName>System.Guid</rd:TypeName>
-        </Field>
-        <Field Name="MemberTypeId">
-          <DataField>MemberTypeId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="MI">
-          <DataField>MI</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Phone">
-          <DataField>Phone</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RemovalReasonCode">
-          <DataField>RemovalReasonCode</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="SponsorID1">
-          <DataField>SponsorID1</DataField>
-          <rd:TypeName>System.Guid</rd:TypeName>
-        </Field>
-        <Field Name="SponsorID2">
-          <DataField>SponsorID2</DataField>
-          <rd:TypeName>System.Guid</rd:TypeName>
-        </Field>
-        <Field Name="SponsorID3">
-          <DataField>SponsorID3</DataField>
-          <rd:TypeName>System.Guid</rd:TypeName>
-        </Field>
         <Field Name="State">
           <DataField>State</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
+        <Field Name="Zip">
+          <DataField>Zip</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ZIP">
-          <DataField>ZIP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="DuesAmount">
+          <DataField>DuesAmount</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>Membership.Core.DataModels</rd:DataSetName>
-        <rd:TableName>Member</rd:TableName>
-        <rd:ObjectDataSourceType>Membership.Core.DataModels.Member, Membership, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>RPT_DuesCards3330</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\kdoran\Documents\Visual Studio 2015\Projects\Membership\Membership\RPT_DuesCards3330.xsd</rd:SchemaPath>
+        <rd:TableName>RPT_DuesCards3330</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>RPT_DuesCards3330TableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -159,20 +68,20 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Tablix Name="Tablix2">
+          <Tablix Name="Tablix3">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>5in</Width>
+                  <Width>5.5in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>3.75in</Height>
+                  <Height>4.25in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Rectangle Name="Rectangle2">
+                        <Rectangle Name="Rectangle3">
                           <ReportItems>
                             <Textbox Name="DateActive">
                               <CanGrow>true</CanGrow>
@@ -181,23 +90,31 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Globals!ExecutionTime</Value>
+                                      <Value>Date: </Value>
                                       <Style>
                                         <FontSize>14pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
+                                    <TextRun>
+                                      <Value>=Globals!ExecutionTime</Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                        <Format>MM/dd/yyyy</Format>
+                                        <TextDecoration>Underline</TextDecoration>
+                                      </Style>
+                                    </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Left</TextAlign>
+                                    <TextAlign>Right</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>DateActive</rd:DefaultName>
-                              <Top>0.64974in</Top>
-                              <Left>0.58481in</Left>
+                              <Top>0.98768in</Top>
+                              <Left>2.94475in</Left>
                               <Height>0.28082in</Height>
-                              <Width>1.15409in</Width>
+                              <Width>2.30525in</Width>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -215,9 +132,17 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
+                                      <Value>To:  </Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
                                       <Value>=Fields!FullName.Value</Value>
                                       <Style>
                                         <FontSize>14pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>Underline</TextDecoration>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -225,10 +150,10 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>FullName</rd:DefaultName>
-                              <Top>1.07791in</Top>
-                              <Left>0.58481in</Left>
+                              <Top>0.98768in</Top>
+                              <Left>0.25in</Left>
                               <Height>0.29315in</Height>
-                              <Width>4.18664in</Width>
+                              <Width>2.64646in</Width>
                               <ZIndex>1</ZIndex>
                               <Style>
                                 <Border>
@@ -247,13 +172,22 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
+                                      <Value>Dues notice for the year: </Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                        <Format>yyyy</Format>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
                                       <Value>="Jan 1, " +
 FORMAT( Globals!ExecutionTime,"yyyy") +
 " to Dec 31, " +
 FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                       <Style>
                                         <FontSize>14pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
                                         <Format>yyyy</Format>
+                                        <TextDecoration>Underline</TextDecoration>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -261,10 +195,10 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>DateRemoved</rd:DefaultName>
-                              <Top>1.4497in</Top>
-                              <Left>1.94083in</Left>
+                              <Top>1.42934in</Top>
+                              <Left>0.25in</Left>
                               <Height>0.29561in</Height>
-                              <Width>2.65187in</Width>
+                              <Width>5in</Width>
                               <ZIndex>2</ZIndex>
                               <Style>
                                 <Border>
@@ -276,8 +210,7 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
-                            <Textbox Name="FullName1">
-                              <CanGrow>true</CanGrow>
+                            <Textbox Name="Signature">
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
                                 <Paragraph>
@@ -285,8 +218,10 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                     <TextRun>
                                       <Value>=Parameters!Signature.Value</Value>
                                       <Style>
-                                        <FontStyle>Italic</FontStyle>
-                                        <FontSize>16pt</FontSize>
+                                        <FontStyle>Normal</FontStyle>
+                                        <FontFamily>English157 BT</FontFamily>
+                                        <FontSize>30pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -295,20 +230,23 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>FullName1</rd:DefaultName>
-                              <Top>2.964in</Top>
-                              <Left>2.30449in</Left>
-                              <Height>0.3856in</Height>
-                              <Width>2.69551in</Width>
+                              <Top>3.32934in</Top>
+                              <Left>2.05895in</Left>
+                              <Height>0.56702in</Height>
+                              <Width>3.19105in</Width>
                               <ZIndex>3</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
                                 </Border>
+                                <BottomBorder>
+                                  <Style>Solid</Style>
+                                  <Width>2pt</Width>
+                                </BottomBorder>
+                                <VerticalAlign>Bottom</VerticalAlign>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
                             <Textbox Name="DuesAmount">
@@ -318,10 +256,19 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!DuesAmount.Value</Value>
+                                      <Value>Your dues are </Value>
                                       <Style>
                                         <FontSize>14pt</FontSize>
                                         <Format>'$'0.00;('$'0.00)</Format>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=Fields!DuesAmount.Value</Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Format>'$'0.00;('$'0.00)</Format>
+                                        <TextDecoration>Underline</TextDecoration>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -329,10 +276,10 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>DuesAmount</rd:DefaultName>
-                              <Top>2.32914in</Top>
-                              <Left>0.99778in</Left>
+                              <Top>1.77934in</Top>
+                              <Left>0.25in</Left>
                               <Height>0.30547in</Height>
-                              <Width>0.88905in</Width>
+                              <Width>5in</Width>
                               <ZIndex>4</ZIndex>
                               <Style>
                                 <Border>
@@ -355,7 +302,7 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                       <Value>X</Value>
                                       <Style>
                                         <FontFamily>Arial Black</FontFamily>
-                                        <FontSize>12pt</FontSize>
+                                        <FontSize>14pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -364,10 +311,10 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>MI</rd:DefaultName>
-                              <Top>3.09344in</Top>
-                              <Left>0.49852in</Left>
-                              <Height>0.25616in</Height>
-                              <Width>0.18023in</Width>
+                              <Top>3.29626in</Top>
+                              <Left>0.45in</Left>
+                              <Height>0.31616in</Height>
+                              <Width>0.23231in</Width>
                               <ZIndex>5</ZIndex>
                               <Visibility>
                                 <Hidden>=Not (Parameters!FirstNotice.Value = "True")</Hidden>
@@ -392,7 +339,7 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                       <Value>X</Value>
                                       <Style>
                                         <FontFamily>Arial Black</FontFamily>
-                                        <FontSize>12pt</FontSize>
+                                        <FontSize>14pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -401,10 +348,10 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>MI</rd:DefaultName>
-                              <Top>3.27833in</Top>
-                              <Left>0.49852in</Left>
-                              <Height>0.25616in</Height>
-                              <Width>0.18023in</Width>
+                              <Top>3.54712in</Top>
+                              <Left>0.45in</Left>
+                              <Height>0.31616in</Height>
+                              <Width>0.23231in</Width>
                               <ZIndex>6</ZIndex>
                               <Visibility>
                                 <Hidden>=Parameters!FirstNotice.Value = "True"</Hidden>
@@ -419,10 +366,351 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
+                            <Textbox Name="Textbox3">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Point Pleasant Firemen's Association, Inc.</Value>
+                                      <Style>
+                                        <FontFamily>Monotype Corsiva</FontFamily>
+                                        <FontSize>22pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>55 Ewer Avenue, Rochester, New York  14622</Value>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox3</rd:DefaultName>
+                              <Top>0.15in</Top>
+                              <Left>0.1in</Left>
+                              <Height>0.65in</Height>
+                              <Width>5.3in</Width>
+                              <ZIndex>7</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>1pt</Width>
+                                </BottomBorder>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox4">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Dues can be paid by:</Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>     - Venmo to @PointPleasant-FiremensASSN</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>     - Checks made payable to Point Pleasant Fireman's Assoc.</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox4</rd:DefaultName>
+                              <Top>2.05356in</Top>
+                              <Left>0.25in</Left>
+                              <Height>0.60634in</Height>
+                              <Width>5in</Width>
+                              <ZIndex>8</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox5">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>The absolute deadline for dues payment is March 31st.</Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox5</rd:DefaultName>
+                              <Top>2.72934in</Top>
+                              <Left>0.25in</Left>
+                              <Height>0.31606in</Height>
+                              <Width>5in</Width>
+                              <ZIndex>9</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox6">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value> 1st Notice</Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox5</rd:DefaultName>
+                              <Top>3.32934in</Top>
+                              <Left>0.7in</Left>
+                              <Height>0.25in</Height>
+                              <Width>1.16796in</Width>
+                              <ZIndex>10</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox7">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>2nd Notice</Value>
+                                      <Style>
+                                        <FontSize>14pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox5</rd:DefaultName>
+                              <Top>3.5802in</Top>
+                              <Left>0.7in</Left>
+                              <Height>0.25in</Height>
+                              <Width>1.16796in</Width>
+                              <ZIndex>11</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
                           </ReportItems>
                           <KeepTogether>true</KeepTogether>
                           <Style>
                             <Border />
+                            <BackgroundColor>White</BackgroundColor>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details2" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Members</DataSetName>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!PageNum.Value</Value>
+              </SortExpression>
+              <SortExpression>
+                <Value>=Fields!RowNum.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Height>4.25in</Height>
+            <Width>5.5in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Tablix Name="Tablix2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>5.5in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>4.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle2">
+                          <ReportItems>
+                            <Textbox Name="Textbox2">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=iif(Fields!PageNum.Value MOD 2,
+"Home of the ""Pea Pickers""" + vbcrlf +
+"55 Ewer Avenue" + vbcrlf +
+"Rochester, New York  14622","")</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>SeaGreen</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>0.2in</Top>
+                              <Left>0.2in</Left>
+                              <Height>0.6in</Height>
+                              <Width>2in</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(Fields!PageNum.Value MOD 2,
+Fields!FullName.Value + vbcrlf +
+Fields!Address1.Value + vbcrlf + 
+
+IIF(IsNothing(Fields!Address2.Value),
+   "",
+   Fields!Address2.Value + vbcrlf) +
+
+Fields!City.Value + ", " + 
+Fields!State.Value + "  " + 
+Fields!Zip.Value,
+"")</Value>
+                                      <Style>
+                                        <FontSize>16pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <Top>2in</Top>
+                              <Left>1.5in</Left>
+                              <Height>1.2in</Height>
+                              <Width>3.25in</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border />
+                            <BackgroundColor>=iif(Fields!PageNum.Value MOD 2,"White","No Color")</BackgroundColor>
                           </Style>
                         </Rectangle>
                       </CellContents>
@@ -443,9 +731,18 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>MemberRecord</DataSetName>
-            <Height>3.75in</Height>
-            <Width>5in</Width>
+            <DataSetName>Members</DataSetName>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!PageNum.Value</Value>
+              </SortExpression>
+              <SortExpression>
+                <Value>=Fields!RowNum.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Height>4.25in</Height>
+            <Width>5.5in</Width>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -453,17 +750,15 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>3.75in</Height>
+        <Height>4.25in</Height>
         <Style />
       </Body>
-      <Width>5in</Width>
+      <Width>5.5in</Width>
       <Page>
-        <PageHeight>4.25in</PageHeight>
-        <PageWidth>5.5in</PageWidth>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>11in</PageWidth>
+        <Columns>2</Columns>
+        <ColumnSpacing>0in</ColumnSpacing>
         <Style>
           <Border>
             <Style>None</Style>
@@ -502,6 +797,7 @@ FORMAT( Globals!ExecutionTime,"yyyy")</Value>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>6fe27d7a-0ac1-4d58-bbd0-3bef81f76dde</rd:ReportID>
 </Report>

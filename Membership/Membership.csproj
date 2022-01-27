@@ -62,7 +62,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
@@ -175,6 +175,8 @@
     <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficerPresenter.cs" />
     <Compile Include="Core\Presenters\MemberSelectionPresenter.cs" />
+    <Compile Include="Core\Repositories\IReportDataRepository.cs" />
+    <Compile Include="Core\Repositories\ReportDataRepository.cs" />
     <Compile Include="Core\Repositories\FileStoreRepository.cs" />
     <Compile Include="Core\Repositories\IDuesRepository.cs" />
     <Compile Include="Core\Repositories\IFileStoreRepository.cs" />
@@ -190,6 +192,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MembershipDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MembershipDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MembershipDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ReportDefinitions\DuesAddressLabels.xaml.cs">
@@ -204,8 +211,13 @@
     <Compile Include="ReportDefinitions\DuesWarningReport.xaml.cs">
       <DependentUpon>DuesWarningReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportDefinitions\DuesCardsReport.xaml.cs">
-      <DependentUpon>DuesCardsReport.xaml</DependentUpon>
+    <Compile Include="ReportDefinitions\DuesCards.xaml.cs">
+      <DependentUpon>DuesCards.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RPT_DuesCards3330.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UI_Controls\Members\ImagePopupWindow.xaml.cs">
@@ -286,7 +298,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReportDefinitions\DuesCardsReport.xaml">
+    <Page Include="ReportDefinitions\DuesCards.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -350,10 +362,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="ReportDefinitions\DuesAddressLabels.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\DuesCards.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalLetters.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalNotice.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesWarning.rdlc" />
-    <EmbeddedResource Include="ReportDefinitions\DuesCards.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -369,6 +381,17 @@
     <None Include="MembershipDataSet.xss">
       <DependentUpon>MembershipDataSet.xsd</DependentUpon>
     </None>
+    <None Include="MembershipDataSet1.xsc">
+      <DependentUpon>MembershipDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="MembershipDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MembershipDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MembershipDataSet1.xss">
+      <DependentUpon>MembershipDataSet1.xsd</DependentUpon>
+    </None>
     <None Include="Membership_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Membership.Core.DataModels.DuesHistory.datasource" />
@@ -382,6 +405,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="RPT_DuesCards3330.xsc">
+      <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
+    </None>
+    <None Include="RPT_DuesCards3330.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RPT_DuesCards3330.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RPT_DuesCards3330.xss">
+      <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
