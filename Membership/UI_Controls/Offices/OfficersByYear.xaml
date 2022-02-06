@@ -7,7 +7,7 @@
              xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             d:DesignHeight="400" d:DesignWidth="1200">
+             d:DesignHeight="400" d:DesignWidth="1500">
 
 
     <UserControl.Resources>
@@ -47,15 +47,20 @@
     <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite" Padding="0">
         <GroupBox.Header>
             <DockPanel  x:Name="SelectionBar"  LastChildFill="False">
-                <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
-                    <Label Content="OFFICER RECORDS :   " FontWeight="Bold" FontSize="16"/>
-                    <Label Content="    Year:"      FontSize="16"/>
-                    <ComboBox x:Name="YearSelectionCombo"   Margin="0,3" MinWidth="100" IsEditable="False"
+                <StackPanel DockPanel.Dock="Left">
+                    <Label Content="OFFICER RECORDS :   " FontWeight="Bold" FontSize="18" />
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="   Year:" FontWeight="Bold" FontSize="16"/>
+                        <ComboBox x:Name="YearSelectionCombo"   Margin="0,0,10,0" Height="24" MinWidth="100" IsEditable="False"
+                                  VerticalAlignment="Top"
                                   ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"
                                   SelectionChanged="YearSelectionChanged"/>
+                    </StackPanel>
                 </StackPanel>
-            
-                <Label DockPanel.Dock="Right" Content="* Denotes a partial year term." FontSize="14" />
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" >
+                    <offices:EditOfficerControl x:Name="EditOfficerControl" 
+                             YearOfTerm="{Binding ElementName=YearSelectionCombo,Path=SelectedValue}" />
+                </StackPanel>
             </DockPanel>
         </GroupBox.Header>
 
@@ -70,24 +75,20 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-
-            <!--<offices:EditOfficerControl x:Name="EditOfficerControl"
-                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-
-                ItemData="{Binding ElementName=LineOfficerList, Path=SelectedItem, Mode=TwoWay}" />-->
-
-
-
             <StackPanel x:Name="DistrictOfficersStack" Grid.Row="1" Grid.Column="0" Margin="10,10,5,10"  Background="White"  >
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center"
                             FontWeight="Heavy" FontSize="24" Text="FIRE DISTRICT OFFICERS" />
                 <!--COMMISSIONERS-->
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center" Margin="0,10,0,0"
                             FontWeight="Bold" FontSize="18" Text="COMMISSIONERS" />
-                <ListBox x:Name="CommissionerList" MouseDoubleClick="CommissionerList_MouseDoubleClick"
-                          ItemsSource="{Binding Path=Commissioners}" Width="250" MinHeight="30" Margin="0,0,0,40"
+                <ListBox x:Name="CommissionerList" 
+                         PreviewMouseDoubleClick="OfficerList_OnPreviewMouseDoubleClick"
+                         SelectionChanged="OfficerList_SelectionChanged" 
+                         LostFocus="OfficerList_LostFocus"
+
+                         ItemsSource="{Binding Path=Commissioners}" Width="250" MinHeight="30" Margin="0,0,0,40"
                           ItemTemplate="{StaticResource BoardListTemplate}" 
-                          FontSize="16" HorizontalContentAlignment="Center" /> 
+                          FontSize="16" HorizontalContentAlignment="Center"  /> 
                 <!--LINE AND OTHER DISTRICT OFFICERS-->
                 <Grid >
                     <Grid.ColumnDefinitions>
@@ -98,16 +99,22 @@
                     <StackPanel Grid.Column="0" Margin="5,0,5,0">
                         <TextBlock Text="LINE OFFICERS" FontWeight="Bold" FontSize="18" TextAlignment="Center"
                                 TextDecorations="Underline" />
-                        <ListBox x:Name="LineOfficerList" SelectionChanged="LineOfficerList_SelectionChanged" 
-                                ItemsSource="{Binding Path=LineOfficers}" MinHeight="20" Margin="30,0"
+                        <ListBox x:Name="LineOfficerList" 
+                                 PreviewMouseDoubleClick="OfficerList_OnPreviewMouseDoubleClick"
+                                 SelectionChanged="OfficerList_SelectionChanged" 
+                                 LostFocus="OfficerList_LostFocus"
+                                ItemsSource="{Binding Path=LineOfficers}" MinHeight="20" Margin="10,0"
                                 ItemTemplate="{StaticResource OfficerListTemplate}"  />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Margin="5,0,10,0">
                         <TextBlock Text="OTHER OFFICERS" FontWeight="Bold" FontSize="18" TextAlignment="Center"
                                     TextDecorations="Underline" />
-                        <ListBox x:Name="OtherDistrictList" MouseDoubleClick="OtherDistrictList_MouseDoubleClick" 
-                                ItemsSource="{Binding Path=OtherDistrictOfficers}" MinHeight="20" Margin="30,0"
+                        <ListBox x:Name="OtherDistrictList" 
+                                 PreviewMouseDoubleClick="OfficerList_OnPreviewMouseDoubleClick"
+                                 SelectionChanged="OfficerList_SelectionChanged" 
+                                 LostFocus="OfficerList_LostFocus"
+                                ItemsSource="{Binding Path=OtherDistrictOfficers}" MinHeight="20" Margin="10,0"
                                 ItemTemplate="{StaticResource OfficerListTemplate}" />
                     </StackPanel>
                 </Grid>
@@ -119,7 +126,10 @@
                 <!--BOARD OF DIRECTORS-->
                 <TextBlock TextDecorations="Underline" DockPanel.Dock="Top" TextAlignment="Center" Margin="0,10,0,0"
                             FontWeight="Bold" FontSize="18" Text="BOARD OF DIRECTORS" />
-                <ListBox x:Name="BoardList" SelectionChanged="BoardList_SelectionChanged"
+                <ListBox x:Name="BoardList" 
+                         PreviewMouseDoubleClick="OfficerList_OnPreviewMouseDoubleClick"
+                         SelectionChanged="OfficerList_SelectionChanged" 
+                         LostFocus="OfficerList_LostFocus"
                             ItemsSource="{Binding Path=BoardOfDirectors}" Width="250" MinHeight="30" Margin="0,0,0,40"
                             ItemTemplate="{StaticResource BoardListTemplate}" 
                             FontSize="16" HorizontalContentAlignment="Center" />
@@ -133,16 +143,22 @@
                     <StackPanel Grid.Column="0" Margin="5,0,5,0">
                         <TextBlock Text="TABLE OFFICERS" FontWeight="Bold" FontSize="18" 
                             TextAlignment="Center" TextDecorations="Underline" />
-                        <ListBox x:Name="TableList" MouseDoubleClick="TableList_MouseDoubleClick"
-                            ItemsSource="{Binding Path=TableOfficers}" MinHeight="20" Margin="30,0"
+                        <ListBox x:Name="TableList"
+                                 PreviewMouseDoubleClick="OfficerList_OnPreviewMouseDoubleClick"
+                                 SelectionChanged="OfficerList_SelectionChanged" 
+                                 LostFocus="OfficerList_LostFocus"
+                            ItemsSource="{Binding Path=TableOfficers}" MinHeight="20" Margin="15,0"
                             ItemTemplate="{StaticResource OfficerListTemplate}"  />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Margin="5,0,10,0">
                         <TextBlock Text="OTHER OFFICERS" FontWeight="Bold" FontSize="18" TextAlignment="Center"
                                  TextDecorations="Underline" />
-                        <ListBox x:Name="OtherAssocList" MouseDoubleClick="OtherAssocList_MouseDoubleClick"
-                                 ItemsSource="{Binding Path=OtherAssocOfficers}" MinHeight="20" Margin="30,0"
+                        <ListBox x:Name="OtherAssocList" 
+                                 PreviewMouseDoubleClick="OfficerList_OnPreviewMouseDoubleClick"
+                                 SelectionChanged="OfficerList_SelectionChanged" 
+                                 LostFocus="OfficerList_LostFocus"
+                                 ItemsSource="{Binding Path=OtherAssocOfficers}" MinHeight="20" Margin="15,0"
                                  ItemTemplate="{StaticResource OfficerListTemplate}"  />
                     </StackPanel>
                 </Grid>

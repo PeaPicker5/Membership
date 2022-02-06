@@ -10,8 +10,8 @@ namespace Membership.Common.Controls
 
         public T ItemData
         {
-            get { return (T)GetValue(ItemDataProperty); }
-            set { SetValue(ItemDataProperty, value); }
+            get => (T)GetValue(ItemDataProperty);
+            set => SetValue(ItemDataProperty, value);
         }
         public static readonly DependencyProperty ItemDataProperty = 
             DependencyProperty.Register("ItemData", typeof(T), typeof(DetailsBaseControl<T>), 
@@ -19,8 +19,8 @@ namespace Membership.Common.Controls
 
         public bool IsAdding
         {
-            get { return GetValue(IsAddingProperty) is bool && (bool)GetValue(IsAddingProperty); }
-            set { SetValue(IsAddingProperty, value); }
+            get => GetValue(IsAddingProperty) is bool && (bool)GetValue(IsAddingProperty);
+            set => SetValue(IsAddingProperty, value);
         }
         public static readonly DependencyProperty IsAddingProperty =
             DependencyProperty.Register("IsAdding", typeof(bool), typeof(DetailsBaseControl<T>),
@@ -51,6 +51,63 @@ namespace Membership.Common.Controls
                         }
                         control.InvokePropertyChanged(@"TitleText");
                     }));
+
+        public static readonly DependencyProperty IsAddingProtectedProperty =
+            DependencyProperty.Register("IsAddingProtected", typeof(bool), typeof(DetailsBaseControl<T>),
+                new FrameworkPropertyMetadata(
+                    (dependencyObject, eventArgs) =>
+                    {
+                        var control = dependencyObject as DetailsBaseControl<T>;
+                        if (control == null)
+                        {
+                            return;
+                        }
+                        control.InvokePropertyChanged(@"TitleText");
+                    }));
+
+        public bool IsAddingProtected
+        {
+            get => GetValue(IsAddingProtectedProperty) is bool && (bool)GetValue(IsAddingProtectedProperty);
+            set => SetValue(IsAddingProtectedProperty, value);
+        }
+
+        public static readonly DependencyProperty IsEditProtectedProperty =
+            DependencyProperty.Register("IsEditProtected", typeof(bool), typeof(DetailsBaseControl<T>),
+                new FrameworkPropertyMetadata(
+                    (dependencyObject, eventArgs) =>
+                    {
+                        var control = dependencyObject as DetailsBaseControl<T>;
+                        if (control == null)
+                        {
+                            return;
+                        }
+                        control.InvokePropertyChanged(@"TitleText");
+                    }));
+
+        public bool IsEditProtected
+        {
+            get => GetValue(IsEditProtectedProperty) is bool && (bool)GetValue(IsEditProtectedProperty);
+            set => SetValue(IsEditProtectedProperty, value);
+        }
+
+        public static readonly DependencyProperty IsDeleteProtectedProperty =
+            DependencyProperty.Register("IsDeleteProtected", typeof(bool), typeof(DetailsBaseControl<T>),
+                new FrameworkPropertyMetadata(
+                    (dependencyObject, eventArgs) =>
+                    {
+                        var control = dependencyObject as DetailsBaseControl<T>;
+                        if (control == null)
+                        {
+                            return;
+                        }
+                        control.InvokePropertyChanged(@"TitleText");
+                    }));
+
+        public bool IsDeleteProtected
+        {
+            get => GetValue(IsDeleteProtectedProperty) is bool && (bool)GetValue(IsDeleteProtectedProperty);
+            set => SetValue(IsDeleteProtectedProperty, value);
+        }
 
         #region Events
 
@@ -87,8 +144,8 @@ namespace Membership.Common.Controls
 
         public event RoutedEventHandler ItemChanged
         {
-            add { AddHandler(ItemChangedEvent, value); }
-            remove { RemoveHandler(ItemChangedEvent, value); }
+            add => AddHandler(ItemChangedEvent, value);
+            remove => RemoveHandler(ItemChangedEvent, value);
         }
 
         #endregion

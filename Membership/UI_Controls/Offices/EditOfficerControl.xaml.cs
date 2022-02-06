@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using Membership.Common.Controls;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
@@ -18,13 +14,26 @@ namespace Membership.UI_Controls.Offices
 
     public sealed partial class EditOfficerControl : IEditOfficerView, INotifyPropertyChanged
     {
-        private const int DistrictOnly = 0;
-        private const int AssocOnly = 1;
         private readonly EditOfficerPresenter _presenter;
-        private int _selectedOfficeType = 0;
+
+        public int YearOfTerm
+        {
+            get { return (int)GetValue(YearOfTermProperty); }
+            set { SetValue(YearOfTermProperty, value); }
+        }
+        public static readonly DependencyProperty YearOfTermProperty =
+            DependencyProperty.Register("YearOfTerm", typeof(int),
+                typeof(EditOfficerControl));
 
 
-        public string[] Months1_12 => DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames;
+        public static IEnumerable<string> Months1_12 => DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames;
+
+        public Officer currentOfficerRec => new Officer(
+                                    (Member)MemberCombo.SelectedItem,
+                                    (Office)OfficeCombo.SelectedItem, YearOfTerm,
+                             DateTime.Parse($"{FromMonth.SelectedIndex + 1}-1-{YearOfTerm}"),
+                               DateTime.Parse($"{ToMonth.SelectedIndex + 1}-1-{YearOfTerm}"));
+
 
         #region Dependency Properties
 
@@ -46,117 +55,105 @@ namespace Membership.UI_Controls.Offices
         #endregion
 
 
-        public ICollection<string> FromDateOptions
-        {
-            get { return (ICollection<string>)GetValue(FromDateOptionsProperty); }
-            set { SetValue(FromDateOptionsProperty, value); OnPropertyChanged(); }
-        }
-        public static readonly DependencyProperty FromDateOptionsProperty =
-            DependencyProperty.Register("FromDateOptions", typeof(ICollection<string>), typeof(EditOfficerControl));
-
-
         public EditOfficerControl()
         {
             MemberRecs = new ObservableCollection<Member>();
             OfficeRecs = new ObservableCollection<Office>();
 
             InitializeComponent();
-
             _presenter = new EditOfficerPresenter(this);
-            SelectedYear.Value = DateTime.Now.Year;
-            FromMonth.ItemsSource = Months1_12;
-            ToMonth.ItemsSource = Months1_12;
             LoadOfficeRecords();
+            LoadMemberRecords();
         }
 
-        public void Load()
+        public void ClearControlValues()
         {
-            if (ItemData == null) return;
-            if (ItemData.OfficeRec.GroupId < 20)
-                DistrictOfficerRadio.IsChecked = true;
-            else
-                AssocOfficerRadio.IsChecked = true;
-            OfficerTypeRadio_Click(null, null);
-
-            OfficeCombo.SelectedValue = ItemData.OfficeRec.OfficeId;
-            MemberCombo.SelectedValue = ItemData.MemberRec.MemberId;
-
-            SelectedYear.Value = ItemData.Year;
-            //FromDate = officerRec.FromDate;
-            //ToDate = officerRec.ToDate;
-
+            OfficeCombo.SelectedIndex = -1;
+            MemberCombo.SelectedIndex = -1;
+            FromMonth.SelectedIndex = -1;
+            ToMonth.SelectedIndex = -1;
+            SetCurrentValue(IsEditProtectedProperty, true);
+            SetCurrentValue(IsDeleteProtectedProperty, true);
         }
-
-        private void NewYearSelected(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        public void SetControlValues(Officer currentOfficer)
         {
-            var yr = Convert.ToInt32(SelectedYear.Value);
-            if (yr >= 1915 && yr < 1961)
+            if (currentOfficer == null) return;
+            SetCurrentValue(IsEditProtectedProperty, false);
+            SetCurrentValue(IsDeleteProtectedProperty, false);
+
+            OfficeCombo.SelectedValue = currentOfficer.OfficeId;
+            if (OfficeCombo.SelectedIndex == -1)
             {
-                FromMonth.SelectedIndex = 4;
-                ToMonth.SelectedIndex = 3;
-                //FromDate = DateTime.Parse($"05-01-{yr}");
-                //ToDate = DateTime.Parse($"04-30-{yr + 1}");
+                FilterCurrentOffices.IsChecked = false;
+                LoadOfficeRecords();
+                OfficeCombo.SelectedValue = currentOfficer.OfficeId;
             }
-
-            if (yr < 1961 || yr >= 2100) return;
-
-            //FromDate = DateTime.Parse($"01-01-{yr}");
-            //ToDate = DateTime.Parse($"12-31-{yr}");
-            FromMonth.SelectedIndex = 0;
-            ToMonth.SelectedIndex = 11;
-
-        }
-
-        private void RefreshFromDates(int selYear)
-        {
-            FromDateOptions = new List<string>();
-            for (var i = 1; i <= 12; i++)
+            MemberCombo.SelectedValue = currentOfficer.MemberId;
+            if (MemberCombo.SelectedIndex == -1)
             {
-                FromDateOptions.Add($"{i}/{selYear}");
+                FilterCurrentMembers.IsChecked = false;
+                LoadMemberRecords();
+                MemberCombo.SelectedValue = currentOfficer.MemberId;
             }
-
+            FromMonth.SelectedIndex = currentOfficer.FromMonth-1;
+            ToMonth.SelectedIndex = currentOfficer.ToMonth-1;
         }
 
-        private void FilterCheckBoxOnClick(object sender, RoutedEventArgs e)
+        private void CurrentOfficesOnlyCheckBox_OnClick(object sender, RoutedEventArgs e)
         {
             LoadOfficeRecords();
         }
-        private void OfficerTypeRadio_Click(object sender, RoutedEventArgs e)
-        {
-            _selectedOfficeType = DistrictOfficerRadio.IsChecked == true ? DistrictOnly : AssocOnly;
-            LoadOfficeRecords();
-        }
-        private void LoadOfficeRecords()
-        {
-            _presenter.LoadOfficesForaType(_selectedOfficeType, FilterCurrent.IsChecked == true);
-            if (OfficeRecs.Any())
-                OfficeCombo.SelectedIndex = 0;
-        }
-
-        private void OfficeSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CurrentMembersOnlyCheckBox_OnClick(object sender, RoutedEventArgs e)
         {
             LoadMemberRecords();
         }
 
+        private void LoadOfficeRecords()
+        {
+            _presenter.GetAllOfficeRecords(FilterCurrentOffices.IsChecked == true);
+        }
         private void LoadMemberRecords()
         {
-            if (OfficeCombo.SelectedValue is null) return;
-            var officeId = (int)OfficeCombo.SelectedValue;
-            if (officeId == 15 || officeId > 20)
-                _presenter.LoadCurrentMembers();
-            else
-                _presenter.LoadActiveMembers();
-            if (MemberRecs.Count() > 0)
-                MemberCombo.SelectedIndex = 0;
+            _presenter.GetAllMemberRecords(FilterCurrentMembers.IsChecked == true);
         }
 
 
-
-        private void DatePickerOnPreviewTextInput(object sender, TextCompositionEventArgs eventArgs)
+        #region MENU BUTTON Events (Add, Edit, Remove, Save, Cancel)
+        private void OfficerControl_OnAddItem(object sender, RoutedEventArgs e)
         {
-            eventArgs.Handled = eventArgs.Text.Any(
-                character => !char.IsDigit(character) && character != '/' && character != '-');
+            IsAdding = true;
+            IsEditing = true;
+            OfficeCombo.SelectedIndex = 0;
+            MemberCombo.SelectedIndex = -1;
+            FromMonth.SelectedIndex = 0;
+            ToMonth.SelectedIndex = 11;
         }
+        private void OfficerControl_OnEditItem(object sender, RoutedEventArgs e)
+        {
+            IsEditing = true;
+        }
+        private void OfficerControl_OnRemoveItem(object sender, RoutedEventArgs e)
+        {
+            _presenter.DeleteOfficerRecord(currentOfficerRec);
+            ClearControlValues();
+            UpdateListOfOfficers();
+        }
+        private void OfficerControl_OnSaveItem(object sender, RoutedEventArgs e)
+        {
+            if (IsAdding)
+                _presenter.InsertOfficerRecord(currentOfficerRec);
+            else if (IsEditing)
+                _presenter.UpdateOfficerRecord(currentOfficerRec);
+            UpdateListOfOfficers();
+            IsAdding = false;
+            IsEditing = false;
+        }
+        private void OfficerControl_OnCancelItem(object sender, RoutedEventArgs e)
+        {
+            ClearControlValues();
+        }
+
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
@@ -165,41 +162,30 @@ namespace Membership.UI_Controls.Offices
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-        private void SelectedYearChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        private void OfficeCombo_OnDropDownClosed(object sender, EventArgs e)
         {
-
+            MemberCombo.SelectedIndex = 0;
         }
 
-        private void FromDateChanged(object sender, SelectionChangedEventArgs e)
-        {
 
+
+        #region Events to send back to the parent control
+
+
+        public delegate void NotifyParameterDelegate();
+        public event NotifyParameterDelegate RecordUpdated;
+        private void UpdateListOfOfficers()
+        {
+            //bubble the event up to the parent
+            RecordUpdated?.Invoke();
         }
 
-        private void OfficerControlOnAddItem(object sender, RoutedEventArgs e)
-        {
+        #endregion
 
-        }
 
-        private void OfficerControlOnSaveItem(object sender, RoutedEventArgs e)
-        {
 
-        }
 
-        private void OfficerControlOnRemoveItem(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void OfficerControlOnEditItem(object sender, RoutedEventArgs e)
-        {
-            IsEditing = true;
-        }
-
-        private void OfficerControlOnCancelItem(object sender, RoutedEventArgs e)
-        {
-
-        }
 
     }
 }

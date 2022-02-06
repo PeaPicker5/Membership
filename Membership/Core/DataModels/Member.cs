@@ -67,7 +67,7 @@ namespace Membership.Core.DataModels
         [Computed] public bool WasRemoved => MemberTypeId == RemovedStatus;
         [Computed] public bool IsCurrent
         {
-            get { return (MemberTypeId >= 1 && MemberTypeId <= 3) && !IsDeceased; }
+            get => (MemberTypeId >= 1 && MemberTypeId <= 3) && DateDeceased is null;
             set { }
         }
 

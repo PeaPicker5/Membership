@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
@@ -107,13 +109,15 @@ namespace Membership.UI_Controls.Offices
         public OfficersByYear()
         {
             InitializeComponent();
+            EditOfficerControl.RecordUpdated += LoadOfficerRecords;
             _presenter = new OfficersByYearPresenter(this);
             IsModifying = false;
         }
 
+        private const int initialYear = 1915;
         public void LoadYearsOnFile()
         {
-            YearsOnFile = _presenter.LoadYearsOnFile();
+            YearsOnFile = Enumerable.Range(initialYear, DateTime.Now.Year - initialYear+1).Reverse().ToList();
             if (YearSelectionCombo.Items.Count > 0)
             {
                 YearSelectionCombo.SelectedIndex = 0;
@@ -123,15 +127,16 @@ namespace Membership.UI_Controls.Offices
 
         private void YearSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedYear = Convert.ToInt32(YearSelectionCombo.SelectedValue);
-            if (SelectedYear == 0) return;
             LoadOfficerRecords();
         }
+
         private void LoadOfficerRecords()
         {
+            SelectedYear = Convert.ToInt32(YearSelectionCombo.SelectedValue);
+            if (SelectedYear == 0) return;
+            EditOfficerControl.ClearControlValues();
             _presenter.LoadOfficersForaYear(SelectedYear);
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -139,37 +144,33 @@ namespace Membership.UI_Controls.Offices
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void EditOfficerButtonOnClick(object sender, RoutedEventArgs e)
+
+        private void OfficerList_OnPreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            IsModifying = !IsModifying;
+            SelectedOfficer = (Officer)((ListBox)sender).SelectedItem;
+            if (SelectedOfficer == null) return;
+            EditOfficerControl.SetControlValues(SelectedOfficer);
+            EditOfficerControl.IsEditing = true;
         }
 
-        private void CommissionerList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void OfficerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedOfficer = (Officer)CommissionerList.SelectedItem;
+            var officerRec = (Officer) ((ListBox) sender).SelectedItem;
+            if (officerRec == null) return;
+            EditOfficerControl.SetControlValues(officerRec);
         }
-        private void LineOfficerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void OfficerList_LostFocus(object sender, RoutedEventArgs e)
         {
-            SelectedOfficer = (Officer)LineOfficerList.SelectedItem;
-        }
-        private void OtherDistrictList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            SelectedOfficer = (Officer)OtherDistrictList.SelectedItem;
+            ((ListBox) sender).SelectedItem = null;
         }
 
 
-        private void BoardList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SelectedOfficer = (Officer)BoardList.SelectedItem;
-        }
-        private void TableList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            SelectedOfficer = (Officer)TableList.SelectedItem;
-        }
-        private void OtherAssocList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            SelectedOfficer = (Officer)OtherAssocList.SelectedItem;
-        }
+
+
+
+
+
 
     }
 }

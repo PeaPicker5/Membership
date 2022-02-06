@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Dapper;
 using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
@@ -12,6 +11,9 @@ namespace Membership.Core.Repositories
 {
     public class MemberRepository : IMemberRepository
     {
+        private const int DistrictOnly = 0;
+        private const int AssocOnly = 1;
+
         private const string DbConnectionName = "MembershipDB";
         public MemberRepository() {}
 
@@ -38,7 +40,29 @@ namespace Membership.Core.Repositories
             }
         }
 
+        private IEnumerable<Member> GetSelectedMemberRecords(string clause, DynamicParameters param)
+        {
+            const string query = "SELECT ml.* " +
+                                 "FROM MEMBER_List ml " +
+                                 "INNER JOIN MEMBER_Type mt ON ml.MemberTypeId = mt.TypeId " +
+                                 "LEFT OUTER JOIN OFFICE_Assignments oa ON oa.MemberId = oa.MemberId ";
 
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var retVal = connection.Query<Member>(query + clause, param).Distinct().ToList();
+                return retVal;
+            }
+
+        }
+
+        public IEnumerable<Member> GetMembersWithOffice(int year, int officeType)
+        {
+            var whereClause = officeType == DistrictOnly
+                ? "WHERE oa.Year = @year AND oa.OfficeId < 20 "
+                : "WHERE oa.Year = @year AND oa.OfficeId >= 20 ";
+            var parameter = new DynamicParameters();  parameter.Add("Year", year);
+            return GetSelectedMemberRecords(whereClause, parameter);
+        }
 
         public void InsertMemberRecord(Member memberRec)
         {
@@ -71,8 +95,6 @@ namespace Membership.Core.Repositories
                 connection.Delete(memberRec);
                 return true;
             }
-
-            return false;
         }
 
 

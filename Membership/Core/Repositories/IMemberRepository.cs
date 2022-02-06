@@ -19,6 +19,14 @@ namespace Membership.Core.Repositories
         /// <returns></returns>
         ICollection<Member> GetMembers();
 
+        /// <summary>
+        /// Get a list of members that hold an office for the given year
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="officeType"></param>
+        /// <returns></returns>
+        IEnumerable<Member> GetMembersWithOffice(int year, int officeType);
+
         void InsertMemberRecord(Member memberRec);
         void UpdateMemberRecord(Member memberRec);
         bool DeleteMemberRecord(Member memberRec, 

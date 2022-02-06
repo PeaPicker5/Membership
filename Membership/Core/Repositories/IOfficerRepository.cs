@@ -25,6 +25,10 @@ namespace Membership.Core.Repositories
         IEnumerable<Officer> GetOfficersByTitle(int officeId);
         IEnumerable<int> GetOfficerYearsOnFile();
         IEnumerable<Office> GetOfficesOnFile();
+        IEnumerable<Office> GetOfficesByYear(int year);
 
+        void InsertOfficerRecord(Officer officerRec);
+        void UpdateOfficerRecord(Officer officerRec);
+        void DeleteOfficerRecord(Officer officerRec);
     }
 }

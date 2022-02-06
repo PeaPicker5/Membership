@@ -6,12 +6,15 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
              xmlns:controls="clr-namespace:Membership.Common.Controls"
+             xmlns:converters="clr-namespace:Membership.Common.Converters"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             d:DesignHeight="55" d:DesignWidth="1900">
+             d:DesignHeight="55" d:DesignWidth="1500">
 
     <UserControl.Resources>
         <ResourceDictionary>
+
+            <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Collapsed" x:Key="BoolToVisibilityConverter" />
 
             <Style TargetType="DatePickerTextBox">
                 <Setter Property="Control.Template">
@@ -28,90 +31,81 @@
 
     <Grid Background="AntiqueWhite" >
 
-        <DockPanel  x:Name="SelectionBar"  LastChildFill="True">
+        <DockPanel  x:Name="SelectionBar"  LastChildFill="false">
 
-        <!-- Buttons -->
-        <controls:DetailsHeaderControl
-                DockPanel.Dock="Left" Margin="10" 
-                IsEditing="{Binding Path=IsEditing, Mode=OneWay, 
-                   RelativeSource={RelativeSource AncestorType=offices:EditOfficerControl}}"
-                AddItem="OfficerControlOnAddItem"
-                CancelItem="OfficerControlOnCancelItem"
-                EditItem="OfficerControlOnEditItem"
-                RemoveItem="OfficerControlOnRemoveItem"
-                SaveItem="OfficerControlOnSaveItem" />
+            <!-- Buttons -->
+            <controls:DetailsHeaderControl
+                    DockPanel.Dock="Left" Margin="10" 
+                    IsEditing="{Binding Path=IsEditing, Mode=OneWay, RelativeSource={RelativeSource AncestorType=offices:EditOfficerControl}}"
+                    IsEditProtected="{Binding Path=IsEditProtected, Mode=OneWay}"
+                    IsDeleteProtected="{Binding Path=IsDeleteProtected, Mode=OneWay}"
 
-        <StackPanel IsEnabled="{Binding Path=IsEditing, Mode=OneWay}"
-            DockPanel.Dock="Left" 
-            Orientation="Horizontal"
-            Margin="30,5,0,-5">
+                    AddItem="OfficerControl_OnAddItem"
+                    CancelItem="OfficerControl_OnCancelItem"
+                    EditItem="OfficerControl_OnEditItem"
+                    RemoveItem="OfficerControl_OnRemoveItem"
+                    SaveItem="OfficerControl_OnSaveItem" />
 
-            <!-- Radio Buttons -->
-            <StackPanel DockPanel.Dock="Left" Margin="10,5" >
-                <RadioButton x:Name="DistrictOfficerRadio" GroupName="officetype" Content="District Officers" Click="OfficerTypeRadio_Click" IsChecked="True"/>
-                <RadioButton x:Name="AssocOfficerRadio" GroupName="officetype" Content="Association Officers" Click="OfficerTypeRadio_Click" />
-            </StackPanel>
+            <!--IsEnabled="{Binding Path=IsEditing, Mode=OneWay, RelativeSource={RelativeSource AncestorType=offices:EditOfficerControl}}"-->
+            <StackPanel IsEnabled="{Binding Path=IsEditing, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=offices:EditOfficerControl}}"
+                        DockPanel.Dock="Left" Orientation="Horizontal" Margin="10,5,0,-5">
 
-            <!-- Office Combo -->
-            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
-                <Label Content="Office:"     Style="{StaticResource InputLabel}"/>
-                <ComboBox x:Name="OfficeCombo"
-                    MinWidth="150" IsEditable="False"
-                    DisplayMemberPath="Title"
-                    SelectedValuePath="OfficeId"
-                    SelectionChanged="OfficeSelectionChanged" 
-                    ItemsSource="{Binding Path=OfficeRecs, Mode=TwoWay}"
-                    SelectedValue="{Binding Path=ItemData.OfficeId, Mode=TwoWay}" />
-            </StackPanel>
-
-            <!-- Member Combo -->
-            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
-                <Label Content="Member:" Style="{StaticResource InputLabel}"/>
-                <ComboBox x:Name="MemberCombo"
-                    MinWidth="150" IsEditable="False"
-                    DisplayMemberPath="LFName"
-                    SelectedValuePath="MemberId"
-                    ItemsSource="{Binding Path=MemberRecs, Mode=OneWay}"
-                    SelectedItem="{Binding Path=ItemData.MemberRec, Mode=OneWay}"/>
-            </StackPanel>
-
-            <!-- Selected Year UpDown -->
-            <StackPanel DockPanel.Dock="Left" Margin="10,0">
-                <Label Content="Year:" Style="{StaticResource InputLabel}"/>
-                    <mah:NumericUpDown x:Name="SelectedYear"
-                        Minimum="1915" Maximum="2050" 
-                        ValueChanged="NewYearSelected" Width="85" />
+                <!-- Office Combo -->
+                <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                    <Label Content="Office:"     Style="{StaticResource InputLabel}"/>
+                    <ComboBox x:Name="OfficeCombo"
+                              IsEnabled="{Binding Path=IsAdding, Mode=OneWay, RelativeSource={RelativeSource AncestorType=offices:EditOfficerControl}}"
+                              MinWidth="150" IsEditable="False"
+                        DisplayMemberPath="Title"
+                        SelectedValuePath="OfficeId"
+                              DropDownClosed="OfficeCombo_OnDropDownClosed"
+                        ItemsSource="{Binding Path=OfficeRecs, Mode=TwoWay}" />
                 </StackPanel>
 
-            <!-- From Month -->
-            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
-                <Label Content="From:" Style="{StaticResource InputLabel}" />
-                <ComboBox x:Name="FromMonth" 
-                    MinWidth="60" IsEditable="False"
-                    SelectionChanged="FromDateChanged" 
-                    ItemsSource="{Binding Path=Months1_12, Mode=OneWay}"/>
+                <!-- Member Combo -->
+                <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                    <Label Content="Member:" Style="{StaticResource InputLabel}"/>
+                    <ComboBox x:Name="MemberCombo"
+                        MinWidth="150" IsEditable="False"
+                        DisplayMemberPath="LFName"
+                        SelectedValuePath="MemberId"
+                        ItemsSource="{Binding Path=MemberRecs, Mode=OneWay}"
+                        SelectedItem="{Binding Path=ItemData.MemberId, Mode=OneWay}"/>
+                </StackPanel>
+
+                <!-- From Month -->
+                <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                    <Label Content="From:" Style="{StaticResource InputLabel}" />
+                    <ComboBox x:Name="FromMonth" 
+                        MinWidth="60" IsEditable="False" 
+                        ItemsSource="{Binding Path=Months1_12, Mode=OneWay}"/>
+                </StackPanel>
+
+                <!-- To Month -->
+                <StackPanel DockPanel.Dock="Left" Margin="10,0" >
+                    <Label Content="To:" Style="{StaticResource InputLabel}" />
+                    <ComboBox x:Name="ToMonth" 
+                        MinWidth="60" IsEditable="False" 
+                        ItemsSource="{Binding Path=Months1_12, Mode=OneWay}"/>
+                </StackPanel>
+                
+
             </StackPanel>
-
-            <!-- To Month -->
-            <StackPanel DockPanel.Dock="Left" Margin="10,0" >
-                <Label Content="To:" Style="{StaticResource InputLabel}" />
-                <ComboBox x:Name="ToMonth" 
-                    MinWidth="60" IsEditable="False"
-                    SelectionChanged="FromDateChanged" 
-                    ItemsSource="{Binding Path=Months1_12, Mode=OneWay}"/>
-            </StackPanel>
-
-            <!-- Filter Current CheckBox -->
-            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Margin="15,0" >
-
-                <CheckBox  x:Name="FilterCurrent" Style="{StaticResource CheckBoxStyle}"  
-                           Click="FilterCheckBoxOnClick"
-                           VerticalAlignment="Center" IsChecked="True"/>
-                <Label Content="Current Offices Only"  VerticalAlignment="Center"   FontSize="16"/>
-            </StackPanel>
-
-
-            </StackPanel>
+                <!-- Filter Current CheckBox -->
+                <StackPanel DockPanel.Dock="Right" Margin="20,5,0,0">
+                    <StackPanel  Orientation="Horizontal" Margin="15,-4" >
+                        <CheckBox  x:Name="FilterCurrentOffices" Style="{StaticResource CheckBoxStyle}"  
+                                   Click="CurrentOfficesOnlyCheckBox_OnClick"
+                                   VerticalAlignment="Center" IsChecked="True"/>
+                        <Label Content="Current Offices Only"  VerticalAlignment="Center"   FontSize="16"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="15,-4" >
+                        <CheckBox  x:Name="FilterCurrentMembers" Style="{StaticResource CheckBoxStyle}"  
+                                   Click="CurrentMembersOnlyCheckBox_OnClick"
+                                   VerticalAlignment="Center" IsChecked="True"/>
+                        <Label Content="Current Members Only"  VerticalAlignment="Center"   FontSize="16"/>
+                    </StackPanel>
+                </StackPanel>
 
         </DockPanel>
 

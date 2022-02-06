@@ -7,7 +7,7 @@ namespace Membership.Core.DataModels
     {
         public Office() { }
         public Office(int officeId, string title, int groupId, 
-                      int groupOrder, int currentlyUsed)
+                      int groupOrder, bool currentlyUsed)
         {
             OfficeId = officeId;
             Title = title;
@@ -20,6 +20,6 @@ namespace Membership.Core.DataModels
         public string Title { get; set; }
         public int GroupId { get; set; }
         public int GroupOrder { get; set; }
-        public int CurrentlyUsed { get; set; }
+        public bool CurrentlyUsed { get; set; }
     }
 }

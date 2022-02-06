@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Dapper.Contrib.Extensions;
 
 namespace Membership.Core.DataModels
@@ -25,7 +24,7 @@ namespace Membership.Core.DataModels
         public DateTime ToDate { get; set; }
 
         [ExplicitKey] public Guid MemberId => MemberRec.MemberId;
-        [Computed] public int OfficeId => OfficeRec.OfficeId;
+        [ExplicitKey] public int OfficeId => OfficeRec.OfficeId;
 
 
 
@@ -43,6 +42,12 @@ namespace Membership.Core.DataModels
                 return $"({fMonth}-{tMonth})";
             }
         }
+
+     //   public bool Equals(Officer other)
+     //   {
+     //       return ControlPanelId.Equals(other?.ControlPanelId) && ControlPointNumber.Equals(other?.ControlPointNumber);
+//
+ //       }
 
     }
 }

@@ -47,7 +47,17 @@ namespace Membership.Core.Repositories
                 return retVal;
             }
         }
+        private IEnumerable<Office> GetSelectedOfficeRecords(string clause = "", DynamicParameters param = null)
+        {
+            const string query = "SELECT DISTINCT ol.* FROM OFFICE_Assignments oa " +
+                                 "INNER JOIN OFFICE_List ol ON oa.OfficeID = ol.OfficeID ";
 
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                return connection.Query<Office>(query + clause, param).ToList();
+            }
+
+        }
 
         private IEnumerable<Officer> GetSelectedOfficerRecords(string clause, DynamicParameters param)
         {
@@ -94,6 +104,30 @@ namespace Membership.Core.Repositories
             return GetSelectedOfficerRecords(whereClause, parameter);
         }
 
+        public IEnumerable<Office> GetOfficesByYear(int year)
+        {
+            var whereClause = "WHERE oa.Year = @year";
+            var parameter = new DynamicParameters();
+            parameter.Add("Year", year);
+            return GetSelectedOfficeRecords(whereClause, parameter);
+        }
+        private bool IsDuplicateRecord(Officer officerRec)
+        {
+            var whereClause = "WHERE oa.MemberId = @MemberId " +
+                                     " AND oa.OfficeId = @OfficeId " +
+                                     " AND oa.Year = @Year " +
+                                     " AND oa.FromDate = @FromDate " +
+                                     " AND oa.ToDate = @ToDate ";
+
+            var parameter = new DynamicParameters();
+            parameter.Add("MemberId", officerRec.MemberId);
+            parameter.Add("OfficeId", officerRec.OfficeId);
+            parameter.Add("Year", officerRec.Year);
+            parameter.Add("FromDate", officerRec.FromDate);
+            parameter.Add("ToDate", officerRec.ToDate);
+            var recOnFile = GetSelectedOfficeRecords(whereClause, parameter);
+            return recOnFile.Any();
+        }
 
         public void InsertOfficerRecord(Officer officerRec)
         {
@@ -104,17 +138,18 @@ namespace Membership.Core.Repositories
         }
         public void UpdateOfficerRecord(Officer officerRec)
         {
+            if (IsDuplicateRecord(officerRec)) return;
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 connection.Update(officerRec);
             }
         }
 
-        public void DeleteOfficerRecords(IEnumerable<Officer> officerRecs)
+        public void DeleteOfficerRecord(Officer officerRec)
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var isSuccess = connection.Delete(officerRecs);
+                connection.Delete(officerRec);
             }
         }
 
