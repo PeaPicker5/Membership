@@ -104,7 +104,7 @@
                     <DockPanel LastChildFill="True" >
                         <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.ZIP, Mode=TwoWay}" Style="{StaticResource InputTextBox}" Width="60" />
                         <ComboBox DockPanel.Dock="Right" Width="60" Margin="10,0" FontSize="16" Height="24"
-                                  VerticalAlignment="Top" VerticalContentAlignment="Top"
+                                  VerticalAlignment="Top" VerticalContentAlignment="Top" 
                                   SelectedValue="{Binding Path=MemberRec.State, Mode=TwoWay}"
                                   ItemsSource="{Binding Path=StateInits}"
                                   Style="{StaticResource ComboBoxFadeInOutStyle}" />
@@ -144,6 +144,7 @@
             <StackPanel x:Name="SecondColumnOfInformation" Grid.Column="1" Grid.Row="0"  Margin="10,5,5,5">
                 <Label Content="Status:" Style="{StaticResource InputLabel}"   />
                 <ComboBox x:Name="StatusCombo" Margin="0,0,0,5" MinWidth="100" FontSize="16"
+                          SelectionChanged="StatusCombo_OnSelectionChanged"
                           ItemsSource="{Binding Path=MemberTypeLookups, Mode=OneWay}"
                           SelectedValuePath="Item1" DisplayMemberPath="Item2"
                           SelectedValue="{Binding Path=MemberRec.MemberTypeId}"/>
@@ -232,7 +233,11 @@
             </ScrollViewer>
 
             <!--IMAGE OF MEMBERSHIP RECORD-->
+            <StackPanel Grid.Row="1" Grid.Column="2" Margin="10">
+                <CheckBox x:Name="ChkboxIsActive" Content="Active Firefighter" IsChecked="{Binding Path=MemberRec.IsActive}"
+                          Style="{StaticResource MetroCheckBox}" FontSize="16" />
 
+            </StackPanel>
         </Grid>
     </GroupBox>
 </UserControl>

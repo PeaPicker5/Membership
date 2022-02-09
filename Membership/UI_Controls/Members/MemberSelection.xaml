@@ -98,7 +98,7 @@
                           CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single"
                           SelectionChanged="MemberGrid_SelectionChanged">
                     <DataGrid.Columns  >
-                    <DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsCurrent}" Width="85"  />
+                        <DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsCurrent}" Width="85"  />
                         <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
                         <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
                         <DataGridTextColumn Header="MI" Binding="{Binding Path=MI}" Width="40" 
@@ -106,6 +106,7 @@
                         <DataGridTextColumn Header="Sfx" Binding="{Binding Path=Suffix}"  Width="45" 
                                             ElementStyle="{StaticResource DataGridCellCenter}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
+                        <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=IsActive}"/>
                         <DataGridTextColumn Header="Obligated" Binding="{Binding Path=DateObligated, 
                                             Converter={StaticResource MinimumDateConverter},StringFormat=MM-dd-yyyy}" >
                             <DataGridTextColumn.ElementStyle>

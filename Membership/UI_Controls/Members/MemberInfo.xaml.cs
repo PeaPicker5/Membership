@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
 using Membership.Properties;
 using Microsoft.Win32;
 using static Membership.Common.CommonBaseClass;
+using Image = System.Drawing.Image;
 using MessageBox = System.Windows.MessageBox;
 
 namespace Membership.UI_Controls.Members
@@ -21,11 +22,11 @@ namespace Membership.UI_Controls.Members
 
         private byte[] _fullResPage; //Set with Load or Clear Image, Add/Update/Delete on Member Save, Load on Expand Button
 
-        //public static IEnumerable<string> StateInits => new List<string>()
-        //{
-        //    "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
-        //    "NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"
-        //};
+        public static IEnumerable<string> StateInits => new List<string>()
+        {
+            "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
+            "NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"
+        };
         private readonly MemberInfoPresenter _presenter;
 
         private Guid _selectedMemberId;
@@ -245,6 +246,12 @@ namespace Membership.UI_Controls.Members
         }
 
 
-
+        private void StatusCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MemberRec.MemberTypeId == 1)
+                ChkboxIsActive.IsChecked = true;
+            else if (MemberRec.MemberTypeId > 2)
+                ChkboxIsActive.IsChecked = false;
+        }
     }
 }
