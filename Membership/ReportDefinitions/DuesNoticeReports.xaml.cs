@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using Membership.Annotations;
 using Membership.Core.DataModels;
 using Membership.Core.Presenters;
@@ -10,11 +11,10 @@ using Microsoft.Reporting.WinForms;
 
 namespace Membership.ReportDefinitions
 {
-    public partial class DuesRemovalNoticeReport : INotifyPropertyChanged
+    public partial class DuesNoticeReports : INotifyPropertyChanged
     {
         private readonly ReportParametersPresenter _presenter;
-
-
+        public string ReportName { get; set; }
 
         public IEnumerable<Officer> TableOfficers
         {
@@ -23,9 +23,7 @@ namespace Membership.ReportDefinitions
         }
         public static readonly DependencyProperty MyPropertyProperty =
             DependencyProperty.Register("TableOfficers", typeof(IEnumerable<Officer>),
-                typeof(DuesRemovalNoticeReport));
-
-
+                typeof(DuesNoticeReports));
 
         public Officer SelectedOffice
         {
@@ -34,29 +32,26 @@ namespace Membership.ReportDefinitions
         }
         public static readonly DependencyProperty SelectedOfficeProperty =
             DependencyProperty.Register("SelectedOffice", typeof(Officer),
-                typeof(DuesRemovalNoticeReport));
+                typeof(DuesNoticeReports));
 
 
-
-
-        public DuesRemovalNoticeReport()
+        public DuesNoticeReports()
         {
             InitializeComponent();
             _presenter = new ReportParametersPresenter();
-            SetupParameters();
-            UpdateTheReport();
+
+            Loaded += (sender, args) => {
+                SetupParameters();
+                UpdateTheReport();
+            };
         }
 
         private void SetupParameters()
         {
             TableOfficers = _presenter.LoadTableOfficersForThisYear();
 
-            var finSecRecord = TableOfficers.FirstOrDefault(x => x.OfficeRec.OfficeId == 13);
-            if (finSecRecord != null)
-            {
-                OfficerToSignText.Text = finSecRecord.MemberRec.FullName;
-                SelectedOffice = finSecRecord;
-            }
+            var finSecRecord = TableOfficers.FirstOrDefault(x => x.OfficeRec.OfficeId == 24);
+            SelectedOffice = finSecRecord;
         }
 
         private IEnumerable<ReportParameter> UpdateParameterValues()
@@ -75,7 +70,7 @@ namespace Membership.ReportDefinitions
 
         private void UpdateTheReport()
         {
-            ReportControl.ReportName = "DuesRemovalNotice";
+            ReportControl.ReportName = ReportName; // "DuesRemovalNotice";
             ReportControl.ReportParams = UpdateParameterValues();
             ReportControl.LoadReport();
         }
@@ -86,6 +81,11 @@ namespace Membership.ReportDefinitions
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OfficeTitleCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OfficerToSignText.Text = ((Officer) OfficeTitleCombo.SelectedItem).MemberRec.FullName;
         }
     }
 }

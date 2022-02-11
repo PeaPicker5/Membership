@@ -184,8 +184,8 @@
                                       <Value>=Parameters!Signature.Value</Value>
                                       <Style>
                                         <FontStyle>Italic</FontStyle>
-                                        <FontFamily>Segoe Script</FontFamily>
-                                        <FontSize>18pt</FontSize>
+                                        <FontFamily>English157 BT</FontFamily>
+                                        <FontSize>28pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>

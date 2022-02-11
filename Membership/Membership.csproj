@@ -202,14 +202,8 @@
     <Compile Include="ReportDefinitions\DuesAddressLabels.xaml.cs">
       <DependentUpon>DuesAddressLabels.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportDefinitions\DuesRemovalLettersReport.xaml.cs">
-      <DependentUpon>DuesRemovalLettersReport.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ReportDefinitions\DuesRemovalNoticeReport.xaml.cs">
-      <DependentUpon>DuesRemovalNoticeReport.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ReportDefinitions\DuesWarningReport.xaml.cs">
-      <DependentUpon>DuesWarningReport.xaml</DependentUpon>
+    <Compile Include="ReportDefinitions\DuesNoticeReports.xaml.cs">
+      <DependentUpon>DuesNoticeReports.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReportDefinitions\DuesCards.xaml.cs">
       <DependentUpon>DuesCards.xaml</DependentUpon>
@@ -286,15 +280,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReportDefinitions\DuesRemovalLettersReport.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ReportDefinitions\DuesRemovalNoticeReport.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ReportDefinitions\DuesWarningReport.xaml">
+    <Page Include="ReportDefinitions\DuesNoticeReports.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -517,7 +503,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI_Controls\Meetings\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

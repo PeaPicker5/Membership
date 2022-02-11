@@ -21,7 +21,7 @@ namespace Membership.Core.Presenters
         public IEnumerable<Officer> LoadTableOfficersForThisYear()
         {
             return _officeRepository.GetOfficersByYear(DateTime.Now.Year)
-                .Where(x => x.OfficeRec.GroupId == 5)
+                .Where(x => x.OfficeRec.GroupId == 22)
                 .OrderBy(x => x.OfficeRec.GroupOrder)
                 .ToList();
         }

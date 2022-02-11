@@ -60,20 +60,20 @@ namespace Membership
 
         private void DuesWarningButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesWarningReport = new DuesWarningReport();
+            var ucDuesWarningReport = new DuesNoticeReports { ReportName = "DuesWarning" };
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesWarningReport);
         }
         private void DuesRemovalNoticeButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesRemovalNoticeReport = new DuesRemovalNoticeReport();
+            var ucDuesRemovalNoticeReport = new DuesNoticeReports {ReportName = "DuesRemovalNotice"};
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesRemovalNoticeReport);
         }
 
         private void DuesRemovalLettersButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesRemovalLettersReport = new DuesRemovalLettersReport();
+            var ucDuesRemovalLettersReport = new DuesNoticeReports { ReportName = "DuesRemovalLetters" };
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesRemovalLettersReport);
         }

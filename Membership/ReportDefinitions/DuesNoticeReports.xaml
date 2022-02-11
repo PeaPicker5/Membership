@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Membership.ReportDefinitions.DuesRemovalLettersReport"
+﻿<UserControl x:Class="Membership.ReportDefinitions.DuesNoticeReports"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -16,18 +16,19 @@
                 <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
                     <Label Content=" PARAMETERS :   " FontWeight="Bold" FontSize="16"/>
 
-                    <Label Content="    Signature Name:"  FontSize="16"/>
-                    <TextBox x:Name="OfficerToSignText" FontSize="18" FontStyle="Italic" 
-                               Style="{StaticResource InputTextBox}"
-                               Margin="0,3" MinWidth="175" Background="White"/>
-
                     <Label Content="    Office Title:"  FontSize="16"/>
                     <ComboBox x:Name="OfficeTitleCombo"  FontSize="16"  Margin="0,3" MinWidth="175" IsEditable="False"
                               ItemsSource="{Binding Path=TableOfficers, Mode=OneWay}"
-                              DisplayMemberPath="OfficeRec.Title"
-                              SelectedValuePath="OfficeRec.Title"
-                              SelectedValue="{Binding Path=SelectedOffice.OfficeRec.Title}"
+                              DisplayMemberPath="OfficeRec.Title" 
+                              SelectionChanged="OfficeTitleCombo_OnSelectionChanged"
+                              SelectedValuePath="OfficeRec.OfficeId"
+                              SelectedValue="{Binding Path=SelectedOffice.OfficeRec.OfficeId}"
                               Style="{StaticResource ComboBoxFadeInOutStyle}" />
+
+                    <Label Content="    Signature Name:"  FontSize="16"/>
+                    <TextBox x:Name="OfficerToSignText" FontSize="18" FontStyle="Italic" 
+                             Style="{StaticResource InputTextBox}"
+                             Margin="0,3" MinWidth="175" Background="White"/>
 
 
                 </StackPanel>

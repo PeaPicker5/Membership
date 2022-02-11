@@ -283,8 +283,8 @@
                   <TextRun>
                     <Value>=Parameters!Signature.Value</Value>
                     <Style>
-                      <FontFamily>Segoe Script</FontFamily>
-                      <FontSize>16pt</FontSize>
+                      <FontFamily>Monotype Corsiva</FontFamily>
+                      <FontSize>26pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -293,9 +293,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Signature</rd:DefaultName>
-            <Top>4.41307in</Top>
+            <Top>4.42349in</Top>
             <Left>4.10292in</Left>
-            <Height>0.35416in</Height>
+            <Height>0.46874in</Height>
             <Width>3.07416in</Width>
             <ZIndex>2</ZIndex>
             <Style>
