@@ -199,13 +199,13 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
-    <Compile Include="ReportDefinitions\DuesAddressLabels.xaml.cs">
+    <Compile Include="UI_Controls\Dues\DuesAddressLabels.xaml.cs">
       <DependentUpon>DuesAddressLabels.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportDefinitions\DuesNoticeReports.xaml.cs">
+    <Compile Include="UI_Controls\Dues\DuesNoticeReports.xaml.cs">
       <DependentUpon>DuesNoticeReports.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportDefinitions\DuesCards.xaml.cs">
+    <Compile Include="UI_Controls\Dues\DuesCards.xaml.cs">
       <DependentUpon>DuesCards.xaml</DependentUpon>
     </Compile>
     <Compile Include="RPT_DuesCards3330.Designer.cs">
@@ -276,15 +276,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ReportDefinitions\DuesAddressLabels.xaml">
+    <Page Include="UI_Controls\Dues\DuesAddressLabels.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReportDefinitions\DuesNoticeReports.xaml">
+    <Page Include="UI_Controls\Dues\DuesNoticeReports.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReportDefinitions\DuesCards.xaml">
+    <Page Include="UI_Controls\Dues\DuesCards.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
