@@ -202,6 +202,9 @@
     <Compile Include="UI_Controls\Dues\DuesAddressLabels.xaml.cs">
       <DependentUpon>DuesAddressLabels.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI_Controls\Dues\DuesEmailList.xaml.cs">
+      <DependentUpon>DuesEmailList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Controls\Dues\DuesNoticeReports.xaml.cs">
       <DependentUpon>DuesNoticeReports.xaml</DependentUpon>
     </Compile>
@@ -277,6 +280,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI_Controls\Dues\DuesAddressLabels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI_Controls\Dues\DuesEmailList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

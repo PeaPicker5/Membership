@@ -125,7 +125,7 @@
                         <fluent:Button Header="Current Dues Email List."
                                        ToolTip="Create a comma delimited list of emails to be copied into the BCC of an email for notification" 
                                        LargeIcon="{StaticResource DuesEmailList}"
-                                       Click="DuesCardsButtonOnClick" />
+                                       Click="DuesEmailListButtonOnClick" />
                         <fluent:Button Header="Print  Dues Cards"
                                        ToolTip="Dues Cards" 
                                        LargeIcon="{StaticResource DuesCards}"

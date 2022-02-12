@@ -29,6 +29,15 @@ namespace Membership
 
 
         #region  DUES FUNCTIONS 
+
+        private void DuesEmailListButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var ucDuesEmailList = new DuesEmailList();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucDuesEmailList);
+        }
+
+
         private void DuesHistoryButtonOnClick(object sender, RoutedEventArgs e)
         {
             var ucDuesHistory = new DuesHistory();
