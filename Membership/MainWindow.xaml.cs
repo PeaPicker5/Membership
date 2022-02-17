@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Membership.ReportDefinitions;
 using Membership.UI_Controls.Dues;
+using Membership.UI_Controls.Meetings;
 using Membership.UI_Controls.Members;
 using Membership.UI_Controls.Offices;
 
@@ -122,5 +123,11 @@ namespace Membership
 
         }
 
+        private void MeetingButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ucMeetingAttendance = new MeetingAttendance();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucMeetingAttendance);
+        }
     }
 }

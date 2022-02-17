@@ -152,11 +152,14 @@
     </Compile>
     <Compile Include="Core\DataModels\DuesHistory.cs" />
     <Compile Include="Core\DataModels\DuesRecord.cs" />
+    <Compile Include="Core\DataModels\MeetingMember.cs" />
     <Compile Include="Core\DataModels\MemberRemoval.cs" />
     <Compile Include="Core\DataModels\ImageRec.cs" />
+    <Compile Include="Core\DataModels\Meeting.cs" />
     <Compile Include="Core\DataModels\Officer.cs" />
     <Compile Include="Core\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Presenters\IDuesRecordView.cs" />
+    <Compile Include="Core\Presenters\IMeetingAttendanceView.cs" />
     <Compile Include="Core\Presenters\IOfficeAssignment.cs" />
     <Compile Include="Core\Presenters\IEditOfficerView.cs" />
     <Compile Include="Core\Presenters\IOfficersByYear.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="Core\Presenters\IOfficeHistoryView.cs" />
     <Compile Include="Core\Presenters\IMemberView.cs" />
     <Compile Include="Core\Presenters\MemberInfoPresenter.cs" />
+    <Compile Include="Core\Presenters\MeeetingAttendancePresenter.cs" />
     <Compile Include="Core\Presenters\OfficeAssignmentPresenter.cs" />
     <Compile Include="Core\Presenters\EditOfficerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficersByYearPresenter.cs" />
@@ -175,7 +179,9 @@
     <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Presenters\OfficerPresenter.cs" />
     <Compile Include="Core\Presenters\MemberSelectionPresenter.cs" />
+    <Compile Include="Core\Repositories\IMeetingRepository.cs" />
     <Compile Include="Core\Repositories\IReportDataRepository.cs" />
+    <Compile Include="Core\Repositories\MeetingRepository.cs" />
     <Compile Include="Core\Repositories\ReportDataRepository.cs" />
     <Compile Include="Core\Repositories\FileStoreRepository.cs" />
     <Compile Include="Core\Repositories\IDuesRepository.cs" />
@@ -217,6 +223,9 @@
       <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UI_Controls\Meetings\MeetingAttendance.xaml.cs">
+      <DependentUpon>MeetingAttendance.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Controls\Members\ImagePopupWindow.xaml.cs">
       <DependentUpon>ImagePopupWindow.xaml</DependentUpon>
     </Compile>
@@ -292,6 +301,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI_Controls\Dues\DuesCards.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI_Controls\Meetings\MeetingAttendance.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -510,9 +523,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI_Controls\Meetings\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

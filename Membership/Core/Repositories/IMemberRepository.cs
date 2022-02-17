@@ -27,6 +27,7 @@ namespace Membership.Core.Repositories
         /// <returns></returns>
         IEnumerable<Member> GetMembersWithOffice(int year, int officeType);
 
+        IEnumerable<Member> GetCurrentMembers();
         void InsertMemberRecord(Member memberRec);
         void UpdateMemberRecord(Member memberRec);
         bool DeleteMemberRecord(Member memberRec, 

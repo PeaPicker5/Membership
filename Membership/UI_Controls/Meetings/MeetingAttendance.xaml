@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="Membership.UI_Controls.Meetings.MeetingAttendance"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:offices="clr-namespace:Membership.UI_Controls.Offices"
+             xmlns:dues="clr-namespace:Membership.UI_Controls.Dues"
+             xmlns:members="clr-namespace:Membership.UI_Controls.Members"
+             xmlns:common="clr-namespace:Membership.Common"
+             xmlns:converters="clr-namespace:Membership.Common.Converters"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="400" d:DesignWidth="1500">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BooleanInverterConverter x:Key="BooleanInverterConverter" /> 
+            <converters:MinimumDateConverter x:Key="MinimumDateConverter" /> 
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!-- Membership Information -->
+    <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+        <GroupBox.Header>
+            <DockPanel  x:Name="SelectionBar" LastChildFill="True">
+                <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
+
+                    <Label Content="MEMBERSHIP SELECTION:   " FontWeight="Bold" FontSize="16"/>
+
+                    <CheckBox  x:Name="FilterCurrent" Style="{StaticResource CheckBoxStyle}"  
+                                VerticalAlignment="Center" 
+                                Click="FilterCheckBoxOnClick" />
+                    <Label Content="Current Only"     FontSize="16"/>
+
+                </StackPanel>
+                <!--<StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button ToolTip="Clear the selection filters."  Width="100"
+                            Click="ClearSelectionOnClick" Margin="10,0" Height="32">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text=" CLEAR FILTER"   
+                                        FontSize="12" Style="{StaticResource MessageTextBlockStyle}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content="Records:" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="{Binding FilteredMembersCount}" Style="{StaticResource LabelStyle}"/>
+                </StackPanel>-->
+            </DockPanel>
+        </GroupBox.Header>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListView Grid.Column="1" ItemsSource="{Binding Path=MemberList}" Background="Aquamarine" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Style="{StaticResource CheckBoxStyle}" Margin="15,0" Content="{Binding LFName}" >
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.2" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <StackPanel Grid.Column="2">
+                <ComboBox x:Name="Additional1" ItemsSource="{Binding Path=AdditionalMembers}"></ComboBox>
+
+
+            </StackPanel>
+            
+            <ListView Grid.Column="2" ItemsSource="{Binding Path=MemberList}" Background="Aquamarine" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Style="{StaticResource CheckBoxStyle}" Margin="15,0" >
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.2" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                        <ComboBox Width="100" ItemsSource="{Binding Path=Add}"></ComboBox>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </GroupBox>
+
+</UserControl>
+

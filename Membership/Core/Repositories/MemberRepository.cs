@@ -60,8 +60,13 @@ namespace Membership.Core.Repositories
             var whereClause = officeType == DistrictOnly
                 ? "WHERE oa.Year = @year AND oa.OfficeId < 20 "
                 : "WHERE oa.Year = @year AND oa.OfficeId >= 20 ";
-            var parameter = new DynamicParameters();  parameter.Add("Year", year);
+            var parameter = new DynamicParameters(); parameter.Add("Year", year);
             return GetSelectedMemberRecords(whereClause, parameter);
+        }
+        public IEnumerable<Member> GetCurrentMembers()
+        {
+            var members = GetMembers();
+            return members.Where(x => x.IsCurrent);
         }
 
         public void InsertMemberRecord(Member memberRec)

@@ -73,7 +73,7 @@ namespace Membership.Core.DataModels
 
         [Computed] public bool IsDeceased => DateDeceased > DateObligated;
         [Computed] public string FullName => $"{FirstName} {LastName}";
-        [Computed] public string LFName => $"{LastName}, {FirstName} {MI}";
+        [Computed] public string LFName => $"{LastName} {Suffix}, {FirstName} {MI}";
         [Computed] public string CityStateZip => $"{City}, {State}  {ZIP}";
 
 
