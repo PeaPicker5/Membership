@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Membership.Core.DataModels;
-using Membership.Core.Presenters;
+using Membership.Core.Dues.DataModels;
+using Membership.Core.Dues.Presenters;
 using Button = System.Windows.Controls.Button;
 
 namespace Membership.UI_Controls.Dues

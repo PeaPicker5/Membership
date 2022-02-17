@@ -6,7 +6,9 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Membership.Core.DataModels;
-using Membership.Core.Presenters;
+using Membership.Core.Member.DataModels;
+using Membership.Core.Officers.DataModels;
+using Membership.Core.Officers.Presenters;
 using Membership.Properties;
 
 namespace Membership.UI_Controls.Offices

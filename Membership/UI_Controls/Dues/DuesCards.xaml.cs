@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Membership.Annotations;
-using Membership.Core.Presenters;
+using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.ReportDefinitions

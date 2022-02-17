@@ -4,7 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using Membership.Core.DataModels;
-using Membership.Core.Presenters;
+using Membership.Core.Member.DataModels;
+using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.ReportViewer

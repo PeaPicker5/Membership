@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using Membership.Core.DataModels;
-using Membership.Core.Presenters;
+using Membership.Core.Officers.DataModels;
+using Membership.Core.Officers.Presenters;
 
 namespace Membership.UI_Controls.Offices
 {

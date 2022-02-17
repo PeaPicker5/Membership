@@ -88,7 +88,7 @@
                         <WrapPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
+                <!--<ListView.ItemTemplate>
                     <DataTemplate>
                         <CheckBox Style="{StaticResource CheckBoxStyle}" Margin="15,0" >
                             <CheckBox.LayoutTransform>
@@ -97,7 +97,7 @@
                         </CheckBox>
                         <ComboBox Width="100" ItemsSource="{Binding Path=Add}"></ComboBox>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </ListView.ItemTemplate>-->
             </ListView>
         </Grid>
     </GroupBox>

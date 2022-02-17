@@ -6,7 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Membership.Annotations;
 using Membership.Core.DataModels;
-using Membership.Core.Presenters;
+using Membership.Core.Officers.DataModels;
+using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.ReportDefinitions

@@ -8,7 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Membership.Core.DataModels;
-using Membership.Core.Presenters;
+using Membership.Core.Dues.DataModels;
+using Membership.Core.Dues.Presenters;
 using Membership.Properties;
 using CheckBox = System.Windows.Controls.CheckBox;
 

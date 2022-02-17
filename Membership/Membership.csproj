@@ -147,52 +147,52 @@
     <Compile Include="Common\Converters\StringToStringConverter.cs" />
     <Compile Include="Common\Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Common\CommonBaseClass.cs" />
-    <Compile Include="Common\InputControl.xaml.cs">
+    <Compile Include="Common\Controls\InputControl.xaml.cs">
       <DependentUpon>InputControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\DataModels\DuesHistory.cs" />
-    <Compile Include="Core\DataModels\DuesRecord.cs" />
-    <Compile Include="Core\DataModels\MeetingMember.cs" />
-    <Compile Include="Core\DataModels\MemberRemoval.cs" />
+    <Compile Include="Core\Dues\DataModels\DuesHistory.cs" />
+    <Compile Include="Core\Dues\DataModels\DuesRecord.cs" />
+    <Compile Include="Core\Meetings\DataModels\MeetingMember.cs" />
+    <Compile Include="Core\Member\DataModels\MemberRemoval.cs" />
     <Compile Include="Core\DataModels\ImageRec.cs" />
-    <Compile Include="Core\DataModels\Meeting.cs" />
-    <Compile Include="Core\DataModels\Officer.cs" />
-    <Compile Include="Core\Presenters\DuesPresenter.cs" />
-    <Compile Include="Core\Presenters\IDuesRecordView.cs" />
-    <Compile Include="Core\Presenters\IMeetingAttendanceView.cs" />
-    <Compile Include="Core\Presenters\IOfficeAssignment.cs" />
-    <Compile Include="Core\Presenters\IEditOfficerView.cs" />
-    <Compile Include="Core\Presenters\IOfficersByYear.cs" />
-    <Compile Include="Core\Presenters\IOfficerRecordsView.cs" />
-    <Compile Include="Core\Presenters\IReportParametersView.cs" />
-    <Compile Include="Core\Presenters\IReportViewerView.cs" />
-    <Compile Include="Core\Presenters\IMemberSelectionView.cs" />
-    <Compile Include="Core\Presenters\IOfficeHistoryView.cs" />
-    <Compile Include="Core\Presenters\IMemberView.cs" />
-    <Compile Include="Core\Presenters\MemberInfoPresenter.cs" />
-    <Compile Include="Core\Presenters\MeeetingAttendancePresenter.cs" />
-    <Compile Include="Core\Presenters\OfficeAssignmentPresenter.cs" />
-    <Compile Include="Core\Presenters\EditOfficerPresenter.cs" />
-    <Compile Include="Core\Presenters\OfficersByYearPresenter.cs" />
-    <Compile Include="Core\Presenters\OfficeHistoryPresenter.cs" />
-    <Compile Include="Core\Presenters\ReportParametersPresenter.cs" />
-    <Compile Include="Core\Presenters\ReportViewerPresenter.cs" />
-    <Compile Include="Core\Presenters\OfficerPresenter.cs" />
-    <Compile Include="Core\Presenters\MemberSelectionPresenter.cs" />
-    <Compile Include="Core\Repositories\IMeetingRepository.cs" />
-    <Compile Include="Core\Repositories\IReportDataRepository.cs" />
-    <Compile Include="Core\Repositories\MeetingRepository.cs" />
-    <Compile Include="Core\Repositories\ReportDataRepository.cs" />
+    <Compile Include="Core\Meetings\DataModels\Meeting.cs" />
+    <Compile Include="Core\Officers\DataModels\Officer.cs" />
+    <Compile Include="Core\Dues\Presenters\DuesPresenter.cs" />
+    <Compile Include="Core\Dues\Presenters\IDuesRecordView.cs" />
+    <Compile Include="Core\Meetings\Presenters\IMeetingAttendanceView.cs" />
+    <Compile Include="Core\Officers\Presenters\IOfficeAssignment.cs" />
+    <Compile Include="Core\Officers\Presenters\IEditOfficerView.cs" />
+    <Compile Include="Core\Officers\Presenters\IOfficersByYear.cs" />
+    <Compile Include="Core\Officers\Presenters\IOfficerRecordsView.cs" />
+    <Compile Include="Core\Reports\Presenters\IReportParametersView.cs" />
+    <Compile Include="Core\Reports\Presenters\IReportViewerView.cs" />
+    <Compile Include="Core\Member\Presenters\IMemberSelectionView.cs" />
+    <Compile Include="Core\Officers\Presenters\IOfficeHistoryView.cs" />
+    <Compile Include="Core\Member\Presenters\IMemberView.cs" />
+    <Compile Include="Core\Member\Presenters\MemberInfoPresenter.cs" />
+    <Compile Include="Core\Meetings\Presenters\MeeetingAttendancePresenter.cs" />
+    <Compile Include="Core\Officers\Presenters\OfficeAssignmentPresenter.cs" />
+    <Compile Include="Core\Officers\Presenters\EditOfficerPresenter.cs" />
+    <Compile Include="Core\Officers\Presenters\OfficersByYearPresenter.cs" />
+    <Compile Include="Core\Officers\Presenters\OfficeHistoryPresenter.cs" />
+    <Compile Include="Core\Reports\Presenters\ReportParametersPresenter.cs" />
+    <Compile Include="Core\Reports\Presenters\ReportViewerPresenter.cs" />
+    <Compile Include="Core\Officers\Presenters\OfficerPresenter.cs" />
+    <Compile Include="Core\Member\Presenters\MemberSelectionPresenter.cs" />
+    <Compile Include="Core\Meetings\Repositories\IMeetingRepository.cs" />
+    <Compile Include="Core\Reports\Repositories\IReportDataRepository.cs" />
+    <Compile Include="Core\Meetings\Repositories\MeetingRepository.cs" />
+    <Compile Include="Core\Reports\Repositories\ReportDataRepository.cs" />
     <Compile Include="Core\Repositories\FileStoreRepository.cs" />
-    <Compile Include="Core\Repositories\IDuesRepository.cs" />
+    <Compile Include="Core\Dues\Repositories\IDuesRepository.cs" />
     <Compile Include="Core\Repositories\IFileStoreRepository.cs" />
-    <Compile Include="Core\Repositories\IMemberTypeRepository.cs" />
-    <Compile Include="Core\Repositories\IOfficerRepository.cs" />
-    <Compile Include="Core\Repositories\IMemberRepository.cs" />
-    <Compile Include="Core\Repositories\DuesRepository.cs" />
-    <Compile Include="Core\Repositories\MemberTypeRepository.cs" />
-    <Compile Include="Core\Repositories\OfficerRepository.cs" />
-    <Compile Include="Core\Repositories\MemberRepository.cs" />
+    <Compile Include="Core\Member\Repositories\IMemberTypeRepository.cs" />
+    <Compile Include="Core\Officers\Repositories\IOfficerRepository.cs" />
+    <Compile Include="Core\Member\Repositories\IMemberRepository.cs" />
+    <Compile Include="Core\Dues\Repositories\DuesRepository.cs" />
+    <Compile Include="Core\Member\Repositories\MemberTypeRepository.cs" />
+    <Compile Include="Core\Officers\Repositories\OfficerRepository.cs" />
+    <Compile Include="Core\Member\Repositories\MemberRepository.cs" />
     <Compile Include="MembershipDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -268,7 +268,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Common\InputControl.xaml">
+    <Page Include="Common\Controls\InputControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -280,9 +280,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\DataModels\Member.cs" />
-    <Compile Include="Core\DataModels\Office.cs" />
-    <Compile Include="Core\DataModels\MemberType.cs" />
+    <Compile Include="Core\Member\DataModels\Member.cs" />
+    <Compile Include="Core\Officers\DataModels\Office.cs" />
+    <Compile Include="Core\Member\DataModels\MemberType.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
