@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Membership.Core.Dues.DataModels;
 using Membership.Core.Officers.DataModels;
 
-namespace Membership.Core.Member.Repositories
+namespace Membership.Core.Members.Repositories
 {
     public interface IMemberRepository
     {
@@ -12,13 +12,13 @@ namespace Membership.Core.Member.Repositories
         /// </summary>
         /// <param name="memberId">The event identifier.</param>
         /// <returns></returns>
-        Member.DataModels.Member Get(Guid memberId);
+        Members.DataModels.Member Get(Guid memberId);
 
         /// <summary>
         /// Gets all access events.
         /// </summary>
         /// <returns></returns>
-        ICollection<Member.DataModels.Member> GetMembers();
+        ICollection<Members.DataModels.Member> GetMembers();
 
         /// <summary>
         /// Get a list of members that hold an office for the given year
@@ -26,12 +26,12 @@ namespace Membership.Core.Member.Repositories
         /// <param name="year"></param>
         /// <param name="officeType"></param>
         /// <returns></returns>
-        IEnumerable<Member.DataModels.Member> GetMembersWithOffice(int year, int officeType);
+        IEnumerable<Members.DataModels.Member> GetMembersWithOffice(int year, int officeType);
 
-        IEnumerable<Member.DataModels.Member> GetCurrentMembers();
-        void InsertMemberRecord(Member.DataModels.Member memberRec);
-        void UpdateMemberRecord(Member.DataModels.Member memberRec);
-        bool DeleteMemberRecord(Member.DataModels.Member memberRec, 
+        IEnumerable<Members.DataModels.Member> GetCurrentMembers();
+        void InsertMemberRecord(Members.DataModels.Member memberRec);
+        void UpdateMemberRecord(Members.DataModels.Member memberRec);
+        bool DeleteMemberRecord(Members.DataModels.Member memberRec, 
             IEnumerable<DuesHistory> duesRecs,
             IEnumerable<Officer> officerRecs);
 

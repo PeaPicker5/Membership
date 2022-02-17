@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Membership.Core.Member.Repositories;
+using Membership.Core.Members.Repositories;
 using Membership.Core.Officers.Repositories;
 
 namespace Membership.Core.Officers.Presenters
@@ -9,9 +9,9 @@ namespace Membership.Core.Officers.Presenters
     {
 
         public IEnumerable<DataModels.Office> OfficeRecs { get; set; }
-        public IEnumerable<Member.DataModels.Member> MemberRecs { get; set; }
+        public IEnumerable<Members.DataModels.Member> MemberRecs { get; set; }
         private IEnumerable<DataModels.Office> _allOfficeRecs { get; set; }
-        private IEnumerable<Member.DataModels.Member> _allMemberRecs { get; set; }
+        private IEnumerable<Members.DataModels.Member> _allMemberRecs { get; set; }
         private readonly IMemberRepository _memberRepository;
         private readonly IOfficerRepository _officeRepository;
         private readonly IEditOfficerView _view;

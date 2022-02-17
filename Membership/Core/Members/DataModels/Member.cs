@@ -1,7 +1,7 @@
 ﻿using System;
 using Dapper.Contrib.Extensions;
 
-namespace Membership.Core.Member.DataModels
+namespace Membership.Core.Members.DataModels
 {
     [Table("MEMBER_List")]
     public class Member

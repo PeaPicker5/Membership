@@ -7,7 +7,7 @@ namespace Membership.Core.Officers.DataModels
     public class Officer
     {
         public Officer() {}
-        public Officer(Member.DataModels.Member memberRec, Office officeRec, int year, 
+        public Officer(Members.DataModels.Member memberRec, Office officeRec, int year, 
             DateTime fromDate, DateTime toDate)
         {
             MemberRec = memberRec;
@@ -17,7 +17,7 @@ namespace Membership.Core.Officers.DataModels
             ToDate = toDate;
         }
 
-        [Computed] public Member.DataModels.Member MemberRec { get; set; }
+        [Computed] public Members.DataModels.Member MemberRec { get; set; }
         [Computed] public Office OfficeRec { get; set; }
         public int Year { get; set; }
         public DateTime FromDate { get; set; }

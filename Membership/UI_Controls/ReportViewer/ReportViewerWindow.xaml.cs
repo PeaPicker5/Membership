@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using Membership.Core.DataModels;
-using Membership.Core.Member.DataModels;
+using Membership.Core.Members.DataModels;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 

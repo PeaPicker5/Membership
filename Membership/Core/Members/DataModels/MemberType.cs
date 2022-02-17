@@ -1,4 +1,4 @@
-﻿namespace Membership.Core.Member.DataModels
+﻿namespace Membership.Core.Members.DataModels
 {
     public class MemberType
     {

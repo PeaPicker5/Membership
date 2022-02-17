@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Membership.Core.DataModels;
 using Membership.Core.Dues.Repositories;
-using Membership.Core.Member.DataModels;
-using Membership.Core.Member.Repositories;
+using Membership.Core.Members.DataModels;
+using Membership.Core.Members.Repositories;
 using Membership.Core.Officers.Repositories;
 using Membership.Core.Repositories;
 
-namespace Membership.Core.Member.Presenters
+namespace Membership.Core.Members.Presenters
 {
     public class MemberInfoPresenter :IMemberView
     {
@@ -35,7 +35,7 @@ namespace Membership.Core.Member.Presenters
         }
 
 
-        public Member.DataModels.Member GetMember(Guid memberId)
+        public Members.DataModels.Member GetMember(Guid memberId)
         {
             return _memberRepository.Get(memberId);
         }
@@ -53,18 +53,18 @@ namespace Membership.Core.Member.Presenters
             _view.RemovalCodes = _memberTypeRepository.GetRemovalCodes().ToList();
         }
 
-        public void InsertMemberRecord(Member.DataModels.Member memberRec, byte[] fullResPicture)
+        public void InsertMemberRecord(Members.DataModels.Member memberRec, byte[] fullResPicture)
         {
             if (fullResPicture != null)
                 memberRec.PageId = InsertNewPicture("Membership Card", fullResPicture);
             _memberRepository.InsertMemberRecord(memberRec);
         }
-        public void UpdateMemberRecord(Member.DataModels.Member memberRec, byte[] fullResPicture)
+        public void UpdateMemberRecord(Members.DataModels.Member memberRec, byte[] fullResPicture)
         {
             memberRec.PageId = UpdateMembershipCardImage(memberRec.PageId, fullResPicture);
             _memberRepository.UpdateMemberRecord(memberRec);
         }
-        public bool DeleteMemberRecord(Member.DataModels.Member memberRec)
+        public bool DeleteMemberRecord(Members.DataModels.Member memberRec)
         {
             _fileStoreRepository.DeleteImageRecord(memberRec.PageId);
 

@@ -10,7 +10,7 @@ namespace Membership.Core.Dues.DataModels
     public class DuesRecord : INotifyPropertyChanged
     {
         public DuesRecord() { }
-        public DuesRecord(Member.DataModels.Member memberRec, int year, int month, float amount, bool isPaid)
+        public DuesRecord(Members.DataModels.Member memberRec, int year, int month, float amount, bool isPaid)
         {
             MemberRec = memberRec;
             Year = year;
@@ -19,7 +19,7 @@ namespace Membership.Core.Dues.DataModels
             IsPaid = isPaid;
         }
 
-        public Member.DataModels.Member MemberRec { get; set; }
+        public Members.DataModels.Member MemberRec { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public float Amount { get; set; }

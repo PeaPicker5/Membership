@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Membership.Core.Member.DataModels;
+using Membership.Core.Members.DataModels;
 
-namespace Membership.Core.Member.Repositories
+namespace Membership.Core.Members.Repositories
 {
     public interface IMemberTypeRepository
     {

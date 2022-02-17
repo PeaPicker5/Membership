@@ -70,7 +70,7 @@ namespace Membership.Core.Officers.Repositories
             List<Officer> officerRecs = null;
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                officerRecs = connection.Query<Officer, Member.DataModels.Member, Office, Officer>(query + clause,
+                officerRecs = connection.Query<Officer, Members.DataModels.Member, Office, Officer>(query + clause,
                     (officer, member, office) =>
                     {
                         officer.MemberRec = member;

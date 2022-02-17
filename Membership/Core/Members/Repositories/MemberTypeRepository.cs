@@ -3,9 +3,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using Membership.Core.Member.DataModels;
+using Membership.Core.Members.DataModels;
 
-namespace Membership.Core.Member.Repositories
+namespace Membership.Core.Members.Repositories
 {
     public class MemberTypeRepository : IMemberTypeRepository
     {

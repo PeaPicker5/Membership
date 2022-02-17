@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Membership.Core.Meetings.Repositories;
-using Membership.Core.Member.Repositories;
+using Membership.Core.Members.Repositories;
 
 namespace Membership.Core.Meetings.Presenters
 {
@@ -13,8 +13,8 @@ namespace Membership.Core.Meetings.Presenters
         private readonly IMemberTypeRepository _memberTypeRepository;
         private readonly IMeetingAttendanceView _view;
         public Meetings.DataModels.Meeting CurrentMeeting { get; set; }
-        public ICollection<Member.DataModels.Member> MemberList { get; set; }
-        public ICollection<Member.DataModels.Member> AdditionalMembers { get; set; }
+        public ICollection<Members.DataModels.Member> MemberList { get; set; }
+        public ICollection<Members.DataModels.Member> AdditionalMembers { get; set; }
 
         public MeetingAttendancePresenter(IMeetingAttendanceView view)
         {

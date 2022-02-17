@@ -27,7 +27,7 @@ namespace Membership.Core.Dues.Repositories
                     Param1 = param1,
                     Param2 = param2
                 };
-                return connection.Query<DuesRecord, Member.DataModels.Member, DuesRecord>(query,
+                return connection.Query<DuesRecord, Members.DataModels.Member, DuesRecord>(query,
                     (duesRec, person) =>
                     {
                         duesRec.MemberRec = person;
@@ -44,7 +44,7 @@ namespace Membership.Core.Dues.Repositories
                 {
                     Param1 = param1
                 };
-                return connection.Query<DuesRecord, Member.DataModels.Member, DuesRecord>(query,
+                return connection.Query<DuesRecord, Members.DataModels.Member, DuesRecord>(query,
                     (duesRec, person) =>
                     {
                         duesRec.MemberRec = person;
@@ -82,7 +82,7 @@ namespace Membership.Core.Dues.Repositories
             const string query = "SELECT * FROM VIEW_CurrentDues ORDER BY Lastname, Firstname";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var x = connection.Query<DuesRecord, Member.DataModels.Member, DuesRecord>(query,
+                var x = connection.Query<DuesRecord, Members.DataModels.Member, DuesRecord>(query,
                     (duesRec, person) =>
                     {
                         duesRec.MemberRec = person;

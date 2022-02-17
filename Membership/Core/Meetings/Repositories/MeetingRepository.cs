@@ -35,13 +35,13 @@ namespace Membership.Core.Meetings.Repositories
             }
         }
 
-        public ICollection<Member.DataModels.Member> GetAttendanceList()
+        public ICollection<Members.DataModels.Member> GetAttendanceList()
         {
-            var retValue = new List<Member.DataModels.Member>();
+            var retValue = new List<Members.DataModels.Member>();
             const string query = "SELECT * FROM MEMBER_List WHERE Zip LIKE '14%'";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var members = connection.Query<Member.DataModels.Member>(query);
+                var members = connection.Query<Members.DataModels.Member>(query);
                 retValue.AddRange(members.Where(x => x.IsCurrent).OrderBy(y => y.LFName));
                 return retValue;
             }

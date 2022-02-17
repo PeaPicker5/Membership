@@ -6,7 +6,7 @@ using System.Windows;
 using Membership.Core.DataModels;
 using Membership.Core.Meetings.DataModels;
 using Membership.Core.Meetings.Presenters;
-using Membership.Core.Member.DataModels;
+using Membership.Core.Members.DataModels;
 using Membership.Properties;
 
 namespace Membership.UI_Controls.Meetings

@@ -9,7 +9,7 @@ namespace Membership.Core.Meetings.Repositories
     {
         Meeting Get(Guid meetingId);
 
-        ICollection<Member.DataModels.Member> GetAttendanceList();
+        ICollection<Members.DataModels.Member> GetAttendanceList();
         void InsertMeeting(Meeting meetingRec);
 
         bool DeleteMeeting(Meeting meetingRec);

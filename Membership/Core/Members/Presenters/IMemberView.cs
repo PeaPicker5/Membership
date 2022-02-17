@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Membership.Core.Member.DataModels;
+using Membership.Core.Members.DataModels;
 
-namespace Membership.Core.Member.Presenters
+namespace Membership.Core.Members.Presenters
 {
     public interface IMemberView
     {

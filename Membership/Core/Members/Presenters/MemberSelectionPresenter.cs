@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Membership.Core.Dues.DataModels;
-using Membership.Core.Member.DataModels;
-using Membership.Core.Member.Repositories;
+using Membership.Core.Members.DataModels;
+using Membership.Core.Members.Repositories;
 using Membership.Core.Officers.DataModels;
 
-namespace Membership.Core.Member.Presenters
+namespace Membership.Core.Members.Presenters
 {
     public class MemberSelectionPresenter :IMemberSelectionView
     {
@@ -34,7 +34,7 @@ namespace Membership.Core.Member.Presenters
             var x = _memberRepository.Get(memberId);
         }
 
-        public ICollection<Member.DataModels.Member> Members { get; set; }
+        public ICollection<Members.DataModels.Member> Members { get; set; }
         public IEnumerable<MemberType> MemberTypes { get; set; }
         public IEnumerable<Office> Offices { get; set; }
         public IEnumerable<DuesRecord> DuesRecords { get; set; }

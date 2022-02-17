@@ -153,7 +153,7 @@
     <Compile Include="Core\Dues\DataModels\DuesHistory.cs" />
     <Compile Include="Core\Dues\DataModels\DuesRecord.cs" />
     <Compile Include="Core\Meetings\DataModels\MeetingMember.cs" />
-    <Compile Include="Core\Member\DataModels\MemberRemoval.cs" />
+    <Compile Include="Core\Members\DataModels\MemberRemoval.cs" />
     <Compile Include="Core\DataModels\ImageRec.cs" />
     <Compile Include="Core\Meetings\DataModels\Meeting.cs" />
     <Compile Include="Core\Officers\DataModels\Officer.cs" />
@@ -166,10 +166,10 @@
     <Compile Include="Core\Officers\Presenters\IOfficerRecordsView.cs" />
     <Compile Include="Core\Reports\Presenters\IReportParametersView.cs" />
     <Compile Include="Core\Reports\Presenters\IReportViewerView.cs" />
-    <Compile Include="Core\Member\Presenters\IMemberSelectionView.cs" />
+    <Compile Include="Core\Members\Presenters\IMemberSelectionView.cs" />
     <Compile Include="Core\Officers\Presenters\IOfficeHistoryView.cs" />
-    <Compile Include="Core\Member\Presenters\IMemberView.cs" />
-    <Compile Include="Core\Member\Presenters\MemberInfoPresenter.cs" />
+    <Compile Include="Core\Members\Presenters\IMemberView.cs" />
+    <Compile Include="Core\Members\Presenters\MemberInfoPresenter.cs" />
     <Compile Include="Core\Meetings\Presenters\MeeetingAttendancePresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficeAssignmentPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\EditOfficerPresenter.cs" />
@@ -178,7 +178,7 @@
     <Compile Include="Core\Reports\Presenters\ReportParametersPresenter.cs" />
     <Compile Include="Core\Reports\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficerPresenter.cs" />
-    <Compile Include="Core\Member\Presenters\MemberSelectionPresenter.cs" />
+    <Compile Include="Core\Members\Presenters\MemberSelectionPresenter.cs" />
     <Compile Include="Core\Meetings\Repositories\IMeetingRepository.cs" />
     <Compile Include="Core\Reports\Repositories\IReportDataRepository.cs" />
     <Compile Include="Core\Meetings\Repositories\MeetingRepository.cs" />
@@ -186,13 +186,13 @@
     <Compile Include="Core\Repositories\FileStoreRepository.cs" />
     <Compile Include="Core\Dues\Repositories\IDuesRepository.cs" />
     <Compile Include="Core\Repositories\IFileStoreRepository.cs" />
-    <Compile Include="Core\Member\Repositories\IMemberTypeRepository.cs" />
+    <Compile Include="Core\Members\Repositories\IMemberTypeRepository.cs" />
     <Compile Include="Core\Officers\Repositories\IOfficerRepository.cs" />
-    <Compile Include="Core\Member\Repositories\IMemberRepository.cs" />
+    <Compile Include="Core\Members\Repositories\IMemberRepository.cs" />
     <Compile Include="Core\Dues\Repositories\DuesRepository.cs" />
-    <Compile Include="Core\Member\Repositories\MemberTypeRepository.cs" />
+    <Compile Include="Core\Members\Repositories\MemberTypeRepository.cs" />
     <Compile Include="Core\Officers\Repositories\OfficerRepository.cs" />
-    <Compile Include="Core\Member\Repositories\MemberRepository.cs" />
+    <Compile Include="Core\Members\Repositories\MemberRepository.cs" />
     <Compile Include="MembershipDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -280,9 +280,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\Member\DataModels\Member.cs" />
+    <Compile Include="Core\Members\DataModels\Member.cs" />
     <Compile Include="Core\Officers\DataModels\Office.cs" />
-    <Compile Include="Core\Member\DataModels\MemberType.cs" />
+    <Compile Include="Core\Members\DataModels\MemberType.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
