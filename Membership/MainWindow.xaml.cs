@@ -125,9 +125,9 @@ namespace Membership
 
         private void MeetingButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucMeetingAttendance = new MeetingAttendance();
+            var ucMeetingSelection = new MeetingSelection();
             MainStack.Children.Clear();
-            MainStack.Children.Add(ucMeetingAttendance);
+            MainStack.Children.Add(ucMeetingSelection);
         }
     }
 }

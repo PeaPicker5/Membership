@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Membership.Core.Meetings.DataModels;
 using Membership.Core.Meetings.Repositories;
+using Membership.Core.Members.DataModels;
 using Membership.Core.Members.Repositories;
 
 namespace Membership.Core.Meetings.Presenters
 {
     public class MeetingAttendancePresenter :IMeetingAttendanceView
     {
-        private readonly IMemberRepository _memberRepository;
         private readonly IMeetingRepository _meetingRepository;
-        private readonly IMemberTypeRepository _memberTypeRepository;
+        private readonly IMemberRepository _memberRepository;
         private readonly IMeetingAttendanceView _view;
-        public Meetings.DataModels.Meeting CurrentMeeting { get; set; }
-        public ICollection<Members.DataModels.Member> MemberList { get; set; }
-        public ICollection<Members.DataModels.Member> AdditionalMembers { get; set; }
+        public Meeting CurrentMeeting { get; set; }
+        public ICollection<Member> MemberList { get; set; }
+        public ICollection<Member> AdditionalMembers { get; set; }
 
         public MeetingAttendancePresenter(IMeetingAttendanceView view)
         {
             _meetingRepository = new MeetingRepository();
-            _memberTypeRepository = new MemberTypeRepository();
+            _memberRepository = new MemberRepository();
             _view = view;
         }
 

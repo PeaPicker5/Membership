@@ -8,6 +8,7 @@
              xmlns:members="clr-namespace:Membership.UI_Controls.Members"
              xmlns:common="clr-namespace:Membership.Common"
              xmlns:converters="clr-namespace:Membership.Common.Converters"
+             xmlns:meetings="clr-namespace:Membership.UI_Controls.Meetings"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="400" d:DesignWidth="1500">
@@ -91,18 +92,18 @@
                               Background="Gray"/>
 
 
-                <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14"
+                <DataGrid x:Name="MemberSelectionGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                          Style="{StaticResource DataGridStyle}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" 
                           IsEnabled="{Binding ElementName=MemberInfoControl, Path=IsEditing, Converter={StaticResource BooleanInverterConverter} }"
                           ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
-                          AutoGenerateColumns="false" GridLinesVisibility="All" Margin="5,0,5,5"
-                          CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single"
-                          SelectionChanged="MemberGrid_SelectionChanged">
+                          GridLinesVisibility="All"
+                          SelectionChanged="MemberGrid_SelectionChanged" >
                     <DataGrid.Columns  >
-                        <DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsCurrent}" Width="85"  />
-                        <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"/>
-                        <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"/>
-                        <DataGridTextColumn Header="MI" Binding="{Binding Path=MI}" Width="40" 
-                                            ElementStyle="{StaticResource DataGridCellCenter}"/>
+                    <DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsCurrent}" Width="85"  />
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}" />
+                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}" />
+                    <DataGridTextColumn Header="MI" Binding="{Binding Path=MI}" Width="40" 
+                                            ElementStyle="{StaticResource DataGridCellCenter}" />
                         <DataGridTextColumn Header="Sfx" Binding="{Binding Path=Suffix}"  Width="45" 
                                             ElementStyle="{StaticResource DataGridCellCenter}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>

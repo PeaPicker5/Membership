@@ -8,13 +8,14 @@ namespace Membership.Core.Meetings.DataModels
     public class Meeting
     {
         public Meeting() { }
-        public Meeting(Guid meetingId, DateTime meetingDate, string description, string comments, Guid inCharge)
+        public Meeting(Guid meetingId, DateTime meetingDate, string description, string comments, Guid inCharge, bool isRegularScheduled)
         {
             MeetingId = meetingId;
             MeetingDate = meetingDate;
             Description = description;
             Comments = comments;
             InCharge = inCharge;
+            IsRegularScheduled = isRegularScheduled;
         }
 
         [ExplicitKey] public Guid MeetingId  { get; set; }
@@ -22,11 +23,12 @@ namespace Membership.Core.Meetings.DataModels
         public string Description { get; set; }
         public string Comments { get; set; }
         public Guid InCharge { get; set; }
+        public bool IsRegularScheduled { get; set; }
 
 
-        public IEnumerable<Guid> Attendees { get; set; }
+        public ICollection<Tuple<Guid, string>> Attendees { get; set; }
 
-
+        public int MemberCount => Attendees?.Count ?? 0;
 
     }
 }

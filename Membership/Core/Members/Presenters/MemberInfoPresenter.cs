@@ -53,7 +53,7 @@ namespace Membership.Core.Members.Presenters
             _view.RemovalCodes = _memberTypeRepository.GetRemovalCodes().ToList();
         }
 
-        public void InsertMemberRecord(Members.DataModels.Member memberRec, byte[] fullResPicture)
+        public void InsertMemberRecord(Member memberRec, byte[] fullResPicture)
         {
             if (fullResPicture != null)
                 memberRec.PageId = InsertNewPicture("Membership Card", fullResPicture);
@@ -74,7 +74,7 @@ namespace Membership.Core.Members.Presenters
 
             var officerRecords = _officerRepository.GetOfficersByMember(memberRec.MemberId);
             //_officerRepository.dele
-            //Need to delete records from DUES_History, MEETING_Attendance, and OFFICE_Assignments.
+            //Need to delete records from DUES_History, MEETING_Members, and OFFICE_Assignments.
             //var meetingRecords = _
 
             //return false;

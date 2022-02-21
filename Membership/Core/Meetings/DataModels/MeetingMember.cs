@@ -3,7 +3,7 @@ using Dapper.Contrib.Extensions;
 
 namespace Membership.Core.Meetings.DataModels
 {
-    [Table("MEETING_Attendance")]
+    [Table("MEETING_Members")]
     public class MeetingMember
     {
         public MeetingMember() { }

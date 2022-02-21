@@ -84,7 +84,7 @@
                     </fluent:RibbonGroupBox>
                     <fluent:RibbonGroupBox Header="Meetings">
                         <fluent:Button Header="Meeting Attendance"
-                                       ToolTip="Assign the officers of the Association."
+                                       ToolTip="Meetings List."
                                        LargeIcon="{StaticResource MeetingIcon}"
                                        Click="MeetingButton_OnClick" />
                     </fluent:RibbonGroupBox>

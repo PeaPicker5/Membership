@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using Membership.Core.Meetings.DataModels;
+using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.Meetings.Presenters
 {
     public interface IMeetingAttendanceView
     {
-        Meetings.DataModels.Meeting CurrentMeeting { get; set; }
-        ICollection<Members.DataModels.Member> MemberList { get; set; }
-        ICollection<Members.DataModels.Member> AdditionalMembers { get; set; }
+        Meeting CurrentMeeting { get; set; }
+        ICollection<Member> MemberList { get; set; }
+        ICollection<Member> AdditionalMembers { get; set; }
     }
 }

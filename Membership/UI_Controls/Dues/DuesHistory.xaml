@@ -3,12 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Membership.Common.Converters"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="200" d:DesignWidth="1200">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-        <!-- Membership Information -->
         <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
             <GroupBox.Header>
                 <DockPanel  x:Name="SelectionBar" LastChildFill="True">
@@ -26,11 +33,9 @@
 
             <Grid  >
 
-            <DataGrid FontSize="14"
-                    ItemsSource="{Binding Path=DuesRecs, Mode=OneWay}"
-                    AlternatingRowBackground="LightGray"
-                    AutoGenerateColumns="false"
-                    CanUserAddRows="False" IsReadOnly="True" >
+            <DataGrid Style="{StaticResource DataGridStyle}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" 
+                      ItemsSource="{Binding Path=DuesRecs, Mode=OneWay}"
+                      AlternatingRowBackground="LightGray" >
                 <DataGrid.Columns  >
                     <DataGridTextColumn Width="90"     Header="Date Paid" Binding="{Binding Path=PaidOnDate}">
                         <DataGridTextColumn.ElementStyle>

@@ -153,6 +153,8 @@
     <Compile Include="Core\Dues\DataModels\DuesHistory.cs" />
     <Compile Include="Core\Dues\DataModels\DuesRecord.cs" />
     <Compile Include="Core\Meetings\DataModels\MeetingMember.cs" />
+    <Compile Include="Core\Meetings\Presenters\IMeetingSelectionView.cs" />
+    <Compile Include="Core\Meetings\Presenters\MeetingSelectionPresenter.cs" />
     <Compile Include="Core\Members\DataModels\MemberRemoval.cs" />
     <Compile Include="Core\DataModels\ImageRec.cs" />
     <Compile Include="Core\Meetings\DataModels\Meeting.cs" />
@@ -225,6 +227,9 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UI_Controls\Meetings\MeetingAttendance.xaml.cs">
       <DependentUpon>MeetingAttendance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Controls\Meetings\MeetingSelection.xaml.cs">
+      <DependentUpon>MeetingSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI_Controls\Members\ImagePopupWindow.xaml.cs">
       <DependentUpon>ImagePopupWindow.xaml</DependentUpon>
@@ -305,6 +310,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UI_Controls\Meetings\MeetingAttendance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI_Controls\Meetings\MeetingSelection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -63,7 +63,8 @@
                                Style="{StaticResource HeaderTextBlockStyle}"/>
                 </StackPanel>
 
-                <DataGrid x:Name="CollectionGrid" Grid.Row="0" Grid.Column="1" FontSize="14" 
+                <DataGrid x:Name="CollectionGrid" Grid.Row="0" Grid.Column="1" 
+                          Style="{StaticResource DataGridStyle}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" 
                           CanUserAddRows="False" AutoGenerateColumns="false" IsReadOnly="True"
                           ItemsSource="{Binding Path=DuesRecs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectionUnit="FullRow" SelectedValuePath="IsPaid"
