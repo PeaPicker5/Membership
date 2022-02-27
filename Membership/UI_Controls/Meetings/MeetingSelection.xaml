@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Membership.Common.Converters"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:meetings="clr-namespace:Membership.UI_Controls.Meetings"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="400" d:DesignWidth="1500">
@@ -18,6 +19,9 @@
             <converters:MinimumDateConverter x:Key="MinimumDateConverter" />
             <converters:BoolToVisibilityConverter TrueValue="Visible" FalseValue="Hidden"
                                                   x:Key="BoolToVisibilityConverter" />
+            <converters:BoolToVisibilityConverter TrueValue="Collapsed" FalseValue="Visible"
+                                                  x:Key="InvertedBoolToVisibilityConverter" />
+
 
         </ResourceDictionary>
     </UserControl.Resources>
@@ -26,6 +30,40 @@
         <GroupBox.Header>
             <DockPanel  x:Name="SelectionBar" LastChildFill="True">
                 <Label DockPanel.Dock="Left" Content="MEETING SELECTION:   " FontWeight="Bold" FontSize="16"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button ToolTip="Add a new meeting to the database."  
+                            Visibility="{Binding Path=IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                            Click="AddMeetingButton_OnClick"
+                            Margin="2,-2">
+                        <Image Source="/Membership;component/Common/Resources/Add.png" Width="24" Margin="-3"/>
+                    </Button>
+                    <Button ToolTip="Edit an existing meeting record." 
+                            Visibility="{Binding Path=IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                            Click="EditMeetingButton_OnClick" 
+                            Margin="2,-2">
+                        <Image Source="/Membership;component/Common/Resources/Edit.png" Width="24" Margin="-3"/>
+                    </Button>
+                    <Button ToolTip="Delete the current meeting record." 
+                            Visibility="{Binding Path=IsEditing, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+                            Click="DeleteMeetingButton_OnClick"
+                            Margin="2,-2">
+                        <Image Source="/Membership;component/Common/Resources/Remove.png" Width="24" Margin="-3"/>
+                    </Button>
+                    <Button ToolTip="Save the current member record." 
+                            Visibility="{Binding Path=IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Click="SaveMemberButton_OnClick"
+                            Margin="2,-2">
+                        <Image Source="/Membership;component/Common/Resources/Save.png" Width="24" Margin="-3"/>
+                    </Button>
+                    <Button ToolTip="Cancel the current editing." 
+                            Visibility="{Binding Path=IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Click="CancelButton_OnClick"
+                            Margin="2,-2">
+                        <Image Source="/Membership;component/Common/Resources/Cancel.png" Width="24" Margin="-3"/>
+                    </Button>
+                </StackPanel>
+
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right" >
                     <CheckBox x:Name="YearFilterCheckBox" Content="Filter by Year:  " FontSize="16" 
                               Checked="YearFilter_OnChanged" Unchecked="YearFilter_OnChanged"/>
@@ -35,18 +73,20 @@
                                         ValueChanged="YearUpDown_Changed" Width="90"
                                         Visibility="{Binding ElementName=YearFilterCheckBox, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     
-                    <Label Content="Records:" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="Meeting Records:" Style="{StaticResource LabelStyle}"/>
                     <Label Content="{Binding Path=MeetingList.Count}" Style="{StaticResource LabelStyle}" Margin="0,0,10,0" Width="40"/>
                 </StackPanel>
             </DockPanel>
         </GroupBox.Header>
 
-        <Grid Background="AntiqueWhite" >
+        <Grid Background="AntiqueWhite" x:Name="MainGrid" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="0" />
             </Grid.RowDefinitions>
 
+            <!-- Row #1 - The DataGrid of the Meeting Records  -->
             <DataGrid x:Name="MeetingSelectionGrid" Grid.Row="0" 
                       Style="{StaticResource DataGridStyle}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" 
                           IsEnabled="{Binding ElementName=MeetingDetailControl, Path=IsEditing, Converter={StaticResource BooleanInverterConverter} }"
@@ -70,6 +110,7 @@
 
             <GridSplitter Grid.Row="0" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Background="Gray"/>
 
+            <!-- Row #2 the list of Attendees to the selected meeting.  -->
             <DockPanel Grid.Row="1" Grid.ColumnSpan="3" IsEnabled="False"  >
                 <Border BorderThickness="4" BorderBrush="Black" DockPanel.Dock="Top" >
                     <Label Content="Members In Attendance:"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="20" />
@@ -99,6 +140,10 @@
                 </Grid>
             </DockPanel>
 
+            <!--  Row #3 - Normally collapsed - The Add/Edit control for a meeting. -->
+            <DockPanel Grid.Row="2" x:Name="AddEditStack">
+
+            </DockPanel>
         </Grid>
     </GroupBox>
 

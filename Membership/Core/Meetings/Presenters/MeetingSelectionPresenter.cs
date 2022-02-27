@@ -27,7 +27,7 @@ namespace Membership.Core.Meetings.Presenters
 
         public IEnumerable<int> LoadYearsOnFile()
         {
-            return _meetingRepository.GetYearsOnFile();
+            return _meetingRepository.GetMeetingYearsOnFile();
         }
 
 

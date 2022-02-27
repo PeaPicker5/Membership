@@ -7,7 +7,6 @@ namespace Membership.Core.Meetings.Presenters
     public interface IMeetingAttendanceView
     {
         Meeting CurrentMeeting { get; set; }
-        ICollection<Member> MemberList { get; set; }
-        ICollection<Member> AdditionalMembers { get; set; }
+        ICollection<SelectableMember> MemberCheckList { get; set; }
     }
 }

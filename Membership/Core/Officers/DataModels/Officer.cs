@@ -1,5 +1,6 @@
 ﻿using System;
 using Dapper.Contrib.Extensions;
+using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.Officers.DataModels
 {
@@ -7,7 +8,7 @@ namespace Membership.Core.Officers.DataModels
     public class Officer
     {
         public Officer() {}
-        public Officer(Members.DataModels.Member memberRec, Office officeRec, int year, 
+        public Officer(Member memberRec, Office officeRec, int year, 
             DateTime fromDate, DateTime toDate)
         {
             MemberRec = memberRec;
@@ -17,7 +18,7 @@ namespace Membership.Core.Officers.DataModels
             ToDate = toDate;
         }
 
-        [Computed] public Members.DataModels.Member MemberRec { get; set; }
+        [Computed] public Member MemberRec { get; set; }
         [Computed] public Office OfficeRec { get; set; }
         public int Year { get; set; }
         public DateTime FromDate { get; set; }
@@ -42,12 +43,5 @@ namespace Membership.Core.Officers.DataModels
                 return $"({fMonth}-{tMonth})";
             }
         }
-
-     //   public bool Equals(Officer other)
-     //   {
-     //       return ControlPanelId.Equals(other?.ControlPanelId) && ControlPointNumber.Equals(other?.ControlPointNumber);
-//
- //       }
-
     }
 }

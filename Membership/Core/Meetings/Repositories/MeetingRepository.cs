@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Security.Principal;
 using Dapper;
 using Dapper.Contrib.Extensions;
 using Membership.Core.Meetings.DataModels;
@@ -14,8 +13,8 @@ namespace Membership.Core.Meetings.Repositories
     public class MeetingRepository : IMeetingRepository
     {
         private const string DbConnectionName = "MembershipDB";
-        public MeetingRepository() { }
 
+        public MeetingRepository() { }
         public Meeting Get(Guid meetingId)
         {
             const string query = "SELECT * FROM Meeting WHERE MeetingId = @MeetingId";
@@ -26,56 +25,38 @@ namespace Membership.Core.Meetings.Repositories
                 return meeting;
             }
         }
-
-        private static ICollection<Tuple<Guid,string>> GetMeetingAttendees(Guid meetingId)
-        {
-            const string query = @"SELECT mm.memberId, ml.Lastname + ' ' + ml.Suffix + ', ' + ml.Firstname + ' ' + ml.MI as LFName  
-                                    FROM MEETING_Members mm
-                                    INNER JOIN MEMBER_List ml 
-                                    ON mm.MemberId = ml.MemberID   
-                                    WHERE MeetingId = @MeetingId";
-            
-            var retValue = new List<Tuple<Guid, string>>();
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
-            { 
-                retValue = connection.Query<Guid, string, Tuple<Guid,string>>(query,Tuple.Create, new { MeetingId = meetingId }, splitOn: "*").ToList();    
-                   
-                return retValue;
-            }
-
-        }
-
         public ICollection<Meeting> GetMeetings()
         {
             const string query = "SELECT * FROM MEETING_List ";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var meetingRecs = connection.Query<Meeting>(query).ToList();
-                foreach (var meet in meetingRecs)
+                var listOfMeetings = connection.Query<Meeting>(query).ToList();
+                foreach (var meet in listOfMeetings)
                 {
                     meet.Attendees = GetMeetingAttendees(meet.MeetingId);
                 }
-                return meetingRecs;
+                return listOfMeetings;
             }
         }
-        public ICollection<Member> GetAttendanceList()
+        private static ICollection<SelectableMember> GetMeetingAttendees(Guid meetingId)
         {
-            var retValue = new List<Member>();
-            const string query = "SELECT * FROM MEMBER_List WHERE Zip LIKE '14%'";
+            const string query = @"SELECT ml.*, 1 as 'IsSelected'
+                                    FROM MEMBER_List ml 
+                                    INNER JOIN MEETING_Members mm
+                                    ON mm.MemberId = ml.MemberID   
+                                    WHERE MeetingId = @MeetingId";
+
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var members = connection.Query<Member>(query);
-                retValue.AddRange(members.Where(x => x.IsCurrent).OrderBy(y => y.LFName));
-                return retValue;
+                return connection.Query<SelectableMember>(query, new { MeetingId = meetingId}).ToList();
             }
-
         }
         public void InsertMeeting(Meeting meetingRec)
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                foreach (var memberTuple in meetingRec.Attendees)
-                    connection.Insert(new MeetingMember(meetingRec.MeetingId, memberTuple.Item1));
+                foreach (var member in meetingRec.Attendees)
+                    connection.Insert(new MeetingMember(meetingRec.MeetingId, member.MemberId));
                 connection.Insert(meetingRec);
             }
         }
@@ -83,15 +64,14 @@ namespace Membership.Core.Meetings.Repositories
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                foreach (var memberTuple in meetingRec.Attendees)
-                    connection.Delete(new MeetingMember(meetingRec.MeetingId, memberTuple.Item1));
+                foreach (var member in meetingRec.Attendees)
+                    connection.Delete(new MeetingMember(meetingRec.MeetingId, member.MemberId));
                 connection.Delete(meetingRec);
                 return true;
             }
         }
 
-
-        public IEnumerable<int> GetYearsOnFile()
+        public IEnumerable<int> GetMeetingYearsOnFile()
         {
             const string query = "SELECT DISTINCT Year(MeetingDate) FROM MEETING_List ORDER BY Year(MeetingDate) DESC";
 

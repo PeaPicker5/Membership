@@ -1,17 +1,17 @@
-﻿<UserControl x:Class="Membership.Common.Controls.InputControl"
+﻿<UserControl x:Class="Membership.Common.Controls.InputDateControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" >
 
     <Grid Height="42">
         <Label Content="{Binding Path=Label, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
                          RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"  
                Style="{StaticResource InputLabel}" />
-        <TextBox Text="{Binding Path=TextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
-                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-               Style="{StaticResource InputTextBox}" Height="24" VerticalAlignment="Top"
-               Margin="0,18,0,0" />
+
+        <DatePicker Text="{Binding Path=DtpText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" Padding="0"
+               Margin="0,18,0,0" BorderBrush="Black" BorderThickness="1" Height="24" FontSize="16" Width="130" />
     </Grid>
 </UserControl>

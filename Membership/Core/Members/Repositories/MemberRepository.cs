@@ -7,6 +7,7 @@ using Dapper;
 using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 using Membership.Core.Dues.DataModels;
+using Membership.Core.Members.DataModels;
 using Membership.Core.Officers.DataModels;
 
 namespace Membership.Core.Members.Repositories
@@ -19,17 +20,17 @@ namespace Membership.Core.Members.Repositories
         private const string DbConnectionName = "MembershipDB";
         public MemberRepository() {}
 
-        public Members.DataModels.Member Get(Guid memberId)
+        public Member Get(Guid memberId)
         {
             const string query = "SELECT * FROM MEMBER_List WHERE MemberId = @MemberId";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<Members.DataModels.Member>(query,new {MemberId = memberId}).ToList();
+                var retVal = connection.Query<Member>(query,new {MemberId = memberId}).ToList();
                 return retVal[0];
             }
         }
 
-        public ICollection<Members.DataModels.Member> GetMembers()
+        public ICollection<Member> GetMembers()
         {
             const string query = "SELECT ml.*, mt.Description as [Status], mt.DuesAmount " +
                                  "FROM MEMBER_List ml " +
@@ -37,12 +38,12 @@ namespace Membership.Core.Members.Repositories
                                  "ORDER BY Lastname";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<Members.DataModels.Member>(query).ToList();
+                var retVal = connection.Query<Member>(query).ToList();
                 return retVal;
             }
         }
 
-        private IEnumerable<Members.DataModels.Member> GetSelectedMemberRecords(string clause, DynamicParameters param)
+        private IEnumerable<Member> GetSelectedMemberRecords(string clause, DynamicParameters param)
         {
             const string query = "SELECT ml.* " +
                                  "FROM MEMBER_List ml " +
@@ -51,13 +52,13 @@ namespace Membership.Core.Members.Repositories
 
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<Members.DataModels.Member>(query + clause, param).Distinct().ToList();
+                var retVal = connection.Query<Member>(query + clause, param).Distinct().ToList();
                 return retVal;
             }
 
         }
 
-        public IEnumerable<Members.DataModels.Member> GetMembersWithOffice(int year, int officeType)
+        public IEnumerable<Member> GetMembersWithOffice(int year, int officeType)
         {
             var whereClause = officeType == DistrictOnly
                 ? "WHERE oa.Year = @year AND oa.OfficeId < 20 "
@@ -65,20 +66,20 @@ namespace Membership.Core.Members.Repositories
             var parameter = new DynamicParameters(); parameter.Add("Year", year);
             return GetSelectedMemberRecords(whereClause, parameter);
         }
-        public IEnumerable<Members.DataModels.Member> GetCurrentMembers()
+        public IEnumerable<Member> GetCurrentMembers()
         {
             var members = GetMembers();
             return members.Where(x => x.IsCurrent);
         }
 
-        public void InsertMemberRecord(Members.DataModels.Member memberRec)
+        public void InsertMemberRecord(Member memberRec)
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 connection.Insert(memberRec);
             }
         }
-        public void UpdateMemberRecord(Members.DataModels.Member memberRec)
+        public void UpdateMemberRecord(Member memberRec)
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
@@ -86,7 +87,7 @@ namespace Membership.Core.Members.Repositories
             }
         }
 
-        public bool DeleteMemberRecord(Members.DataModels.Member memberRec, 
+        public bool DeleteMemberRecord(Member memberRec, 
                                        IEnumerable<DuesHistory> duesHistoryRecs, 
                                        IEnumerable<Officer> officerRecs)
         {

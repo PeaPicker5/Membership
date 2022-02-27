@@ -76,8 +76,8 @@ namespace Membership.UI_Controls.Meetings
             if (MeetingSelectionGrid.SelectedItem == null) return;
             AttendeeNames.Clear();
             var att = ((Meeting)MeetingSelectionGrid.SelectedItem).Attendees;
-            foreach (var mem in att.OrderBy(x => x.Item2))
-                AttendeeNames.Add(mem.Item2);
+            foreach (var mem in att.OrderBy(x => x.LFName))
+                AttendeeNames.Add(mem.LFName);
         }
 
         private void YearUpDown_Changed(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -102,5 +102,42 @@ namespace Membership.UI_Controls.Meetings
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void EditMeetingButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainGrid.RowDefinitions[0].Height = new GridLength(0);
+            MainGrid.RowDefinitions[1].Height = new GridLength(0);
+            MainGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
+            var ucMeetingAddUpdate = new MeetingAttendance { CurrentMeeting = (Meeting) MeetingSelectionGrid.SelectedValue };
+            AddEditStack.Children.Clear();
+            AddEditStack.Children.Add(ucMeetingAddUpdate);
+        }
+
+        private void AddMeetingButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainGrid.RowDefinitions[0].Height = new GridLength(0);
+            MainGrid.RowDefinitions[1].Height = new GridLength(0);
+            MainGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
+            var ucMeetingAddUpdate = new MeetingAttendance
+            {
+                CurrentMeeting = new Meeting(Guid.NewGuid(), DateTime.Now, $"{DateTime.Now:MMMM} Monthly Meeting", "", Guid.Empty, true)
+            };
+            AddEditStack.Children.Clear();
+            AddEditStack.Children.Add(ucMeetingAddUpdate);
+        }
+
+        private void DeleteMeetingButton_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveMemberButton_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

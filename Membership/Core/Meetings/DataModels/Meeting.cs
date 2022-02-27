@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
+using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.Meetings.DataModels
 {
@@ -26,7 +27,7 @@ namespace Membership.Core.Meetings.DataModels
         public bool IsRegularScheduled { get; set; }
 
 
-        public ICollection<Tuple<Guid, string>> Attendees { get; set; }
+        public ICollection<SelectableMember> Attendees { get; set; }
 
         public int MemberCount => Attendees?.Count ?? 0;
 

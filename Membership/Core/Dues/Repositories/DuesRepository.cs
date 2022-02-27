@@ -7,6 +7,7 @@ using Dapper;
 using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 using Membership.Core.Dues.DataModels;
+using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.Dues.Repositories
 {
@@ -27,7 +28,7 @@ namespace Membership.Core.Dues.Repositories
                     Param1 = param1,
                     Param2 = param2
                 };
-                return connection.Query<DuesRecord, Members.DataModels.Member, DuesRecord>(query,
+                return connection.Query<DuesRecord, Member, DuesRecord>(query,
                     (duesRec, person) =>
                     {
                         duesRec.MemberRec = person;
@@ -44,7 +45,7 @@ namespace Membership.Core.Dues.Repositories
                 {
                     Param1 = param1
                 };
-                return connection.Query<DuesRecord, Members.DataModels.Member, DuesRecord>(query,
+                return connection.Query<DuesRecord, Member, DuesRecord>(query,
                     (duesRec, person) =>
                     {
                         duesRec.MemberRec = person;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Membership.Core.Meetings.DataModels;
-using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.Meetings.Repositories
 {
@@ -9,12 +8,10 @@ namespace Membership.Core.Meetings.Repositories
     {
         Meeting Get(Guid meetingId);
         ICollection<Meeting> GetMeetings();
-        ICollection<Member> GetAttendanceList();
-        
+        IEnumerable<int> GetMeetingYearsOnFile();
+
         void InsertMeeting(Meeting meetingRec);
 
         bool DeleteMeeting(Meeting meetingRec);
-
-        IEnumerable<int> GetYearsOnFile();
     }
 }

@@ -86,10 +86,10 @@
                         <ColumnDefinition Width="10*" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
-                    <controls:InputControl Grid.Column="0" Label="First Name" TextBox="{Binding Path=MemberRec.FirstName, Mode=TwoWay}" Margin="5"/>
-                    <controls:InputControl Grid.Column="1" Label="MI" TextBox="{Binding Path=MemberRec.MI, Mode=TwoWay}" Margin="5"/>
-                    <controls:InputControl Grid.Column="2" Label="Last Name" TextBox="{Binding Path=MemberRec.LastName, Mode=TwoWay}" Margin="5"/>
-                    <controls:InputControl Grid.Column="3" Label="Suffix" TextBox="{Binding Path=MemberRec.Suffix, Mode=TwoWay}" Margin="5"/>
+                    <controls:InputTextControl Grid.Column="0" Label="First Name" TextBox="{Binding Path=MemberRec.FirstName, Mode=TwoWay}" Margin="5"/>
+                    <controls:InputTextControl Grid.Column="1" Label="MI" TextBox="{Binding Path=MemberRec.MI, Mode=TwoWay}" Margin="5"/>
+                    <controls:InputTextControl Grid.Column="2" Label="Last Name" TextBox="{Binding Path=MemberRec.LastName, Mode=TwoWay}" Margin="5"/>
+                    <controls:InputTextControl Grid.Column="3" Label="Suffix" TextBox="{Binding Path=MemberRec.Suffix, Mode=TwoWay}" Margin="5"/>
                 </Grid>
                 
                 <!--ADDRESS CONTROL-->
@@ -114,7 +114,7 @@
                     </DockPanel>
                 </StackPanel>
 
-                <controls:InputControl Label="Email Address:" DockPanel.Dock="Top"
+                <controls:InputTextControl Label="Email Address:" DockPanel.Dock="Top"
                                      TextBox="{Binding Path=MemberRec.EmailAddress, Mode=TwoWay}" Margin="5,0,5,5"/>
             </DockPanel>
 

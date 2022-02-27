@@ -128,6 +128,15 @@
     <Compile Include="Common\Controls\DetailsHeaderControl.xaml.cs">
       <DependentUpon>DetailsHeaderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Controls\InputCheckBoxControl.xaml.cs">
+      <DependentUpon>InputCheckBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Controls\InputDateControl.xaml.cs">
+      <DependentUpon>InputDateControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Controls\InputComboControl.xaml.cs">
+      <DependentUpon>InputComboControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\Converters\BooleanInverterConverter.cs" />
     <Compile Include="Common\Converters\MinimumDateConverter.cs" />
     <Compile Include="Common\Converters\IntegerGreaterThanAmount.cs" />
@@ -147,8 +156,8 @@
     <Compile Include="Common\Converters\StringToStringConverter.cs" />
     <Compile Include="Common\Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Common\CommonBaseClass.cs" />
-    <Compile Include="Common\Controls\InputControl.xaml.cs">
-      <DependentUpon>InputControl.xaml</DependentUpon>
+    <Compile Include="Common\Controls\InputTextControl.xaml.cs">
+      <DependentUpon>InputTextControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Dues\DataModels\DuesHistory.cs" />
     <Compile Include="Core\Dues\DataModels\DuesRecord.cs" />
@@ -158,6 +167,7 @@
     <Compile Include="Core\Members\DataModels\MemberRemoval.cs" />
     <Compile Include="Core\DataModels\ImageRec.cs" />
     <Compile Include="Core\Meetings\DataModels\Meeting.cs" />
+    <Compile Include="Core\Members\DataModels\SelectableMember.cs" />
     <Compile Include="Core\Officers\DataModels\Officer.cs" />
     <Compile Include="Core\Dues\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Dues\Presenters\IDuesRecordView.cs" />
@@ -269,11 +279,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Common\Controls\InputCheckBoxControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Controls\InputDateControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Common\Controls\InputComboControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Common\ResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Common\Controls\InputControl.xaml">
+    <Page Include="Common\Controls\InputTextControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,16 +5,13 @@ using Membership.Properties;
 
 namespace Membership.Common.Controls
 {
-    /// <summary>
-    /// Interaction logic for LabelTextBox.xaml
-    /// </summary>
-    public partial class InputControl : INotifyPropertyChanged
+
+    public partial class InputCheckBoxControl : INotifyPropertyChanged
     {
-        public InputControl()
+        public InputCheckBoxControl()
         {
             InitializeComponent();
         }
-
 
         public string Label
         {
@@ -26,19 +23,18 @@ namespace Membership.Common.Controls
             }
         }
         public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register("Label", typeof(string), typeof(InputControl));
+            DependencyProperty.Register("Label", typeof(string), typeof(InputCheckBoxControl));
 
-
-        public string TextBox
+        public bool IsChecked    
         {
-            get { return (string)GetValue(TextBoxProperty); }
+            get { return (bool)GetValue(IsCheckedProperty); }
             set { 
-                SetValue(TextBoxProperty, value);
+                SetValue(IsCheckedProperty, value);
                 OnPropertyChanged();
             }
         }
-        public static readonly DependencyProperty TextBoxProperty =
-            DependencyProperty.Register("TextBox", typeof(string), typeof(InputControl));
+        public static readonly DependencyProperty IsCheckedProperty =
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(InputCheckBoxControl));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
