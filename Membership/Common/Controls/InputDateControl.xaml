@@ -6,6 +6,7 @@
              mc:Ignorable="d" >
 
     <Grid Height="42">
+
         <Label Content="{Binding Path=Label, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
                          RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"  
                Style="{StaticResource InputLabel}" />

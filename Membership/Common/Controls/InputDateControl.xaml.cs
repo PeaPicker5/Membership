@@ -5,20 +5,16 @@ using Membership.Properties;
 
 namespace Membership.Common.Controls
 {
-    /// <summary>
-    /// Interaction logic for LabelTextBox.xaml
-    /// </summary>
-    public partial class InputDateControl : INotifyPropertyChanged
+    public sealed partial class InputDateControl : INotifyPropertyChanged
     {
         public InputDateControl()
         {
             InitializeComponent();
         }
 
-
         public string Label
         {
-            get { return (string)GetValue(LabelProperty); }
+            get => (string)GetValue(LabelProperty);
             set
             {
                 SetValue(LabelProperty, value);
@@ -28,10 +24,9 @@ namespace Membership.Common.Controls
         public static readonly DependencyProperty LabelProperty =
             DependencyProperty.Register("Label", typeof(string), typeof(InputDateControl));
 
-
         public string DtpText    
         {
-            get { return (string)GetValue(DtpTextProperty); }
+            get => (string)GetValue(DtpTextProperty);
             set { 
                 SetValue(DtpTextProperty, value);
                 OnPropertyChanged();
@@ -40,10 +35,11 @@ namespace Membership.Common.Controls
         public static readonly DependencyProperty DtpTextProperty =
             DependencyProperty.Register("DtpText", typeof(string), typeof(InputDateControl));
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
+        
+        public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
