@@ -23,7 +23,7 @@ namespace Membership.Core.Members.DataModels
             IsSelected = isSelected;
         }
 
-        public bool IsSelected
+        [Computed] public bool IsSelected
         {
             get => _isSelected;
             set
@@ -33,7 +33,7 @@ namespace Membership.Core.Members.DataModels
             }
         }
 
-        public enumCheckStatus CheckStatus { get; set; }
+        [Computed] public enumCheckStatus CheckStatus { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

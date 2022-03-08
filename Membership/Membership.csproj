@@ -159,6 +159,7 @@
     <Compile Include="Common\Controls\InputTextControl.xaml.cs">
       <DependentUpon>InputTextControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\DataModels\SelectableItem.cs" />
     <Compile Include="Core\Dues\DataModels\DuesHistory.cs" />
     <Compile Include="Core\Dues\DataModels\DuesRecord.cs" />
     <Compile Include="Core\Meetings\DataModels\MeetingMember.cs" />

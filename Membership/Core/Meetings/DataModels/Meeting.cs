@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Dapper.Contrib.Extensions;
-using Membership.Core.Members.DataModels;
+using Membership.Annotations;
 
 namespace Membership.Core.Meetings.DataModels
 {
     [Table("MEETING_List")]
-    public class Meeting
+    public class Meeting : INotifyPropertyChanged
     {
         public Meeting() { }
         public Meeting(Guid meetingId, DateTime meetingDate, string description, string comments, Guid inCharge, bool isRegularScheduled)
@@ -27,9 +28,21 @@ namespace Membership.Core.Meetings.DataModels
         public bool IsRegularScheduled { get; set; }
 
 
-        public ICollection<SelectableMember> Attendees { get; set; }
+        private int _memberCount;
 
-        public int MemberCount => Attendees?.Count ?? 0;
+        [Computed] public int MemberCount
+        {
+            get => _memberCount;
+            set { _memberCount = value; OnPropertyChanged();}
+        }
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

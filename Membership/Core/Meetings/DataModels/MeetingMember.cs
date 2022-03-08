@@ -14,6 +14,7 @@ namespace Membership.Core.Meetings.DataModels
         }
 
         [ExplicitKey] public Guid MeetingId { get; set; }
-        public Guid MemberId { get; set; }
+        [ExplicitKey] public Guid MemberId { get; set; }
+
     }
 }

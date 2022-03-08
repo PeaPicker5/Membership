@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:Membership.Common.Converters"
              xmlns:controls="clr-namespace:Membership.Common.Controls"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
@@ -14,8 +13,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <converters:BooleanInverterConverter x:Key="BooleanInverterConverter" /> 
-            <converters:MinimumDateConverter x:Key="MinimumDateConverter" /> 
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -31,15 +28,14 @@
                 <controls:InputCheckBoxControl Label=" Regular:"  
                                            IsChecked="{Binding Path=CurrentMeeting.IsRegularScheduled, Mode=TwoWay}" Margin="20,0,0,0" />
                 <controls:InputComboControl Label=" In Charge:" Width="150"
-                                           ComboBoxItems="{Binding Path=InChargeList, Mode=TwoWay}" Margin="20,0,0,0" />
-                
+                                            SelectedItemGuid="{Binding Path=CurrentMeeting.InCharge, Mode=TwoWay}"
+                                            ComboBoxItems="{Binding Path=InChargeList, Mode=TwoWay}" Margin="20,0,0,0" />
                 <StackPanel DockPanel.Dock="Right">
                     <Label Content="Members Attending:" Style="{StaticResource LabelStyle}" FontWeight="Bold" />
-                    <Label Content="{Binding Path=AttendCount}" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="24" Margin="20,-15,20,0" Width="40"/>
+                    <Label Content="{Binding Path=CurrentMeeting.MemberCount, Mode=TwoWay}" Style="{StaticResource LabelStyle}" FontWeight="Bold" FontSize="24" Margin="20,-15,20,0" Width="40"/>
                 </StackPanel>
-                
                 <controls:InputTextControl Label=" Comments:" x:Name="TextControl"
-                                          TextBox="{Binding Path=CurrentMeeting.Description, Mode=TwoWay}" Margin="20,0,20,0" />
+                                          TextBox="{Binding Path=CurrentMeeting.Comments, Mode=TwoWay}" Margin="20,0,20,0" />
 
             </DockPanel>
         </GroupBox.Header>
@@ -60,7 +56,7 @@
                         </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox  Margin="0,0,15,8" Content="{Binding LFName}" Tag="{Binding MemberId}" 
+                                <CheckBox  Margin="0,0,15,8" Content="{Binding Name}" Tag="{Binding ItemId}" 
                                            IsChecked="{Binding IsSelected, Mode=TwoWay}"
                                            Style="{StaticResource CheckBoxBig}" Width="200"
                                            Checked="MemberName_OnCheckChanged" Unchecked="MemberName_OnCheckChanged"/>
