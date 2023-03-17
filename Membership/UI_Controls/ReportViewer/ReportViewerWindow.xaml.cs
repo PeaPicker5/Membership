@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using Membership.Core.DataModels;
+using Membership.Core.Meetings.DataModels;
 using Membership.Core.Members.DataModels;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
@@ -56,6 +57,9 @@ namespace Membership.UI_Controls.ReportViewer
         private void LoadReportDatasets()
         {
             ReportViewer.LocalReport.DataSources.Clear();
+            var datasetValueMembers = new List<Member>();
+            var datasetValueMeetings = new List<Meeting>();
+            var dataset = new ReportDataSource();
 
             switch (ReportName.ToUpper())
             {
@@ -74,20 +78,43 @@ namespace Membership.UI_Controls.ReportViewer
                 case "DUESREMOVALNOTICE":
                 case "DUESREMOVALLETTERS":
                 case "DUESADDRESSLABELS":
-                    var datasetValue = new List<Member>();
 
                     if (ReportName.ToUpper() == "DUESADDRESSLABELS")
-                        datasetValue.AddRange(GetBlankMembersForLabels());
-                    
-                    var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
-                    datasetValue.AddRange(_presenter.GetMembersFromList(membersThatOwe));
+                        datasetValueMembers.AddRange(GetBlankMembersForLabels());
 
-                    var dataset = new ReportDataSource
-                    {
-                        Name = "MemberRecord",
-                        Value = datasetValue
-                    };
+                    var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
+                    //                   var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
+                    datasetValueMembers.AddRange(_presenter.GetMembersFromList(membersThatOwe));
+
+                    dataset.Name = "MemberRecord";
+                    dataset.Value = datasetValueMembers;
                     ReportViewer.LocalReport.DataSources.Add(dataset);
+                    break;
+                case "MEMBERSABLETOVOTE":
+
+                    datasetValueMembers.AddRange(_presenter.MembersThanCanVote());
+                    dataset.Name = "MembersAbleToVote";
+                    dataset.Value = datasetValueMembers;
+                    ReportViewer.LocalReport.DataSources.Add(dataset);
+                    dataset = new ReportDataSource();
+                    datasetValueMeetings.AddRange(_presenter.GetLast11Meetings());
+                    dataset.Name = "Last11Meetings";
+                    dataset.Value = datasetValueMeetings;
+                    ReportViewer.LocalReport.DataSources.Add(dataset);
+                    break;
+                case "MEMBERDETAILS":
+
+                    var memberId = (from p in ReportParams where p.Name == "MemberID" select p.Values).FirstOrDefault().ToString();
+                    datasetValueMembers.Add(_presenter.GetMember(Guid.Parse(memberId)));
+                    dataset.Name = "MemberInfo";
+                    dataset.Value = datasetValueMembers;
+                    ReportViewer.LocalReport.DataSources.Add(dataset);
+
+ //                   dataset = new ReportDataSource();
+ ////                   datasetValueMeetings.AddRange(_presenter.GetOffices());
+ //                   dataset.Name = "OfficerInfo";
+ //                   dataset.Value = datasetValueMeetings;
+ //                   ReportViewer.LocalReport.DataSources.Add(dataset);
                     break;
             }
         }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Membership</RootNamespace>
     <AssemblyName>Membership</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.1</ApplicationVersion>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -64,10 +64,15 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Membership.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Common\Resources\Pea-Dude Shield.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
@@ -76,12 +81,10 @@
       <HintPath>..\packages\Dapper.Contrib.2.0.30\lib\net461\Dapper.Contrib.dll</HintPath>
     </Reference>
     <Reference Include="Fluent, Version=6.1.0.326, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fluent.Ribbon.6.1.0.326\lib\net45\Fluent.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Fluent.Ribbon.6.1.0.326\lib\net462\Fluent.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
@@ -95,14 +98,19 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -114,6 +122,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -206,36 +215,44 @@
     <Compile Include="Core\Members\Repositories\MemberTypeRepository.cs" />
     <Compile Include="Core\Officers\Repositories\OfficerRepository.cs" />
     <Compile Include="Core\Members\Repositories\MemberRepository.cs" />
-    <Compile Include="MembershipDataSet.Designer.cs">
+    <Compile Include="ReportDataSources\Meetings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Meetings.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDataSources\MemberList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberList.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDataSources\MembershipDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MembershipDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="MembershipDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MembershipDataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
-    <Compile Include="UI_Controls\Dues\DuesAddressLabels.xaml.cs">
+    <Compile Include="UI_Controls\Reports\DuesAddressLabels.xaml.cs">
       <DependentUpon>DuesAddressLabels.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI_Controls\Dues\DuesEmailList.xaml.cs">
+    <Compile Include="UI_Controls\Reports\DuesEmailList.xaml.cs">
       <DependentUpon>DuesEmailList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI_Controls\Dues\DuesNoticeReports.xaml.cs">
+    <Compile Include="UI_Controls\Reports\DuesNoticeReports.xaml.cs">
       <DependentUpon>DuesNoticeReports.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI_Controls\Dues\DuesCards.xaml.cs">
+    <Compile Include="UI_Controls\Reports\DuesCards.xaml.cs">
       <DependentUpon>DuesCards.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RPT_DuesCards3330.Designer.cs">
+    <Compile Include="ReportDataSources\RPT_DuesCards3330.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UI_Controls\Reports\MembersAbleToVote.xaml.cs">
+      <DependentUpon>MembersAbleToVote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Controls\Meetings\MeetingAttendance.xaml.cs">
       <DependentUpon>MeetingAttendance.xaml</DependentUpon>
     </Compile>
@@ -244,6 +261,9 @@
     </Compile>
     <Compile Include="UI_Controls\Members\ImagePopupWindow.xaml.cs">
       <DependentUpon>ImagePopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Controls\Reports\MemberDetailsReport.xaml.cs">
+      <DependentUpon>MemberDetailsReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI_Controls\Offices\EditOfficerBase.cs" />
     <Compile Include="UI_Controls\Offices\OfficeHistory.xaml.cs">
@@ -275,6 +295,11 @@
     </Compile>
     <Compile Include="UI_Controls\Offices\OfficesHeld.xaml.cs">
       <DependentUpon>OfficesHeld.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDataSources\VIEW_OfficeAssignments.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VIEW_OfficeAssignments.xsd</DependentUpon>
     </Compile>
     <Page Include="Common\Controls\DetailsHeaderControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -316,19 +341,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI_Controls\Dues\DuesAddressLabels.xaml">
+    <Page Include="UI_Controls\Reports\DuesAddressLabels.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI_Controls\Dues\DuesEmailList.xaml">
+    <Page Include="UI_Controls\Reports\DuesEmailList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI_Controls\Dues\DuesNoticeReports.xaml">
+    <Page Include="UI_Controls\Reports\DuesNoticeReports.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI_Controls\Dues\DuesCards.xaml">
+    <Page Include="UI_Controls\Reports\DuesCards.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI_Controls\Reports\MembersAbleToVote.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -343,6 +372,10 @@
     <Page Include="UI_Controls\Members\ImagePopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI_Controls\Reports\MemberDetailsReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI_Controls\Offices\OfficeHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -403,56 +436,88 @@
     <EmbeddedResource Include="ReportDefinitions\DuesCards.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalLetters.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalNotice.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\MemberDetails.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\MembersAbleToVote.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesWarning.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="MembershipDataSet.xsc">
+    <None Include="ReportDataSources\Meetings.xsc">
+      <DependentUpon>Meetings.xsd</DependentUpon>
+    </None>
+    <None Include="ReportDataSources\Meetings.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Meetings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportDataSources\Meetings.xss">
+      <DependentUpon>Meetings.xsd</DependentUpon>
+    </None>
+    <None Include="ReportDataSources\MemberList.xsc">
+      <DependentUpon>MemberList.xsd</DependentUpon>
+    </None>
+    <None Include="ReportDataSources\MemberList.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MemberList.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportDataSources\MemberList.xss">
+      <DependentUpon>MemberList.xsd</DependentUpon>
+    </None>
+    <None Include="ReportDataSources\MembershipDataSet.xsc">
       <DependentUpon>MembershipDataSet.xsd</DependentUpon>
     </None>
-    <None Include="MembershipDataSet.xsd">
+    <None Include="ReportDataSources\MembershipDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>MembershipDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="MembershipDataSet.xss">
+    <None Include="ReportDataSources\MembershipDataSet.xss">
       <DependentUpon>MembershipDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="MembershipDataSet1.xsc">
-      <DependentUpon>MembershipDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="MembershipDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MembershipDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="MembershipDataSet1.xss">
-      <DependentUpon>MembershipDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Membership_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\MemberList.datasource" />
     <None Include="Properties\DataSources\Membership.Core.DataModels.DuesHistory.datasource" />
     <None Include="Properties\DataSources\Membership.Core.DataModels.DuesRecord.datasource" />
     <None Include="Properties\DataSources\Membership.Core.DataModels.Member.datasource" />
     <None Include="Properties\DataSources\Membership.Core.DataModels.MemberType.datasource" />
     <None Include="Properties\DataSources\Membership.Core.DataModels.Office.datasource" />
     <None Include="Properties\DataSources\Membership.Core.DataModels.OfficeHeld.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Members.DataModels.Member.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Members.DataModels.MemberRemoval.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Members.DataModels.MemberType.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Members.DataModels.SelectableMember+enumCheckStatus.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Members.DataModels.SelectableMember.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Officers.DataModels.Office.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Officers.DataModels.Officer.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="RPT_DuesCards3330.xsc">
+    <None Include="ReportDataSources\RPT_DuesCards3330.xsc">
       <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
     </None>
-    <None Include="RPT_DuesCards3330.xsd">
+    <None Include="ReportDataSources\RPT_DuesCards3330.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>RPT_DuesCards3330.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="RPT_DuesCards3330.xss">
+    <None Include="ReportDataSources\RPT_DuesCards3330.xss">
       <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
+    </None>
+    <None Include="ReportDataSources\VIEW_OfficeAssignments.xsc">
+      <DependentUpon>VIEW_OfficeAssignments.xsd</DependentUpon>
+    </None>
+    <None Include="ReportDataSources\VIEW_OfficeAssignments.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VIEW_OfficeAssignments.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportDataSources\VIEW_OfficeAssignments.xss">
+      <DependentUpon>VIEW_OfficeAssignments.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -541,6 +606,8 @@
     <Resource Include="Common\Resources\employee-table.png" />
     <Resource Include="Common\Resources\user_group.png" />
     <Resource Include="Common\Resources\clipboard-user.png" />
+    <Resource Include="Common\Resources\Green-Ball.ico" />
+    <Resource Include="Common\Resources\Pea-Dude Shield.ico" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -554,6 +621,9 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

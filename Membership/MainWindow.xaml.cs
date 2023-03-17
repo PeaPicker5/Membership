@@ -1,9 +1,12 @@
-﻿using System.Windows;
-using Membership.ReportDefinitions;
+﻿using System;
+using System.Reflection;
+using System.Windows;
 using Membership.UI_Controls.Dues;
 using Membership.UI_Controls.Meetings;
 using Membership.UI_Controls.Members;
 using Membership.UI_Controls.Offices;
+using Membership.UI_Controls.Reports;
+using DuesEmailList = Membership.UI_Controls.Reports.DuesEmailList;
 
 namespace Membership
 {
@@ -12,8 +15,9 @@ namespace Membership
         public MainWindow()
         {
             InitializeComponent();
+            Title = $"Association Membership - ver {Assembly.GetExecutingAssembly().GetName().Version}";
         }
-        
+
         private void MembershipButton_Click(object sender, RoutedEventArgs e)
         {
             var ucMemberSelection = new MemberSelection();
@@ -128,6 +132,20 @@ namespace Membership
             var ucMeetingSelection = new MeetingSelection();
             MainStack.Children.Clear();
             MainStack.Children.Add(ucMeetingSelection);
+        }
+
+        private void MembersAbleToVoteOnClick(object sender, RoutedEventArgs e)
+        {
+            var ucAbleToVoteReport = new MembersAbleToVote();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucAbleToVoteReport);
+        }
+
+        private void MemberDetailsOnClick(object sender, RoutedEventArgs e)
+        {
+            var ucMemberDetailsReport = new MemberDetailsReport();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucMemberDetailsReport);
         }
     }
 }

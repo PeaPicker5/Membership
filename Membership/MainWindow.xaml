@@ -7,7 +7,7 @@
         xmlns:converters="clr-namespace:Membership.Common.Converters"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="MainWindow" Height="900" Width="1450"
+        Height="900" Width="1450"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         >
@@ -168,11 +168,15 @@
                         <fluent:Button Header="Member Details"
                                        ToolTip="Report of member details with offices, dues and meeting records." 
                                        LargeIcon="{StaticResource ReportIcon}"
-                                       Click="ReportsButtonOnClick" />
+                                       Click="MemberDetailsOnClick" />
                         <fluent:Button Header="Current Members Without E-mail"
                                        ToolTip="List of current members that don't have an email address on file." 
                                        LargeIcon="{StaticResource ReportIcon}"
                                        Click="ReportsButtonOnClick" />
+                        <fluent:Button Header="Members Able To Vote"
+                                       ToolTip="List of current members that are eligible to vote per Article __, Section __ of the Assoc By-Laws." 
+                                       LargeIcon="{StaticResource ReportIcon}"
+                                       Click="MembersAbleToVoteOnClick" />
                     </fluent:RibbonGroupBox>
 
                 </fluent:RibbonTabItem>

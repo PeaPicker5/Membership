@@ -43,6 +43,22 @@ namespace Membership.Core.Members.Repositories
             }
         }
 
+        public IEnumerable<Member> GetMembersThatCanVote()
+        {
+            const int MeetingsNeeded = 5;
+            var query = "SELECT * FROM MEMBER_List ml " +
+                        "INNER JOIN VIEW_MembersAbleToVote v " +
+                        "ON ml.MemberId = v.MemberId " +
+                        $"WHERE v.RecCount >= {MeetingsNeeded} " +
+                        "ORDER BY ml.Lastname, ml.FirstName";
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var retVal = connection.Query<Member>(query).ToList();
+                return retVal;
+            }
+        }
+
+
         private IEnumerable<Member> GetSelectedMemberRecords(string clause, DynamicParameters param)
         {
             const string query = "SELECT ml.* " +

@@ -16,13 +16,6 @@
       </ConnectionProperties>
       <rd:DataSourceID>40c2e7c7-a4ce-44c5-a560-8f96ba49a42f</rd:DataSourceID>
     </DataSource>
-    <DataSource Name="MembershipCoreDataModels1">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>e41132b8-24e1-4183-b1b8-4e97bd994186</rd:DataSourceID>
-    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="MemberRecord">

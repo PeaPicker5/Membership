@@ -32,7 +32,7 @@ namespace Membership.Core.Meetings.Presenters
 
         private void LoadMemberCheckListWithCurrent()
         {
-            var currentMembers = _memberRepository.GetCurrentMembers().ToList();
+            var currentMembers = _memberRepository.GetCurrentMembers().OrderBy(member => member.LFName).ToList();
             _view.MemberCheckList = currentMembers.Select(member => new SelectableItem(member.MemberId, member.LFName, notSelected)).ToList();
         }
 

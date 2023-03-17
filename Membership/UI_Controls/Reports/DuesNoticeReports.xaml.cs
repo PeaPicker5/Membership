@@ -5,12 +5,11 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Membership.Annotations;
-using Membership.Core.DataModels;
 using Membership.Core.Officers.DataModels;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
-namespace Membership.ReportDefinitions
+namespace Membership.UI_Controls.Reports
 {
     public partial class DuesNoticeReports : INotifyPropertyChanged
     {

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Membership.Core.DataModels;
 using Membership.Core.Dues.DataModels;
 using Membership.Core.Dues.Presenters;
 using Button = System.Windows.Controls.Button;
 
-namespace Membership.UI_Controls.Dues
+namespace Membership.UI_Controls.Reports
 {
 
     public partial class DuesEmailList : IDuesRecordView
@@ -50,10 +48,12 @@ namespace Membership.UI_Controls.Dues
 
         private void LoadCurrentDuesRecords()
         {
-            DuesRecs = _presenter.GetByYear(DateTime.Now.Year)
-                .OrderBy(name => name.MemberRec.LastName)
-                .ToList();
+            _presenter.MembersCurrentlyOweDues();
+            //DuesRecs = _presenter.GetByYear(DateTime.Now.Year)
+            //    .OrderBy(name => name.MemberRec.LastName)
+            //    .ToList();
             EmailList = DuesRecs.Where(x => !string.IsNullOrEmpty(x.MemberRec.EmailAddress))
+                                .Where(y => !y.IsPaid)
                                 .Aggregate("", (current, rec) => current + rec.MemberRec.EmailAddress + ", ");
         }
         private void CopyTextOnClick(object sender, RoutedEventArgs e)

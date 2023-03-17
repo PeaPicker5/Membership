@@ -34,7 +34,7 @@
                         <Label Content="{Binding Source={x:Static sys:DateTime.Today}}"
                                ContentStringFormat="{}{0:yyyy    }" FontSize="16"/>
                         <CheckBox Content="Show Unpaid Members Only" 
-                               Style="{StaticResource MetroCheckBox}" FontSize="16" Click="DisplayUnpaidMembersOnly" />
+                               Style="{StaticResource CheckBoxBig}" FontSize="16" Click="DisplayUnpaidMembersOnly" />
                     </StackPanel>
                     <Button ToolTip="Record the dues receipts."  DockPanel.Dock="Right" Width="100"
                             Click="RecordDuesButtonOnClick" IsEnabled="{Binding Path=RunningCount}"
@@ -74,13 +74,13 @@
                     <DataGrid.Columns>
 
                         <DataGridCheckBoxColumn MinWidth="40" Header="PAID" Binding="{Binding Path=IsPaid}" />
-                                            <!--ElementStyle="{StaticResource CheckBoxStyle}" />-->
-
+                                                <!-- ElementStyle="{StaticResource CheckBoxStyle}" />-->
                         <!--<DataGridTemplateColumn Header="PAID" IsReadOnly="True" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox x:Name="IsPaidBox" HorizontalAlignment="Center"         Tag="{Binding Path=Year}"
-                                          IsChecked="{Binding Path=IsPaid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <CheckBox x:Name="IsPaidBox" HorizontalAlignment="Center" 
+                                              Tag="{Binding Path=SelectedDuesRecord.Year}"
+                                          IsChecked="{Binding Path=SelectedDuesRecord.IsPaid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>-->

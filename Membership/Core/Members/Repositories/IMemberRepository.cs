@@ -29,6 +29,7 @@ namespace Membership.Core.Members.Repositories
         IEnumerable<Members.DataModels.Member> GetMembersWithOffice(int year, int officeType);
 
         IEnumerable<Members.DataModels.Member> GetCurrentMembers();
+        IEnumerable<Members.DataModels.Member> GetMembersThatCanVote();
         void InsertMemberRecord(Members.DataModels.Member memberRec);
         void UpdateMemberRecord(Members.DataModels.Member memberRec);
         bool DeleteMemberRecord(Members.DataModels.Member memberRec, 

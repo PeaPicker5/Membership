@@ -8,33 +8,7 @@
         <Setter Property="Width" Value="300" />
         <Setter Property="MinHeight" Value="300" />
         <Setter Property="MinWidth" Value="300" />
-        <Setter Property="GlowBrush" Value="{DynamicResource AccentColorBrush}" />
-        <Setter Property="TitleCaps" Value="False" />
         <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
-    </Style>
-
-    <Style x:Key="DialogStyle" TargetType="{x:Type controls:MetroWindow}">
-        <Setter Property="ResizeMode" Value="NoResize" />
-        <Setter Property="ShowInTaskbar" Value="False" />
-        <Setter Property="GlowBrush" Value="{DynamicResource AccentColorBrush}" />
-        <Setter Property="TitleCaps" Value="False" />
-        <Setter Property="ShowSystemMenuOnRightClick" Value="False" />
-    </Style>
-
-    <Style x:Key="FooterBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="#FF00ADD9" />
-        <Setter Property="BorderThickness" Value="0,1,0,0" />
-        <Setter Property="Margin" Value="0,10,0,0" />
-    </Style>
-
-    <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="Black" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Opacity" Value=".5" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
 
@@ -98,7 +72,7 @@
 
 
 
-
+    
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="controls:ButtonHelper.PreserveTextCase" Value="True" />
         <Setter Property="Background" Value="{DynamicResource BackgroundColorBrush}" />
@@ -122,43 +96,6 @@
                             <Setter Property="Background" Value="{StaticResource HighlightColorBrush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource PressedColorBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="ButtonContentPresenter" Property="Opacity" Value=".5" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-        <Setter Property="controls:ButtonHelper.PreserveTextCase" Value="True" />
-        <Setter Property="Background" Value="{DynamicResource BackgroundColorBrush}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="0, 5" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border CornerRadius="2" Background="{TemplateBinding Background}" BorderThickness="1"
-                            BorderBrush="{StaticResource BorderColorBrush}">
-                        <ContentPresenter Name="ButtonContentPresenter"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          Margin="{TemplateBinding Padding}"
-                                          RecognizesAccessKey="True" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource HighlightColorBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource PressedColorBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Background" Value="{DynamicResource PressedColorBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
@@ -200,231 +137,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="GroupBoxFadeInOutStyle" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
-        <Style.Triggers>
-            <Trigger Property="Visibility" Value="Visible">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.5" BeginTime="0:0:0"
-                                             From="0.0" To="1.0" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="TextBoxFadeInOutStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-        <Style.Triggers>
-            <Trigger Property="Visibility" Value="Visible">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.5" BeginTime="0:0:0"
-                                             From="0.0" To="1.0" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="TabControlLeftStyle" TargetType="{x:Type TabControl}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TabControl">
-                    <Grid UseLayoutRounding="True">
-                        <Grid.ColumnDefinitions>
-                            <!--3 columns for the TabPanel, overlap, and the selected content-->
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="0"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <!--TabPanel needs to be on top of the selected content border-->
-                        <TabPanel IsItemsHost="True"
-                                      Grid.Column="0"
-                                      Grid.ColumnSpan="2"
-                                      Panel.ZIndex="1" />
-                        <Border Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    CornerRadius="0,6,6,6"
-                                    Panel.ZIndex="0"
-                                    BorderThickness="1"
-                                    Background="White"
-                                    BorderBrush="#FF00ADD9">
-                            <ContentPresenter Margin="2"
-                                                  ContentSource="SelectedContent" />
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="TabStripPlacement" Value="Left"/>
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Opacity" Value=".5" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
-        <Setter Property="FontSize" Value="20" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid Name="Panel">
-                        <ContentPresenter x:Name="ContentSite"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          ContentSource="Header"
-                                          Margin="10,2" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Panel" Property="Background" Value="#FF00ADD9" />
-                            <Setter Property="Foreground" Value="White" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Panel" Property="Background" Value="White" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="TabItemSubStyle" TargetType="{x:Type TabItem}">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid Name="Panel">
-                        <Border Name="Border"
-                                BorderThickness="1,1,0,1"
-                                BorderBrush="LightGray"
-                                CornerRadius="6,0,0,6">
-                            <ContentPresenter x:Name="ContentSite"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          ContentSource="Header"
-                                          Margin="10,2" />
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="White" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF00ADD9"/>
-                            <Setter TargetName="Border" Property="Background" Value="#FF00ADD9"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Panel" Property="Background" Value="White" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="TabItemStyleTop" TargetType="{x:Type TabItem}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid Name="Panel">
-                        <Border Name="Border"
-                                BorderThickness="1,1,0,1"
-                                BorderBrush="LightGray"
-                                CornerRadius="6,6,0,0">
-                            <ContentPresenter x:Name="ContentSite"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          ContentSource="Header"
-                                          Margin="10,2" />
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="White" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF00ADD9"/>
-                            <Setter TargetName="Border" Property="Background" Value="#FF00ADD9"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Panel" Property="Background" Value="White" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="TabItemStyleVertical" TargetType="{x:Type TabItem}">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid Name="Panel">
-                        <ContentPresenter x:Name="ContentSite"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"
-                                          ContentSource="Header"
-                                          Margin="10,2" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Panel" Property="Background" Value="#FF00ADD9" />
-                            <Setter Property="Foreground" Value="White" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Panel" Property="Background" Value="White" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="HeaderTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <ContentPresenter Content="{TemplateBinding Content}" TextOptions.TextFormattingMode="Display">
-                        <ContentPresenter.LayoutTransform>
-                            <RotateTransform Angle="-90" />
-                        </ContentPresenter.LayoutTransform>
-                    </ContentPresenter>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="#CCCCCC" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="#7F7F7F" />
-            </Trigger>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="BorderBrush" Value="#7F7F7F" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="TreeViewStyle" TargetType="{x:Type TreeView}">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="#CCCCCC" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="#7F7F7F" />
-            </Trigger>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="BorderBrush" Value="#7F7F7F" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
 
 
     <Style x:Key="HeaderTextBlockStyle" TargetType="{x:Type TextBlock}">
@@ -434,17 +146,6 @@
         <Setter Property="Padding" Value="5,5,5,5" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Bold" />
-    </Style>
-
-    <Style x:Key="InvertedHeaderTextBlockStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Background" Value="#FF00ADD9" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="TextAlignment" Value="Left" />
-        <Setter Property="Padding" Value="10,5" />
-        <Setter Property="Margin" Value="0,0,0,0" />
-        <Setter Property="FontSize" Value="24" />
     </Style>
 
     <Style x:Key="DataGridCellCenter" TargetType="TextBlock">
@@ -466,29 +167,12 @@
         <Setter Property="FontSize" Value="14" />
     </Style>
 
-    <Style x:Key="GroupBoxText" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="FontSize" Value="16" />
-    </Style>
 
-    <Style x:Key="GroupBoxChildText" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="#FF00ADD9" />
-        <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="FontSize" Value="14" />
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Opacity" Value=".5" />
-            </Trigger>
-        </Style.Triggers>
+    <Style x:Key="MetroCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MetroCheckBox}">
+        <Style.Resources>
+            <SolidColorBrush x:Key="HighlightBrush" Color="black"/>
+        </Style.Resources>
     </Style>
-
-    <Style x:Key="GroupBoxChildHeaderStyle" TargetType="{x:Type GroupBox}">
-        <Setter Property="Background" Value="White" />
-        <Setter Property="Foreground" Value="#FF00ADD9" />
-        <Setter Property="FontSize" Value="10" />
-    </Style>
-
     <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="FontSize" Value="14" />
@@ -506,41 +190,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
-    <Style x:Key="CalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
-        <Setter Property="Foreground" Value="Black" />
-        <Setter Property="FontSize" Value="12" />
-    </Style>
-
-    <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}">
-        <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}"/>
-    </Style>
-
-
-    <Style x:Key="InvertedHeaderTextBlockStyle90" TargetType="{x:Type TextBlock}"
-           BasedOn="{StaticResource InvertedHeaderTextBlockStyle}">
-        <Setter Property="LayoutTransform">
-            <Setter.Value>
-                <RotateTransform Angle="90" CenterX="0" CenterY="0" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ExpanderHeaderText" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="18" />
-    </Style>
-
-    <Style x:Key="ReportButtonStyle" TargetType="Button" BasedOn="{StaticResource FadeInOutButtonStyle}">
-        <Setter Property="Width" Value="40" />
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Margin" Value="0,10,5,0" />
-        <Setter Property="Padding" Value="5" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-    </Style>
-
 
 
     <Style x:Key="InputLabel" TargetType="{x:Type Label}">
@@ -579,15 +228,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DateMmyy" TargetType="DatePickerTextBox">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <TextBox IsEnabled="False" Text="{Binding Path=SelectedDate, StringFormat='yyyy/MM', RelativeSource={RelativeSource AncestorType=DatePicker}}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
         <Setter Property="FontSize" Value="16"/>

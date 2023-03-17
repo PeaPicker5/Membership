@@ -76,7 +76,7 @@ namespace Membership.UI_Controls.Members
             InitializeComponent();
             _presenter = new MemberSelectionPresenter(this);
             _presenter.LoadMemberTypes();
-            FilterCurrent.IsChecked = true;
+  //          FilterCurrent.IsChecked = true;
         }
 
         public void LoadMembers()
@@ -93,9 +93,9 @@ namespace Membership.UI_Controls.Members
             var dg = (DataGrid) sender;
             if (!(dg.SelectedItem is Member selectedMemberRec)) return;
             SelectedMember = (Member)dg.SelectedItem;
+            MemberInfoControl.MemberRec = selectedMemberRec;
             DuesPaidControl.LoadDuesPaidRecords(selectedMemberRec.MemberId);
             OfficesHeldControl.LoadOfficeRecords(selectedMemberRec.MemberId);
-            MemberInfoControl.MemberRec = selectedMemberRec;
         }
 
 

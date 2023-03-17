@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Membership {
+namespace Membership.ReportDataSources {
     
     
     /// <summary>
@@ -20,17 +20,17 @@ namespace Membership {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("MembershipDataSet1")]
+    [global::System.Xml.Serialization.XmlRootAttribute("VIEW_OfficeAssignments")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class MembershipDataSet1 : global::System.Data.DataSet {
+    public partial class VIEW_OfficeAssignments : global::System.Data.DataSet {
         
-        private RPT_DuesCards3330DataTable tableRPT_DuesCards3330;
+        private VIEW_OfficeAssignmentsDataTable tableVIEW_OfficeAssignments;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public MembershipDataSet1() {
+        public VIEW_OfficeAssignments() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace Membership {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected MembershipDataSet1(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected VIEW_OfficeAssignments(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace Membership {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["RPT_DuesCards3330"] != null)) {
-                    base.Tables.Add(new RPT_DuesCards3330DataTable(ds.Tables["RPT_DuesCards3330"]));
+                if ((ds.Tables["VIEW_OfficeAssignments"] != null)) {
+                    base.Tables.Add(new VIEW_OfficeAssignmentsDataTable(ds.Tables["VIEW_OfficeAssignments"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace Membership {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public RPT_DuesCards3330DataTable RPT_DuesCards3330 {
+        public VIEW_OfficeAssignmentsDataTable _VIEW_OfficeAssignments {
             get {
-                return this.tableRPT_DuesCards3330;
+                return this.tableVIEW_OfficeAssignments;
             }
         }
         
@@ -127,7 +127,7 @@ namespace Membership {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            MembershipDataSet1 cln = ((MembershipDataSet1)(base.Clone()));
+            VIEW_OfficeAssignments cln = ((VIEW_OfficeAssignments)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace Membership {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["RPT_DuesCards3330"] != null)) {
-                    base.Tables.Add(new RPT_DuesCards3330DataTable(ds.Tables["RPT_DuesCards3330"]));
+                if ((ds.Tables["VIEW_OfficeAssignments"] != null)) {
+                    base.Tables.Add(new VIEW_OfficeAssignmentsDataTable(ds.Tables["VIEW_OfficeAssignments"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace Membership {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableRPT_DuesCards3330 = ((RPT_DuesCards3330DataTable)(base.Tables["RPT_DuesCards3330"]));
+            this.tableVIEW_OfficeAssignments = ((VIEW_OfficeAssignmentsDataTable)(base.Tables["VIEW_OfficeAssignments"]));
             if ((initTable == true)) {
-                if ((this.tableRPT_DuesCards3330 != null)) {
-                    this.tableRPT_DuesCards3330.InitVars();
+                if ((this.tableVIEW_OfficeAssignments != null)) {
+                    this.tableVIEW_OfficeAssignments.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace Membership {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "MembershipDataSet1";
+            this.DataSetName = "VIEW_OfficeAssignments";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/MembershipDataSet1.xsd";
+            this.Namespace = "http://tempuri.org/VIEW_OfficeAssignments.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableRPT_DuesCards3330 = new RPT_DuesCards3330DataTable();
-            base.Tables.Add(this.tableRPT_DuesCards3330);
+            this.tableVIEW_OfficeAssignments = new VIEW_OfficeAssignmentsDataTable();
+            base.Tables.Add(this.tableVIEW_OfficeAssignments);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializeRPT_DuesCards3330() {
+        private bool ShouldSerialize_VIEW_OfficeAssignments() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace Membership {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            MembershipDataSet1 ds = new MembershipDataSet1();
+            VIEW_OfficeAssignments ds = new VIEW_OfficeAssignments();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,37 +270,41 @@ namespace Membership {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void RPT_DuesCards3330RowChangeEventHandler(object sender, RPT_DuesCards3330RowChangeEvent e);
+        public delegate void VIEW_OfficeAssignmentsRowChangeEventHandler(object sender, VIEW_OfficeAssignmentsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class RPT_DuesCards3330DataTable : global::System.Data.TypedTableBase<RPT_DuesCards3330Row> {
+        public partial class VIEW_OfficeAssignmentsDataTable : global::System.Data.TypedTableBase<VIEW_OfficeAssignmentsRow> {
             
-            private global::System.Data.DataColumn columnPageNum;
+            private global::System.Data.DataColumn columnYear;
             
-            private global::System.Data.DataColumn columnRowNum;
+            private global::System.Data.DataColumn columnGroupName;
             
-            private global::System.Data.DataColumn columnFullName;
+            private global::System.Data.DataColumn columnGroupID;
             
-            private global::System.Data.DataColumn columnAddress1;
+            private global::System.Data.DataColumn columnGroupOrder;
             
-            private global::System.Data.DataColumn columnAddress2;
+            private global::System.Data.DataColumn columnTitle;
             
-            private global::System.Data.DataColumn columnCity;
+            private global::System.Data.DataColumn columnOfficeID;
             
-            private global::System.Data.DataColumn columnState;
+            private global::System.Data.DataColumn columnFirstname;
             
-            private global::System.Data.DataColumn columnZip;
+            private global::System.Data.DataColumn columnLastname;
             
-            private global::System.Data.DataColumn columnDuesAmount;
+            private global::System.Data.DataColumn columnFromDate;
+            
+            private global::System.Data.DataColumn columnToDate;
+            
+            private global::System.Data.DataColumn columnMemberID;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public RPT_DuesCards3330DataTable() {
-                this.TableName = "RPT_DuesCards3330";
+            public VIEW_OfficeAssignmentsDataTable() {
+                this.TableName = "VIEW_OfficeAssignments";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -308,7 +312,7 @@ namespace Membership {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal RPT_DuesCards3330DataTable(global::System.Data.DataTable table) {
+            internal VIEW_OfficeAssignmentsDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -325,80 +329,96 @@ namespace Membership {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected RPT_DuesCards3330DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected VIEW_OfficeAssignmentsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn PageNumColumn {
+            public global::System.Data.DataColumn YearColumn {
                 get {
-                    return this.columnPageNum;
+                    return this.columnYear;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn RowNumColumn {
+            public global::System.Data.DataColumn GroupNameColumn {
                 get {
-                    return this.columnRowNum;
+                    return this.columnGroupName;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn FullNameColumn {
+            public global::System.Data.DataColumn GroupIDColumn {
                 get {
-                    return this.columnFullName;
+                    return this.columnGroupID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn Address1Column {
+            public global::System.Data.DataColumn GroupOrderColumn {
                 get {
-                    return this.columnAddress1;
+                    return this.columnGroupOrder;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn Address2Column {
+            public global::System.Data.DataColumn TitleColumn {
                 get {
-                    return this.columnAddress2;
+                    return this.columnTitle;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn CityColumn {
+            public global::System.Data.DataColumn OfficeIDColumn {
                 get {
-                    return this.columnCity;
+                    return this.columnOfficeID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn StateColumn {
+            public global::System.Data.DataColumn FirstnameColumn {
                 get {
-                    return this.columnState;
+                    return this.columnFirstname;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ZipColumn {
+            public global::System.Data.DataColumn LastnameColumn {
                 get {
-                    return this.columnZip;
+                    return this.columnLastname;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn DuesAmountColumn {
+            public global::System.Data.DataColumn FromDateColumn {
                 get {
-                    return this.columnDuesAmount;
+                    return this.columnFromDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ToDateColumn {
+                get {
+                    return this.columnToDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn MemberIDColumn {
+                get {
+                    return this.columnMemberID;
                 }
             }
             
@@ -413,53 +433,63 @@ namespace Membership {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public RPT_DuesCards3330Row this[int index] {
+            public VIEW_OfficeAssignmentsRow this[int index] {
                 get {
-                    return ((RPT_DuesCards3330Row)(this.Rows[index]));
+                    return ((VIEW_OfficeAssignmentsRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event RPT_DuesCards3330RowChangeEventHandler RPT_DuesCards3330RowChanging;
+            public event VIEW_OfficeAssignmentsRowChangeEventHandler VIEW_OfficeAssignmentsRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event RPT_DuesCards3330RowChangeEventHandler RPT_DuesCards3330RowChanged;
+            public event VIEW_OfficeAssignmentsRowChangeEventHandler VIEW_OfficeAssignmentsRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event RPT_DuesCards3330RowChangeEventHandler RPT_DuesCards3330RowDeleting;
+            public event VIEW_OfficeAssignmentsRowChangeEventHandler VIEW_OfficeAssignmentsRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event RPT_DuesCards3330RowChangeEventHandler RPT_DuesCards3330RowDeleted;
+            public event VIEW_OfficeAssignmentsRowChangeEventHandler VIEW_OfficeAssignmentsRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddRPT_DuesCards3330Row(RPT_DuesCards3330Row row) {
+            public void AddVIEW_OfficeAssignmentsRow(VIEW_OfficeAssignmentsRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public RPT_DuesCards3330Row AddRPT_DuesCards3330Row(long PageNum, long RowNum, string FullName, string Address1, string Address2, string City, string State, string Zip, double DuesAmount) {
-                RPT_DuesCards3330Row rowRPT_DuesCards3330Row = ((RPT_DuesCards3330Row)(this.NewRow()));
+            public VIEW_OfficeAssignmentsRow AddVIEW_OfficeAssignmentsRow(int Year, string GroupName, int GroupID, int GroupOrder, string Title, int OfficeID, string Firstname, string Lastname, System.DateTime FromDate, System.DateTime ToDate, System.Guid MemberID) {
+                VIEW_OfficeAssignmentsRow rowVIEW_OfficeAssignmentsRow = ((VIEW_OfficeAssignmentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        PageNum,
-                        RowNum,
-                        FullName,
-                        Address1,
-                        Address2,
-                        City,
-                        State,
-                        Zip,
-                        DuesAmount};
-                rowRPT_DuesCards3330Row.ItemArray = columnValuesArray;
-                this.Rows.Add(rowRPT_DuesCards3330Row);
-                return rowRPT_DuesCards3330Row;
+                        Year,
+                        GroupName,
+                        GroupID,
+                        GroupOrder,
+                        Title,
+                        OfficeID,
+                        Firstname,
+                        Lastname,
+                        FromDate,
+                        ToDate,
+                        MemberID};
+                rowVIEW_OfficeAssignmentsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowVIEW_OfficeAssignmentsRow);
+                return rowVIEW_OfficeAssignmentsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public VIEW_OfficeAssignmentsRow FindByOfficeIDMemberID(int OfficeID, System.Guid MemberID) {
+                return ((VIEW_OfficeAssignmentsRow)(this.Rows.Find(new object[] {
+                            OfficeID,
+                            MemberID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                RPT_DuesCards3330DataTable cln = ((RPT_DuesCards3330DataTable)(base.Clone()));
+                VIEW_OfficeAssignmentsDataTable cln = ((VIEW_OfficeAssignmentsDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -467,85 +497,94 @@ namespace Membership {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new RPT_DuesCards3330DataTable();
+                return new VIEW_OfficeAssignmentsDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnPageNum = base.Columns["PageNum"];
-                this.columnRowNum = base.Columns["RowNum"];
-                this.columnFullName = base.Columns["FullName"];
-                this.columnAddress1 = base.Columns["Address1"];
-                this.columnAddress2 = base.Columns["Address2"];
-                this.columnCity = base.Columns["City"];
-                this.columnState = base.Columns["State"];
-                this.columnZip = base.Columns["Zip"];
-                this.columnDuesAmount = base.Columns["DuesAmount"];
+                this.columnYear = base.Columns["Year"];
+                this.columnGroupName = base.Columns["GroupName"];
+                this.columnGroupID = base.Columns["GroupID"];
+                this.columnGroupOrder = base.Columns["GroupOrder"];
+                this.columnTitle = base.Columns["Title"];
+                this.columnOfficeID = base.Columns["OfficeID"];
+                this.columnFirstname = base.Columns["Firstname"];
+                this.columnLastname = base.Columns["Lastname"];
+                this.columnFromDate = base.Columns["FromDate"];
+                this.columnToDate = base.Columns["ToDate"];
+                this.columnMemberID = base.Columns["MemberID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnPageNum = new global::System.Data.DataColumn("PageNum", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPageNum);
-                this.columnRowNum = new global::System.Data.DataColumn("RowNum", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRowNum);
-                this.columnFullName = new global::System.Data.DataColumn("FullName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFullName);
-                this.columnAddress1 = new global::System.Data.DataColumn("Address1", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAddress1);
-                this.columnAddress2 = new global::System.Data.DataColumn("Address2", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAddress2);
-                this.columnCity = new global::System.Data.DataColumn("City", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCity);
-                this.columnState = new global::System.Data.DataColumn("State", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnState);
-                this.columnZip = new global::System.Data.DataColumn("Zip", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnZip);
-                this.columnDuesAmount = new global::System.Data.DataColumn("DuesAmount", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDuesAmount);
-                this.columnPageNum.ReadOnly = true;
-                this.columnRowNum.ReadOnly = true;
-                this.columnFullName.ReadOnly = true;
-                this.columnFullName.MaxLength = 101;
-                this.columnAddress1.ReadOnly = true;
-                this.columnAddress1.MaxLength = 50;
-                this.columnAddress2.ReadOnly = true;
-                this.columnAddress2.MaxLength = 50;
-                this.columnCity.ReadOnly = true;
-                this.columnCity.MaxLength = 50;
-                this.columnState.ReadOnly = true;
-                this.columnState.MaxLength = 5;
-                this.columnZip.ReadOnly = true;
-                this.columnZip.MaxLength = 10;
-                this.columnDuesAmount.ReadOnly = true;
+                this.columnYear = new global::System.Data.DataColumn("Year", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnYear);
+                this.columnGroupName = new global::System.Data.DataColumn("GroupName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGroupName);
+                this.columnGroupID = new global::System.Data.DataColumn("GroupID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGroupID);
+                this.columnGroupOrder = new global::System.Data.DataColumn("GroupOrder", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGroupOrder);
+                this.columnTitle = new global::System.Data.DataColumn("Title", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTitle);
+                this.columnOfficeID = new global::System.Data.DataColumn("OfficeID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOfficeID);
+                this.columnFirstname = new global::System.Data.DataColumn("Firstname", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFirstname);
+                this.columnLastname = new global::System.Data.DataColumn("Lastname", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLastname);
+                this.columnFromDate = new global::System.Data.DataColumn("FromDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFromDate);
+                this.columnToDate = new global::System.Data.DataColumn("ToDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnToDate);
+                this.columnMemberID = new global::System.Data.DataColumn("MemberID", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMemberID);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnOfficeID,
+                                this.columnMemberID}, true));
+                this.columnYear.AllowDBNull = false;
+                this.columnGroupName.AllowDBNull = false;
+                this.columnGroupName.MaxLength = 50;
+                this.columnGroupID.AllowDBNull = false;
+                this.columnGroupOrder.AllowDBNull = false;
+                this.columnTitle.AllowDBNull = false;
+                this.columnTitle.MaxLength = 50;
+                this.columnOfficeID.AllowDBNull = false;
+                this.columnFirstname.AllowDBNull = false;
+                this.columnFirstname.MaxLength = 50;
+                this.columnLastname.AllowDBNull = false;
+                this.columnLastname.MaxLength = 50;
+                this.columnMemberID.AllowDBNull = false;
+                this.ExtendedProperties.Add("Generator_TablePropName", "_VIEW_OfficeAssignments");
+                this.ExtendedProperties.Add("Generator_UserTableName", "VIEW_OfficeAssignments");
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public RPT_DuesCards3330Row NewRPT_DuesCards3330Row() {
-                return ((RPT_DuesCards3330Row)(this.NewRow()));
+            public VIEW_OfficeAssignmentsRow NewVIEW_OfficeAssignmentsRow() {
+                return ((VIEW_OfficeAssignmentsRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new RPT_DuesCards3330Row(builder);
+                return new VIEW_OfficeAssignmentsRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(RPT_DuesCards3330Row);
+                return typeof(VIEW_OfficeAssignmentsRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.RPT_DuesCards3330RowChanged != null)) {
-                    this.RPT_DuesCards3330RowChanged(this, new RPT_DuesCards3330RowChangeEvent(((RPT_DuesCards3330Row)(e.Row)), e.Action));
+                if ((this.VIEW_OfficeAssignmentsRowChanged != null)) {
+                    this.VIEW_OfficeAssignmentsRowChanged(this, new VIEW_OfficeAssignmentsRowChangeEvent(((VIEW_OfficeAssignmentsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -553,8 +592,8 @@ namespace Membership {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.RPT_DuesCards3330RowChanging != null)) {
-                    this.RPT_DuesCards3330RowChanging(this, new RPT_DuesCards3330RowChangeEvent(((RPT_DuesCards3330Row)(e.Row)), e.Action));
+                if ((this.VIEW_OfficeAssignmentsRowChanging != null)) {
+                    this.VIEW_OfficeAssignmentsRowChanging(this, new VIEW_OfficeAssignmentsRowChangeEvent(((VIEW_OfficeAssignmentsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -562,8 +601,8 @@ namespace Membership {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.RPT_DuesCards3330RowDeleted != null)) {
-                    this.RPT_DuesCards3330RowDeleted(this, new RPT_DuesCards3330RowChangeEvent(((RPT_DuesCards3330Row)(e.Row)), e.Action));
+                if ((this.VIEW_OfficeAssignmentsRowDeleted != null)) {
+                    this.VIEW_OfficeAssignmentsRowDeleted(this, new VIEW_OfficeAssignmentsRowChangeEvent(((VIEW_OfficeAssignmentsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -571,14 +610,14 @@ namespace Membership {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.RPT_DuesCards3330RowDeleting != null)) {
-                    this.RPT_DuesCards3330RowDeleting(this, new RPT_DuesCards3330RowChangeEvent(((RPT_DuesCards3330Row)(e.Row)), e.Action));
+                if ((this.VIEW_OfficeAssignmentsRowDeleting != null)) {
+                    this.VIEW_OfficeAssignmentsRowDeleting(this, new VIEW_OfficeAssignmentsRowChangeEvent(((VIEW_OfficeAssignmentsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemoveRPT_DuesCards3330Row(RPT_DuesCards3330Row row) {
+            public void RemoveVIEW_OfficeAssignmentsRow(VIEW_OfficeAssignmentsRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -587,7 +626,7 @@ namespace Membership {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                MembershipDataSet1 ds = new MembershipDataSet1();
+                VIEW_OfficeAssignments ds = new VIEW_OfficeAssignments();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -605,7 +644,7 @@ namespace Membership {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "RPT_DuesCards3330DataTable";
+                attribute2.FixedValue = "VIEW_OfficeAssignmentsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -649,267 +688,170 @@ namespace Membership {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class RPT_DuesCards3330Row : global::System.Data.DataRow {
+        public partial class VIEW_OfficeAssignmentsRow : global::System.Data.DataRow {
             
-            private RPT_DuesCards3330DataTable tableRPT_DuesCards3330;
+            private VIEW_OfficeAssignmentsDataTable tableVIEW_OfficeAssignments;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal RPT_DuesCards3330Row(global::System.Data.DataRowBuilder rb) : 
+            internal VIEW_OfficeAssignmentsRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableRPT_DuesCards3330 = ((RPT_DuesCards3330DataTable)(this.Table));
+                this.tableVIEW_OfficeAssignments = ((VIEW_OfficeAssignmentsDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public long PageNum {
+            public int Year {
+                get {
+                    return ((int)(this[this.tableVIEW_OfficeAssignments.YearColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.YearColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string GroupName {
+                get {
+                    return ((string)(this[this.tableVIEW_OfficeAssignments.GroupNameColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.GroupNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int GroupID {
+                get {
+                    return ((int)(this[this.tableVIEW_OfficeAssignments.GroupIDColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.GroupIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int GroupOrder {
+                get {
+                    return ((int)(this[this.tableVIEW_OfficeAssignments.GroupOrderColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.GroupOrderColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Title {
+                get {
+                    return ((string)(this[this.tableVIEW_OfficeAssignments.TitleColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.TitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int OfficeID {
+                get {
+                    return ((int)(this[this.tableVIEW_OfficeAssignments.OfficeIDColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.OfficeIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Firstname {
+                get {
+                    return ((string)(this[this.tableVIEW_OfficeAssignments.FirstnameColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.FirstnameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Lastname {
+                get {
+                    return ((string)(this[this.tableVIEW_OfficeAssignments.LastnameColumn]));
+                }
+                set {
+                    this[this.tableVIEW_OfficeAssignments.LastnameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime FromDate {
                 get {
                     try {
-                        return ((long)(this[this.tableRPT_DuesCards3330.PageNumColumn]));
+                        return ((global::System.DateTime)(this[this.tableVIEW_OfficeAssignments.FromDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PageNum\' in table \'RPT_DuesCards3330\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'FromDate\' in table \'VIEW_OfficeAssignments\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRPT_DuesCards3330.PageNumColumn] = value;
+                    this[this.tableVIEW_OfficeAssignments.FromDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public long RowNum {
+            public System.DateTime ToDate {
                 get {
                     try {
-                        return ((long)(this[this.tableRPT_DuesCards3330.RowNumColumn]));
+                        return ((global::System.DateTime)(this[this.tableVIEW_OfficeAssignments.ToDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RowNum\' in table \'RPT_DuesCards3330\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ToDate\' in table \'VIEW_OfficeAssignments\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRPT_DuesCards3330.RowNumColumn] = value;
+                    this[this.tableVIEW_OfficeAssignments.ToDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string FullName {
+            public System.Guid MemberID {
                 get {
-                    try {
-                        return ((string)(this[this.tableRPT_DuesCards3330.FullNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FullName\' in table \'RPT_DuesCards3330\' is DBNull.", e);
-                    }
+                    return ((global::System.Guid)(this[this.tableVIEW_OfficeAssignments.MemberIDColumn]));
                 }
                 set {
-                    this[this.tableRPT_DuesCards3330.FullNameColumn] = value;
+                    this[this.tableVIEW_OfficeAssignments.MemberIDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Address1 {
-                get {
-                    try {
-                        return ((string)(this[this.tableRPT_DuesCards3330.Address1Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Address1\' in table \'RPT_DuesCards3330\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRPT_DuesCards3330.Address1Column] = value;
-                }
+            public bool IsFromDateNull() {
+                return this.IsNull(this.tableVIEW_OfficeAssignments.FromDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Address2 {
-                get {
-                    try {
-                        return ((string)(this[this.tableRPT_DuesCards3330.Address2Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Address2\' in table \'RPT_DuesCards3330\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRPT_DuesCards3330.Address2Column] = value;
-                }
+            public void SetFromDateNull() {
+                this[this.tableVIEW_OfficeAssignments.FromDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string City {
-                get {
-                    try {
-                        return ((string)(this[this.tableRPT_DuesCards3330.CityColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'City\' in table \'RPT_DuesCards3330\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRPT_DuesCards3330.CityColumn] = value;
-                }
+            public bool IsToDateNull() {
+                return this.IsNull(this.tableVIEW_OfficeAssignments.ToDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string State {
-                get {
-                    try {
-                        return ((string)(this[this.tableRPT_DuesCards3330.StateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'State\' in table \'RPT_DuesCards3330\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRPT_DuesCards3330.StateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Zip {
-                get {
-                    try {
-                        return ((string)(this[this.tableRPT_DuesCards3330.ZipColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Zip\' in table \'RPT_DuesCards3330\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRPT_DuesCards3330.ZipColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public double DuesAmount {
-                get {
-                    try {
-                        return ((double)(this[this.tableRPT_DuesCards3330.DuesAmountColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DuesAmount\' in table \'RPT_DuesCards3330\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableRPT_DuesCards3330.DuesAmountColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsPageNumNull() {
-                return this.IsNull(this.tableRPT_DuesCards3330.PageNumColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetPageNumNull() {
-                this[this.tableRPT_DuesCards3330.PageNumColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsRowNumNull() {
-                return this.IsNull(this.tableRPT_DuesCards3330.RowNumColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetRowNumNull() {
-                this[this.tableRPT_DuesCards3330.RowNumColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsFullNameNull() {
-                return this.IsNull(this.tableRPT_DuesCards3330.FullNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetFullNameNull() {
-                this[this.tableRPT_DuesCards3330.FullNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsAddress1Null() {
-                return this.IsNull(this.tableRPT_DuesCards3330.Address1Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetAddress1Null() {
-                this[this.tableRPT_DuesCards3330.Address1Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsAddress2Null() {
-                return this.IsNull(this.tableRPT_DuesCards3330.Address2Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetAddress2Null() {
-                this[this.tableRPT_DuesCards3330.Address2Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsCityNull() {
-                return this.IsNull(this.tableRPT_DuesCards3330.CityColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetCityNull() {
-                this[this.tableRPT_DuesCards3330.CityColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsStateNull() {
-                return this.IsNull(this.tableRPT_DuesCards3330.StateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetStateNull() {
-                this[this.tableRPT_DuesCards3330.StateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsZipNull() {
-                return this.IsNull(this.tableRPT_DuesCards3330.ZipColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetZipNull() {
-                this[this.tableRPT_DuesCards3330.ZipColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsDuesAmountNull() {
-                return this.IsNull(this.tableRPT_DuesCards3330.DuesAmountColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetDuesAmountNull() {
-                this[this.tableRPT_DuesCards3330.DuesAmountColumn] = global::System.Convert.DBNull;
+            public void SetToDateNull() {
+                this[this.tableVIEW_OfficeAssignments.ToDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -917,22 +859,22 @@ namespace Membership {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class RPT_DuesCards3330RowChangeEvent : global::System.EventArgs {
+        public class VIEW_OfficeAssignmentsRowChangeEvent : global::System.EventArgs {
             
-            private RPT_DuesCards3330Row eventRow;
+            private VIEW_OfficeAssignmentsRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public RPT_DuesCards3330RowChangeEvent(RPT_DuesCards3330Row row, global::System.Data.DataRowAction action) {
+            public VIEW_OfficeAssignmentsRowChangeEvent(VIEW_OfficeAssignmentsRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public RPT_DuesCards3330Row Row {
+            public VIEW_OfficeAssignmentsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -948,7 +890,7 @@ namespace Membership {
         }
     }
 }
-namespace Membership.MembershipDataSet1TableAdapters {
+namespace Membership.ReportDataSources.VIEW_OfficeAssignmentsTableAdapters {
     
     
     /// <summary>
@@ -960,7 +902,7 @@ namespace Membership.MembershipDataSet1TableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class RPT_DuesCards3330TableAdapter : global::System.ComponentModel.Component {
+    public partial class VIEW_OfficeAssignmentsTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -974,7 +916,7 @@ namespace Membership.MembershipDataSet1TableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public RPT_DuesCards3330TableAdapter() {
+        public VIEW_OfficeAssignmentsTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1071,16 +1013,18 @@ namespace Membership.MembershipDataSet1TableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "RPT_DuesCards3330";
-            tableMapping.ColumnMappings.Add("PageNum", "PageNum");
-            tableMapping.ColumnMappings.Add("RowNum", "RowNum");
-            tableMapping.ColumnMappings.Add("FullName", "FullName");
-            tableMapping.ColumnMappings.Add("Address1", "Address1");
-            tableMapping.ColumnMappings.Add("Address2", "Address2");
-            tableMapping.ColumnMappings.Add("City", "City");
-            tableMapping.ColumnMappings.Add("State", "State");
-            tableMapping.ColumnMappings.Add("Zip", "Zip");
-            tableMapping.ColumnMappings.Add("DuesAmount", "DuesAmount");
+            tableMapping.DataSetTable = "VIEW_OfficeAssignments";
+            tableMapping.ColumnMappings.Add("Year", "Year");
+            tableMapping.ColumnMappings.Add("GroupName", "GroupName");
+            tableMapping.ColumnMappings.Add("GroupID", "GroupID");
+            tableMapping.ColumnMappings.Add("GroupOrder", "GroupOrder");
+            tableMapping.ColumnMappings.Add("Title", "Title");
+            tableMapping.ColumnMappings.Add("OfficeID", "OfficeID");
+            tableMapping.ColumnMappings.Add("Firstname", "Firstname");
+            tableMapping.ColumnMappings.Add("Lastname", "Lastname");
+            tableMapping.ColumnMappings.Add("FromDate", "FromDate");
+            tableMapping.ColumnMappings.Add("ToDate", "ToDate");
+            tableMapping.ColumnMappings.Add("MemberID", "MemberID");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1097,16 +1041,16 @@ namespace Membership.MembershipDataSet1TableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "dbo.RPT_DuesCards3330";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].CommandText = "SELECT Year, GroupName, GroupID, GroupOrder, Title, OfficeID, Firstname, Lastname" +
+                ", FromDate, ToDate, MemberID FROM dbo.VIEW_OfficeAssignments";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(MembershipDataSet1.RPT_DuesCards3330DataTable dataTable) {
+        public virtual int Fill(VIEW_OfficeAssignments.VIEW_OfficeAssignmentsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1119,9 +1063,9 @@ namespace Membership.MembershipDataSet1TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual MembershipDataSet1.RPT_DuesCards3330DataTable GetData() {
+        public virtual VIEW_OfficeAssignments.VIEW_OfficeAssignmentsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            MembershipDataSet1.RPT_DuesCards3330DataTable dataTable = new MembershipDataSet1.RPT_DuesCards3330DataTable();
+            VIEW_OfficeAssignments.VIEW_OfficeAssignmentsDataTable dataTable = new VIEW_OfficeAssignments.VIEW_OfficeAssignmentsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1195,7 +1139,7 @@ namespace Membership.MembershipDataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateUpdatedRows(MembershipDataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(VIEW_OfficeAssignments dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1205,7 +1149,7 @@ namespace Membership.MembershipDataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateInsertedRows(MembershipDataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(VIEW_OfficeAssignments dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1215,7 +1159,7 @@ namespace Membership.MembershipDataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateDeletedRows(MembershipDataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(VIEW_OfficeAssignments dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1249,7 +1193,7 @@ namespace Membership.MembershipDataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public virtual int UpdateAll(MembershipDataSet1 dataSet) {
+        public virtual int UpdateAll(VIEW_OfficeAssignments dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

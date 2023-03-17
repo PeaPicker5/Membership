@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Membership {
+namespace Membership.ReportDataSources {
     
     
     /// <summary>
@@ -1822,7 +1822,7 @@ namespace Membership {
         }
     }
 }
-namespace Membership.MembershipDataSetTableAdapters {
+namespace Membership.ReportDataSources.MembershipDataSetTableAdapters {
     
     
     /// <summary>

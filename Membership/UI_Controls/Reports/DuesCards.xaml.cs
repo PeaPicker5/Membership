@@ -7,7 +7,7 @@ using Membership.Annotations;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
-namespace Membership.ReportDefinitions
+namespace Membership.UI_Controls.Reports
 {
     public partial class DuesCards : INotifyPropertyChanged
     {
