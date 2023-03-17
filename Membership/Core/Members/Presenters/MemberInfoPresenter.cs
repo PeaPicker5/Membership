@@ -35,7 +35,7 @@ namespace Membership.Core.Members.Presenters
         }
 
 
-        public Members.DataModels.Member GetMember(Guid memberId)
+        public Member GetMember(Guid memberId)
         {
             return _memberRepository.Get(memberId);
         }

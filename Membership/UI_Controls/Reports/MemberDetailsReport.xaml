@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:reportViewer="clr-namespace:Membership.UI_Controls.ReportViewer"
+             xmlns:controls="clr-namespace:Membership.Common.Controls"
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="300" d:DesignWidth="1600">
@@ -11,10 +12,28 @@
 
         <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
             <GroupBox.Header>
-                <DockPanel  x:Name="SelectionBar" LastChildFill="True">
+                <DockPanel  x:Name="SelectionBar" LastChildFill="False" >
+
                     <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
-                        <Label Content="MEMBERS ELIGIBLE TO VOTE in a General Election, as per Article III, Section 2 of the Association By-Laws" FontWeight="Bold" FontSize="16"/>
+                        <Label Content=" PARAMETERS :   " FontWeight="Bold" FontSize="16"/>
+
+                        <Label Content="    Member Name:"  FontSize="16"/>
+    
+                    <ComboBox x:Name="MembersCombo"  Width="200" FontSize="16" Margin="0,3"
+                                  ItemsSource="{Binding Path=MemberLookups, Mode=OneWay}"
+                                  SelectedValuePath="Item1"
+                                  DisplayMemberPath="Item2" />
                     </StackPanel>
+
+                    <Button ToolTip="Update the report with the given parameter values."  
+                            DockPanel.Dock="Right" Width="120"
+                            Click="UpdateReportOnClick" 
+                            Margin="10,0" Height="32">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Membership;component/Common/Resources/report-update.png" Width="24" Margin="-3"/>
+                            <TextBlock Text=" UPDATE" FontSize="18" Style="{StaticResource MessageTextBlockStyle}" />
+                        </StackPanel>
+                    </Button>
 
                 </DockPanel>
             </GroupBox.Header>

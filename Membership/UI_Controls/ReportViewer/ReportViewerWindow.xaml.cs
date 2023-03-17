@@ -57,14 +57,14 @@ namespace Membership.UI_Controls.ReportViewer
         private void LoadReportDatasets()
         {
             ReportViewer.LocalReport.DataSources.Clear();
-            var datasetValueMembers = new List<Member>();
-            var datasetValueMeetings = new List<Meeting>();
+            var MembersList = new List<Member>();
+            var MeetingsList = new List<Meeting>();
             var dataset = new ReportDataSource();
 
             switch (ReportName.ToUpper())
             {
                 case "DUESCARDS":
-                    DataTable datasetTable = _presenter.GetRecords("exec RPT_DuesCards3330");
+                    var datasetTable = _presenter.GetRecords("exec RPT_DuesCards3330");
 
                     var dataset1 = new ReportDataSource
                     {
@@ -80,34 +80,34 @@ namespace Membership.UI_Controls.ReportViewer
                 case "DUESADDRESSLABELS":
 
                     if (ReportName.ToUpper() == "DUESADDRESSLABELS")
-                        datasetValueMembers.AddRange(GetBlankMembersForLabels());
+                        MembersList.AddRange(GetBlankMembersForLabels());
 
                     var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
                     //                   var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
-                    datasetValueMembers.AddRange(_presenter.GetMembersFromList(membersThatOwe));
+                    MembersList.AddRange(_presenter.GetMembersFromList(membersThatOwe));
 
                     dataset.Name = "MemberRecord";
-                    dataset.Value = datasetValueMembers;
+                    dataset.Value = MembersList;
                     ReportViewer.LocalReport.DataSources.Add(dataset);
                     break;
                 case "MEMBERSABLETOVOTE":
 
-                    datasetValueMembers.AddRange(_presenter.MembersThanCanVote());
+                    MembersList.AddRange(_presenter.MembersThanCanVote());
                     dataset.Name = "MembersAbleToVote";
-                    dataset.Value = datasetValueMembers;
+                    dataset.Value = MembersList;
                     ReportViewer.LocalReport.DataSources.Add(dataset);
                     dataset = new ReportDataSource();
-                    datasetValueMeetings.AddRange(_presenter.GetLast11Meetings());
+                    MeetingsList.AddRange(_presenter.GetLast11Meetings());
                     dataset.Name = "Last11Meetings";
-                    dataset.Value = datasetValueMeetings;
+                    dataset.Value = MeetingsList;
                     ReportViewer.LocalReport.DataSources.Add(dataset);
                     break;
                 case "MEMBERDETAILS":
 
-                    var memberId = (from p in ReportParams where p.Name == "MemberID" select p.Values).FirstOrDefault().ToString();
-                    datasetValueMembers.Add(_presenter.GetMember(Guid.Parse(memberId)));
-                    dataset.Name = "MemberInfo";
-                    dataset.Value = datasetValueMembers;
+                    var memberId = (from p in ReportParams where p.Name == "MemberId" select p.Values).FirstOrDefault();
+                    MembersList.Add(_presenter.GetMember(Guid.Parse(memberId[0])));
+                    dataset.Name = "Members";
+                    dataset.Value = MembersList;
                     ReportViewer.LocalReport.DataSources.Add(dataset);
 
  //                   dataset = new ReportDataSource();
