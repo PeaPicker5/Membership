@@ -21,8 +21,8 @@
     
                     <ComboBox x:Name="MembersCombo"  Width="200" FontSize="16" Margin="0,3"
                                   ItemsSource="{Binding Path=MemberLookups, Mode=OneWay}"
-                                  SelectedValuePath="Item1"
-                                  DisplayMemberPath="Item2" />
+                                  DisplayMemberPath="LFName"
+                                  SelectedValuePath="MemberId"/>
                     </StackPanel>
 
                     <Button ToolTip="Update the report with the given parameter values."  

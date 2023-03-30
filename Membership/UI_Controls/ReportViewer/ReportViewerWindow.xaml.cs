@@ -11,7 +11,7 @@ using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.ReportViewer
 {
-    public partial class ReportViewerWindow 
+    public partial class ReportViewerWindow : IReportViewerView 
     {
         private readonly ReportViewerPresenter _presenter;
 
@@ -22,17 +22,19 @@ namespace Membership.UI_Controls.ReportViewer
             set { SetValue(ReportNameProperty, value); }
         }
         public static readonly DependencyProperty ReportNameProperty =
-            DependencyProperty.Register("ReportName",
+            DependencyProperty.Register(nameof(ReportName),
                 typeof(string), typeof(ReportViewerWindow));
+
         public IEnumerable<ReportParameter> ReportParams
         {
-            get { return (IEnumerable<ReportParameter>)GetValue(ReportParamsProperty); }
-            set { SetValue(ReportParamsProperty, value); }
+            get => (IEnumerable<ReportParameter>)GetValue(ReportParamsProperty);
+            set => SetValue(ReportParamsProperty, value);
         }
         public static readonly DependencyProperty ReportParamsProperty =
-            DependencyProperty.Register("ReportParams",
+            DependencyProperty.Register(nameof(ReportParams),
                 typeof(IEnumerable<ReportParameter>), typeof(ReportViewerWindow));
 
+        public IEnumerable<ReportDataSource> ReportDatasets { get; set; }
         #endregion
 
         public ReportViewerWindow()
@@ -41,12 +43,17 @@ namespace Membership.UI_Controls.ReportViewer
             _presenter = new ReportViewerPresenter();
         }
 
-        public void LoadReport()
+        public void LoadReportControl()
         {
+            ReportViewer.LocalReport.DataSources.Clear();
             var reportFileName = $"Membership.ReportDefinitions.{ReportName}.rdlc";
             ReportViewer.LocalReport.ReportEmbeddedResource = reportFileName;
 
-            LoadReportDatasets();
+            ReportViewer.LocalReport.DataSources.Clear();
+            foreach (var dSet in ReportDatasets)
+            {
+                ReportViewer.LocalReport.DataSources.Add(dSet);
+            }
             if (ReportParams.Any())
                 ReportViewer.LocalReport.SetParameters(ReportParams);
             ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
@@ -54,84 +61,5 @@ namespace Membership.UI_Controls.ReportViewer
             ReportViewer.RefreshReport();
         }
 
-        private void LoadReportDatasets()
-        {
-            ReportViewer.LocalReport.DataSources.Clear();
-            var MembersList = new List<Member>();
-            var MeetingsList = new List<Meeting>();
-            var dataset = new ReportDataSource();
-
-            switch (ReportName.ToUpper())
-            {
-                case "DUESCARDS":
-                    var datasetTable = _presenter.GetRecords("exec RPT_DuesCards3330");
-
-                    var dataset1 = new ReportDataSource
-                    {
-                        Name = "Members",
-                        Value = datasetTable
-                    };
-                    ReportViewer.LocalReport.DataSources.Add(dataset1);
-
-                    break;
-                case "DUESWARNING":
-                case "DUESREMOVALNOTICE":
-                case "DUESREMOVALLETTERS":
-                case "DUESADDRESSLABELS":
-
-                    if (ReportName.ToUpper() == "DUESADDRESSLABELS")
-                        MembersList.AddRange(GetBlankMembersForLabels());
-
-                    var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
-                    //                   var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
-                    MembersList.AddRange(_presenter.GetMembersFromList(membersThatOwe));
-
-                    dataset.Name = "MemberRecord";
-                    dataset.Value = MembersList;
-                    ReportViewer.LocalReport.DataSources.Add(dataset);
-                    break;
-                case "MEMBERSABLETOVOTE":
-
-                    MembersList.AddRange(_presenter.MembersThanCanVote());
-                    dataset.Name = "MembersAbleToVote";
-                    dataset.Value = MembersList;
-                    ReportViewer.LocalReport.DataSources.Add(dataset);
-                    dataset = new ReportDataSource();
-                    MeetingsList.AddRange(_presenter.GetLast11Meetings());
-                    dataset.Name = "Last11Meetings";
-                    dataset.Value = MeetingsList;
-                    ReportViewer.LocalReport.DataSources.Add(dataset);
-                    break;
-                case "MEMBERDETAILS":
-
-                    var memberId = (from p in ReportParams where p.Name == "MemberId" select p.Values).FirstOrDefault();
-                    MembersList.Add(_presenter.GetMember(Guid.Parse(memberId[0])));
-                    dataset.Name = "Members";
-                    dataset.Value = MembersList;
-                    ReportViewer.LocalReport.DataSources.Add(dataset);
-
- //                   dataset = new ReportDataSource();
- ////                   datasetValueMeetings.AddRange(_presenter.GetOffices());
- //                   dataset.Name = "OfficerInfo";
- //                   dataset.Value = datasetValueMeetings;
- //                   ReportViewer.LocalReport.DataSources.Add(dataset);
-                    break;
-            }
-        }
-
-        private IEnumerable<Member> GetBlankMembersForLabels()
-        {
-            var blankLabels = (from p in ReportParams where p.Name == "StartingLabel" select p.Values).FirstOrDefault();
-
-            if (blankLabels == null) return null;
-            var numOfLabels = Convert.ToInt32(blankLabels[0]);
-
-            var returnVal = new List<Member>();
-            for (var i = 1; i < numOfLabels; i++)
-            {
-                returnVal.Add(new Member());
-            }
-            return returnVal;
-        }
     }
 }

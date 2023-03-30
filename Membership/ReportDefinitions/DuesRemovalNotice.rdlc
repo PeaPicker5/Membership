@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="MemberRecord">
+    <DataSet Name="Members">
       <Query>
         <DataSourceName>MembershipDataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -177,6 +177,7 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>FullName</rd:DefaultName>
+                              <Top>0.02001in</Top>
                               <Height>0.25in</Height>
                               <Width>2.5in</Width>
                               <Style>
@@ -209,18 +210,18 @@
                 <TablixMember>
                   <Group Name="Details" />
                   <Visibility>
-                    <Hidden>=iif(((RowNumber(Nothing)-1)*2 &lt; Count(Fields!FullName.Value, "MemberRecord")), False, True)</Hidden>
+                    <Hidden>=iif(((RowNumber(Nothing)-1)*2 &lt; Count(Fields!FullName.Value, "Members")), False, True)</Hidden>
                   </Visibility>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>MemberRecord</DataSetName>
+            <DataSetName>Members</DataSetName>
             <Top>2.86856in</Top>
             <Left>1.33348in</Left>
             <Height>0.27in</Height>
             <Width>2.6in</Width>
             <Visibility>
-              <Hidden>=Count(Fields!FullName.Value, "MemberRecord")&lt;9</Hidden>
+              <Hidden>=Count(Fields!FullName.Value, "Members")&lt;9</Hidden>
             </Visibility>
             <Style>
               <Border>
@@ -440,14 +441,14 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>MemberRecord</DataSetName>
+            <DataSetName>Members</DataSetName>
             <Top>3.20801in</Top>
             <Left>2.61959in</Left>
             <Height>0.4in</Height>
             <Width>2.6in</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
-              <Hidden>=Count(Fields!FullName.Value, "MemberRecord")&gt;8</Hidden>
+              <Hidden>=Count(Fields!FullName.Value, "Members")&gt;8</Hidden>
             </Visibility>
             <Style>
               <Border>
@@ -519,19 +520,19 @@
                 <TablixMember>
                   <Group Name="Details3" />
                   <Visibility>
-                    <Hidden>=iif(((RowNumber(Nothing)-1)*2 &lt; Count(Fields!FullName.Value, "MemberRecord")), True, False)</Hidden>
+                    <Hidden>=iif(((RowNumber(Nothing)-1)*2 &lt; Count(Fields!FullName.Value, "Members")), True, False)</Hidden>
                   </Visibility>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>MemberRecord</DataSetName>
+            <DataSetName>Members</DataSetName>
             <Top>2.86856in</Top>
             <Left>4.00292in</Left>
             <Height>0.27in</Height>
             <Width>2.6in</Width>
             <ZIndex>7</ZIndex>
             <Visibility>
-              <Hidden>=Count(Fields!FullName.Value, "MemberRecord")&lt;9</Hidden>
+              <Hidden>=Count(Fields!FullName.Value, "Members")&lt;9</Hidden>
             </Visibility>
             <Style>
               <Border>

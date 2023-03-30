@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using Membership.Annotations;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.Reports
 {
-    public partial class DuesCards : INotifyPropertyChanged
+    public partial class DuesCards : IReportViewerView
     {
-        private readonly ReportParametersPresenter _presenter;
+        private readonly ReportDatasetPresenter _presenter;
 
         public DuesCards()
         {
             InitializeComponent();
-            _presenter = new ReportParametersPresenter();
-            SetupParameters();
-            UpdateTheReport();
+            _presenter = new ReportDatasetPresenter();
+            Loaded += (sender, args) => {
+                SetupParameters();
+                UpdateTheReport();
+            };
         }
 
         private void SetupParameters()
@@ -47,16 +46,29 @@ namespace Membership.UI_Controls.Reports
 
         private void UpdateTheReport()
         {
-            ReportControl.ReportName = "DuesCards";
+            ReportControl.InitializeComponent();
+            ReportControl.ReportName = ReportName;
             ReportControl.ReportParams = UpdateParameterValues();
-            ReportControl.LoadReport();
+            ReportControl.ReportDatasets = LoadDataSets();
+            ReportControl.LoadReportControl();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private IEnumerable<ReportDataSource> LoadDataSets()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            var retValue = new List<ReportDataSource>();
+            var datasetTable = _presenter.GetRecords("exec RPT_DuesCards3330");
+            var dSet = new ReportDataSource
+            {
+                Name = "Members",
+                Value = datasetTable
+            };
+            retValue.Add(dSet);
+            return retValue;
         }
+
+
+        public string ReportName { get; set; }
+        public IEnumerable<ReportParameter> ReportParams { get; set; }
+        public IEnumerable<ReportDataSource> ReportDatasets { get; set; }
     }
 }

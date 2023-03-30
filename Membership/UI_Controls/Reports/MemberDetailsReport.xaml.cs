@@ -4,39 +4,38 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Membership.Core.Members.DataModels;
-using Membership.Core.Members.Presenters;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.Reports
 {
 
-    public partial class MemberDetailsReport : IMemberView, INotifyPropertyChanged
+    public partial class MemberDetailsReport : IReportViewerView, INotifyPropertyChanged
     {
 
-        private readonly ReportParametersPresenter _presenter;
+        private readonly ReportDatasetPresenter _presenter;
 
 
-        public IEnumerable<Tuple<Guid, string>> MemberLookups
+        public IEnumerable<Member> MemberLookups
         {
-            get { return (IEnumerable<Tuple<Guid, string>>)GetValue(MemberLookupsProperty); }
-            set { SetValue(MemberLookupsProperty, value); OnPropertyChanged(); }
+            get => (IEnumerable<Member>)GetValue(MemberLookupsProperty);
+            private set { SetValue(MemberLookupsProperty, value); OnPropertyChanged(); }
         }
         public static readonly DependencyProperty MemberLookupsProperty =
-            DependencyProperty.Register("MemberLookups", typeof(IEnumerable<Tuple<Guid, string>>),
+            DependencyProperty.Register(nameof(MemberLookups), typeof(IEnumerable<Member>),
                 typeof(MemberDetailsReport));
 
         public MemberDetailsReport()
         {
             InitializeComponent();
-            _presenter = new ReportParametersPresenter();
+            _presenter = new ReportDatasetPresenter();
             Loaded += (sender, args) => {
                 SetupParameters();
             };
         }
         private void SetupParameters()
         {
-            MemberLookups = _presenter.GetMemberTuples();
+            MemberLookups = _presenter.GetAllMembers();
             MembersCombo.SelectedIndex = 1;
         }
 
@@ -55,27 +54,46 @@ namespace Membership.UI_Controls.Reports
 
         private void UpdateTheReport()
         {
-            ReportControl.ReportName = "MemberDetails";
+            ReportControl.InitializeComponent();
+            ReportControl.ReportName = ReportName;
             ReportControl.ReportParams = UpdateParameterValues();
-            ReportControl.LoadReport();
+            ReportControl.ReportDatasets = LoadDataSets();
+            ReportControl.LoadReportControl();
         }
 
-        public ICollection<Tuple<int, string>> MemberTypeLookups { get; set; }
-        public ICollection<Tuple<Guid, string>> SponsorLookups { get; set; }
-        public ICollection<MemberRemoval> RemovalCodes { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
+        private IEnumerable<ReportDataSource> LoadDataSets()
+        {
+            var retValue = new List<ReportDataSource>();
+            var MembersList = new List<Member>
+            {
+                _presenter.GetMember(Guid.Parse(MembersCombo.SelectedValue.ToString())) 
+            };
 
+            var dSet = new ReportDataSource
+            {
+                Name = "Member",
+                Value = MembersList
+            };
+            retValue.Add(dSet);
+
+            return retValue;
+        }
+
+
+
+        
+        
+        
+        
+        
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
+        public string ReportName { get; set; }
+        public IEnumerable<ReportParameter> ReportParams { get; set; }
+        public IEnumerable<ReportDataSource> ReportDatasets { get; set; }
     }
 }

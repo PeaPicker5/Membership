@@ -7,5 +7,6 @@ namespace Membership.Core.Reports.Presenters
     {
         string ReportName { get; set; }
         IEnumerable<ReportParameter> ReportParams { get; set; }
+        IEnumerable<ReportDataSource> ReportDatasets { get; set; }
     }
 }

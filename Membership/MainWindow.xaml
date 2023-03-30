@@ -129,11 +129,11 @@
                         <fluent:Button Header="Print  Dues Cards"
                                        ToolTip="Dues Cards" 
                                        LargeIcon="{StaticResource DuesCards}"
-                                       Click="DuesCardsButtonOnClick" />
+                                       Click="DuesCardsButton_OnClick" />
                         <fluent:Button Header="Print Dues Address Labels"
                                        ToolTip="Address labels for those members that still owe dues for the current year." 
                                        LargeIcon="{StaticResource DuesAddressLabels}"
-                                       Click="DuesAddressLabelsButtonOnClick" />
+                                       Click="DuesAddressLabelsButton_OnClick" />
                     </fluent:RibbonGroupBox>
                     <fluent:RibbonGroupBox Header="Processing">
                         <fluent:Button Header="Dues Collection"
@@ -150,7 +150,7 @@
                         <fluent:Button Header="Warning Notice"
                                        ToolTip="Warning report of members that still owe.  Post on the board in late March." 
                                        LargeIcon="{StaticResource ReportWarnIcon}"
-                                       Click="DuesWarningButtonOnClick" />
+                                       Click="DuesWarningButton_OnClick" />
                         <fluent:Button Header="Removal Notice"
                                        ToolTip="Notice to be read off at the April meeting." 
                                        LargeIcon="{StaticResource ReportInfoIcon}"
@@ -168,7 +168,11 @@
                         <fluent:Button Header="Member Details"
                                        ToolTip="Report of member details with offices, dues and meeting records." 
                                        LargeIcon="{StaticResource ReportIcon}"
-                                       Click="MemberDetailsOnClick" />
+                                       Click="MemberDetails_OnClick" />
+                        <fluent:Button Header="Member Phone List"
+                                       ToolTip="Report of member address details with phone." 
+                                       LargeIcon="{StaticResource ReportIcon}"
+                                       Click="MemberPhoneList_OnClick" />
                         <fluent:Button Header="Current Members Without E-mail"
                                        ToolTip="List of current members that don't have an email address on file." 
                                        LargeIcon="{StaticResource ReportIcon}"
@@ -176,7 +180,7 @@
                         <fluent:Button Header="Members Able To Vote"
                                        ToolTip="List of current members that are eligible to vote per Article __, Section __ of the Assoc By-Laws." 
                                        LargeIcon="{StaticResource ReportIcon}"
-                                       Click="MembersAbleToVoteOnClick" />
+                                       Click="MembersAbleToVote_OnClick" />
                     </fluent:RibbonGroupBox>
 
                 </fluent:RibbonTabItem>

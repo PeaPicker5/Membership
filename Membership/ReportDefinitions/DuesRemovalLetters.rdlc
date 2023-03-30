@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="MemberRecord">
+    <DataSet Name="Members">
       <Query>
         <DataSourceName>MembershipDataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -520,7 +520,7 @@ Fields!CityStateZip.Value</Value>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>MemberRecord</DataSetName>
+            <DataSetName>Members</DataSetName>
             <PageBreak>
               <BreakLocation>End</BreakLocation>
             </PageBreak>

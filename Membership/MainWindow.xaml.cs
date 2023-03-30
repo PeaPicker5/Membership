@@ -59,20 +59,20 @@ namespace Membership
             MainStack.Children.Add(ucDuesCollection);
         }
 
-        private void DuesCardsButtonOnClick(object sender, RoutedEventArgs e)
+        private void DuesCardsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCards = new DuesCards();
+            var ucDuesCards = new DuesCards { ReportName = "DuesCards" };
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesCards);
         }
-        private void DuesAddressLabelsButtonOnClick(object sender, RoutedEventArgs e)
+        private void DuesAddressLabelsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCardReport = new DuesAddressLabels();
+            var ucDuesCardReport = new DuesAddressLabels { ReportName = "DuesAddressLabels" };
             MainStack.Children.Clear();
             MainStack.Children.Add(ucDuesCardReport);
         }
 
-        private void DuesWarningButtonOnClick(object sender, RoutedEventArgs e)
+        private void DuesWarningButton_OnClick(object sender, RoutedEventArgs e)
         {
             var ucDuesWarningReport = new DuesNoticeReports { ReportName = "DuesWarning" };
             MainStack.Children.Clear();
@@ -134,18 +134,25 @@ namespace Membership
             MainStack.Children.Add(ucMeetingSelection);
         }
 
-        private void MembersAbleToVoteOnClick(object sender, RoutedEventArgs e)
+        private void MembersAbleToVote_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucAbleToVoteReport = new MembersAbleToVote();
+            var ucAbleToVoteReport = new MembersAbleToVote { ReportName = "MembersAbleToVote" }; ;
             MainStack.Children.Clear();
             MainStack.Children.Add(ucAbleToVoteReport);
         }
 
-        private void MemberDetailsOnClick(object sender, RoutedEventArgs e)
+        private void MemberDetails_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucMemberDetailsReport = new MemberDetailsReport();
+            var ucMemberDetailsReport = new MemberDetailsReport { ReportName = "MemberDetails" };
             MainStack.Children.Clear();
             MainStack.Children.Add(ucMemberDetailsReport);
+        }
+
+        private void MemberPhoneList_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ucMemberPhoneListReport = new MemberPhoneListReport { ReportName = "MemberPhoneList" };
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucMemberPhoneListReport);
         }
     }
 }

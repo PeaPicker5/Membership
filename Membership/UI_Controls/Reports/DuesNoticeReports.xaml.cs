@@ -5,16 +5,19 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Membership.Annotations;
+using Membership.Core.Members.DataModels;
 using Membership.Core.Officers.DataModels;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.Reports
 {
-    public partial class DuesNoticeReports : INotifyPropertyChanged
+    public partial class DuesNoticeReports : IReportViewerView, INotifyPropertyChanged
     {
-        private readonly ReportParametersPresenter _presenter;
+        private readonly ReportDatasetPresenter _presenter;
         public string ReportName { get; set; }
+        public IEnumerable<ReportParameter> ReportParams { get; set; }
+        public IEnumerable<ReportDataSource> ReportDatasets { get; set; }
 
         public IEnumerable<Officer> TableOfficers
         {
@@ -22,7 +25,7 @@ namespace Membership.UI_Controls.Reports
             set { SetValue(MyPropertyProperty, value); OnPropertyChanged();}
         }
         public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("TableOfficers", typeof(IEnumerable<Officer>),
+            DependencyProperty.Register(nameof(TableOfficers), typeof(IEnumerable<Officer>),
                 typeof(DuesNoticeReports));
 
         public Officer SelectedOffice
@@ -31,14 +34,13 @@ namespace Membership.UI_Controls.Reports
             set { SetValue(SelectedOfficeProperty, value); OnPropertyChanged(); }
         }
         public static readonly DependencyProperty SelectedOfficeProperty =
-            DependencyProperty.Register("SelectedOffice", typeof(Officer),
+            DependencyProperty.Register(nameof(SelectedOffice), typeof(Officer),
                 typeof(DuesNoticeReports));
-
 
         public DuesNoticeReports()
         {
             InitializeComponent();
-            _presenter = new ReportParametersPresenter();
+            _presenter = new ReportDatasetPresenter();
 
             Loaded += (sender, args) => {
                 SetupParameters();
@@ -49,9 +51,16 @@ namespace Membership.UI_Controls.Reports
         private void SetupParameters()
         {
             TableOfficers = _presenter.LoadTableOfficersForThisYear();
+            SelectedOffice = TableOfficers.FirstOrDefault(x => x.OfficeRec.OfficeId == 24);
+        }
 
-            var finSecRecord = TableOfficers.FirstOrDefault(x => x.OfficeRec.OfficeId == 24);
-            SelectedOffice = finSecRecord;
+        private void OfficeTitleCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OfficerToSignText.Text = ((Officer) OfficeTitleCombo.SelectedItem).MemberRec.FullName;
+        }
+        private void UpdateReportOnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateTheReport();
         }
 
         private IEnumerable<ReportParameter> UpdateParameterValues()
@@ -62,30 +71,38 @@ namespace Membership.UI_Controls.Reports
                 new ReportParameter("Office", OfficeTitleCombo.Text)
             };
         }
-
-        private void UpdateReportOnClick(object sender, RoutedEventArgs e)
-        {
-            UpdateTheReport();
-        }
-
         private void UpdateTheReport()
         {
-            ReportControl.ReportName = ReportName; // "DuesRemovalNotice";
+            ReportControl.InitializeComponent();
+            ReportControl.ReportName = ReportName;
             ReportControl.ReportParams = UpdateParameterValues();
-            ReportControl.LoadReport();
+            ReportControl.ReportDatasets = LoadDataSets();
+            ReportControl.LoadReportControl();
+        }
+
+        private IEnumerable<ReportDataSource> LoadDataSets()
+        {
+            var retValue = new List<ReportDataSource>();
+            var MembersList = new List<Member>();
+
+            var membersThatOwe = _presenter.CurrentlyOweDues().Where(rec => !rec.IsPaid).Select(ml => ml.MemberId).ToList();
+
+            MembersList.AddRange(_presenter.GetMembersFromList(membersThatOwe));
+            var dSet = new ReportDataSource
+            {
+                Name = "Members",
+                Value = MembersList
+            };
+            retValue.Add(dSet);
+
+            return retValue;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void OfficeTitleCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            OfficerToSignText.Text = ((Officer) OfficeTitleCombo.SelectedItem).MemberRec.FullName;
         }
     }
 }

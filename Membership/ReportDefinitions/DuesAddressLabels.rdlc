@@ -18,7 +18,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="MemberRecord">
+    <DataSet Name="Members">
       <Query>
         <DataSourceName>MembershipDataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -246,7 +246,7 @@ iif(Trim(Fields!CityStateZip.Value) = ",","", Fields!CityStateZip.Value)</Value>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>MemberRecord</DataSetName>
+            <DataSetName>Members</DataSetName>
             <Height>1in</Height>
             <Width>2.5935in</Width>
             <Style>

@@ -198,6 +198,7 @@
     <Compile Include="Core\Officers\Presenters\OfficersByYearPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficeHistoryPresenter.cs" />
     <Compile Include="Core\Reports\Presenters\ReportParametersPresenter.cs" />
+    <Compile Include="Core\Reports\Presenters\ReportDatasetPresenter.cs" />
     <Compile Include="Core\Reports\Presenters\ReportViewerPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficerPresenter.cs" />
     <Compile Include="Core\Members\Presenters\MemberSelectionPresenter.cs" />
@@ -250,6 +251,9 @@
       <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UI_Controls\Reports\MemberPhoneListReport.xaml.cs">
+      <DependentUpon>MemberPhoneListReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Controls\Reports\MembersAbleToVote.xaml.cs">
       <DependentUpon>MembersAbleToVote.xaml</DependentUpon>
     </Compile>
@@ -357,6 +361,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI_Controls\Reports\MemberPhoneListReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI_Controls\Reports\MembersAbleToVote.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -437,6 +445,7 @@
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalLetters.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalNotice.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MemberDetails.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\MemberPhoneList.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MembersAbleToVote.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesWarning.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">

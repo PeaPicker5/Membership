@@ -522,7 +522,9 @@
     LookUpSet(true, Fields!IsRegularScheduled.Value, Format(Fields!MeetingDate.Value,"MMM dd,yyyy"), "Last11Meetings"),
 ", ")</Value>
                     <Style>
+                      <FontStyle>Italic</FontStyle>
                       <FontFamily>MS Gothic</FontFamily>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -533,7 +535,7 @@
             <Top>1.7743in</Top>
             <Left>1.11208in</Left>
             <Height>0.25in</Height>
-            <Width>6.07125in</Width>
+            <Width>5.78375in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -554,6 +556,7 @@
                   <TextRun>
                     <Value>Meetings:</Value>
                     <Style>
+                      <FontStyle>Italic</FontStyle>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
                     </Style>
@@ -680,7 +683,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.48in</Height>
+        <Height>2.58417in</Height>
         <Style />
       </Body>
       <Width>7.5in</Width>

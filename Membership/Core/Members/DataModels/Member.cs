@@ -73,10 +73,10 @@ namespace Membership.Core.Members.DataModels
 
         [Computed] public bool IsDeceased => DateDeceased > DateObligated;
         [Computed] public string FullName => $"{FirstName} {LastName}";
-        [Computed] public string LFName => $"{LastName} {Suffix}, {FirstName}";
+        [Computed] public string LFName => string.IsNullOrEmpty(Suffix) 
+            ? $"{LastName}, {FirstName}" 
+            : $"{LastName} {Suffix}, {FirstName}";
         [Computed] public string CityStateZip => $"{City}, {State}  {ZIP}";
-
-
 
 
         [ExplicitKey] public Guid MemberId { get; set; }

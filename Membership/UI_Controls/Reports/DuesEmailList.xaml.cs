@@ -29,10 +29,10 @@ namespace Membership.UI_Controls.Reports
         public string EmailList
         {
             get => (string)GetValue(EmailListProperty);
-            set => SetValue(EmailListProperty, value);
+            private set => SetValue(EmailListProperty, value);
         }
         public static readonly DependencyProperty EmailListProperty =
-            DependencyProperty.Register("EmailList", typeof(string), typeof(DuesEmailList));
+            DependencyProperty.Register(nameof(EmailList), typeof(string), typeof(DuesEmailList));
 
         public ICollection<DuesRecord> DuesRecs { get; set; }
 
@@ -49,9 +49,6 @@ namespace Membership.UI_Controls.Reports
         private void LoadCurrentDuesRecords()
         {
             _presenter.MembersCurrentlyOweDues();
-            //DuesRecs = _presenter.GetByYear(DateTime.Now.Year)
-            //    .OrderBy(name => name.MemberRec.LastName)
-            //    .ToList();
             EmailList = DuesRecs.Where(x => !string.IsNullOrEmpty(x.MemberRec.EmailAddress))
                                 .Where(y => !y.IsPaid)
                                 .Aggregate("", (current, rec) => current + rec.MemberRec.EmailAddress + ", ");
