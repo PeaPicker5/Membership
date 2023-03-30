@@ -50,14 +50,16 @@ namespace Membership.Core.Members.DataModels
             {
                 switch (MemberTypeId)
                 {
-                    case 1:
-                        return "Active";
-                    case 2:
-                        return "Life";
-                    case 3:
-                        return "Social";
+                    case 1: return "Active";
+                    case 2: return "Life";
+                    case 3: return "Social";
+                    case 4: return "Removed";
+                    case 5: return "Social";
+                    case 6: return "Honorary";
+                    case 7: return "Hon. Active";
+                    case 8: return "Hon. Social";
                     default:
-                        return "";
+                        return "Unknown";
                 }
             }
          }

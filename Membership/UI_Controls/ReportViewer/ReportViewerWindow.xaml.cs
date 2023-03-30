@@ -57,8 +57,8 @@ namespace Membership.UI_Controls.ReportViewer
             if (ReportParams.Any())
                 ReportViewer.LocalReport.SetParameters(ReportParams);
             ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-
             ReportViewer.RefreshReport();
+//          ReportViewer.ZoomMode = ZoomMode.PageWidth;
         }
 
     }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Membership.Core.Members.DataModels;
+using Membership.Core.Officers.DataModels;
 using Membership.Core.Reports.Presenters;
 using Microsoft.Reporting.WinForms;
 
@@ -36,7 +39,7 @@ namespace Membership.UI_Controls.Reports
         private void SetupParameters()
         {
             MemberLookups = _presenter.GetAllMembers();
-            MembersCombo.SelectedIndex = 1;
+            MembersCombo.SelectedIndex = 187;
         }
 
         private IEnumerable<ReportParameter> UpdateParameterValues()
@@ -64,17 +67,17 @@ namespace Membership.UI_Controls.Reports
         private IEnumerable<ReportDataSource> LoadDataSets()
         {
             var retValue = new List<ReportDataSource>();
+            var selectedMemberId = MembersCombo.SelectedValue.ToString();
             var MembersList = new List<Member>
             {
-                _presenter.GetMember(Guid.Parse(MembersCombo.SelectedValue.ToString())) 
+                _presenter.GetMember(Guid.Parse(selectedMemberId)) 
             };
+            retValue.Add(new ReportDataSource { Name = "Member", Value = MembersList });
 
-            var dSet = new ReportDataSource
-            {
-                Name = "Member",
-                Value = MembersList
-            };
-            retValue.Add(dSet);
+            var query = $"SELECT * FROM VIEW_OfficeAssignments WHERE MemberId = '{selectedMemberId}' ";
+            var dataTable = _presenter.GetRecords(query);
+            retValue.Add(new ReportDataSource { Name = "OfficesHeld", Value = dataTable });
+
 
             return retValue;
         }
