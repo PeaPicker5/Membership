@@ -251,6 +251,9 @@
       <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UI_Controls\Reports\MembersWithoutEmailReport.xaml.cs">
+      <DependentUpon>MembersWithoutEmailReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Controls\Reports\MemberPhoneListReport.xaml.cs">
       <DependentUpon>MemberPhoneListReport.xaml</DependentUpon>
     </Compile>
@@ -361,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI_Controls\Reports\MembersWithoutEmailReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI_Controls\Reports\MemberPhoneListReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -445,6 +452,7 @@
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalLetters.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalNotice.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MemberDetails.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\MembersWithoutEmail.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MemberPhoneList.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MembersAbleToVote.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesWarning.rdlc" />

@@ -176,7 +176,7 @@
                         <fluent:Button Header="Current Members Without E-mail"
                                        ToolTip="List of current members that don't have an email address on file." 
                                        LargeIcon="{StaticResource ReportIcon}"
-                                       Click="ReportsButtonOnClick" />
+                                       Click="MembersWithoutEmails_OnClick" />
                         <fluent:Button Header="Members Able To Vote"
                                        ToolTip="List of current members that are eligible to vote per Article __, Section __ of the Assoc By-Laws." 
                                        LargeIcon="{StaticResource ReportIcon}"

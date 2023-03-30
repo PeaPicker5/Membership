@@ -154,5 +154,12 @@ namespace Membership
             MainStack.Children.Clear();
             MainStack.Children.Add(ucMemberPhoneListReport);
         }
+
+        private void MembersWithoutEmails_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ucMembersWithoutEmailReport = new MembersWithoutEmailReport { ReportName = "MembersWithoutEmail" };
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucMembersWithoutEmailReport);
+        }
     }
 }
