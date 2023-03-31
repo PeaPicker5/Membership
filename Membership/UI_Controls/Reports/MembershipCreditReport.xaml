@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Membership.UI_Controls.Reports.MembershipCreditReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:reportViewer="clr-namespace:Membership.UI_Controls.ReportViewer"
+             xmlns:controls="clr-namespace:Membership.Common.Controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="300" d:DesignWidth="1600">
+
+
+        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+            <GroupBox.Header>
+                <DockPanel  x:Name="SelectionBar" LastChildFill="False" >
+
+                    <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
+                        <Label Content=" PARAMETERS :   " FontWeight="Bold" FontSize="16"/>
+
+                        <Label Content="   Year:" FontWeight="Bold" FontSize="16"/>
+                        <ComboBox x:Name="YearSelectionCombo"   Margin="0,0,10,0" Height="24" MinWidth="100" IsEditable="False"
+                                  VerticalAlignment="Top"
+                                  ItemsSource="{Binding Path=YearsOnFile, Mode=OneWay}"/>
+                    </StackPanel>
+
+                    <Button ToolTip="Update the report with the given parameter values."  
+                            DockPanel.Dock="Right" Width="120"
+                            Click="UpdateReportOnClick" 
+                            Margin="10,0" Height="32">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Membership;component/Common/Resources/report-update.png" Width="24" Margin="-3"/>
+                            <TextBlock Text=" UPDATE" FontSize="18" Style="{StaticResource MessageTextBlockStyle}" />
+                        </StackPanel>
+                    </Button>
+
+                </DockPanel>
+            </GroupBox.Header>
+
+            <DockPanel LastChildFill="True">
+                <reportViewer:ReportViewerWindow x:Name="ReportControl"/>
+            </DockPanel>
+
+    </GroupBox>
+
+</UserControl>
+

@@ -216,6 +216,16 @@
     <Compile Include="Core\Members\Repositories\MemberTypeRepository.cs" />
     <Compile Include="Core\Officers\Repositories\OfficerRepository.cs" />
     <Compile Include="Core\Members\Repositories\MemberRepository.cs" />
+    <Compile Include="Credits.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Credits.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MembershipDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MembershipDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ReportDataSources\Meetings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -251,6 +261,9 @@
       <DependentUpon>RPT_DuesCards3330.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UI_Controls\Reports\MembershipCreditReport.xaml.cs">
+      <DependentUpon>MembershipCreditReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Controls\Reports\MembersWithoutEmailReport.xaml.cs">
       <DependentUpon>MembersWithoutEmailReport.xaml</DependentUpon>
     </Compile>
@@ -364,6 +377,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI_Controls\Reports\MembershipCreditReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI_Controls\Reports\MembersWithoutEmailReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -451,6 +468,7 @@
     <EmbeddedResource Include="ReportDefinitions\DuesCards.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalLetters.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalNotice.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\MembershipCredits.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MemberDetails.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MembersWithoutEmail.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MemberPhoneList.rdlc" />
@@ -460,6 +478,35 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Credits.xsc">
+      <DependentUpon>Credits.xsd</DependentUpon>
+    </None>
+    <None Include="Credits.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Credits.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Credits.xss">
+      <DependentUpon>Credits.xsd</DependentUpon>
+    </None>
+    <None Include="MembershipDataSet.xsc">
+      <DependentUpon>MembershipDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MembershipDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MembershipDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MembershipDataSet.xss">
+      <DependentUpon>MembershipDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\Membership.Core.Meetings.DataModels.Meeting.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Meetings.DataModels.MeetingMember.datasource" />
+    <None Include="Properties\DataSources\Membership.CreditsTableAdapters.MEETING_MembersTableAdapter.datasource" />
+    <None Include="Properties\DataSources\Membership.CreditsTableAdapters.MEMBER_ListTableAdapter.datasource" />
+    <None Include="Properties\DataSources\Membership.CreditsTableAdapters.OFFICE_AssignmentsTableAdapter.datasource" />
+    <None Include="Properties\DataSources\Membership.CreditsTableAdapters.TableAdapterManager+UpdateOrderOption.datasource" />
+    <None Include="Properties\DataSources\Membership.CreditsTableAdapters.TableAdapterManager.datasource" />
     <None Include="ReportDataSources\Meetings.xsc">
       <DependentUpon>Meetings.xsd</DependentUpon>
     </None>

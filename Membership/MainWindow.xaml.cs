@@ -161,5 +161,12 @@ namespace Membership
             MainStack.Children.Clear();
             MainStack.Children.Add(ucMembersWithoutEmailReport);
         }
+
+        private void MembershipCreditReport_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ucMembershipCreditReport = new MembershipCreditReport { ReportName = "MembershipCredits" };
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucMembershipCreditReport);
+        }
     }
 }

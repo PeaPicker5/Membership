@@ -178,9 +178,13 @@
                                        LargeIcon="{StaticResource ReportIcon}"
                                        Click="MembersWithoutEmails_OnClick" />
                         <fluent:Button Header="Members Able To Vote"
-                                       ToolTip="List of current members that are eligible to vote per Article __, Section __ of the Assoc By-Laws." 
+                                       ToolTip="List of current members that are eligible to vote per Article III, Section 2 of the Assoc By-Laws." 
                                        LargeIcon="{StaticResource ReportIcon}"
                                        Click="MembersAbleToVote_OnClick" />
+                        <fluent:Button Header="Membership Credit Report"
+                                       ToolTip="Running total for the yearly credit participation program." 
+                                       LargeIcon="{StaticResource ReportIcon}"
+                                       Click="MembershipCreditReport_OnClick" />
                     </fluent:RibbonGroupBox>
 
                 </fluent:RibbonTabItem>
