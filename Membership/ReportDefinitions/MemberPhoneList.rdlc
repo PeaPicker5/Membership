@@ -335,7 +335,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -495,6 +494,7 @@ Len(Fields!Phone.Value) &lt; 7, Fields!Phone.value)</Value>
                 <Value>=Fields!LFName.Value</Value>
               </SortExpression>
             </SortExpressions>
+            <Top>0.375in</Top>
             <Left>0.14931in</Left>
             <Height>0.44411in</Height>
             <Width>6.97569in</Width>
@@ -504,8 +504,45 @@ Len(Fields!Phone.Value) &lt; 7, Fields!Phone.value)</Value>
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Membership Phone List (as of " + 
+FormatDateTime(Today(),DateFormat.ShortDate) +
+")"</Value>
+                    <Style>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.0382in</Top>
+            <Left>0.41875in</Left>
+            <Height>0.29513in</Height>
+            <Width>6.22917in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>0.5425in</Height>
+        <Height>0.90083in</Height>
         <Style />
       </Body>
       <Width>7.5in</Width>

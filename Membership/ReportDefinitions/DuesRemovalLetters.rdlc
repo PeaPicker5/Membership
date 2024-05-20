@@ -170,8 +170,8 @@
                                       <Value>=Parameters!Signature.Value</Value>
                                       <Style>
                                         <FontStyle>Italic</FontStyle>
-                                        <FontFamily>English157 BT</FontFamily>
-                                        <FontSize>28pt</FontSize>
+                                        <FontFamily>Script MT Bold</FontFamily>
+                                        <FontSize>26pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>

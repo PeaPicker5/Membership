@@ -103,18 +103,20 @@
                     </Border>
                     <!--City State ZIP-->
                     <DockPanel LastChildFill="True" >
-                        <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.ZIP, Mode=TwoWay}" Style="{StaticResource InputTextBox}" Width="60" />
-                        <ComboBox DockPanel.Dock="Right" Width="60" Margin="10,0" FontSize="16" Height="24"
+                        <TextBox x:Name="ZipCodeTextBox" DockPanel.Dock="Right" Text="{Binding Path=MemberRec.ZIP, Mode=TwoWay}" 
+                                 Style="{StaticResource InputTextBox}" Width="60"
+                                  LostFocus="ZipCodeTextBox_LostFocus" />
+                        <ComboBox x:Name="StateComboBox" DockPanel.Dock="Right" Width="60" Margin="10,0" FontSize="16" Height="24"
                                   VerticalAlignment="Top" VerticalContentAlignment="Top" 
                                   SelectedValue="{Binding Path=MemberRec.State, Mode=TwoWay}"
                                   ItemsSource="{Binding Path=StateInits}"
                                   Style="{StaticResource ComboBoxFadeInOutStyle}" />
 
-                        <TextBox DockPanel.Dock="Right" Text="{Binding Path=MemberRec.City, Mode=TwoWay}" Style="{StaticResource InputTextBox}" />
+                        <TextBox x:Name="CityTextBox" DockPanel.Dock="Right" Text="{Binding Path=MemberRec.City, Mode=TwoWay}" Style="{StaticResource InputTextBox}" />
                     </DockPanel>
                 </StackPanel>
 
-                <controls:InputTextControl Label="Email Address:" DockPanel.Dock="Top"
+                <controls:InputTextControl x:Name="EmailTextBox" Label="Email Address:" DockPanel.Dock="Top"
                                      TextBox="{Binding Path=MemberRec.EmailAddress, Mode=TwoWay}" Margin="5,0,5,5"/>
             </DockPanel>
 

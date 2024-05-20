@@ -23,6 +23,11 @@ namespace Membership.UI_Controls.Members
 
         private byte[] _fullResPage; //Set with Load or Clear Image, Add/Update/Delete on Member Save, Load on Expand Button
 
+        private static IEnumerable<string> RochesterZipCodes => new List<string>()
+        {
+            "14604","14606","14608","14609","14612","14613","14616","14617","14618",
+            "14619","14620","14621","14622","14623","14624","14625","14626"
+        };
         public static IEnumerable<string> StateInits => new List<string>()
         {
             "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
@@ -117,13 +122,11 @@ namespace Membership.UI_Controls.Members
             IsEditing = true;
             _selectedMemberId = MemberRec.MemberId;
         }
-
         private void EditMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
             IsEditing = true;
             _selectedMemberId = MemberRec.MemberId;
         }
-
         private void DeleteMemberButtonOnClick(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show(
@@ -163,19 +166,18 @@ namespace Membership.UI_Controls.Members
             IsEditing = false;
             RaiseEvent(new RoutedEventArgs(OnMemberUpdatedEvent));
         }
-
         private void CancelMemberRecord()
         {
             IsAdding = false;
             IsEditing = false;
             MemberRec = _presenter.GetMember(_selectedMemberId);
         }
+        
         private void DatePickerOnPreviewTextInput(object sender, TextCompositionEventArgs eventArgs)
         {
             eventArgs.Handled = eventArgs.Text.Any(
                 character => !char.IsDigit(character) && character != '/' && character != '-');
         }
-
 
         private bool VerifyControls()
         {
@@ -226,14 +228,11 @@ namespace Membership.UI_Controls.Members
             }
 
         }
-
-
         private void ClearImageButton_Click(object sender, RoutedEventArgs e)
         {
             _fullResPage = null;
             LocalPageThumb = null;
         }
-
         private void ExpandImageButton_Click(object sender, RoutedEventArgs e)
         {
             var popup = new ImagePopupWindow {ImageSource = _presenter.GetImageData(MemberRec.PageId)};
@@ -253,6 +252,14 @@ namespace Membership.UI_Controls.Members
                 ChkboxIsActive.IsChecked = true;
             else if (MemberRec.MemberTypeId > 2)
                 ChkboxIsActive.IsChecked = false;
+        }
+
+        private void ZipCodeTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!RochesterZipCodes.Any(x => x.Equals(ZipCodeTextBox.Text))) return;
+
+            MemberRec.City = "Rochester";  CityTextBox.Text = "Rochester";
+            MemberRec.State = "NY";        StateComboBox.Text = "NY";
         }
     }
 }

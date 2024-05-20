@@ -514,6 +514,7 @@ Len(Fields!Phone.Value) &lt; 7, Fields!Phone.value)</Value>
                     <Value>Current members that do not have an Email Address on file.</Value>
                     <Style>
                       <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -524,9 +525,9 @@ Len(Fields!Phone.Value) &lt; 7, Fields!Phone.value)</Value>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.23612in</Top>
-            <Left>0.57465in</Left>
+            <Left>0.19792in</Left>
             <Height>0.29513in</Height>
-            <Width>6.22917in</Width>
+            <Width>6.98264in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
