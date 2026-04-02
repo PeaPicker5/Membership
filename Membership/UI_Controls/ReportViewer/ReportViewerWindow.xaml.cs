@@ -50,10 +50,14 @@ namespace Membership.UI_Controls.ReportViewer
             ReportViewer.LocalReport.ReportEmbeddedResource = reportFileName;
 
             ReportViewer.LocalReport.DataSources.Clear();
-            foreach (var dSet in ReportDatasets)
+            if (ReportDatasets != null)
             {
-                ReportViewer.LocalReport.DataSources.Add(dSet);
+                foreach (var dSet in ReportDatasets)
+                {
+                    ReportViewer.LocalReport.DataSources.Add(dSet);
+                }
             }
+
             if (ReportParams.Any())
                 ReportViewer.LocalReport.SetParameters(ReportParams);
             ReportViewer.SetDisplayMode(DisplayMode.PrintLayout);

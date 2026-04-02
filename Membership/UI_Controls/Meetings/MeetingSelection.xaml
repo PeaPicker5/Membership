@@ -80,8 +80,8 @@
 
         <Grid Background="AntiqueWhite" x:Name="MainGrid" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
                 <RowDefinition Height="0" />
             </Grid.RowDefinitions>
 
@@ -110,7 +110,7 @@
             <GridSplitter Grid.Row="0" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Background="Gray"/>
 
             <!-- Row #2 the list of Attendees to the selected meeting.  -->
-            <DockPanel Grid.Row="1" Grid.ColumnSpan="3" IsEnabled="False"  >
+            <DockPanel Grid.Row="1" Grid.ColumnSpan="3" x:Name="AttendancePanel">
                 <Border BorderThickness="4" BorderBrush="Black" DockPanel.Dock="Top" >
                     <Label Content="Members In Attendance:"  HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="20" />
                 </Border>
@@ -120,8 +120,10 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <ListView Grid.Column="1" Margin="0,5,0,20" IsHitTestVisible="False" x:Name="NamesList"
+                    <ListView Grid.Column="1" Margin="0,5,0,20" x:Name="NamesList"
                               ItemsSource="{Binding Path=Attendees}" 
+                              Width="{Binding ElementName=AttendancePanel, Path=ActualWidth}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto"
                               ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>

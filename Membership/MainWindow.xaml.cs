@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Windows;
 using Membership.UI_Controls.Dues;
 using Membership.UI_Controls.Meetings;
@@ -136,7 +135,7 @@ namespace Membership
 
         private void MembersAbleToVote_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucAbleToVoteReport = new MembersAbleToVote { ReportName = "MembersAbleToVote" }; ;
+            var ucAbleToVoteReport = new MembersAbleToVote { ReportName = "MembersAbleToVote" };
             MainStack.Children.Clear();
             MainStack.Children.Add(ucAbleToVoteReport);
         }
@@ -167,6 +166,14 @@ namespace Membership
             var ucMembershipCreditReport = new MembershipCreditReport { ReportName = "MembershipCredits" };
             MainStack.Children.Clear();
             MainStack.Children.Add(ucMembershipCreditReport);
+        }
+
+        private void Letterhead_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ucLetterhead = new Letterhead { ReportName = "Letterhead" };
+            MainStack.Children.Clear();
+            MainStack.Children.Add(ucLetterhead);
+
         }
     }
 }

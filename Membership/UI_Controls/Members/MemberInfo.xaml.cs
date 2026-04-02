@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Membership.Core.DataModels;
 using Membership.Core.Members.DataModels;
 using Membership.Core.Members.Presenters;
 using Membership.Properties;
@@ -28,6 +27,7 @@ namespace Membership.UI_Controls.Members
             "14604","14606","14608","14609","14612","14613","14616","14617","14618",
             "14619","14620","14621","14622","14623","14624","14625","14626"
         };
+        private static string WebsterZipCode => "14580";
         public static IEnumerable<string> StateInits => new List<string>()
         {
             "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT",
@@ -256,10 +256,18 @@ namespace Membership.UI_Controls.Members
 
         private void ZipCodeTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!RochesterZipCodes.Any(x => x.Equals(ZipCodeTextBox.Text))) return;
-
-            MemberRec.City = "Rochester";  CityTextBox.Text = "Rochester";
-            MemberRec.State = "NY";        StateComboBox.Text = "NY";
+            if (IsAdding)
+            {
+                MemberRec.State = "NY"; StateComboBox.Text = "NY";
+            }
+            if (RochesterZipCodes.Any(x => x.Equals(ZipCodeTextBox.Text)))
+            {
+                MemberRec.City = "Rochester"; CityTextBox.Text = "Rochester";
+            }
+            else if (ZipCodeTextBox.Text == WebsterZipCode)
+            {
+                MemberRec.City = "Webster"; CityTextBox.Text = "Webster";
+            }
         }
     }
 }

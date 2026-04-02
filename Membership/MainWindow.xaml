@@ -185,6 +185,10 @@
                                        ToolTip="Running total for the yearly credit participation program." 
                                        LargeIcon="{StaticResource ReportIcon}"
                                        Click="MembershipCreditReport_OnClick" />
+                        <fluent:Button Header="Blank Letterhead"
+                                       ToolTip="Just our header on a page." 
+                                       LargeIcon="{StaticResource ReportIcon}"
+                                       Click="Letterhead_OnClick" />
                     </fluent:RibbonGroupBox>
 
                 </fluent:RibbonTabItem>

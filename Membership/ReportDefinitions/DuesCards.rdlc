@@ -97,7 +97,7 @@
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Globals!ExecutionTime</Value>
+                                      <Value>Mar 07, 2026</Value>
                                       <Style>
                                         <FontSize>14pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
@@ -192,7 +192,7 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>DateRemoved</rd:DefaultName>
-                              <Top>1.42934in</Top>
+                              <Top>1.3225in</Top>
                               <Left>0.25in</Left>
                               <Height>0.29561in</Height>
                               <Width>3.68156in</Width>
@@ -217,7 +217,7 @@
                                       <Style>
                                         <FontStyle>Normal</FontStyle>
                                         <FontFamily>Script MT Bold</FontFamily>
-                                        <FontSize>30pt</FontSize>
+                                        <FontSize>24pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -228,9 +228,9 @@
                                 </Paragraph>
                               </Paragraphs>
                               <Top>3.32934in</Top>
-                              <Left>2.05895in</Left>
+                              <Left>2.81728in</Left>
                               <Height>0.56702in</Height>
-                              <Width>3.19105in</Width>
+                              <Width>2.58272in</Width>
                               <ZIndex>3</ZIndex>
                               <Style>
                                 <Border>
@@ -273,7 +273,7 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>DuesAmount</rd:DefaultName>
-                              <Top>1.77934in</Top>
+                              <Top>1.6725in</Top>
                               <Left>0.25in</Left>
                               <Height>0.30547in</Height>
                               <Width>3.68156in</Width>
@@ -287,80 +287,6 @@
                                 <PaddingTop>2pt</PaddingTop>
                                 <PaddingBottom>2pt</PaddingBottom>
                                 <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="MI4">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>X</Value>
-                                      <Style>
-                                        <FontFamily>Arial Black</FontFamily>
-                                        <FontSize>14pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>MI</rd:DefaultName>
-                              <Top>3.29626in</Top>
-                              <Left>0.45in</Left>
-                              <Height>0.31616in</Height>
-                              <Width>0.23231in</Width>
-                              <ZIndex>5</ZIndex>
-                              <Visibility>
-                                <Hidden>=Not (Parameters!FirstNotice.Value = "True")</Hidden>
-                              </Visibility>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="MI5">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>X</Value>
-                                      <Style>
-                                        <FontFamily>Arial Black</FontFamily>
-                                        <FontSize>14pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>MI</rd:DefaultName>
-                              <Top>3.54712in</Top>
-                              <Left>0.45in</Left>
-                              <Height>0.31616in</Height>
-                              <Width>0.23231in</Width>
-                              <ZIndex>6</ZIndex>
-                              <Visibility>
-                                <Hidden>=Parameters!FirstNotice.Value = "True"</Hidden>
-                              </Visibility>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
                             <Textbox Name="Textbox3">
@@ -402,7 +328,7 @@
                               <Left>0.1in</Left>
                               <Height>0.65in</Height>
                               <Width>5.3in</Width>
-                              <ZIndex>7</ZIndex>
+                              <ZIndex>5</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -453,11 +379,11 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>Textbox4</rd:DefaultName>
-                              <Top>2.05356in</Top>
+                              <Top>1.94672in</Top>
                               <Left>0.25in</Left>
                               <Height>0.76094in</Height>
                               <Width>3.68156in</Width>
-                              <ZIndex>8</ZIndex>
+                              <ZIndex>6</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -485,79 +411,11 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>Textbox5</rd:DefaultName>
-                              <Top>2.88394in</Top>
+                              <Top>2.69377in</Top>
                               <Left>0.25in</Left>
                               <Height>0.31606in</Height>
                               <Width>5in</Width>
-                              <ZIndex>9</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="Textbox6">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value> 1st Notice</Value>
-                                      <Style>
-                                        <FontSize>14pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Left</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox5</rd:DefaultName>
-                              <Top>3.32934in</Top>
-                              <Left>0.7in</Left>
-                              <Height>0.25in</Height>
-                              <Width>1.16796in</Width>
-                              <ZIndex>10</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>None</Style>
-                                </Border>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="Textbox7">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>2nd Notice</Value>
-                                      <Style>
-                                        <FontSize>14pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Left</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox5</rd:DefaultName>
-                              <Top>3.5802in</Top>
-                              <Left>0.7in</Left>
-                              <Height>0.25in</Height>
-                              <Width>1.16796in</Width>
-                              <ZIndex>11</ZIndex>
+                              <ZIndex>7</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -572,17 +430,51 @@
                               <Source>Embedded</Source>
                               <Value>VenmoCodeOnly</Value>
                               <Sizing>FitProportional</Sizing>
-                              <Top>1.31017in</Top>
+                              <Top>1.25in</Top>
                               <Left>3.72323in</Left>
                               <Height>1.47655in</Height>
                               <Width>1.67677in</Width>
-                              <ZIndex>12</ZIndex>
+                              <ZIndex>8</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
                                 </Border>
                               </Style>
                             </Image>
+                            <Textbox Name="Textbox6">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>An Email reminder was sent out last week.  If you did not receive one, please add your Email with your payment.</Value>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox6</rd:DefaultName>
+                              <Top>3.02371in</Top>
+                              <Left>0.26389in</Left>
+                              <Height>0.85066in</Height>
+                              <Width>2.52562in</Width>
+                              <ZIndex>9</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>LightGrey</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
                           </ReportItems>
                           <KeepTogether>true</KeepTogether>
                           <Style>

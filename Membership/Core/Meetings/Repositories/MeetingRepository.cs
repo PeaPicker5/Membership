@@ -59,6 +59,27 @@ namespace Membership.Core.Meetings.Repositories
                 return retValue;
             }
         }
+        public ICollection<SelectableItem> GetMeetingsAttended(Guid memberId)
+        {
+            const string query = @"SELECT ml.* 
+                FROM MEETING_List ml
+                INNER JOIN MEETING_Members mm 
+                ON mm.MeetingID = ml.MeetingID
+                WHERE mm.MemberId = @MemberId 
+                    AND ml.MeetingDate > DATEADD(yy, -2, CONVERT(datetime, CONVERT(varchar, GETDATE(), 101)))
+                ORDER BY MeetingDate";
+
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                var retValue = connection.Query<SelectableItem>(query, new { MemberId = memberId }).ToList();
+                foreach (var itm in retValue)
+                {
+                    itm.IsSelected = true;
+                    itm.CheckStatus = SelectableMember.enumCheckStatus.Original;
+                }
+                return retValue;
+            }
+        }
         public IEnumerable<int> GetMeetingYearsOnFile()
         {
             const string query = "SELECT DISTINCT Year(MeetingDate) FROM MEETING_List ORDER BY Year(MeetingDate) DESC";

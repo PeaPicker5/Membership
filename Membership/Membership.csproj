@@ -264,6 +264,9 @@
     <Compile Include="UI_Controls\Reports\MembershipCreditReport.xaml.cs">
       <DependentUpon>MembershipCreditReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI_Controls\Reports\Letterhead.xaml.cs">
+      <DependentUpon>Letterhead.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI_Controls\Reports\MembersWithoutEmailReport.xaml.cs">
       <DependentUpon>MembersWithoutEmailReport.xaml</DependentUpon>
     </Compile>
@@ -381,6 +384,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI_Controls\Reports\Letterhead.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI_Controls\Reports\MembersWithoutEmailReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -467,9 +474,12 @@
     <EmbeddedResource Include="ReportDefinitions\DuesAddressLabels.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesCards.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalLetters.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\Removal-Under21.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\Letterhead.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\DuesRemovalNotice.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MembershipCredits.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MemberDetails.rdlc" />
+    <EmbeddedResource Include="ReportDefinitions\SUB-Meetings Attended.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MembersWithoutEmail.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MemberPhoneList.rdlc" />
     <EmbeddedResource Include="ReportDefinitions\MembersAbleToVote.rdlc" />
@@ -502,6 +512,7 @@
     </None>
     <None Include="Properties\DataSources\Membership.Core.Meetings.DataModels.Meeting.datasource" />
     <None Include="Properties\DataSources\Membership.Core.Meetings.DataModels.MeetingMember.datasource" />
+    <None Include="Properties\DataSources\Membership.Core.Meetings.Repositories.MeetingRepository.datasource" />
     <None Include="Properties\DataSources\Membership.CreditsTableAdapters.MEETING_MembersTableAdapter.datasource" />
     <None Include="Properties\DataSources\Membership.CreditsTableAdapters.MEMBER_ListTableAdapter.datasource" />
     <None Include="Properties\DataSources\Membership.CreditsTableAdapters.OFFICE_AssignmentsTableAdapter.datasource" />
