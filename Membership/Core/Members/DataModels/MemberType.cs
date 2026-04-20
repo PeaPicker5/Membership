@@ -1,18 +1,17 @@
-﻿namespace Membership.Core.Members.DataModels
+﻿namespace Membership.Core.Members.DataModels;
+
+public class MemberType
 {
-    public class MemberType
+    public MemberType() { }
+    public MemberType(int typeId, string description, float duesAmount)
     {
-        public MemberType() { }
-        public MemberType(int typeId, string description, float duesAmount)
-        {
-            TypeId = typeId;
-            Description = description;
-            DuesAmount = duesAmount;
-        }
-
-        public int TypeId { get; set; }
-        public string Description { get; set; }
-        public float DuesAmount { get; set; }
-
+        TypeId = typeId;
+        Description = description;
+        DuesAmount = duesAmount;
     }
+
+    public int TypeId { get; set; }
+    public string Description { get; set; }
+    public float DuesAmount { get; set; }
+
 }

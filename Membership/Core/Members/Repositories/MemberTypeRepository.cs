@@ -39,7 +39,7 @@ namespace Membership.Core.Members.Repositories
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
                 var retVal = connection.Query<MemberRemoval>(query).ToList();
-                return retVal.OrderBy(r => r.ReasonID);
+                return retVal.OrderBy(r => r.ReasonId);
             }
         }
     }

@@ -1,16 +1,15 @@
-﻿namespace Membership.Core.Members.DataModels
+﻿namespace Membership.Core.Members.DataModels;
+
+public class MemberRemoval
 {
-    public class MemberRemoval
+    public MemberRemoval() { }
+    public MemberRemoval(int reasonId, string description)
     {
-        public MemberRemoval() { }
-        public MemberRemoval(int reasonId, string description)
-        {
-            ReasonID = reasonId;
-            Description = description;
-        }
-
-        public int ReasonID { get; set; }
-        public string Description { get; set; }
-
+        ReasonId = reasonId;
+        Description = description;
     }
+
+    public int ReasonId { get; set; }
+    public string Description { get; set; }
+
 }
