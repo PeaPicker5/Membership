@@ -162,6 +162,20 @@
                     </fluent:RibbonGroupBox>
                 </fluent:RibbonTabItem>
 
+                <fluent:RibbonTabItem Header="LOSAP" KeyTip="M">
+
+                    <fluent:RibbonGroupBox  Header="LOSAP">
+                        <fluent:Button ToolTip="Listing of LOSAP credits awarded"
+                                       Header="LOSAP Listing"
+                                       LargeIcon="{StaticResource MembershipIcon}"
+                                       Click="LosapListingButton_Click" />
+                        <fluent:Button Header="LOSAP  Data Entry"
+                                       ToolTip="Assign LOSAP credits at end of year."
+                                       LargeIcon="{StaticResource MeetingIcon}"
+                                       Click="LosapEntryButton_OnClick" />
+                    </fluent:RibbonGroupBox>
+                </fluent:RibbonTabItem>
+
                 <fluent:RibbonTabItem Header="Reports" KeyTip="R">
 
                     <fluent:RibbonGroupBox Header="Member Reports" >

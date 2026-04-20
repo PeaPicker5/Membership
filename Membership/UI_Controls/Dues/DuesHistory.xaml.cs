@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Membership.Core.DataModels;
 using Membership.Core.Dues.DataModels;
 using Membership.Core.Dues.Presenters;
 using Membership.Properties;

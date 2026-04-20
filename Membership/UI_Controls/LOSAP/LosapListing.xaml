@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Membership.UI_Controls.LOSAP.LosapListing"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Membership.Common.Converters"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="200" d:DesignWidth="1600">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Common/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+        <GroupBox BorderBrush="Black" BorderThickness="4" Background="AntiqueWhite">
+            <GroupBox.Header>
+                <DockPanel  x:Name="SelectionBar" LastChildFill="True">
+                    <StackPanel DockPanel.Dock="Left" Height="32" 
+                                HorizontalAlignment="Center"  >
+                        <Label Content="CURRENT LOSAP TOTALS USED FOR DETERMINING ASSOCIATION LIFE MEMBERSHIP." 
+                               FontWeight="Bold" FontSize="20" />
+                    
+                    </StackPanel>
+
+                </DockPanel>
+        </GroupBox.Header>
+
+            <Grid Margin="10" >
+
+                <DataGrid Style="{StaticResource DataGridStyle}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" 
+                      ItemsSource="{Binding Path=LosapRecs, Mode=OneWay}"
+                      AlternatingRowBackground="LightGray" >
+                <DataGrid.Columns  >
+                    <DataGridTextColumn Width="40"     Header="FF#" Binding="{Binding Path=MemberRec.FireFighterNum}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="110"     Header="LOSAP Years" Binding="{Binding Path=TotalYears}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="120"     Header="Legacy Years" Binding="{Binding Path=MemberRec.LegacyLosapYears}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=MemberRec.LastName}"/>
+                    <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=MemberRec.FirstName}"/>
+                    <DataGridTextColumn Width="40"     Header="MI" Binding="{Binding Path=MemberRec.MI}"/>
+                    <DataGridTextColumn MinWidth="200" Header="Address  (On File)" Binding="{Binding Path=MemberRec.Address1}"/>
+                    <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=MemberRec.CityStateZip}"/>
+                    <DataGridTextColumn MinWidth="250" Width="*" Header="EMail Address" Binding="{Binding Path=MemberRec.EmailAddress}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            </Grid>
+
+    </GroupBox>
+
+</UserControl>
+

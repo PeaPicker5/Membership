@@ -1,53 +1,33 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Membership.Core.Members.DataModels;
 using Membership.Core.Reports.Presenters;
+using Membership.UI_Controls.ReportViewer;
 using Microsoft.Reporting.WinForms;
 
 namespace Membership.UI_Controls.Reports
 {
-
-    public partial class MembersWithoutEmailReport : IReportViewerView
+    public partial class MembersWithoutEmailReport : ReportUserControlBase
     {
         private readonly ReportDatasetPresenter _presenter;
-
-        public string ReportName { get; set; }
-        public IEnumerable<ReportParameter> ReportParams { get; set; }
-        public IEnumerable<ReportDataSource> ReportDatasets { get; set; }
 
         public MembersWithoutEmailReport()
         {
             InitializeComponent();
             _presenter = new ReportDatasetPresenter();
-            Loaded += (sender, args) => {
-                UpdateTheReport();
-            };
+            Loaded += (sender, args) => UpdateTheReport();
         }
 
-        private void UpdateTheReport()
-        {
-            ReportControl.InitializeComponent();
-            ReportControl.ReportName = ReportName;
-            ReportControl.ReportParams = new List<ReportParameter>();
-            ReportControl.ReportDatasets = LoadDataSets();
-            ReportControl.LoadReportControl();
-        }
+        protected override ReportViewerWindow Viewer => ReportControl;
 
-        private IEnumerable<ReportDataSource> LoadDataSets()
+        protected override IEnumerable<ReportDataSource> LoadDataSets()
         {
-            var retValue = new List<ReportDataSource>();
-            var MembersList = new List<Member>();
-
-            MembersList.AddRange(_presenter.GetCurrentMembers()
-                    .Where(x => string.IsNullOrEmpty(x.EmailAddress)));
-            var dSet = new ReportDataSource
+            var membersList = new List<Member>(
+                _presenter.GetCurrentMembers().Where(x => string.IsNullOrEmpty(x.EmailAddress)));
+            return new List<ReportDataSource>
             {
-                Name = "Members",
-                Value = MembersList
+                new ReportDataSource { Name = "Members", Value = membersList }
             };
-            retValue.Add(dSet);
-
-            return retValue;
         }
     }
 }

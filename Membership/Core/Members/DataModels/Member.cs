@@ -9,9 +9,9 @@ namespace Membership.Core.Members.DataModels
         public Member() { }
 
         private int RemovedStatus = 4;
-        public Member(Guid memberId, int memberTypeId, bool isActive, string lastName, string firstName,
+        public Member(Guid memberId, int memberTypeId, bool isActive, int fireFighterNum, string lastName, string firstName,
             string mi, string suffix, string comment, string emailAddress, 
-            Guid sponsorID1, Guid sponsorID2, Guid sponsorID3,
+            Guid sponsorId1, Guid sponsorId2, Guid sponsorId3,
             string address1, string address2, string city, string state, string zip, string phone, 
             DateTime? dateOfBirth, DateTime? dateObligated, DateTime? dateRemoved, int removalReasonId,
             DateTime? dateDeceased, Guid pageId, byte[] pageThumb)
@@ -19,15 +19,16 @@ namespace Membership.Core.Members.DataModels
             MemberId = memberId;
             MemberTypeId = memberTypeId;
             IsActive = isActive;
+            FireFighterNum = fireFighterNum;
             LastName = lastName;
             FirstName = firstName;
             MI = mi;
             Suffix = suffix;
             Comment = comment;
             EmailAddress = emailAddress;
-            SponsorID1 = sponsorID1;
-            SponsorID2 = sponsorID2;
-            SponsorID3 = sponsorID3;
+            SponsorId1 = sponsorId1;
+            SponsorId2 = sponsorId2;
+            SponsorId3 = sponsorId3;
             Address1 = address1;
             Address2 = address2;
             City = city;
@@ -86,15 +87,16 @@ namespace Membership.Core.Members.DataModels
         [ExplicitKey] public Guid MemberId { get; set; }
         public int MemberTypeId { get; set; }
         public bool IsActive { get; set; }
+        public int FireFighterNum { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MI { get; set; }
         public string Suffix { get; set; }
         public string Comment { get; set; }
         public string EmailAddress { get; set; }
-        public Guid SponsorID1 { get; set; }
-        public Guid SponsorID2 { get; set; }
-        public Guid SponsorID3 { get; set; }
+        public Guid SponsorId1 { get; set; }
+        public Guid SponsorId2 { get; set; }
+        public Guid SponsorId3 { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
@@ -108,5 +110,8 @@ namespace Membership.Core.Members.DataModels
         public DateTime? DateDeceased { get; set; }
         public Guid PageId { get; set; }
         public byte[] PageThumb { get; set; }
+        public float LegacyLosapYears { get; set; }
+
+        public int LosapYears { get; set; }
     }
 }

@@ -4,7 +4,6 @@ namespace Membership.Core.Reports.Repositories
 {
     public interface IReportDataRepository
     {
-        DataTable GetRecordSet(string query);
-
+        DataTable GetRecordSet(string query, object parameters = null);
     }
 }

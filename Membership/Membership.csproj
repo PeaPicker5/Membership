@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -42,6 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +52,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>266E7BFC687F2D894DCDDA2BEBD214BF737B3FB9</ManifestCertificateThumbprint>
@@ -169,6 +171,13 @@
       <DependentUpon>InputTextControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\DataModels\SelectableItem.cs" />
+    <Compile Include="Core\LOSAP\DataModels\LosapRecord.cs" />
+    <Compile Include="Core\LOSAP\Presenters\ILosapListingView.cs" />
+    <Compile Include="Core\LOSAP\Presenters\LosapListingPresenter.cs" />
+    <Compile Include="Core\LOSAP\Presenters\LosapRecordPresenter.cs" />
+    <Compile Include="Core\LOSAP\Presenters\ILosapRecordView.cs" />
+    <Compile Include="Core\LOSAP\Repositories\LosapRepository.cs" />
+    <Compile Include="Core\LOSAP\Repositories\ILosapRepository.cs" />
     <Compile Include="Core\Dues\DataModels\DuesHistory.cs" />
     <Compile Include="Core\Dues\DataModels\DuesRecord.cs" />
     <Compile Include="Core\Meetings\DataModels\MeetingMember.cs" />
@@ -197,6 +206,7 @@
     <Compile Include="Core\Officers\Presenters\EditOfficerPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficersByYearPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficeHistoryPresenter.cs" />
+    <Compile Include="Core\Reports\ReportNames.cs" />
     <Compile Include="Core\Reports\Presenters\ReportParametersPresenter.cs" />
     <Compile Include="Core\Reports\Presenters\ReportDatasetPresenter.cs" />
     <Compile Include="Core\Reports\Presenters\ReportViewerPresenter.cs" />
@@ -243,6 +253,13 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="UI_Controls\LOSAP\LosapListing.xaml.cs">
+      <DependentUpon>LosapListing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Controls\LOSAP\LosapCredit.xaml.cs">
+      <DependentUpon>LosapCredit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI_Controls\Reports\ReportUserControlBase.cs" />
     <Compile Include="UI_Controls\Reports\DuesAddressLabels.xaml.cs">
       <DependentUpon>DuesAddressLabels.xaml</DependentUpon>
     </Compile>
@@ -364,6 +381,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI_Controls\LOSAP\LosapListing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI_Controls\LOSAP\LosapCredit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI_Controls\Reports\DuesAddressLabels.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

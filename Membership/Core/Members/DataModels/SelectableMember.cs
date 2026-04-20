@@ -14,8 +14,8 @@ namespace Membership.Core.Members.DataModels
         private bool _isSelected;
         public SelectableMember(Member member, bool isSelected)
             : base(
-                member.MemberId, member.MemberTypeId, member.IsActive, member.LastName, member.FirstName,
-                member.MI, member.Suffix, member.Comment, member.EmailAddress, member.SponsorID1, member.SponsorID2, member.SponsorID3,
+                member.MemberId, member.MemberTypeId, member.IsActive, member.FireFighterNum, member.LastName, member.FirstName,
+                member.MI, member.Suffix, member.Comment, member.EmailAddress, member.SponsorId1, member.SponsorId2, member.SponsorId3,
                 member.Address1, member.Address2, member.City, member.State, member.ZIP, member.Phone,
                 member.DateOfBirth, member.DateObligated, member.DateRemoved, member.RemovalReasonId, member.DateDeceased,
                 member.PageId, member.PageThumb)

@@ -10,12 +10,12 @@ namespace Membership.Core.Reports.Repositories
         private const string DbConnectionName = "MembershipDB";
         public ReportDataRepository() { }
 
-        public DataTable GetRecordSet(string query)
+        public DataTable GetRecordSet(string query, object parameters = null)
         {
             DataTable table = new DataTable();
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                using (var reader = connection.ExecuteReader(query))
+                using (var reader = connection.ExecuteReader(query, parameters))
                 {
                     table.Load(reader);
                 }

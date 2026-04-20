@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Membership.UI_Controls.Reports.DuesAddressLabels"
+﻿<reports:ReportUserControlBase x:Class="Membership.UI_Controls.Reports.DuesAddressLabels"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,8 @@
         xmlns:rv="clr-namespace:Membership.UI_Controls.ReportViewer"
         xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d" 
+        xmlns:reports="clr-namespace:Membership.UI_Controls.Reports"
+        mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         d:DesignHeight="400" d:DesignWidth="1200">
 
@@ -46,4 +47,4 @@
         </DockPanel>
     </GroupBox>
 
-</UserControl>
+</reports:ReportUserControlBase>

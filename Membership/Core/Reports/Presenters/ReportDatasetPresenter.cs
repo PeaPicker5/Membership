@@ -108,9 +108,9 @@ namespace Membership.Core.Reports.Presenters
         }
 
 
-        public DataTable GetRecords(string query)
+        public DataTable GetRecords(string query, object parameters = null)
         {
-            return _reportDataRepository.GetRecordSet(query);
+            return _reportDataRepository.GetRecordSet(query, parameters);
         }
 
     }

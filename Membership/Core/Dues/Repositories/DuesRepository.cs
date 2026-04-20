@@ -83,7 +83,7 @@ namespace Membership.Core.Dues.Repositories
             const string query = "SELECT * FROM VIEW_CurrentDues ORDER BY Lastname, Firstname";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var x = connection.Query<DuesRecord, Members.DataModels.Member, DuesRecord>(query,
+                var x = connection.Query<DuesRecord, Member, DuesRecord>(query,
                     (duesRec, person) =>
                     {
                         duesRec.MemberRec = person;
