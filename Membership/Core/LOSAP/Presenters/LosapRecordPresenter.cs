@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using Membership.Core.LOSAP.DataModels;
 using Membership.Core.LOSAP.Repositories;
+using Membership.Core.Members.DataModels;
+using Membership.Core.Members.Repositories;
 
 namespace Membership.Core.LOSAP.Presenters
 {
     public class LosapRecordPresenter : ILosapRecordView
     {
         public ICollection<LosapRecord> LosapRecs { get; set; }
+        public ICollection<Member> MemberRecs { get; set; }
         private readonly ILosapRepository _losapRepository;
+        private readonly IMemberRepository _memberRepository;
         private readonly ILosapRecordView _view;
 
         public LosapRecordPresenter(ILosapRecordView view)
         {
             _losapRepository = new LosapRepository();
+            _memberRepository = new MemberRepository();
             _view = view;
         }
 
-        public void GetByMemberId(Guid memberId)
-        {
-            _view.LosapRecs = _losapRepository.GetLosapRecordsByMemberId(memberId).OrderBy(x => x.Year).ToList();
-        }
 
         public IEnumerable<int> LoadYearsOnFile()
         {
@@ -48,7 +49,7 @@ namespace Membership.Core.LOSAP.Presenters
 
         public void GetCurrentMembers()
         {
-            _view.LosapRecs = _losapRepository.CurrentActiveMembers().ToList();
+            _view.MemberRecs = _memberRepository.GetCurrentMembers().ToList();
         }
 
 

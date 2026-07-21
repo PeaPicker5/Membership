@@ -34,7 +34,7 @@ namespace Membership.Core.LOSAP.Presenters
 
             foreach (var rec in losapRecs)
             {
-                rec.TotalYears = countByMember[rec.MemberId];
+                rec.LosapYears = countByMember[rec.MemberId];
                 rec.Year = 0;  // To allow .Distinct to filter out duplicate records
             }
             _view.LosapRecs = losapRecs.Distinct().ToList();

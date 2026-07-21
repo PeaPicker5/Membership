@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Membership.Core.LOSAP.DataModels;
 using Membership.Core.LOSAP.Presenters;
+using Membership.Core.Members.DataModels;
 using Membership.Properties;
 using CheckBox = System.Windows.Controls.CheckBox;
 
@@ -40,6 +41,9 @@ namespace Membership.UI_Controls.LOSAP
                 OnPropertyChanged();
             }
         }
+
+        public ICollection<Member> MemberRecs { get; set; }
+
         public static readonly DependencyProperty LosapRecsProperty =
             DependencyProperty.Register("LosapRecs", typeof(ICollection<LosapRecord>),
                 typeof(LosapCredit));

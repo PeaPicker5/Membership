@@ -88,20 +88,6 @@ namespace Membership.Core.LOSAP.Repositories
                 return yearList;
             }
         }
-        public IEnumerable<LosapRecord> CurrentActiveMembers()
-        {
-            const string query = "SELECT * FROM LOSAP_History";
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
-            {
-                var x = connection.Query<LosapRecord, Member, LosapRecord>(query,
-                    (losapRec, person) =>
-                    {
-                        losapRec.MemberRec = person;
-                        return losapRec;
-                    },  splitOn: "MemberId");
-                return x;
-            }
-        }
 
         public void InsertLosapCredits(IEnumerable<LosapRecord> losapCredits)
         {

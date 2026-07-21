@@ -43,10 +43,10 @@ namespace Membership
 
         private void LosapEntryButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCollection = new DuesCollection();
-            ucDuesCollection.LoadMembers();
+            var ucLosapCredit = new LosapCredit();
+            ucLosapCredit.LoadMembers();
             MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesCollection);
+            MainStack.Children.Add(ucLosapCredit);
         }
 
         #endregion

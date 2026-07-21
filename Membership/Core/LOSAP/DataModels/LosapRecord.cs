@@ -19,8 +19,19 @@ public class LosapRecord : INotifyPropertyChanged, IEquatable<LosapRecord>
     public int Year { get; set; }
     public bool HasCredit { get; set; }
 
+    private int _losapYears;
+    public int LosapYears
+    {
+        get => _losapYears;
+        set
+        {
+            if (value == _losapYears) return;
+            _losapYears = value;
+            OnPropertyChanged();
+        }
+    }
 
-    public int TotalYears { get; set; }
+    public int CombinedTotalYears => LosapYears + (int)MemberRec.TotalLegacyYears;
 
     public Guid MemberId => MemberRec.MemberId;
 

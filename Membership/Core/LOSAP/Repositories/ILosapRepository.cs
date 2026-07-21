@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Membership.Core.LOSAP.DataModels;
+using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.LOSAP.Repositories
 {
     public interface ILosapRepository
     {
-        ///// <summary>
-        ///// Gets the Losap record for a given member for a given year.
-        ///// </summary>
-        ///// <param name="memberId">The event identifier.</param>
-        ///// <param name="year"></param>
-        ///// <returns></returns>
-        LosapRecord Get(Guid memberId, int year);
-
-        ///// <summary>
-        ///// Gets all Losap records for a given member.
-        ///// </summary>
-        ///// <param name="memberId">The event identifier.</param>
-        ///// <returns></returns>
-        ICollection<LosapRecord> GetLosapRecordsByMemberId(Guid memberId);
 
         ///// <summary>
         ///// Gets all Losap records for a given year.
@@ -31,8 +18,6 @@ namespace Membership.Core.LOSAP.Repositories
         ICollection<LosapRecord> GetLosapForActiveMembers();
 
         IEnumerable<int> GetYearsOnFile();
-
-        IEnumerable<LosapRecord> CurrentActiveMembers();
 
         void InsertLosapCredits(IEnumerable<LosapRecord> losapPayments);
         void DeleteLosapCredits(IEnumerable<LosapRecord> losapPayments);

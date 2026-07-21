@@ -114,4 +114,5 @@ public class Member
     public float LegacyLosapYears { get; set; }
 
     [Computed] public int LosapYears { get; set; }
+    [Computed] public float TotalLegacyYears => LegacyLosapYears + LosapYears;
 }
