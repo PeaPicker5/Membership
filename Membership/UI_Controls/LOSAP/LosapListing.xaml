@@ -42,20 +42,29 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="110"     Header="LOSAP Years" Binding="{Binding Path=TotalYears}">
+                    <DataGridTextColumn Width="70"     Header="Total" Binding="{Binding Path=CombinedTotalYears}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="70"     Header="LOSAP" Binding="{Binding Path=LosapYears}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="120"     Header="Legacy Years" Binding="{Binding Path=MemberRec.LegacyLosapYears}">
+                    <DataGridTextColumn Width="70"     Header="Legacy" Binding="{Binding Path=MemberRec.LegacyLosapYears}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
+                    <DataGridTextColumn MinWidth="70" Header="Status" Binding="{Binding Path=MemberRec.Status}"/>
                     <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=MemberRec.LastName}"/>
                     <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=MemberRec.FirstName}"/>
                     <DataGridTextColumn Width="40"     Header="MI" Binding="{Binding Path=MemberRec.MI}"/>
