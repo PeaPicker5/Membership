@@ -34,7 +34,7 @@
                         <Label Content="{Binding Source={x:Static sys:DateTime.Today}}"
                                ContentStringFormat="{}{0:yyyy    }" FontSize="16"/>
 
-                        <Label Content="Showing Active Members Only" FontWeight="Bold" FontSize="24" />
+                        <Label Content="Showing Active Members Only" FontWeight="Bold" FontSize="18" />
                     </StackPanel>
                     <Button ToolTip="Record the LOSAP credit for the year."  DockPanel.Dock="Right" Width="100"
                             Click="RecordLosapButtonOnClick" IsEnabled="{Binding Path=RunningCount}"
@@ -75,24 +75,20 @@
 
                         <DataGridCheckBoxColumn MinWidth="40" Header="MADE LOSAP" Binding="{Binding Path=IsPaid}" 
                                                  ElementStyle="{StaticResource CheckBoxStyle}" />
-                        <!--<DataGridTemplateColumn Header="PAID" IsReadOnly="True" >
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox x:Name="LOSAPBox" HorizontalAlignment="Center" 
-                                              Tag="{Binding Path=LosapRecs}"
-                                          IsChecked="{Binding Path=SelectedLosapRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
-
-                        <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=MemberRec.LastName}" IsReadOnly="True" />
+                        <DataGridTextColumn Width="80" Header="Total Yrs" Binding="{Binding Path=CombinedTotalYears}" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    <DataGridTextColumn MinWidth="120" Header="Last Name" Binding="{Binding Path=MemberRec.LastName}" IsReadOnly="True" />
                         <DataGridTextColumn MinWidth="120" Header="First Name" Binding="{Binding Path=MemberRec.FirstName}" IsReadOnly="True"  />
                         <DataGridTextColumn Width="40"  Header="MI" Binding="{Binding Path=MemberRec.MI}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="60"  Header="SUFFIX" Binding="{Binding Path=MemberRec.Suffix}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="120" Header="Status" Binding="{Binding Path=MemberRec.Status}" IsReadOnly="True"/>
                         <DataGridTextColumn Width="80" Header="LOSAP Yrs" Binding="{Binding Path=LosapYears}" IsReadOnly="True"/>
                         <DataGridTextColumn Width="100" Header="Legacy Yrs" Binding="{Binding Path=MemberRec.LegacyLosapYears}" IsReadOnly="True"/>
-                        <DataGridTextColumn Width="80" Header="Total Yrs" Binding="{Binding Path=CombinedTotalYears}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="200" Header="Address" Binding="{Binding Path=MemberRec.Address1}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=MemberRec.CityStateZip}" IsReadOnly="True" Width="*"/>
                     </DataGrid.Columns>

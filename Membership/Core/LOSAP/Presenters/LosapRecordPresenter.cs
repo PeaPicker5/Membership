@@ -55,7 +55,6 @@ namespace Membership.Core.LOSAP.Presenters
 
             _view.LosapRecs = _memberRepository.GetCurrentMembers()
                 .Where(m => m.MemberTypeId == 1)
-                .OrderBy(m => m.LastName)
                 .Select(m =>
                 {
                     var rec = new LosapRecord(m, 0, false);
@@ -63,6 +62,9 @@ namespace Membership.Core.LOSAP.Presenters
                         rec.LosapYears = count;
                     return rec;
                 })
+                .OrderByDescending(r => r.CombinedTotalYears)
+                .ThenBy(r => r.MemberRec.LastName)
+                .ThenBy(r => r.MemberRec.FirstName)
                 .ToList();
         }
 
