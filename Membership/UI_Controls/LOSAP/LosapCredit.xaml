@@ -73,8 +73,13 @@
 
                     <DataGrid.Columns>
 
-                        <DataGridCheckBoxColumn MinWidth="40" Header="MADE LOSAP" Binding="{Binding Path=IsPaid}" 
-                                                 ElementStyle="{StaticResource CheckBoxStyle}" />
+                        <DataGridCheckBoxColumn MinWidth="40" Header="MADE LOSAP" Binding="{Binding Path=IsPaid}">
+                            <DataGridCheckBoxColumn.ElementStyle>
+                                <Style TargetType="CheckBox" BasedOn="{StaticResource CheckBoxStyle}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
+                        </DataGridCheckBoxColumn>
                         <DataGridTextColumn Width="80" Header="Total Yrs" Binding="{Binding Path=CombinedTotalYears}" IsReadOnly="True">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
