@@ -91,6 +91,7 @@ namespace Membership.UI_Controls.LOSAP
         {
             _presenter.GetCurrentMembers();
             AllLosapRecs = LosapRecs;
+            UpdateLosapRecsGrid();
         }
 
         private void RecordLosapButtonOnClick(object sender, RoutedEventArgs e)
