@@ -33,8 +33,8 @@
                         <Label Content="    Year:"      FontSize="16"/>
                         <Label Content="{Binding Source={x:Static sys:DateTime.Today}}"
                                ContentStringFormat="{}{0:yyyy    }" FontSize="16"/>
-                        <CheckBox Content="Show Active Members Only" 
-                               Style="{StaticResource CheckBoxBig}" FontSize="16" Click="DisplayActiveMembersOnly" />
+
+                        <Label Content="Showing Active Members Only" FontWeight="Bold" FontSize="24" />
                     </StackPanel>
                     <Button ToolTip="Record the LOSAP credit for the year."  DockPanel.Dock="Right" Width="100"
                             Click="RecordLosapButtonOnClick" IsEnabled="{Binding Path=RunningCount}"
@@ -92,6 +92,7 @@
                         <DataGridTextColumn MinWidth="120" Header="Status" Binding="{Binding Path=MemberRec.Status}" IsReadOnly="True"/>
                         <DataGridTextColumn Width="80" Header="LOSAP Yrs" Binding="{Binding Path=LosapYears}" IsReadOnly="True"/>
                         <DataGridTextColumn Width="100" Header="Legacy Yrs" Binding="{Binding Path=MemberRec.LegacyLosapYears}" IsReadOnly="True"/>
+                        <DataGridTextColumn Width="80" Header="Total Yrs" Binding="{Binding Path=CombinedTotalYears}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="200" Header="Address" Binding="{Binding Path=MemberRec.Address1}" IsReadOnly="True"/>
                         <DataGridTextColumn MinWidth="200" Header="City State Zip" Binding="{Binding Path=MemberRec.CityStateZip}" IsReadOnly="True" Width="*"/>
                     </DataGrid.Columns>
