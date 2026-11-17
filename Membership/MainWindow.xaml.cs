@@ -20,171 +20,178 @@ namespace Membership
             Title = $"Association Membership - ver {Assembly.GetExecutingAssembly().GetName().Version}";
         }
 
-        // When the Membership List last finished loading. Used to ignore the second click of a double-click.
-        private DateTime _membershipListLoadedAt = DateTime.MinValue;
+        #region Screen switching
+
+        // The ribbon button whose screen was shown last, and when that screen finished loading.
+        private object _lastScreenButton;
+        private DateTime _lastScreenLoadedAt = DateTime.MinValue;
+
+        /// <summary>
+        /// Replaces the main content with the screen <paramref name="createScreen"/> builds.
+        /// A double-click raises Click twice, and the second click is processed right after the
+        /// first finishes loading; it is ignored if it comes from the same button within the
+        /// system double-click time. A later single click still reloads the screen.
+        /// </summary>
+        private void ShowScreen(object button, Func<UIElement> createScreen)
+        {
+            var sinceLastLoad = DateTime.Now - _lastScreenLoadedAt;
+            if (ReferenceEquals(button, _lastScreenButton)
+                && sinceLastLoad.TotalMilliseconds < System.Windows.Forms.SystemInformation.DoubleClickTime)
+                return;
+
+            var screen = createScreen();
+            MainStack.Children.Clear();
+            MainStack.Children.Add(screen);
+
+            _lastScreenButton = button;
+            _lastScreenLoadedAt = DateTime.Now;
+        }
+
+        #endregion
 
         private void MembershipButton_Click(object sender, RoutedEventArgs e)
         {
-            // A double-click raises Click twice. The second click is processed right after the first
-            // finishes loading, so ignore it if it arrives within the system double-click time.
-            var sinceLastLoad = DateTime.Now - _membershipListLoadedAt;
-            if (sinceLastLoad.TotalMilliseconds < System.Windows.Forms.SystemInformation.DoubleClickTime
-                && MainStack.Children.Count == 1 && MainStack.Children[0] is MemberSelection)
-                return;
-
-            var ucMemberSelection = new MemberSelection();
-            ucMemberSelection.LoadMembers();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucMemberSelection);
-            _membershipListLoadedAt = DateTime.Now;
+            ShowScreen(sender, () =>
+            {
+                var screen = new MemberSelection();
+                screen.LoadMembers();
+                return screen;
+            });
         }
 
         #region LOSAP FUNCTIONS
         private void LosapListingButton_Click(object sender, RoutedEventArgs e)
         {
-            var ucLosapListing = new LosapListing();
-            ucLosapListing.LoadMembers();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucLosapListing);
+            ShowScreen(sender, () =>
+            {
+                var screen = new LosapListing();
+                screen.LoadMembers();
+                return screen;
+            });
         }
 
         private void LosapEntryButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucLosapCredit = new LosapCredit();
-            ucLosapCredit.LoadMembers();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucLosapCredit);
+            ShowScreen(sender, () =>
+            {
+                var screen = new LosapCredit();
+                screen.LoadMembers();
+                return screen;
+            });
         }
 
         #endregion
 
-        #region  DUES FUNCTIONS 
+        #region  DUES FUNCTIONS
 
         private void DuesEmailListButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesEmailList = new DuesEmailList();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesEmailList);
+            ShowScreen(sender, () => new DuesEmailList());
         }
-
 
         private void DuesHistoryButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesHistory = new DuesHistory();
-            ucDuesHistory.LoadMembers();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesHistory);
+            ShowScreen(sender, () =>
+            {
+                var screen = new DuesHistory();
+                screen.LoadMembers();
+                return screen;
+            });
         }
 
         private void DuesCollectionButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCollection = new DuesCollection();
-            ucDuesCollection.LoadMembers();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesCollection);
+            ShowScreen(sender, () =>
+            {
+                var screen = new DuesCollection();
+                screen.LoadMembers();
+                return screen;
+            });
         }
 
         private void DuesCardsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCards = new DuesCards { ReportName = ReportNames.DuesCards };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesCards);
+            ShowScreen(sender, () => new DuesCards { ReportName = ReportNames.DuesCards });
         }
+
         private void DuesAddressLabelsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesCardReport = new DuesAddressLabels { ReportName = ReportNames.DuesAddressLabels };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesCardReport);
+            ShowScreen(sender, () => new DuesAddressLabels { ReportName = ReportNames.DuesAddressLabels });
         }
 
         private void DuesWarningButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesWarningReport = new DuesNoticeReports { ReportName = ReportNames.DuesWarning };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesWarningReport);
+            ShowScreen(sender, () => new DuesNoticeReports { ReportName = ReportNames.DuesWarning });
         }
+
         private void DuesRemovalNoticeButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesRemovalNoticeReport = new DuesNoticeReports { ReportName = ReportNames.DuesRemovalNotice };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesRemovalNoticeReport);
+            ShowScreen(sender, () => new DuesNoticeReports { ReportName = ReportNames.DuesRemovalNotice });
         }
 
         private void DuesRemovalLettersButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucDuesRemovalLettersReport = new DuesNoticeReports { ReportName = ReportNames.DuesRemovalLetters };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucDuesRemovalLettersReport);
+            ShowScreen(sender, () => new DuesNoticeReports { ReportName = ReportNames.DuesRemovalLetters });
         }
         #endregion
 
         #region OFFICER FUNCTIONS - On creation of new year, ask to close out previous year
         private void OfficeHistoryButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucOfficeHistory = new OfficeHistory();
-            ucOfficeHistory.LoadRecords();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucOfficeHistory);
+            ShowScreen(sender, () =>
+            {
+                var screen = new OfficeHistory();
+                screen.LoadRecords();
+                return screen;
+            });
         }
+
         private void OfficerAssignmentButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var ucOfficerRecords = new OfficersByYear();
-            ucOfficerRecords.LoadYearsOnFile();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucOfficerRecords);
+            ShowScreen(sender, () =>
+            {
+                var screen = new OfficersByYear();
+                screen.LoadYearsOnFile();
+                return screen;
+            });
         }
         #endregion
 
-
         private void MeetingButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucMeetingSelection = new MeetingSelection();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucMeetingSelection);
+            ShowScreen(sender, () => new MeetingSelection());
         }
 
+        #region REPORTS
         private void MembersAbleToVote_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucAbleToVoteReport = new MembersAbleToVote { ReportName = ReportNames.MembersAbleToVote };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucAbleToVoteReport);
+            ShowScreen(sender, () => new MembersAbleToVote { ReportName = ReportNames.MembersAbleToVote });
         }
 
         private void MemberDetails_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucMemberDetailsReport = new MemberDetailsReport { ReportName = ReportNames.MemberDetails };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucMemberDetailsReport);
+            ShowScreen(sender, () => new MemberDetailsReport { ReportName = ReportNames.MemberDetails });
         }
 
         private void MemberPhoneList_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucMemberPhoneListReport = new MemberPhoneListReport { ReportName = ReportNames.MemberPhoneList };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucMemberPhoneListReport);
+            ShowScreen(sender, () => new MemberPhoneListReport { ReportName = ReportNames.MemberPhoneList });
         }
 
         private void MembersWithoutEmails_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucMembersWithoutEmailReport = new MembersWithoutEmailReport { ReportName = ReportNames.MembersWithoutEmail };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucMembersWithoutEmailReport);
+            ShowScreen(sender, () => new MembersWithoutEmailReport { ReportName = ReportNames.MembersWithoutEmail });
         }
 
         private void MembershipCreditReport_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucMembershipCreditReport = new MembershipCreditReport { ReportName = ReportNames.MembershipCredits };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucMembershipCreditReport);
+            ShowScreen(sender, () => new MembershipCreditReport { ReportName = ReportNames.MembershipCredits });
         }
 
         private void Letterhead_OnClick(object sender, RoutedEventArgs e)
         {
-            var ucLetterhead = new Letterhead { ReportName = ReportNames.Letterhead };
-            MainStack.Children.Clear();
-            MainStack.Children.Add(ucLetterhead);
-
+            ShowScreen(sender, () => new Letterhead { ReportName = ReportNames.Letterhead });
         }
-
+        #endregion
     }
 }
