@@ -76,7 +76,7 @@ LOSAP tracks annual service credits for pension eligibility.
 - `LOSAP_History` has one row per member per year (primary key `MemberID, Year`) with a `LosapCredit` bit.
 - Only rows with `LosapCredit = 1` count as a credited year. Rows with `0` mean the year was reviewed but not credited.
 - Crediting a member upserts their row for that year to `1`; un-crediting sets it to `0` (the row is kept, not deleted).
-- A member's total = credited years (`LosapRecord.LosapYears`) + `MEMBER_List.LegacyLosapYears` (years earned before the app tracked LOSAP), exposed as `LosapRecord.CombinedTotalYears`.
+- A member's total = credited years (`LosapRecord.LosapYears`) + `MEMBER_List.LegacyLosapYears` **truncated to a whole number** (legacy years can be fractional, e.g. 9.5 → 9), exposed as the integer `LosapRecord.CombinedTotalYears`. The truncation is the association's rule — don't change it to rounding or fractional totals.
 
 **Code**
 - `LosapRecord` is a view model (not a table mapping): `MemberRec`, `Year`, `HasCredit`, `OriginalHasCredit` (what the database holds), `IsChanged`, `LosapYears`.

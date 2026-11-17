@@ -56,8 +56,11 @@ public class LosapRecord : INotifyPropertyChanged
         }
     }
 
-    /// <summary>Credited years plus legacy years; legacy years can be fractional (e.g. 9.5).</summary>
-    public float CombinedTotalYears => LosapYears + MemberRec.LegacyLosapYears;
+    /// <summary>
+    /// Credited LOSAP years plus legacy years truncated to a whole number
+    /// (e.g. 1 credited + 9.5 legacy = 10). This is the association's rule, not a rounding bug.
+    /// </summary>
+    public int CombinedTotalYears => LosapYears + (int)MemberRec.LegacyLosapYears;
 
     public Guid MemberId => MemberRec.MemberId;
 

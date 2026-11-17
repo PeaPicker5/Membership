@@ -94,7 +94,7 @@
                                 </Style>
                             </DataGridCheckBoxColumn.ElementStyle>
                         </DataGridCheckBoxColumn>
-                        <DataGridTextColumn Width="80" Header="Total Yrs" Binding="{Binding Path=CombinedTotalYears, StringFormat=0.#}"
+                        <DataGridTextColumn Width="80" Header="Total Yrs" Binding="{Binding Path=CombinedTotalYears}"
                                             IsReadOnly="True" FontWeight="Bold">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>

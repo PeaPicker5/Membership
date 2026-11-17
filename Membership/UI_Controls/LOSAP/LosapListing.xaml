@@ -42,7 +42,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="70"     Header="Total" Binding="{Binding Path=CombinedTotalYears, StringFormat=0.#}">
+                    <DataGridTextColumn Width="70"     Header="Total" Binding="{Binding Path=CombinedTotalYears}">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextAlignment" Value="Center" />
