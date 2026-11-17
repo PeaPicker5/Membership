@@ -79,16 +79,20 @@ namespace Membership.Core.Dues.Repositories
         }
         public IEnumerable<DuesRecord> CurrentlyOweDues()
         {
-            const string query = "SELECT * FROM VIEW_CurrentDues ORDER BY Lastname, Firstname";
+            // Sorted in C#: an ORDER BY over these wide member rows needs a large SQL memory grant,
+            // which can stall for up to 25 seconds on a low-memory server.
+            const string query = "SELECT * FROM VIEW_CurrentDues";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var x = connection.Query<DuesRecord, Member, DuesRecord>(query,
-                    (duesRec, person) =>
-                    {
-                        duesRec.MemberRec = person;
-                        return duesRec;
-                    },  splitOn: "MemberId");
-                return x;
+                return connection.Query<DuesRecord, Member, DuesRecord>(query,
+                        (duesRec, person) =>
+                        {
+                            duesRec.MemberRec = person;
+                            return duesRec;
+                        }, splitOn: "MemberId")
+                    .OrderBy(d => d.MemberRec.LastName, StringComparer.CurrentCultureIgnoreCase)
+                    .ThenBy(d => d.MemberRec.FirstName, StringComparer.CurrentCultureIgnoreCase)
+                    .ToList();
             }
         }
 

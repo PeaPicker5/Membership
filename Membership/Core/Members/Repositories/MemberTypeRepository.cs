@@ -13,16 +13,16 @@ namespace Membership.Core.Members.Repositories
         private const string DbConnectionName = "MembershipDB";
         public MemberTypeRepository() { }
 
-        // MEMBER_Type rarely changes, so descriptions are read once per run.
-        private static readonly Lazy<IDictionary<int, string>> TypeDescriptions =
-            new Lazy<IDictionary<int, string>>(LoadTypeDescriptions);
+        // MEMBER_Type rarely changes, so it is read once per run.
+        private static readonly Lazy<IDictionary<int, MemberType>> TypesById =
+            new Lazy<IDictionary<int, MemberType>>(LoadTypes);
 
-        private static IDictionary<int, string> LoadTypeDescriptions()
+        private static IDictionary<int, MemberType> LoadTypes()
         {
-            const string query = "SELECT TypeId, Description FROM MEMBER_Type";
+            const string query = "SELECT TypeId, Description, DuesAmount FROM MEMBER_Type";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                return connection.Query<MemberType>(query).ToDictionary(t => t.TypeId, t => t.Description);
+                return connection.Query<MemberType>(query).ToDictionary(t => t.TypeId);
             }
         }
 
@@ -31,7 +31,13 @@ namespace Membership.Core.Members.Repositories
         /// </summary>
         public static string GetDescription(int typeId)
         {
-            return TypeDescriptions.Value.TryGetValue(typeId, out var description) ? description : "Unknown";
+            return TypesById.Value.TryGetValue(typeId, out var type) ? type.Description : "Unknown";
+        }
+
+        /// <summary>Annual dues for a member type, or 0 if the type isn't on file.</summary>
+        public static float GetDuesAmount(int typeId)
+        {
+            return TypesById.Value.TryGetValue(typeId, out var type) ? type.DuesAmount : 0;
         }
 
         public MemberType Get(int typeId)

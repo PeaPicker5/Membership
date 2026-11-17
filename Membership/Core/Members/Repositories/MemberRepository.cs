@@ -29,31 +29,40 @@ namespace Membership.Core.Members.Repositories
             }
         }
 
+        // Member rows look very wide to SQL Server (PageThumb is varbinary(max)), so sorting or
+        // hash-joining them in SQL asks for a large memory grant. On a low-memory server that
+        // request can wait up to 25 seconds (RESOURCE_SEMAPHORE). These queries therefore read
+        // MEMBER_List plainly and sort / look up member types in C#.
+
+        private static List<Member> SortByName(IEnumerable<Member> members)
+        {
+            return members
+                .OrderBy(m => m.LastName, StringComparer.CurrentCultureIgnoreCase)
+                .ThenBy(m => m.FirstName, StringComparer.CurrentCultureIgnoreCase)
+                .ToList();
+        }
+
         public ICollection<Member> GetMembers()
         {
-            const string query = "SELECT ml.*, mt.Description as [Status], mt.DuesAmount " +
-                                 "FROM MEMBER_List ml " +
-                                 "INNER JOIN MEMBER_Type mt ON ml.MemberTypeId = mt.TypeId " +
-                                 "ORDER BY Lastname";
+            const string query = "SELECT * FROM MEMBER_List";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<Member>(query).ToList();
-                return retVal;
+                var members = connection.Query<Member>(query).ToList();
+                foreach (var m in members)
+                    m.DuesAmount = MemberTypeRepository.GetDuesAmount(m.MemberTypeId);
+                return SortByName(members);
             }
         }
 
         public IEnumerable<Member> GetMembersThatCanVote()
         {
             const string query = "SELECT * FROM MEMBER_List ml " +
-                                 "INNER JOIN VIEW_MembersAbleToVote v " +
-                                 "ON ml.MemberId = v.MemberId " +
-                                 "WHERE v.RecCount >= @MeetingsNeeded " +
-                                 "ORDER BY ml.Lastname, ml.FirstName";
+                                 "WHERE ml.MemberId IN (SELECT v.MemberId FROM VIEW_MembersAbleToVote v " +
+                                 "WHERE v.RecCount >= @MeetingsNeeded)";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<Member>(query,
-                    new { MeetingsNeeded = Helper.MeetingsNeededToVote }).ToList();
-                return retVal;
+                return SortByName(connection.Query<Member>(query,
+                    new { MeetingsNeeded = Helper.MeetingsNeededToVote }));
             }
         }
 
