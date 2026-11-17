@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Threading;
 using Membership.Core.Reports;
 using Membership.UI_Controls.Dues;
 using Membership.UI_Controls.LOSAP;
@@ -25,26 +26,46 @@ namespace Membership
         // The ribbon button whose screen was shown last, and when that screen finished loading.
         private object _lastScreenButton;
         private DateTime _lastScreenLoadedAt = DateTime.MinValue;
+        private bool _isLoadingScreen;
 
         /// <summary>
         /// Replaces the main content with the screen <paramref name="createScreen"/> builds.
-        /// A double-click raises Click twice, and the second click is processed right after the
-        /// first finishes loading; it is ignored if it comes from the same button within the
-        /// system double-click time. A later single click still reloads the screen.
+        /// A double-click raises Click twice. The second click is ignored when:
+        ///  - it is processed while a screen is still loading. "Loading" lasts until the window is
+        ///    idle, because report screens build their report in their Loaded event (after this
+        ///    method returns) and process pending window messages while doing it; or
+        ///  - it comes from the same button within the system double-click time after loading.
+        /// A later single click still reloads the screen.
         /// </summary>
         private void ShowScreen(object button, Func<UIElement> createScreen)
         {
+            if (_isLoadingScreen) return;
+
             var sinceLastLoad = DateTime.Now - _lastScreenLoadedAt;
             if (ReferenceEquals(button, _lastScreenButton)
                 && sinceLastLoad.TotalMilliseconds < System.Windows.Forms.SystemInformation.DoubleClickTime)
                 return;
 
-            var screen = createScreen();
-            MainStack.Children.Clear();
-            MainStack.Children.Add(screen);
+            _isLoadingScreen = true;
+            try
+            {
+                var screen = createScreen();
+                MainStack.Children.Clear();
+                MainStack.Children.Add(screen);
+                _lastScreenButton = button;
+            }
+            catch
+            {
+                _isLoadingScreen = false;
+                throw;
+            }
 
-            _lastScreenButton = button;
-            _lastScreenLoadedAt = DateTime.Now;
+            // Finished once Loaded handlers and rendering have run and the window goes idle.
+            Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() =>
+            {
+                _isLoadingScreen = false;
+                _lastScreenLoadedAt = DateTime.Now;
+            }));
         }
 
         #endregion
