@@ -22,6 +22,10 @@
                                                   x:Key="BoolToVisibilityConverter" />
             <converters:NullToVisibilityConverter NotNullValue="Visible" NullValue="Collapsed"
                                                   x:Key="NullToVisibilityConverter" />
+            <!-- Sponsor lists hold every member; only create the rows that are visible. -->
+            <ItemsPanelTemplate x:Key="VirtualizingItemsPanel">
+                <VirtualizingStackPanel VirtualizationMode="Recycling" />
+            </ItemsPanelTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -171,14 +175,17 @@
                 </StackPanel>
                 <Label Content="Sponsors:" Style="{StaticResource InputLabel}" Margin="0,5,0,0"  />
                 <ComboBox x:Name="Sponsor1"   Margin="0" MinWidth="100" FontSize="16"
+                          ItemsPanel="{StaticResource VirtualizingItemsPanel}"
                           ItemsSource="{Binding Path=SponsorLookups, Mode=OneWay}"
                           SelectedValuePath="Item1" DisplayMemberPath="Item2"
                           SelectedValue="{Binding Path=MemberRec.SponsorId1}"/>
                 <ComboBox x:Name="Sponsor2"  Margin="0" MinWidth="100" FontSize="16"
+                          ItemsPanel="{StaticResource VirtualizingItemsPanel}"
                           ItemsSource="{Binding Path=SponsorLookups, Mode=OneWay}"
                           SelectedValuePath="Item1" DisplayMemberPath="Item2"
                           SelectedValue="{Binding Path=MemberRec.SponsorId2}"/>
                 <ComboBox x:Name="Sponsor3"  Margin="0,0,0,5" MinWidth="100" FontSize="16"
+                          ItemsPanel="{StaticResource VirtualizingItemsPanel}"
                           ItemsSource="{Binding Path=SponsorLookups, Mode=OneWay}"
                           SelectedValuePath="Item1" DisplayMemberPath="Item2"
                           SelectedValue="{Binding Path=MemberRec.SponsorId3}"/>

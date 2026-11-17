@@ -29,6 +29,11 @@ namespace Membership.Core.Members.Repositories
         IEnumerable<Members.DataModels.Member> GetMembersWithOffice(int year, int officeType);
 
         IEnumerable<Members.DataModels.Member> GetCurrentMembers();
+
+        /// <summary>
+        /// Member id and "First Last" name for every member, ordered by last name, for sponsor lists.
+        /// </summary>
+        IList<Tuple<Guid, string>> GetSponsorLookups();
         IEnumerable<Members.DataModels.Member> GetMembersThatCanVote();
         void InsertMemberRecord(Members.DataModels.Member memberRec);
         void UpdateMemberRecord(Members.DataModels.Member memberRec);

@@ -72,6 +72,19 @@ namespace Membership.Core.Members.Repositories
                 return connection.Query<Member>(query, new { Year = year }).ToList();
             }
         }
+        public IList<Tuple<Guid, string>> GetSponsorLookups()
+        {
+            // Only the two columns the dropdown needs, instead of every column of every member.
+            const string query = "SELECT MemberId, FirstName, LastName " +
+                                 "FROM MEMBER_List ORDER BY LastName, FirstName";
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                return connection.Query<Member>(query)
+                    .Select(m => new Tuple<Guid, string>(m.MemberId, m.FullName))
+                    .ToList();
+            }
+        }
+
         public IEnumerable<Member> GetCurrentMembers()
         {
             var members = GetMembers();

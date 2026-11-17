@@ -39,7 +39,7 @@ namespace Membership.Core.Members.Presenters
                 _view.MemberTypeLookups.Add(new Tuple<int, string>(stat.TypeId, $"{stat.Description,-15}\t(Dues ${stat.DuesAmount,3}.00)"));
             }
 
-            _view.SponsorLookups = _memberRepository.GetMembers().Select(mem => new Tuple<Guid, string>(mem.MemberId, mem.FullName)).ToList();
+            _view.SponsorLookups = _memberRepository.GetSponsorLookups();
             
             _view.RemovalCodes = _memberTypeRepository.GetRemovalCodes().ToList();
         }
