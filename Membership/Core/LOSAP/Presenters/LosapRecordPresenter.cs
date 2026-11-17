@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Membership.Core.LOSAP.DataModels;
 using Membership.Core.LOSAP.Repositories;
-using Membership.Core.Members.DataModels;
 using Membership.Core.Members.Repositories;
 
 namespace Membership.Core.LOSAP.Presenters
 {
-    public class LosapRecordPresenter : ILosapRecordView
+    /// <summary>
+    /// LOSAP credit entry: shows who is credited for a chosen year and saves changes.
+    /// </summary>
+    public class LosapRecordPresenter
     {
-        public ICollection<LosapRecord> LosapRecs { get; set; }
-        public ICollection<Member> MemberRecs { get; set; }
+        private const int ActiveMemberType = 1;
+        private const int YearsBackToOffer = 10;
+
         private readonly ILosapRepository _losapRepository;
         private readonly IMemberRepository _memberRepository;
         private readonly ILosapRecordView _view;
@@ -23,43 +26,37 @@ namespace Membership.Core.LOSAP.Presenters
             _view = view;
         }
 
+        /// <summary>The year credit is normally entered for: last calendar year.</summary>
+        public static int DefaultYear => DateTime.Today.Year - 1;
 
-        public IEnumerable<int> LoadYearsOnFile()
+        /// <summary>
+        /// Years to offer: this year back <see cref="YearsBackToOffer"/> years,
+        /// plus any older year already on file, newest first.
+        /// </summary>
+        public IList<int> GetSelectableYears()
         {
-            return _losapRepository.GetYearsOnFile();
+            var thisYear = DateTime.Today.Year;
+            return Enumerable.Range(thisYear - YearsBackToOffer, YearsBackToOffer + 1)
+                .Union(_losapRepository.GetYearsOnFile())
+                .OrderByDescending(y => y)
+                .ToList();
         }
 
-        public IEnumerable<LosapRecord> GetByYear(int year)
+        /// <summary>
+        /// Loads current Active members, plus anyone already credited for <paramref name="year"/>
+        /// (so a credit can still be removed after a member's status changes).
+        /// </summary>
+        public void LoadYear(int year)
         {
-            return _losapRepository.GetLosapByYear(year);
-        }
+            var yearCounts = _losapRepository.GetCreditedYearCounts();
+            var creditedThisYear = _losapRepository.GetCreditedMemberIds(year);
 
-        public void InsertLosapRecords()
-        {
-            var recordsToUpdate = _view.LosapRecs.Where(rec => rec.HasCredit && rec.Year == 0).ToList();
-            
-            foreach (var r in recordsToUpdate)
-            {
-                r.Year = DateTime.Today.Year;
-            }
-
-            _losapRepository.InsertLosapCredits(recordsToUpdate);
-        }
-
-        public void GetCurrentMembers()
-        {
-            var countByMember = _losapRepository.GetLosapForActiveMembers()
-                .GroupBy(r => r.MemberId)
-                .ToDictionary(g => g.Key, g => g.Count());
-
-            _view.LosapRecs = _memberRepository.GetCurrentMembers()
-                .Where(m => m.MemberTypeId == 1)
-                .Select(m =>
+            _view.LosapRecs = _memberRepository.GetMembers()
+                .Where(m => (m.IsCurrent && m.MemberTypeId == ActiveMemberType)
+                            || creditedThisYear.Contains(m.MemberId))
+                .Select(m => new LosapRecord(m, year, creditedThisYear.Contains(m.MemberId))
                 {
-                    var rec = new LosapRecord(m, 0, false);
-                    if (countByMember.TryGetValue(m.MemberId, out var count))
-                        rec.LosapYears = count;
-                    return rec;
+                    LosapYears = yearCounts.TryGetValue(m.MemberId, out var count) ? count : 0
                 })
                 .OrderByDescending(r => r.CombinedTotalYears)
                 .ThenBy(r => r.MemberRec.LastName)
@@ -67,5 +64,15 @@ namespace Membership.Core.LOSAP.Presenters
                 .ToList();
         }
 
+        /// <summary>Saves every row whose checkbox differs from the database.</summary>
+        public void SaveChanges(int year)
+        {
+            var changed = _view.LosapRecs.Where(r => r.IsChanged).ToList();
+            if (!changed.Any()) return;
+
+            _losapRepository.SaveCredits(year,
+                changed.Where(r => r.HasCredit).Select(r => r.MemberId),
+                changed.Where(r => !r.HasCredit).Select(r => r.MemberId));
+        }
     }
 }

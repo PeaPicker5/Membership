@@ -1,28 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using Membership.Core.LOSAP.DataModels;
-using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.LOSAP.Repositories
 {
+    /// <summary>
+    /// LOSAP_History access. A year counts toward LOSAP only when its row has LosapCredit = 1.
+    /// </summary>
     public interface ILosapRepository
     {
+        /// <summary>Credited years per member (members with none are absent).</summary>
+        IDictionary<Guid, int> GetCreditedYearCounts();
 
-        ///// <summary>
-        ///// Gets all Losap records for a given year.
-        ///// </summary>
-        ///// <param name="year"></param>
-        ///// <returns></returns>
-        IEnumerable<LosapRecord> GetLosapByYear(int year);
+        /// <summary>Members credited for the given year.</summary>
+        ISet<Guid> GetCreditedMemberIds(int year);
 
-        ICollection<LosapRecord> GetLosapForActiveMembers();
-
+        /// <summary>Years that have any LOSAP_History rows, newest first.</summary>
         IEnumerable<int> GetYearsOnFile();
 
-        void InsertLosapCredits(IEnumerable<LosapRecord> losapPayments);
-        void DeleteLosapCredits(IEnumerable<LosapRecord> losapPayments);
-
-        //List<DuesHistory> MapFromData(IEnumerable<DuesRecord> duesRecords);
-
+        /// <summary>
+        /// Credits <paramref name="membersToCredit"/> and un-credits <paramref name="membersToUncredit"/>
+        /// for <paramref name="year"/>, all-or-nothing.
+        /// </summary>
+        void SaveCredits(int year, IEnumerable<Guid> membersToCredit, IEnumerable<Guid> membersToUncredit);
     }
 }

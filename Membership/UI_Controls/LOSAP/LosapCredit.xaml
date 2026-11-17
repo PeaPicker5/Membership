@@ -32,11 +32,15 @@
                     <StackPanel DockPanel.Dock="Left" Height="32" Orientation="Horizontal" >
                         <Label Content="LOSAP CREDIT ENTRY:   " FontWeight="Bold" FontSize="16"/>
                         <Label Content="    YEAR:" FontWeight="Bold"     FontSize="16"/>
-                        <Label Content="{Binding Path=LastYearDate}" FontWeight="Bold"  FontSize="16"/>
-                        <Label Content="    SHOWING ACTIVE MEMBERS ONLY" FontWeight="Bold" FontSize="18" />
+                        <ComboBox x:Name="YearCombo" Width="90" FontSize="16" FontWeight="Bold"
+                                  ItemsSource="{Binding Path=SelectableYears, Mode=OneWay}"
+                                  SelectionChanged="YearCombo_OnSelectionChanged"
+                                  ToolTip="Year the LOSAP credit is for (normally last year)." />
+                        <Label Content="    ACTIVE MEMBERS  -  DOUBLE-CLICK A ROW TO CREDIT OR UN-CREDIT"
+                               FontWeight="Bold" FontSize="16" />
                     </StackPanel>
-                    <Button ToolTip="Record the LOSAP credit for the year."  DockPanel.Dock="Right" Width="100"
-                            Click="RecordLosapButtonOnClick" IsEnabled="{Binding Path=RunningCount}"
+                    <Button ToolTip="Save the credit changes for the selected year."  DockPanel.Dock="Right" Width="100"
+                            Click="RecordLosapButtonOnClick" IsEnabled="{Binding Path=HasPendingChanges}"
                             Margin="10,0" Height="32">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Membership;component/Common/Resources/Add.png" Width="24" Margin="-3"/>
@@ -54,9 +58,13 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Row="0" Grid.Column="0">
-                    <Label Content="LOSAP ASSIGNED:" Style="{StaticResource LabelStyle}" Margin="0,30,0,0"
+                    <Label Content="LOSAP CREDITED:" Style="{StaticResource LabelStyle}" Margin="0,30,0,0"
                            HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Path=RunningCount, StringFormat=Records: {0:d}}"
+                    <TextBlock Text="{Binding Path=CreditedCount, StringFormat=Members: {0:d}}"
+                               Style="{StaticResource HeaderTextBlockStyle}"/>
+                    <Label Content="UNSAVED CHANGES:" Style="{StaticResource LabelStyle}" Margin="0,20,0,0"
+                           HorizontalContentAlignment="Center" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Path=PendingCount, StringFormat=Rows: {0:d}}"
                                Style="{StaticResource HeaderTextBlockStyle}"/>
                 </StackPanel>
 
@@ -64,11 +72,22 @@
                           Style="{StaticResource DataGridStyle}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}" 
                           CanUserAddRows="False" AutoGenerateColumns="false" IsReadOnly="True"
                           ItemsSource="{Binding Path=LosapRecs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          SelectionUnit="FullRow" SelectedValuePath="IsPaid"
+                          SelectionUnit="FullRow"
                           MouseDoubleClick="AssignmentGrid_MouseDoubleClick" >
 
+                    <!-- Highlight rows that will change when APPLY is pressed. -->
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsChanged}" Value="True">
+                                    <Setter Property="Background" Value="LightYellow" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn MinWidth="40" Header="MADE LOSAP" Binding="{Binding Path=NumOfSelectedRecords}">
+                        <DataGridCheckBoxColumn MinWidth="40" Header="MADE LOSAP" Binding="{Binding Path=HasCredit, Mode=OneWay}">
                             <DataGridCheckBoxColumn.ElementStyle>
                                 <Style TargetType="CheckBox" BasedOn="{StaticResource CheckBoxStyle}">
                                     <Setter Property="HorizontalAlignment" Value="Center" />

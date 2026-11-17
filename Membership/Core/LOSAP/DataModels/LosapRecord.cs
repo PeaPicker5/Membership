@@ -5,21 +5,45 @@ using Membership.Annotations;
 
 namespace Membership.Core.LOSAP.DataModels;
 
-public class LosapRecord : INotifyPropertyChanged, IEquatable<LosapRecord>
+/// <summary>
+/// One member's LOSAP standing, optionally for a specific year.
+/// On the credit entry screen, <see cref="HasCredit"/> is whether the member is credited
+/// for <see cref="Year"/>; <see cref="OriginalHasCredit"/> is what the database holds,
+/// so the screen can tell which rows changed.
+/// </summary>
+public class LosapRecord : INotifyPropertyChanged
 {
     public LosapRecord() { }
-    public LosapRecord(Members.DataModels.Member memberRec, int year,  bool hasCredit)
+    public LosapRecord(Members.DataModels.Member memberRec, int year, bool hasCredit)
     {
         MemberRec = memberRec;
         Year = year;
-        HasCredit = hasCredit;
+        _hasCredit = hasCredit;
+        OriginalHasCredit = hasCredit;
     }
 
     public Members.DataModels.Member MemberRec { get; set; }
     public int Year { get; set; }
-    public bool HasCredit { get; set; }
+
+    private bool _hasCredit;
+    public bool HasCredit
+    {
+        get => _hasCredit;
+        set
+        {
+            if (value == _hasCredit) return;
+            _hasCredit = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsChanged));
+        }
+    }
+
+    /// <summary>Credit state as stored in LOSAP_History when the screen was loaded.</summary>
+    public bool OriginalHasCredit { get; private set; }
+    public bool IsChanged => HasCredit != OriginalHasCredit;
 
     private int _losapYears;
+    /// <summary>Number of years the member has been credited in LOSAP_History.</summary>
     public int LosapYears
     {
         get => _losapYears;
@@ -28,29 +52,13 @@ public class LosapRecord : INotifyPropertyChanged, IEquatable<LosapRecord>
             if (value == _losapYears) return;
             _losapYears = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(CombinedTotalYears));
         }
     }
 
     public int CombinedTotalYears => LosapYears + (int)MemberRec.TotalLegacyYears;
 
     public Guid MemberId => MemberRec.MemberId;
-
-    public bool Equals(LosapRecord other)
-    {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return MemberId == other.MemberId && Year == other.Year;
-    }
-
-    public override bool Equals(object obj) => Equals(obj as LosapRecord);
-
-    public override int GetHashCode()
-    {
-        unchecked
-        {
-            return (MemberId.GetHashCode() * 397) ^ Year.GetHashCode();
-        }
-    }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -59,5 +67,4 @@ public class LosapRecord : INotifyPropertyChanged, IEquatable<LosapRecord>
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
 }

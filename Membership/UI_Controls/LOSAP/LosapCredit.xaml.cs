@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -9,31 +8,20 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Membership.Core.LOSAP.DataModels;
 using Membership.Core.LOSAP.Presenters;
-using Membership.Core.Members.DataModels;
 using Membership.Properties;
-using CheckBox = System.Windows.Controls.CheckBox;
 
 namespace Membership.UI_Controls.LOSAP
 {
-
+    /// <summary>
+    /// LOSAP credit entry. Pick a year, double-click members to credit or un-credit them,
+    /// then APPLY to save. Rows with unsaved changes are highlighted.
+    /// </summary>
     public sealed partial class LosapCredit : ILosapRecordView, INotifyPropertyChanged
     {
-
         private readonly LosapRecordPresenter _presenter;
-        private bool _showActiveOnly;
+        private int _loadedYear;
 
         #region Dependency Properties
-
-        public int LastYearDate => DateTime.Today.Year - 1;
-
-        private ICollection<LosapRecord> AllLosapRecs
-        {
-            get { return (ICollection<LosapRecord>)GetValue(AllLosapRecsProperty); }
-            set { SetValue(AllLosapRecsProperty, value); }
-        }
-        public static readonly DependencyProperty AllLosapRecsProperty =
-            DependencyProperty.Register("AllLosapRecs", typeof(ICollection<LosapRecord>),
-                typeof(LosapCredit));
 
         public ICollection<LosapRecord> LosapRecs
         {
@@ -42,34 +30,42 @@ namespace Membership.UI_Controls.LOSAP
             {
                 SetValue(LosapRecsProperty, value);
                 OnPropertyChanged();
+                UpdateCounts();
             }
         }
-
-        public ICollection<Member> MemberRecs { get; set; }
-
         public static readonly DependencyProperty LosapRecsProperty =
             DependencyProperty.Register("LosapRecs", typeof(ICollection<LosapRecord>),
                 typeof(LosapCredit));
 
-        public int RunningCount
+        public IList<int> SelectableYears
         {
-            get => (int)GetValue(RunningCountProperty);
-            set { SetValue(RunningCountProperty, value); OnPropertyChanged();}
+            get => (IList<int>)GetValue(SelectableYearsProperty);
+            set => SetValue(SelectableYearsProperty, value);
         }
-        public static readonly DependencyProperty RunningCountProperty =
-            DependencyProperty.Register("RunningCount", typeof(int),
-                typeof(LosapCredit));
+        public static readonly DependencyProperty SelectableYearsProperty =
+            DependencyProperty.Register("SelectableYears", typeof(IList<int>), typeof(LosapCredit));
 
-
-        public LosapRecord SelectedLosapRecord
+        public int CreditedCount
         {
-            get { return (LosapRecord)GetValue(SelectedLosapRecordProperty); }
-            set { SetValue(SelectedLosapRecordProperty, value); OnPropertyChanged(); }
+            get => (int)GetValue(CreditedCountProperty);
+            set => SetValue(CreditedCountProperty, value);
         }
-        public static readonly DependencyProperty SelectedLosapRecordProperty =
-            DependencyProperty.Register("SelectedLosapRecord", typeof(LosapRecord),
-                typeof(LosapCredit));
+        public static readonly DependencyProperty CreditedCountProperty =
+            DependencyProperty.Register("CreditedCount", typeof(int), typeof(LosapCredit));
 
+        public int PendingCount
+        {
+            get => (int)GetValue(PendingCountProperty);
+            set
+            {
+                SetValue(PendingCountProperty, value);
+                OnPropertyChanged(nameof(HasPendingChanges));
+            }
+        }
+        public static readonly DependencyProperty PendingCountProperty =
+            DependencyProperty.Register("PendingCount", typeof(int), typeof(LosapCredit));
+
+        public bool HasPendingChanges => PendingCount > 0;
 
         #endregion
 
@@ -80,44 +76,51 @@ namespace Membership.UI_Controls.LOSAP
             _presenter = new LosapRecordPresenter(this);
         }
 
+        /// <summary>Called by MainWindow when the screen opens: fill the years and load last year.</summary>
         public void LoadMembers()
         {
-            _presenter.GetCurrentMembers();
-            AllLosapRecs = LosapRecs;
-            UpdateLosapRecsGrid();
+            SelectableYears = _presenter.GetSelectableYears();
+            YearCombo.SelectedItem = LosapRecordPresenter.DefaultYear;   // triggers LoadSelectedYear
+        }
+
+        private void YearCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!(YearCombo.SelectedItem is int year) || year == _loadedYear) return;
+
+            if (HasPendingChanges &&
+                MessageBox.Show($"You have {PendingCount} unsaved LOSAP change(s) for {_loadedYear}. Discard them?",
+                    "Unsaved Changes", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+            {
+                YearCombo.SelectedItem = _loadedYear;   // stay on the year being edited
+                return;
+            }
+
+            LoadSelectedYear(year);
+        }
+
+        private void LoadSelectedYear(int year)
+        {
+            _loadedYear = year;
+            _presenter.LoadYear(year);
         }
 
         private void RecordLosapButtonOnClick(object sender, RoutedEventArgs e)
         {
-            _presenter.InsertLosapRecords();
-            LoadMembers();
-            UpdateLosapRecsGrid();
+            _presenter.SaveChanges(_loadedYear);
+            LoadSelectedYear(_loadedYear);   // reload so totals reflect what was saved
         }
 
         private void AssignmentGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var gridRow = (DataGrid) sender;
-            var selectedRow = gridRow?.SelectedItem; 
-            if (selectedRow == null) return;
-            if (((LosapRecord) selectedRow).Year > 0) return;
-
-            var selectedMemberId = ((LosapRecord)selectedRow).MemberRec.MemberId;
-            ToggleSelectionRecord(selectedMemberId);
-        }
-
-        private void ToggleSelectionRecord(Guid selectedMemberId)
-        {
-            var losapRec = LosapRecs.FirstOrDefault(r => r.MemberRec.MemberId == selectedMemberId);
-            if (losapRec == null) return;
+            if (!(((DataGrid)sender).SelectedItem is LosapRecord losapRec)) return;
             losapRec.HasCredit = !losapRec.HasCredit;
-            UpdateLosapRecsGrid();
+            UpdateCounts();
         }
-        private void UpdateLosapRecsGrid()
+
+        private void UpdateCounts()
         {
-            RunningCount = LosapRecs.Count(c => c.HasCredit && c.Year == 0);
-            LosapRecs = _showActiveOnly
-                ? AllLosapRecs.Where(y => y.Year == 0).ToList()
-                : AllLosapRecs.ToList();
+            CreditedCount = LosapRecs?.Count(r => r.HasCredit) ?? 0;
+            PendingCount = LosapRecs?.Count(r => r.IsChanged) ?? 0;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -126,6 +129,5 @@ namespace Membership.UI_Controls.LOSAP
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

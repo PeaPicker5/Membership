@@ -34,11 +34,7 @@ namespace Membership.UI_Controls.LOSAP
         {
             LosapRecs = new ObservableCollection<LosapRecord>();
             InitializeComponent();
-            _presenter = new LosapListingPresenter(this);
-            Loaded += (sender, args) =>
-            {
-                LoadMembers();
-            };
+            _presenter = new LosapListingPresenter(this);   // MainWindow calls LoadMembers()
         }
 
         public void LoadMembers()
