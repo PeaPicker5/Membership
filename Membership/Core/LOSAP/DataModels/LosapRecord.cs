@@ -56,7 +56,8 @@ public class LosapRecord : INotifyPropertyChanged
         }
     }
 
-    public int CombinedTotalYears => LosapYears + (int)MemberRec.TotalLegacyYears;
+    /// <summary>Credited years plus legacy years; legacy years can be fractional (e.g. 9.5).</summary>
+    public float CombinedTotalYears => LosapYears + MemberRec.LegacyLosapYears;
 
     public Guid MemberId => MemberRec.MemberId;
 
