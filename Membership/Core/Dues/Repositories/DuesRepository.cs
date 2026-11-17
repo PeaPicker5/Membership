@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 using Membership.Core.Dues.DataModels;
 using Membership.Core.Members.DataModels;
@@ -95,16 +94,27 @@ namespace Membership.Core.Dues.Repositories
 
         public void InsertDuesPayments(IEnumerable<DuesRecord> duesPayments)
         {
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
-            {
-                var isSuccess = connection.Insert(MapFromData(duesPayments));
-            }
+            const string query = "INSERT INTO DUES_History (MemberID, Year, Month, Amount) " +
+                                 "VALUES (@MemberId, @Year, @Month, @Amount)";
+            ExecuteForEach(query, MapFromData(duesPayments));
         }
         public void DeleteDuesPayments(IEnumerable<DuesRecord> duesPayments)
         {
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            const string query = "DELETE FROM DUES_History WHERE MemberID = @MemberId AND Year = @Year";
+            ExecuteForEach(query, MapFromData(duesPayments));
+        }
+
+        // Runs the statement once per record, all-or-nothing.
+        private static void ExecuteForEach(string query, IEnumerable<DuesHistory> records)
+        {
+            using (var connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var isSuccess = connection.Delete(MapFromData(duesPayments));
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    connection.Execute(query, records, transaction);
+                    transaction.Commit();
+                }
             }
         }
 

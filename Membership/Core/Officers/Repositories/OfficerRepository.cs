@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using Dapper.Contrib.Extensions;
 using Membership.Core.Dues.DataModels;
 using Membership.Core.Officers.DataModels;
 
@@ -132,14 +131,22 @@ namespace Membership.Core.Officers.Repositories
 
         public void InsertOfficerRecord(Officer officerRec)
         {
+            const string query = "INSERT INTO OFFICE_Assignments (MemberId, OfficeId, Year, FromDate, ToDate) " +
+                                 "VALUES (@MemberId, @OfficeId, @Year, @FromDate, @ToDate)";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Insert(officerRec);
+                connection.Execute(query, new
+                {
+                    officerRec.MemberId,
+                    officerRec.OfficeId,
+                    officerRec.Year,
+                    officerRec.FromDate,
+                    officerRec.ToDate
+                });
             }
         }
         // OFFICE_Assignments has no primary key; a single assignment is identified by
-        // member, office, year and start date. Dapper.Contrib's Update/Delete would only
-        // match on MemberId + OfficeId and hit every year the member held that office.
+        // member, office, year and start date (the primary key).
         private const string AssignmentKeyClause =
             "WHERE MemberId = @OrigMemberId AND OfficeId = @OrigOfficeId " +
             "AND Year = @OrigYear AND FromDate = @OrigFromDate";

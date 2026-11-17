@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 using Membership.Core.Meetings.DataModels;
 using Membership.Core.Members.DataModels;
@@ -98,31 +97,57 @@ namespace Membership.Core.Meetings.Repositories
             return attendeeList.Where(x => x.CheckStatus == SelectableMember.enumCheckStatus.Original).ToList();
         }
 
+        private const string InsertMeetingSql =
+            "INSERT INTO MEETING_List (MeetingID, MeetingDate, Description, Comments, InCharge, IsRegularScheduled) " +
+            "VALUES (@MeetingId, @MeetingDate, @Description, @Comments, @InCharge, @IsRegularScheduled)";
+        private const string UpdateMeetingSql =
+            "UPDATE MEETING_List SET MeetingDate = @MeetingDate, Description = @Description, " +
+            "Comments = @Comments, InCharge = @InCharge, IsRegularScheduled = @IsRegularScheduled " +
+            "WHERE MeetingID = @MeetingId";
+        private const string InsertAttendeeSql =
+            "INSERT INTO MEETING_Members (MeetingID, MemberID) VALUES (@MeetingId, @MemberId)";
+        private const string DeleteAttendeeSql =
+            "DELETE FROM MEETING_Members WHERE MeetingID = @MeetingId AND MemberID = @MemberId";
+
         public void InsertMeeting(Meeting meetingRec, IEnumerable<SelectableItem>Attendees)
         {
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            var attendeeRecs = Attendees
+                .Select(member => new MeetingMember(meetingRec.MeetingId, member.ItemId))
+                .ToList();
+
+            using (var connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Insert(meetingRec);
-                foreach (var member in Attendees)
-                    connection.Insert(new MeetingMember(meetingRec.MeetingId, member.ItemId));
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    connection.Execute(InsertMeetingSql, meetingRec, transaction);
+                    connection.Execute(InsertAttendeeSql, attendeeRecs, transaction);
+                    transaction.Commit();
+                }
             }
         }
         public void UpdateMeeting(Meeting meetingRec, IEnumerable<SelectableItem>Attendees)
         {
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            var attendeeList = Attendees.ToList();
+            var added = attendeeList
+                .Where(x => x.CheckStatus == SelectableMember.enumCheckStatus.Added)
+                .Select(x => new MeetingMember(meetingRec.MeetingId, x.ItemId)).ToList();
+            var removed = attendeeList
+                .Where(x => x.CheckStatus == SelectableMember.enumCheckStatus.Removed)
+                .Select(x => new MeetingMember(meetingRec.MeetingId, x.ItemId)).ToList();
+
+            using (var connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Update(meetingRec);
-                var attendeeList = Attendees.ToList();
-                foreach (var member in attendeeList.Where(x => x.CheckStatus != SelectableMember.enumCheckStatus.Original))
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
                 {
-                    var meetingMemberRec = new MeetingMember(meetingRec.MeetingId, member.ItemId);
-                    if (member.CheckStatus == SelectableMember.enumCheckStatus.Added)
-                        connection.Insert(meetingMemberRec);
-                    else if (member.CheckStatus == SelectableMember.enumCheckStatus.Removed)
-                        connection.Delete(meetingMemberRec);
+                    connection.Execute(UpdateMeetingSql, meetingRec, transaction);
+                    connection.Execute(InsertAttendeeSql, added, transaction);
+                    connection.Execute(DeleteAttendeeSql, removed, transaction);
+                    transaction.Commit();
                 }
-                Attendees = ResetAttendeeCheckStatus(attendeeList);
             }
+            ResetAttendeeCheckStatus(attendeeList);
         }
         public void DeleteMeeting(Meeting meetingRec)
         {

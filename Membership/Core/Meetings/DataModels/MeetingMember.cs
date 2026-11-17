@@ -1,9 +1,7 @@
 ﻿using System;
-using Dapper.Contrib.Extensions;
 
 namespace Membership.Core.Meetings.DataModels;
 
-[Table("MEETING_Members")]
 public class MeetingMember
 {
     public MeetingMember() { }
@@ -13,7 +11,7 @@ public class MeetingMember
         MemberId = memberId;
     }
 
-    [ExplicitKey] public Guid MeetingId { get; set; }
-    [ExplicitKey] public Guid MemberId { get; set; }
+    public Guid MeetingId { get; set; }
+    public Guid MemberId { get; set; }
 
 }

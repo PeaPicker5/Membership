@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 
 namespace Membership.Core.Repositories
@@ -25,10 +24,11 @@ namespace Membership.Core.Repositories
 
         public bool InsertImageRecord(ImageRec imageRecord)
         {
+            const string query = "INSERT INTO SYS_FileStore (ImageId, Description, ImageData) " +
+                                 "VALUES (@ImageId, @Description, @ImageData)";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var isSuccess = connection.Insert(imageRecord);
-                return isSuccess > 0;
+                return connection.Execute(query, imageRecord) > 0;
             }
         }
         public bool UpdateImageRecord(Guid imageId, byte[]imageData)
@@ -42,9 +42,10 @@ namespace Membership.Core.Repositories
         }
         public bool DeleteImageRecord(Guid imageId)
         {
+            const string query = "DELETE FROM SYS_FileStore WHERE ImageId = @ImageId";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                return connection.Delete(new ImageRec { ImageId = imageId });
+                return connection.Execute(query, new { ImageId = imageId }) > 0;
             }
 
         }

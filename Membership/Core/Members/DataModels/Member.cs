@@ -1,10 +1,8 @@
 ﻿using System;
-using Dapper.Contrib.Extensions;
 using Membership.Core.Members.Repositories;
 
 namespace Membership.Core.Members.DataModels;
 
-[Table("MEMBER_List")]
 public class Member
 {
     public Member() { }
@@ -47,28 +45,27 @@ public class Member
     }
 
     // Description comes from the MEMBER_Type table so new or renamed types show correctly.
-    [Computed] public string Status => MemberTypeRepository.GetDescription(MemberTypeId);
-    [Computed] public float DuesAmount { get; set; }
+    public string Status => MemberTypeRepository.GetDescription(MemberTypeId);
+    public float DuesAmount { get; set; }
 
 
-    [Computed] public bool WasRemoved => MemberTypeId == RemovedStatus;
+    public bool WasRemoved => MemberTypeId == RemovedStatus;
 
-    [Computed]
     public bool IsCurrent
     {
         get => (MemberTypeId >= 1 && MemberTypeId <= 3) && DateDeceased is null;
         set { }
     }
 
-    [Computed] public bool IsDeceased => DateDeceased.HasValue;
-    [Computed] public string FullName => $"{FirstName} {LastName}";
-    [Computed] public string LFName => string.IsNullOrEmpty(Suffix) 
+    public bool IsDeceased => DateDeceased.HasValue;
+    public string FullName => $"{FirstName} {LastName}";
+    public string LFName => string.IsNullOrEmpty(Suffix) 
         ? $"{LastName}, {FirstName}" 
         : $"{LastName} {Suffix}, {FirstName}";
-    [Computed] public string CityStateZip => $"{City}, {State}  {ZIP}";
+    public string CityStateZip => $"{City}, {State}  {ZIP}";
 
 
-    [ExplicitKey] public Guid MemberId { get; set; }
+    public Guid MemberId { get; set; }
     public int MemberTypeId { get; set; }
     public bool IsActive { get; set; }
     public int FireFighterNum { get; set; }
@@ -96,6 +93,6 @@ public class Member
     public byte[] PageThumb { get; set; }
     public float LegacyLosapYears { get; set; }
 
-    [Computed] public int LosapYears { get; set; }
-    [Computed] public float TotalLegacyYears => LegacyLosapYears + LosapYears;
+    public int LosapYears { get; set; }
+    public float TotalLegacyYears => LegacyLosapYears + LosapYears;
 }

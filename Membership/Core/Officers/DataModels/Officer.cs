@@ -1,10 +1,8 @@
 ﻿using System;
-using Dapper.Contrib.Extensions;
 using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.Officers.DataModels;
 
-[Table("OFFICE_Assignments")]
 public class Officer
 {
     public Officer() {}
@@ -18,21 +16,21 @@ public class Officer
         ToDate = toDate;
     }
 
-    [Computed] public Member MemberRec { get; set; }
-    [Computed] public Office OfficeRec { get; set; }
+    public Member MemberRec { get; set; }
+    public Office OfficeRec { get; set; }
     public int Year { get; set; }
     public DateTime FromDate { get; set; }
     public DateTime ToDate { get; set; }
 
-    [ExplicitKey] public Guid MemberId => MemberRec.MemberId;
-    [ExplicitKey] public int OfficeId => OfficeRec.OfficeId;
+    public Guid MemberId => MemberRec.MemberId;
+    public int OfficeId => OfficeRec.OfficeId;
 
 
 
-    [Computed] public int FromMonth => FromDate.Month;
-    [Computed] public int ToMonth => ToDate.Month;
+    public int FromMonth => FromDate.Month;
+    public int ToMonth => ToDate.Month;
 
-    [Computed] public string PartialYear
+    public string PartialYear
     {
         get
         {

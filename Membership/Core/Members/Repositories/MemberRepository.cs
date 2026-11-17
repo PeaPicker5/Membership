@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using Dapper.Contrib.Extensions;
 using Membership.Core.DataModels;
 using Membership.Core.Dues.DataModels;
 using Membership.Core.Members.DataModels;
@@ -93,16 +92,35 @@ namespace Membership.Core.Members.Repositories
 
         public void InsertMemberRecord(Member memberRec)
         {
+            const string query =
+                "INSERT INTO MEMBER_List (MemberID, MemberTypeID, IsActive, FireFighterNum, Lastname, Firstname, " +
+                "MI, Suffix, Comment, EMailAddress, SponsorID1, SponsorID2, SponsorID3, Address1, Address2, " +
+                "City, State, ZIP, Phone, DateObligated, DateRemoved, RemovalReasonId, DateOfBirth, DateDeceased, " +
+                "PageId, PageThumb, LegacyLosapYears) " +
+                "VALUES (@MemberId, @MemberTypeId, @IsActive, @FireFighterNum, @LastName, @FirstName, " +
+                "@MI, @Suffix, @Comment, @EmailAddress, @SponsorId1, @SponsorId2, @SponsorId3, @Address1, @Address2, " +
+                "@City, @State, @ZIP, @Phone, @DateObligated, @DateRemoved, @RemovalReasonId, @DateOfBirth, @DateDeceased, " +
+                "@PageId, @PageThumb, @LegacyLosapYears)";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Insert(memberRec);
+                connection.Execute(query, memberRec);
             }
         }
         public void UpdateMemberRecord(Member memberRec)
         {
+            const string query =
+                "UPDATE MEMBER_List SET MemberTypeID = @MemberTypeId, IsActive = @IsActive, " +
+                "FireFighterNum = @FireFighterNum, Lastname = @LastName, Firstname = @FirstName, MI = @MI, " +
+                "Suffix = @Suffix, Comment = @Comment, EMailAddress = @EmailAddress, SponsorID1 = @SponsorId1, " +
+                "SponsorID2 = @SponsorId2, SponsorID3 = @SponsorId3, Address1 = @Address1, Address2 = @Address2, " +
+                "City = @City, State = @State, ZIP = @ZIP, Phone = @Phone, DateObligated = @DateObligated, " +
+                "DateRemoved = @DateRemoved, RemovalReasonId = @RemovalReasonId, DateOfBirth = @DateOfBirth, " +
+                "DateDeceased = @DateDeceased, PageId = @PageId, PageThumb = @PageThumb, " +
+                "LegacyLosapYears = @LegacyLosapYears " +
+                "WHERE MemberID = @MemberId";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Update(memberRec);
+                connection.Execute(query, memberRec);
             }
         }
 

@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Dapper.Contrib.Extensions;
 using Membership.Properties;
 
 namespace Membership.Core.Members.DataModels;
 
-[Table("MEMBER_List")]
 public class SelectableMember : Member, INotifyPropertyChanged
 {
     public SelectableMember() { }
@@ -23,7 +21,7 @@ public class SelectableMember : Member, INotifyPropertyChanged
         IsSelected = isSelected;
     }
 
-    [Computed] public bool IsSelected
+    public bool IsSelected
     {
         get => _isSelected;
         set
@@ -33,7 +31,7 @@ public class SelectableMember : Member, INotifyPropertyChanged
         }
     }
 
-    [Computed] public enumCheckStatus CheckStatus { get; set; }
+    public enumCheckStatus CheckStatus { get; set; }
 
     public event PropertyChangedEventHandler PropertyChanged;
 

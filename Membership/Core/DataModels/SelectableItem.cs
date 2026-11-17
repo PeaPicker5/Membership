@@ -1,5 +1,4 @@
 ﻿using System;
-using Dapper.Contrib.Extensions;
 using Membership.Core.Members.DataModels;
 
 namespace Membership.Core.DataModels;
@@ -20,7 +19,7 @@ public class SelectableItem : IEquatable<SelectableItem>
     public string Name { get; set; }
     public bool IsSelected { get; set; }
 
-    [Computed] public SelectableMember.enumCheckStatus CheckStatus { get; set; }
+    public SelectableMember.enumCheckStatus CheckStatus { get; set; }
 
 
     #region IEquatable Implementation

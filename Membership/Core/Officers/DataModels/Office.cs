@@ -1,8 +1,6 @@
-﻿using Dapper.Contrib.Extensions;
-
+﻿
 namespace Membership.Core.Officers.DataModels;
 
-[Table("OFFICE_List")]
 public class Office
 {
     public Office() { }
@@ -16,7 +14,7 @@ public class Office
         CurrentlyUsed = CurrentlyUsed;
     }
 
-    [ExplicitKey] public int OfficeId { get; set; }
+    public int OfficeId { get; set; }
     public string Title { get; set; }
     public int GroupId { get; set; }
     public int GroupOrder { get; set; }
