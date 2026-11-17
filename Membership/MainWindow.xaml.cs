@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows;
 using Membership.Core.Reports;
 using Membership.UI_Controls.Dues;
@@ -19,12 +20,23 @@ namespace Membership
             Title = $"Association Membership - ver {Assembly.GetExecutingAssembly().GetName().Version}";
         }
 
+        // When the Membership List last finished loading. Used to ignore the second click of a double-click.
+        private DateTime _membershipListLoadedAt = DateTime.MinValue;
+
         private void MembershipButton_Click(object sender, RoutedEventArgs e)
         {
+            // A double-click raises Click twice. The second click is processed right after the first
+            // finishes loading, so ignore it if it arrives within the system double-click time.
+            var sinceLastLoad = DateTime.Now - _membershipListLoadedAt;
+            if (sinceLastLoad.TotalMilliseconds < System.Windows.Forms.SystemInformation.DoubleClickTime
+                && MainStack.Children.Count == 1 && MainStack.Children[0] is MemberSelection)
+                return;
+
             var ucMemberSelection = new MemberSelection();
             ucMemberSelection.LoadMembers();
             MainStack.Children.Clear();
             MainStack.Children.Add(ucMemberSelection);
+            _membershipListLoadedAt = DateTime.Now;
         }
 
         #region LOSAP FUNCTIONS
