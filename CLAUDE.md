@@ -22,11 +22,11 @@ There are no automated tests — all testing is manual by running the applicatio
 
 The codebase follows Model-View-Presenter throughout every feature domain:
 
-- **DataModel** — POCO class with Dapper.Contrib attributes (`[Table]`, `[ExplicitKey]`, `[Computed]`)
+- **DataModel** — plain POCO class mapped by Dapper (property names match column names)
 - **IRepository** — interface defining data access operations
 - **Repository** — concrete implementation using Dapper against SQL Server
 - **IView** — interface exposing UI state properties and events that the presenter drives
-- **Presenter** — coordinates between the view and repository; owns all business logic
+- **Presenter** — coordinates between the view and repository; owns all business logic. Takes the IView in its constructor (it does not implement the IView itself)
 - **UserControl (XAML + code-behind)** — implements IView; code-behind is thin and delegates to the presenter
 
 Example flow for LOSAP:
@@ -41,15 +41,14 @@ Every feature domain (`Members`, `Officers`, `Dues`, `Meetings`, `LOSAP`, `Repor
 
 ## Data Access
 
-Uses **Dapper 2.0.30** and **Dapper.Contrib 2.0.30** — no Entity Framework.
+Uses **Dapper 2.0.30** with hand-written SQL — no Entity Framework, no Dapper.Contrib (removed).
 
 - All repositories open a `SqlConnection` from the `"MembershipDB"` connection string defined in `App.config`
 - `App.config` connection string: `Server=.;Database=Membership;Trusted_Connection=True;`
-- Dapper.Contrib attributes on data models:
-  - `[Table("TABLE_NAME")]` — maps class to SQL table
-  - `[ExplicitKey]` — marks a primary key that is not auto-generated
-  - `[Computed]` — marks properties that are not mapped to columns (derived values)
-- Use `connection.Query<T>()` for SELECT, `connection.Insert()` / `connection.Update()` / `connection.Delete()` for CUD operations
+- Use `connection.Query<T>()` for SELECT and `connection.Execute(sql, param)` for INSERT/UPDATE/DELETE, always with `@parameters` (never string interpolation of values)
+- Wrap multi-statement writes (e.g. a record plus its child rows) in a transaction
+- The database has primary keys and foreign keys (`Database/001_AddKeys.sql`); child tables of `MEMBER_List` and `MEETING_List` cascade on delete
+- Table/column names don't always match property casing (e.g. `Lastname`, `EMailAddress`, `MemberID`); SQL Server is case-insensitive here, but write the column names as the table defines them
 
 ## UI Layer
 
@@ -71,4 +70,16 @@ Uses **Dapper 2.0.30** and **Dapper.Contrib 2.0.30** — no Entity Framework.
 
 ## Key Domain: LOSAP
 
-LOSAP tracks annual service credits for pension eligibility. Each `LosapRecord` represents a member's credit total for a given year. The listing and detail views are `LosapListing.xaml` and `LosapCredit.xaml`. This domain is currently under active development (see modified files in git status).
+LOSAP tracks annual service credits for pension eligibility.
+
+**Data rules**
+- `LOSAP_History` has one row per member per year (primary key `MemberID, Year`) with a `LosapCredit` bit.
+- Only rows with `LosapCredit = 1` count as a credited year. Rows with `0` mean the year was reviewed but not credited.
+- Crediting a member upserts their row for that year to `1`; un-crediting sets it to `0` (the row is kept, not deleted).
+- A member's total = credited years (`LosapRecord.LosapYears`) + `MEMBER_List.LegacyLosapYears` (years earned before the app tracked LOSAP), exposed as `LosapRecord.CombinedTotalYears`.
+
+**Code**
+- `LosapRecord` is a view model (not a table mapping): `MemberRec`, `Year`, `HasCredit`, `OriginalHasCredit` (what the database holds), `IsChanged`, `LosapYears`.
+- `LosapRepository` (explicit SQL): `GetCreditedYearCounts()`, `GetCreditedMemberIds(year)`, `GetYearsOnFile()`, `SaveCredits(year, toCredit, toUncredit)` (single transaction).
+- **Credit entry** — `LosapCredit.xaml` + `LosapRecordPresenter`: a year picker defaults to last year (`DefaultYear`) and offers the last 10 years plus any year on file. It lists current Active members (`MemberTypeId == 1`) plus anyone already credited that year. Double-click toggles credit; changed rows are highlighted; APPLY saves only changed rows, then reloads. Switching years with unsaved changes asks first.
+- **Listing** — `LosapListing.xaml` + `LosapListingPresenter`: every current Active member with credited, legacy and total years, sorted by total descending.
