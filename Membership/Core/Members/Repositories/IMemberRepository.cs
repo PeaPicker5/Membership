@@ -32,9 +32,7 @@ namespace Membership.Core.Members.Repositories
         IEnumerable<Members.DataModels.Member> GetMembersThatCanVote();
         void InsertMemberRecord(Members.DataModels.Member memberRec);
         void UpdateMemberRecord(Members.DataModels.Member memberRec);
-        bool DeleteMemberRecord(Members.DataModels.Member memberRec, 
-            IEnumerable<DuesHistory> duesRecs,
-            IEnumerable<Officer> officerRecs);
+        bool DeleteMemberRecord(Members.DataModels.Member memberRec);
 
     }
 }

@@ -46,14 +46,26 @@ namespace Membership.Core.LOSAP.Presenters
             _losapRepository.InsertLosapCredits(recordsToUpdate);
         }
 
-
         public void GetCurrentMembers()
         {
-            _view.MemberRecs = _memberRepository.GetCurrentMembers().ToList();
+            var countByMember = _losapRepository.GetLosapForActiveMembers()
+                .GroupBy(r => r.MemberId)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            _view.LosapRecs = _memberRepository.GetCurrentMembers()
+                .Where(m => m.MemberTypeId == 1)
+                .Select(m =>
+                {
+                    var rec = new LosapRecord(m, 0, false);
+                    if (countByMember.TryGetValue(m.MemberId, out var count))
+                        rec.LosapYears = count;
+                    return rec;
+                })
+                .OrderByDescending(r => r.CombinedTotalYears)
+                .ThenBy(r => r.MemberRec.LastName)
+                .ThenBy(r => r.MemberRec.FirstName)
+                .ToList();
         }
-
-
-
 
     }
 }

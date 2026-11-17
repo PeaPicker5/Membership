@@ -18,6 +18,9 @@ namespace Membership.UI_Controls.Offices
     {
         private readonly EditOfficerPresenter _presenter;
 
+        // The assignment as loaded from the database, so edits/deletes target that exact row.
+        private Officer _originalOfficerRec;
+
         public int YearOfTerm
         {
             get { return (int)GetValue(YearOfTermProperty); }
@@ -70,6 +73,7 @@ namespace Membership.UI_Controls.Offices
 
         public void ClearControlValues()
         {
+            _originalOfficerRec = null;
             OfficeCombo.SelectedIndex = -1;
             MemberCombo.SelectedIndex = -1;
             FromMonth.SelectedIndex = -1;
@@ -79,6 +83,7 @@ namespace Membership.UI_Controls.Offices
         }
         public void SetControlValues(Officer currentOfficer)
         {
+            _originalOfficerRec = currentOfficer;
             if (currentOfficer == null) return;
             SetCurrentValue(IsEditProtectedProperty, false);
             SetCurrentValue(IsDeleteProtectedProperty, false);
@@ -136,7 +141,8 @@ namespace Membership.UI_Controls.Offices
         }
         private void OfficerControl_OnRemoveItem(object sender, RoutedEventArgs e)
         {
-            _presenter.DeleteOfficerRecord(currentOfficerRec);
+            if (_originalOfficerRec == null) return;
+            _presenter.DeleteOfficerRecord(_originalOfficerRec);
             ClearControlValues();
             UpdateListOfOfficers();
         }
@@ -144,8 +150,8 @@ namespace Membership.UI_Controls.Offices
         {
             if (IsAdding)
                 _presenter.InsertOfficerRecord(currentOfficerRec);
-            else if (IsEditing)
-                _presenter.UpdateOfficerRecord(currentOfficerRec);
+            else if (IsEditing && _originalOfficerRec != null)
+                _presenter.UpdateOfficerRecord(_originalOfficerRec, currentOfficerRec);
             UpdateListOfOfficers();
             IsAdding = false;
             IsEditing = false;

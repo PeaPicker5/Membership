@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,13 +13,34 @@ namespace Membership.Core.Members.Repositories
         private const string DbConnectionName = "MembershipDB";
         public MemberTypeRepository() { }
 
-        public MemberType Get(int typeId)
+        // MEMBER_Type rarely changes, so descriptions are read once per run.
+        private static readonly Lazy<IDictionary<int, string>> TypeDescriptions =
+            new Lazy<IDictionary<int, string>>(LoadTypeDescriptions);
+
+        private static IDictionary<int, string> LoadTypeDescriptions()
         {
-            const string query = "SELECT * FROM MEMBER_Type WHERE MemberTypeId = @MemberTypeId";
+            const string query = "SELECT TypeId, Description FROM MEMBER_Type";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<MemberType>(query, new {MemberTypeId = typeId}).ToList();
-                return retVal[0];
+                return connection.Query<MemberType>(query).ToDictionary(t => t.TypeId, t => t.Description);
+            }
+        }
+
+        /// <summary>
+        /// Description of a member type as stored in MEMBER_Type, or "Unknown" if it isn't on file.
+        /// </summary>
+        public static string GetDescription(int typeId)
+        {
+            return TypeDescriptions.Value.TryGetValue(typeId, out var description) ? description : "Unknown";
+        }
+
+        public MemberType Get(int typeId)
+        {
+            const string query = "SELECT * FROM MEMBER_Type WHERE TypeId = @TypeId";
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                // Returns null when the type is not on file.
+                return connection.QueryFirstOrDefault<MemberType>(query, new { TypeId = typeId });
             }
         }
 

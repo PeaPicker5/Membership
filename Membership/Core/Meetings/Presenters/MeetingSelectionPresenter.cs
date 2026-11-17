@@ -6,11 +6,10 @@ using Membership.Core.Meetings.DataModels;
 using Membership.Core.Meetings.Repositories;
 namespace Membership.Core.Meetings.Presenters
 {
-    public class MeetingSelectionPresenter : IMeetingSelectionView
+    public class MeetingSelectionPresenter
     {
         private readonly IMeetingSelectionView _view;
         private readonly IMeetingRepository _meetingRepository;
-        public ICollection<Meeting> MeetingList { get; set; }
 
         public MeetingSelectionPresenter(IMeetingSelectionView view)
         {

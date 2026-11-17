@@ -18,8 +18,8 @@ namespace Membership.Core.Repositories
             const string query = "SELECT * FROM SYS_FileStore WHERE ImageId = @imageId";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<ImageRec>(query, new { ImageId = imageId }).ToList();
-                return retVal[0];
+                // Returns null when the image is not on file.
+                return connection.QueryFirstOrDefault<ImageRec>(query, new { ImageId = imageId });
             }
         }
 
@@ -33,13 +33,11 @@ namespace Membership.Core.Repositories
         }
         public bool UpdateImageRecord(Guid imageId, byte[]imageData)
         {
+            // Only replace the image bytes; a full-entity Update would also blank the Description.
+            const string query = "UPDATE SYS_FileStore SET ImageData = @ImageData WHERE ImageId = @ImageId";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                return connection.Update(new ImageRec
-                    {
-                        ImageId=imageId, 
-                        ImageData = imageData
-                    });
+                return connection.Execute(query, new { ImageId = imageId, ImageData = imageData }) > 0;
             }
         }
         public bool DeleteImageRecord(Guid imageId)

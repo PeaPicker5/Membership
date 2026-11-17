@@ -1,5 +1,6 @@
 ﻿using System;
 using Dapper.Contrib.Extensions;
+using Membership.Core.Members.Repositories;
 
 namespace Membership.Core.Members.DataModels;
 
@@ -45,26 +46,8 @@ public class Member
         LegacyLosapYears = legacyLosapYears;
     }
 
-    [Computed]
-    public string Status
-    {
-        get
-        {
-            switch (MemberTypeId)
-            {
-                case 1: return "Active";
-                case 2: return "Life";
-                case 3: return "Social";
-                case 4: return "Removed";
-                case 5: return "Social";
-                case 6: return "Honorary";
-                case 7: return "Hon. Active";
-                case 8: return "Hon. Social";
-                default:
-                    return "Unknown";
-            }
-        }
-    }
+    // Description comes from the MEMBER_Type table so new or renamed types show correctly.
+    [Computed] public string Status => MemberTypeRepository.GetDescription(MemberTypeId);
     [Computed] public float DuesAmount { get; set; }
 
 
@@ -77,7 +60,7 @@ public class Member
         set { }
     }
 
-    [Computed] public bool IsDeceased => DateDeceased > DateObligated;
+    [Computed] public bool IsDeceased => DateDeceased.HasValue;
     [Computed] public string FullName => $"{FirstName} {LastName}";
     [Computed] public string LFName => string.IsNullOrEmpty(Suffix) 
         ? $"{LastName}, {FirstName}" 

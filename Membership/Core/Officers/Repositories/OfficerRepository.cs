@@ -137,20 +137,49 @@ namespace Membership.Core.Officers.Repositories
                 connection.Insert(officerRec);
             }
         }
-        public void UpdateOfficerRecord(Officer officerRec)
+        // OFFICE_Assignments has no primary key; a single assignment is identified by
+        // member, office, year and start date. Dapper.Contrib's Update/Delete would only
+        // match on MemberId + OfficeId and hit every year the member held that office.
+        private const string AssignmentKeyClause =
+            "WHERE MemberId = @OrigMemberId AND OfficeId = @OrigOfficeId " +
+            "AND Year = @OrigYear AND FromDate = @OrigFromDate";
+
+        public void UpdateOfficerRecord(Officer originalRec, Officer updatedRec)
         {
-            if (IsDuplicateRecord(officerRec)) return;
+            if (IsDuplicateRecord(updatedRec)) return;
+            const string query = "UPDATE OFFICE_Assignments " +
+                                 "SET MemberId = @MemberId, OfficeId = @OfficeId, Year = @Year, " +
+                                 "FromDate = @FromDate, ToDate = @ToDate " +
+                                 AssignmentKeyClause;
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Update(officerRec);
+                connection.Execute(query, new
+                {
+                    updatedRec.MemberId,
+                    updatedRec.OfficeId,
+                    updatedRec.Year,
+                    updatedRec.FromDate,
+                    updatedRec.ToDate,
+                    OrigMemberId = originalRec.MemberId,
+                    OrigOfficeId = originalRec.OfficeId,
+                    OrigYear = originalRec.Year,
+                    OrigFromDate = originalRec.FromDate
+                });
             }
         }
 
         public void DeleteOfficerRecord(Officer officerRec)
         {
+            const string query = "DELETE FROM OFFICE_Assignments " + AssignmentKeyClause;
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Delete(officerRec);
+                connection.Execute(query, new
+                {
+                    OrigMemberId = officerRec.MemberId,
+                    OrigOfficeId = officerRec.OfficeId,
+                    OrigYear = officerRec.Year,
+                    OrigFromDate = officerRec.FromDate
+                });
             }
         }
 

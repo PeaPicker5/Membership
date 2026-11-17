@@ -7,7 +7,7 @@ using Membership.Core.Officers.DataModels;
 
 namespace Membership.Core.Members.Presenters
 {
-    public class MemberSelectionPresenter :IMemberSelectionView
+    public class MemberSelectionPresenter
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IMemberTypeRepository _memberTypeRepository;
@@ -34,9 +34,5 @@ namespace Membership.Core.Members.Presenters
             var x = _memberRepository.Get(memberId);
         }
 
-        public ICollection<Members.DataModels.Member> Members { get; set; }
-        public IEnumerable<MemberType> MemberTypes { get; set; }
-        public IEnumerable<Office> Offices { get; set; }
-        public IEnumerable<DuesRecord> DuesRecords { get; set; }
     }
 }

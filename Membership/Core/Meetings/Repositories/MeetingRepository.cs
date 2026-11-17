@@ -126,10 +126,17 @@ namespace Membership.Core.Meetings.Repositories
         }
         public void DeleteMeeting(Meeting meetingRec)
         {
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            // Remove all attendance rows for the meeting, then the meeting itself, all-or-nothing.
+            const string query = "DELETE FROM MEETING_Members WHERE MeetingId = @MeetingId; " +
+                                 "DELETE FROM MEETING_List WHERE MeetingId = @MeetingId;";
+            using (var connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                connection.Delete(new MeetingMember(meetingRec.MeetingId, Guid.Empty));
-                connection.Delete(meetingRec);
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    connection.Execute(query, new { meetingRec.MeetingId }, transaction);
+                    transaction.Commit();
+                }
             }
         }
 

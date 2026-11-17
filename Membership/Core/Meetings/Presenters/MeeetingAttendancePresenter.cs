@@ -10,7 +10,7 @@ using Membership.Core.Officers.Repositories;
 
 namespace Membership.Core.Meetings.Presenters
 {
-    public class MeetingAttendancePresenter :IMeetingAttendanceView
+    public class MeetingAttendancePresenter
     {
         private readonly IMeetingRepository _meetingRepository;
         private readonly IMemberRepository _memberRepository;
@@ -18,8 +18,6 @@ namespace Membership.Core.Meetings.Presenters
         private readonly IMeetingAttendanceView _view;
         private const bool notSelected = false;
 
-        public Meeting CurrentMeeting { get; set; }
-        public ICollection<SelectableItem> MemberCheckList { get; set; }
 
         public MeetingAttendancePresenter(IMeetingAttendanceView view)
         {
@@ -69,7 +67,9 @@ namespace Membership.Core.Meetings.Presenters
             foreach (var mem in _view.MemberCheckList)
             {
                 if (officerList.Any(office => office.MemberId == mem.ItemId)) continue;
-                officerList.Add(new Officer(_memberRepository.Get(mem.ItemId), 
+                var memberRec = _memberRepository.Get(mem.ItemId);
+                if (memberRec == null) continue;
+                officerList.Add(new Officer(memberRec,
                     new Office(99,"",99,99,true),1900,DateTime.Now, DateTime.Now));
             }
             return officerList.OrderBy(x => x.OfficeId).

@@ -88,12 +88,6 @@
                                        LargeIcon="{StaticResource MeetingIcon}"
                                        Click="MeetingButton_OnClick" />
                     </fluent:RibbonGroupBox>
-                    <fluent:RibbonGroupBox Header="Organization" >
-                        <fluent:Button Header="System Configuration"
-                                       ToolTip="General settings for the organization." 
-                                       LargeIcon="{StaticResource SystemStatusIcon}"
-                                       Click="SysConfigButtonOnClick" />
-                    </fluent:RibbonGroupBox>
                 </fluent:RibbonTabItem>
 
                 <fluent:RibbonTabItem Header="Offices" KeyTip="O">

@@ -23,6 +23,9 @@ namespace Membership.UI_Controls.LOSAP
         private bool _showActiveOnly;
 
         #region Dependency Properties
+
+        public int LastYearDate => DateTime.Today.Year - 1;
+
         private ICollection<LosapRecord> AllLosapRecs
         {
             get { return (ICollection<LosapRecord>)GetValue(AllLosapRecsProperty); }
@@ -57,16 +60,6 @@ namespace Membership.UI_Controls.LOSAP
             DependencyProperty.Register("RunningCount", typeof(int),
                 typeof(LosapCredit));
 
-        public float RunningAmount  
-        {
-            get => (float)GetValue(RunningAmountProperty);
-            set { SetValue(RunningAmountProperty, value); OnPropertyChanged();
-            }
-        }
-        public static readonly DependencyProperty RunningAmountProperty =
-            DependencyProperty.Register("RunningAmount", typeof(float),
-                typeof(LosapCredit));
-
 
         public LosapRecord SelectedLosapRecord
         {
@@ -91,19 +84,13 @@ namespace Membership.UI_Controls.LOSAP
         {
             _presenter.GetCurrentMembers();
             AllLosapRecs = LosapRecs;
+            UpdateLosapRecsGrid();
         }
 
         private void RecordLosapButtonOnClick(object sender, RoutedEventArgs e)
         {
             _presenter.InsertLosapRecords();
             LoadMembers();
-            UpdateLosapRecsGrid();
-        }
-
-        private void DisplayActiveMembersOnly(object sender, RoutedEventArgs e)
-        {
-            _showActiveOnly = ((CheckBox)sender).IsChecked==true;
-
             UpdateLosapRecsGrid();
         }
 
@@ -115,10 +102,10 @@ namespace Membership.UI_Controls.LOSAP
             if (((LosapRecord) selectedRow).Year > 0) return;
 
             var selectedMemberId = ((LosapRecord)selectedRow).MemberRec.MemberId;
-            TogglePaymentRecord(selectedMemberId);
+            ToggleSelectionRecord(selectedMemberId);
         }
 
-        private void TogglePaymentRecord(Guid selectedMemberId)
+        private void ToggleSelectionRecord(Guid selectedMemberId)
         {
             var losapRec = LosapRecs.FirstOrDefault(r => r.MemberRec.MemberId == selectedMemberId);
             if (losapRec == null) return;
