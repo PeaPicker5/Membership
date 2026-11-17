@@ -25,8 +25,8 @@ namespace Membership.Core.Members.Repositories
             const string query = "SELECT * FROM MEMBER_List WHERE MemberId = @MemberId";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<Member>(query,new {MemberId = memberId}).ToList();
-                return retVal[0];
+                // Returns null when the member is not on file.
+                return connection.QueryFirstOrDefault<Member>(query, new { MemberId = memberId });
             }
         }
 
@@ -45,42 +45,32 @@ namespace Membership.Core.Members.Repositories
 
         public IEnumerable<Member> GetMembersThatCanVote()
         {
-            const int MeetingsNeeded = 5;
-            var query = "SELECT * FROM MEMBER_List ml " +
-                        "INNER JOIN VIEW_MembersAbleToVote v " +
-                        "ON ml.MemberId = v.MemberId " +
-                        $"WHERE v.RecCount >= {MeetingsNeeded} " +
-                        "ORDER BY ml.Lastname, ml.FirstName";
+            const string query = "SELECT * FROM MEMBER_List ml " +
+                                 "INNER JOIN VIEW_MembersAbleToVote v " +
+                                 "ON ml.MemberId = v.MemberId " +
+                                 "WHERE v.RecCount >= @MeetingsNeeded " +
+                                 "ORDER BY ml.Lastname, ml.FirstName";
             using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                var retVal = connection.Query<Member>(query).ToList();
+                var retVal = connection.Query<Member>(query,
+                    new { MeetingsNeeded = Helper.MeetingsNeededToVote }).ToList();
                 return retVal;
             }
         }
 
-
-        private IEnumerable<Member> GetSelectedMemberRecords(string clause, DynamicParameters param)
-        {
-            const string query = "SELECT ml.* " +
-                                 "FROM MEMBER_List ml " +
-                                 "INNER JOIN MEMBER_Type mt ON ml.MemberTypeId = mt.TypeId " +
-                                 "LEFT OUTER JOIN OFFICE_Assignments oa ON oa.MemberId = oa.MemberId ";
-
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
-            {
-                var retVal = connection.Query<Member>(query + clause, param).Distinct().ToList();
-                return retVal;
-            }
-
-        }
 
         public IEnumerable<Member> GetMembersWithOffice(int year, int officeType)
         {
-            var whereClause = officeType == DistrictOnly
-                ? "WHERE oa.Year = @year AND oa.OfficeId < 20 "
-                : "WHERE oa.Year = @year AND oa.OfficeId >= 20 ";
-            var parameter = new DynamicParameters(); parameter.Add("Year", year);
-            return GetSelectedMemberRecords(whereClause, parameter);
+            // EXISTS (rather than a join) returns each member once, even if they hold several offices.
+            var officeFilter = officeType == DistrictOnly ? "oa.OfficeId < 20" : "oa.OfficeId >= 20";
+            var query = "SELECT ml.* FROM MEMBER_List ml " +
+                        "WHERE EXISTS (SELECT 1 FROM OFFICE_Assignments oa " +
+                        "WHERE oa.MemberId = ml.MemberId AND oa.Year = @Year AND " + officeFilter + ")";
+
+            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            {
+                return connection.Query<Member>(query, new { Year = year }).ToList();
+            }
         }
         public IEnumerable<Member> GetCurrentMembers()
         {
@@ -103,21 +93,33 @@ namespace Membership.Core.Members.Repositories
             }
         }
 
-        public bool DeleteMemberRecord(Member memberRec, 
-                                       IEnumerable<DuesHistory> duesHistoryRecs, 
-                                       IEnumerable<Officer> officerRecs)
+        /// <summary>
+        /// Deletes a member and every record that references them, all-or-nothing.
+        /// </summary>
+        public bool DeleteMemberRecord(Member memberRec)
         {
+            const string query =
+                "DELETE FROM OFFICE_Assignments WHERE MemberId = @MemberId; " +
+                "DELETE FROM DUES_History WHERE MemberId = @MemberId; " +
+                "DELETE FROM MEETING_Members WHERE MemberId = @MemberId; " +
+                "DELETE FROM LOSAP_History WHERE MemberId = @MemberId; " +
+                "DELETE FROM SYS_FileStore WHERE ImageId = @PageId AND @PageId <> @EmptyId; " +
+                "DELETE FROM MEMBER_List WHERE MemberId = @MemberId;";
 
-            using (IDbConnection connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
+            using (var connection = new SqlConnection(Helper.ConnVal(DbConnectionName)))
             {
-                foreach (var officeRec in officerRecs)
-                    connection.Delete(officeRec); 
-                foreach (var duesRec in duesHistoryRecs)
-                    connection.Delete(duesRec);
-                if (memberRec.PageId != Guid.Empty)
-                    connection.Delete(new ImageRec(memberRec.PageId, string.Empty, null));
-                connection.Delete(memberRec);
-                return true;
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    connection.Execute(query, new
+                    {
+                        memberRec.MemberId,
+                        memberRec.PageId,
+                        EmptyId = Guid.Empty
+                    }, transaction);
+                    transaction.Commit();
+                    return true;
+                }
             }
         }
 

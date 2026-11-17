@@ -6,9 +6,8 @@ using Membership.Core.Officers.Repositories;
 
 namespace Membership.Core.Officers.Presenters
 {
-    public class OfficerPresenter :IOfficeHistoryView
+    public class OfficerPresenter
     {
-        public IEnumerable<Officer> OfficerRecs { get; set; }
         private readonly IOfficerRepository _officeRepository;
         private readonly IOfficeHistoryView _view;
 

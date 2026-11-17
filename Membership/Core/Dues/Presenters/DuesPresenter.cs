@@ -7,9 +7,8 @@ using Membership.Core.Repositories;
 
 namespace Membership.Core.Dues.Presenters
 {
-    public class DuesPresenter : IDuesRecordView
+    public class DuesPresenter
     {
-        public ICollection<DuesRecord> DuesRecs { get; set; }
         private readonly IDuesRepository _duesRepository;
         private readonly IDuesRecordView _view;
 

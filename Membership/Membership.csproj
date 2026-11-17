@@ -191,7 +191,6 @@
     <Compile Include="Core\Dues\Presenters\DuesPresenter.cs" />
     <Compile Include="Core\Dues\Presenters\IDuesRecordView.cs" />
     <Compile Include="Core\Meetings\Presenters\IMeetingAttendanceView.cs" />
-    <Compile Include="Core\Officers\Presenters\IOfficeAssignment.cs" />
     <Compile Include="Core\Officers\Presenters\IEditOfficerView.cs" />
     <Compile Include="Core\Officers\Presenters\IOfficersByYear.cs" />
     <Compile Include="Core\Officers\Presenters\IOfficerRecordsView.cs" />
@@ -202,7 +201,6 @@
     <Compile Include="Core\Members\Presenters\IMemberView.cs" />
     <Compile Include="Core\Members\Presenters\MemberInfoPresenter.cs" />
     <Compile Include="Core\Meetings\Presenters\MeeetingAttendancePresenter.cs" />
-    <Compile Include="Core\Officers\Presenters\OfficeAssignmentPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\EditOfficerPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficersByYearPresenter.cs" />
     <Compile Include="Core\Officers\Presenters\OfficeHistoryPresenter.cs" />

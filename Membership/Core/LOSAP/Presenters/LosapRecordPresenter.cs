@@ -46,7 +46,6 @@ namespace Membership.Core.LOSAP.Presenters
             _losapRepository.InsertLosapCredits(recordsToUpdate);
         }
 
-
         public void GetCurrentMembers()
         {
             var countByMember = _losapRepository.GetLosapForActiveMembers()
@@ -67,9 +66,6 @@ namespace Membership.Core.LOSAP.Presenters
                 .ThenBy(r => r.MemberRec.FirstName)
                 .ToList();
         }
-
-
-
 
     }
 }

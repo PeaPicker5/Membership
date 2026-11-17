@@ -28,7 +28,10 @@ namespace Membership.Core.Officers.Repositories
         IEnumerable<Office> GetOfficesByYear(int year);
 
         void InsertOfficerRecord(Officer officerRec);
-        void UpdateOfficerRecord(Officer officerRec);
+        /// <summary>
+        /// Replaces the assignment identified by <paramref name="originalRec"/> with the values in <paramref name="updatedRec"/>.
+        /// </summary>
+        void UpdateOfficerRecord(Officer originalRec, Officer updatedRec);
         void DeleteOfficerRecord(Officer officerRec);
     }
 }

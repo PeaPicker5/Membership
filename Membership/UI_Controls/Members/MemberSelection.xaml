@@ -97,6 +97,10 @@
                           IsEnabled="{Binding ElementName=MemberInfoControl, Path=IsEditing, Converter={StaticResource BooleanInverterConverter} }"
                           ItemsSource="{Binding Path=FilteredMembers, Mode=OneWay}"
                           GridLinesVisibility="All"
+                          EnableRowVirtualization="True"
+                          EnableColumnVirtualization="True"
+                          VirtualizingPanel.IsVirtualizing="True"
+                          VirtualizingPanel.VirtualizationMode="Recycling"
                           SelectionChanged="MemberGrid_SelectionChanged" >
                     <DataGrid.Columns  >
                         <DataGridCheckBoxColumn Header="Current" Binding="{Binding Path=IsCurrent}" Width="85"  />

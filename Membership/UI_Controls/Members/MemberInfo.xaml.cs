@@ -235,7 +235,14 @@ namespace Membership.UI_Controls.Members
         }
         private void ExpandImageButton_Click(object sender, RoutedEventArgs e)
         {
-            var popup = new ImagePopupWindow {ImageSource = _presenter.GetImageData(MemberRec.PageId)};
+            var imageData = _presenter.GetImageData(MemberRec.PageId);
+            if (imageData == null)
+            {
+                MessageBox.Show("The full-size picture for this member could not be found.",
+                    "Picture Not Found", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            var popup = new ImagePopupWindow {ImageSource = imageData};
             popup.ShowDialog();
         }
 

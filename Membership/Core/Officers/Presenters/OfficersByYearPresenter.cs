@@ -5,14 +5,8 @@ using Membership.Core.Officers.Repositories;
 
 namespace Membership.Core.Officers.Presenters
 {
-    public class OfficersByYearPresenter : IOfficersByYearView
+    public class OfficersByYearPresenter
     {
-        public IEnumerable<Officer> Commissioners { get; set; }
-        public IEnumerable<Officer> LineOfficers { get; set; }
-        public IEnumerable<Officer> OtherDistrictOfficers { get; set; }
-        public IEnumerable<Officer> BoardOfDirectors { get; set; }
-        public IEnumerable<Officer> TableOfficers { get; set; }
-        public IEnumerable<Officer> OtherAssocOfficers { get; set; }
 
         private readonly IOfficerRepository _officeRepository;
         private readonly IOfficersByYearView _view;

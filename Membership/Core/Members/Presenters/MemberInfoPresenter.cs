@@ -2,34 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using Membership.Core.DataModels;
-using Membership.Core.Dues.Repositories;
 using Membership.Core.Members.DataModels;
 using Membership.Core.Members.Repositories;
-using Membership.Core.Officers.Repositories;
 using Membership.Core.Repositories;
 
 namespace Membership.Core.Members.Presenters
 {
-    public class MemberInfoPresenter :IMemberView
+    public class MemberInfoPresenter
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IMemberTypeRepository _memberTypeRepository;
-        private readonly IOfficerRepository _officerRepository;
-        private readonly IDuesRepository _duesRepository;
         private readonly IFileStoreRepository _fileStoreRepository;
 
 
         private readonly IMemberView _view;
-        public ICollection<Tuple<int, string>> MemberTypeLookups { get; set; }
-        public ICollection<Tuple<Guid, string>> SponsorLookups { get; set; }
-        public ICollection<MemberRemoval> RemovalCodes { get; set; }
 
         public MemberInfoPresenter(IMemberView view)
         {
             _memberRepository = new MemberRepository();
             _memberTypeRepository = new MemberTypeRepository();
-            _officerRepository = new OfficerRepository();
-            _duesRepository = new DuesRepository();
             _fileStoreRepository = new FileStoreRepository();
             _view = view;
         }
@@ -66,24 +57,14 @@ namespace Membership.Core.Members.Presenters
         }
         public bool DeleteMemberRecord(Members.DataModels.Member memberRec)
         {
-            _fileStoreRepository.DeleteImageRecord(memberRec.PageId);
-
-            var duesRecords = _duesRepository.GetDuesRecordByMemberId(memberRec.MemberId);
-            var duesHistory = _duesRepository.MapFromData(duesRecords);
-//            _duesRepository.DeleteDuesPayments(duesRecords);
-
-            var officerRecords = _officerRepository.GetOfficersByMember(memberRec.MemberId);
-            //_officerRepository.dele
-            //Need to delete records from DUES_History, MEETING_Members, and OFFICE_Assignments.
-            //var meetingRecords = _
-
-            //return false;
-            return _memberRepository.DeleteMemberRecord(memberRec, duesHistory, officerRecords);
+            // Repository removes the member's dues, offices, meeting attendance,
+            // LOSAP history and picture in a single transaction.
+            return _memberRepository.DeleteMemberRecord(memberRec);
         }
 
         public byte[] GetImageData(Guid fileStoreId)
         {
-            return _fileStoreRepository.Get(fileStoreId).ImageData;
+            return _fileStoreRepository.Get(fileStoreId)?.ImageData;
         }
 
 
@@ -109,11 +90,16 @@ namespace Membership.Core.Members.Presenters
         }
         private Guid UpdateExistingPicture(Guid imageId, byte[] image)
         {
-            return _fileStoreRepository.UpdateImageRecord(imageId, image) ? imageId : Guid.Empty;
+            // If the stored picture is missing, save the new one rather than dropping it.
+            return _fileStoreRepository.UpdateImageRecord(imageId, image)
+                ? imageId
+                : InsertNewPicture("Membership Card", image);
         }
         private Guid DeleteExistingPicture(Guid imageId)
         {
-            return _fileStoreRepository.DeleteImageRecord(imageId) ? Guid.Empty : imageId;
+            // Either the picture was deleted or it was already gone; the member no longer has one.
+            _fileStoreRepository.DeleteImageRecord(imageId);
+            return Guid.Empty;
         }
 
     }

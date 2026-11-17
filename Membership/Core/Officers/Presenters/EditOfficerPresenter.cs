@@ -5,11 +5,9 @@ using Membership.Core.Officers.Repositories;
 
 namespace Membership.Core.Officers.Presenters
 {
-    public class EditOfficerPresenter : IEditOfficerView
+    public class EditOfficerPresenter
     {
 
-        public IEnumerable<DataModels.Office> OfficeRecs { get; set; }
-        public IEnumerable<Members.DataModels.Member> MemberRecs { get; set; }
         private IEnumerable<DataModels.Office> _allOfficeRecs { get; set; }
         private IEnumerable<Members.DataModels.Member> _allMemberRecs { get; set; }
         private readonly IMemberRepository _memberRepository;
@@ -59,9 +57,9 @@ namespace Membership.Core.Officers.Presenters
             _officeRepository.InsertOfficerRecord(officerRec);
         }
         
-        public void UpdateOfficerRecord(DataModels.Officer officerRec)
+        public void UpdateOfficerRecord(DataModels.Officer originalRec, DataModels.Officer updatedRec)
         {
-            _officeRepository.UpdateOfficerRecord(officerRec);
+            _officeRepository.UpdateOfficerRecord(originalRec, updatedRec);
         }
 
         public void DeleteOfficerRecord(DataModels.Officer officerRec)

@@ -27,11 +27,6 @@ namespace Membership
             MainStack.Children.Add(ucMemberSelection);
         }
 
-        private void OrganizationButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         #region LOSAP FUNCTIONS
         private void LosapListingButton_Click(object sender, RoutedEventArgs e)
         {
@@ -126,24 +121,8 @@ namespace Membership
             MainStack.Children.Clear();
             MainStack.Children.Add(ucOfficerRecords);
         }
-
-        //private void AssignOfficerRecordsButtonOnClick(object sender, RoutedEventArgs e)
-        //{
-        //    var ucOfficeAssignment = new OfficeAssignment();
-        //    ucOfficeAssignment.LoadYearsOnFile();
-        //    MainStack.Children.Clear();
-        //    MainStack.Children.Add(ucOfficeAssignment);
-        //}
         #endregion
-        private void ReportsButtonOnClick(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void SysConfigButtonOnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void MeetingButton_OnClick(object sender, RoutedEventArgs e)
         {

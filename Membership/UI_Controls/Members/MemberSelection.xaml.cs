@@ -82,10 +82,11 @@ namespace Membership.UI_Controls.Members
         public void LoadMembers()
         {
             _presenter.LoadMembers();
-            FilteredMembers = Members;
+            // Bind the grid once with the filtered list, then pick the first row.
+            // (Selecting before filtering loaded member details twice.)
+            ApplyFilterSettings();
             if (SelectedMember == null)
                 MemberSelectionGrid.SelectedIndex = 0;
-            ApplyFilterSettings();
         }
 
         private void MemberGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -101,29 +102,33 @@ namespace Membership.UI_Controls.Members
 
         private void ApplyFilterSettings()
         {
-            FilteredMembers = Members;
+            if (Members == null) return;
+
+            // Build the filter in a local query and hand the grid a single List.
+            // Re-binding the grid after every filter step, to a lazy LINQ query,
+            // made WPF rebuild the 900+ row grid several times per load.
+            IEnumerable<Member> filtered = Members;
             if (FilterFirstName.Text != "" || FilterLastName.Text != "")
-                FilteredMembers = Members.Where(x =>
-                    x.FirstName.StartsWith(FilterFirstName.Text, StringComparison.OrdinalIgnoreCase) &&
-                    x.LastName.StartsWith(FilterLastName.Text, StringComparison.OrdinalIgnoreCase) );
+                filtered = filtered.Where(x =>
+                    (x.FirstName ?? "").StartsWith(FilterFirstName.Text, StringComparison.OrdinalIgnoreCase) &&
+                    (x.LastName ?? "").StartsWith(FilterLastName.Text, StringComparison.OrdinalIgnoreCase) );
             if (FilterCurrent.IsChecked == true)
-                FilteredMembers = FilteredMembers.Where(y => y.IsCurrent);
+                filtered = filtered.Where(y => y.IsCurrent);
             if (FilterStatus.SelectedIndex > 0)
-                FilteredMembers = FilteredMembers.Where(y => y.MemberTypeId == (int) FilterStatus.SelectedValue);
-            if (FilterObligated.Text.Length == 4)
             {
-                var obligationYear = Convert.ToInt32(FilterObligated.Text);
-                if (obligationYear >= 1900 && obligationYear < 2100)
-                    FilteredMembers = FilteredMembers.Where(y =>
-                        y.DateObligated != null && y.DateObligated.Value.Year == obligationYear);
+                var typeId = (int) FilterStatus.SelectedValue;
+                filtered = filtered.Where(y => y.MemberTypeId == typeId);
             }
-            if (FilterRemoved.Text.Length == 4)
-            {
-                var removalYear = Convert.ToInt32(FilterRemoved.Text);
-                if (removalYear >= 1900 && removalYear < 2100)
-                    FilteredMembers = FilteredMembers.Where(y =>
-                        y.DateRemoved != null && y.DateRemoved.Value.Year == removalYear);
-            }
+            if (FilterObligated.Text.Length == 4 && int.TryParse(FilterObligated.Text, out var obligationYear)
+                && obligationYear >= 1900 && obligationYear < 2100)
+                filtered = filtered.Where(y =>
+                    y.DateObligated != null && y.DateObligated.Value.Year == obligationYear);
+            if (FilterRemoved.Text.Length == 4 && int.TryParse(FilterRemoved.Text, out var removalYear)
+                && removalYear >= 1900 && removalYear < 2100)
+                filtered = filtered.Where(y =>
+                    y.DateRemoved != null && y.DateRemoved.Value.Year == removalYear);
+
+            FilteredMembers = filtered.ToList();
         }
         private void FilterTextBoxOnTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -165,8 +170,7 @@ namespace Membership.UI_Controls.Members
         }
         private void MemberInfoControl_OnOnMemberUpdated(object sender, RoutedEventArgs e)
         {
-            LoadMembers();
-            ApplyFilterSettings();
+            LoadMembers();   // already applies the filters
         }
         private void MemberInfoControl_OnOnMemberDeleted(object sender, RoutedEventArgs e)
         {
